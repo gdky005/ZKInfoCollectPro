@@ -1,11 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
+
     defaultConfig {
         applicationId "cc.zkteam.zkinfocollectpro"
-        minSdkVersion 16
-        targetSdkVersion 26
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -16,14 +18,46 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.android.support:design:26.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    // Support libraries
+    implementation deps.support.app_compat
+    implementation deps.support.v4
+    implementation deps.support.design
+    implementation deps.constraint_layout
+
+    // retrofit2
+    implementation deps.retrofit2
+    implementation deps.retrofit2_gson
+
+    // butterknife
+    implementation deps.butterknife
+    annotationProcessor deps.butterknife_compiler
+
+    implementation deps.zk_fresco
+    implementation deps.okhttp
+    implementation deps.fresco
+
+    // For Lifecycles, LiveData, and ViewModel
+    implementation deps.lifecycle.lifecycle_java8
+    implementation deps.lifecycle.extensions
+    implementation deps.lifecycle.arch_paging
+
+    //utilcode， 可参考：https://github.com/Blankj/AndroidUtilCode
+    implementation deps.utilcode
+
+    implementation deps.rvh
+    implementation deps.okhttp_interceptor
+
+
+    testImplementation deps.junit
+
+    androidTestImplementation espresso.core
+    androidTestImplementation deps.runner
 }
