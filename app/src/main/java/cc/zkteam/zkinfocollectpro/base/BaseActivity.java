@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Window;
 import android.widget.TextView;
 
+import butterknife.ButterKnife;
+
 /**
  * BaseActivity
  * <p>
@@ -23,8 +25,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        mContext = this;
         setContentView(getLayoutId());
+        ButterKnife.bind(this);
+        mContext = this;
         initViews();
         initListener();
         initData();

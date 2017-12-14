@@ -5,12 +5,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import butterknife.BindView;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 
 public class MainActivity extends BaseActivity {
-
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.fab)
     FloatingActionButton fab;
 
     @Override
@@ -20,10 +22,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-
-        toolbar = findViewById(R.id.toolbar);
-        fab = findViewById(R.id.fab);
-
         setSupportActionBar(toolbar);
     }
 
@@ -42,5 +40,4 @@ public class MainActivity extends BaseActivity {
     protected void initData() {
 
     }
-
 }
