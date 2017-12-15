@@ -8,8 +8,6 @@ import android.widget.Button;
 
 import com.blankj.utilcode.util.ToastUtils;
 
-import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -39,6 +37,8 @@ public class MainActivity extends BaseActivity {
     Button homeBtn;
     @BindView(R.id.bd_access_token)
     Button bdAccessToken;
+    @BindView(R.id.map)
+    Button map;
 
     @Override
     protected int getLayoutId() {
@@ -66,7 +66,7 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.toolbar, R.id.home_btn})
+    @OnClick({R.id.toolbar, R.id.home_btn, R.id.map})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar:
@@ -74,7 +74,7 @@ public class MainActivity extends BaseActivity {
             case R.id.home_btn:
                 PageCtrl.startActivity(HomeActivity.class);
                 break;
-            case R.id.home_btn:
+            case R.id.map:
                 PageCtrl.startActivity(MapActivity.class);
                 break;
         }
