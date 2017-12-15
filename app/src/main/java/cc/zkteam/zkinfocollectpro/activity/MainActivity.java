@@ -1,12 +1,19 @@
 package cc.zkteam.zkinfocollectpro.activity;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.blankj.utilcode.util.ToastUtils;
+
+import java.net.URLEncoder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -15,9 +22,15 @@ import cc.zkteam.zkinfocollectpro.Constant;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.home.HomeActivity;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
+import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
+import cc.zkteam.zkinfocollectpro.bean.BDIdCardRequestBody;
 import cc.zkteam.zkinfocollectpro.bean.BDTokenBean;
 import cc.zkteam.zkinfocollectpro.managers.ZKConnectionManager;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
+import cc.zkteam.zkinfocollectpro.utils.baidu.Base64Util;
+import cc.zkteam.zkinfocollectpro.utils.baidu.FileUtil;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,6 +38,12 @@ import retrofit2.Response;
 public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
+
+
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
 
     String accessToken = "";
@@ -39,6 +58,8 @@ public class MainActivity extends BaseActivity {
     Button bdAccessToken;
     @BindView(R.id.map)
     Button map;
+    @BindView(R.id.id_card)
+    Button idCard;
 
     @Override
     protected int getLayoutId() {
@@ -57,6 +78,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initData() {
 
+
+        verifyStoragePermissions(this);
     }
 
     @Override
@@ -66,7 +89,7 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.toolbar, R.id.home_btn, R.id.map})
+    @OnClick({R.id.toolbar, R.id.home_btn, R.id.map, R.id.bd_access_token, R.id.id_card})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar:
@@ -77,11 +100,54 @@ public class MainActivity extends BaseActivity {
             case R.id.map:
                 PageCtrl.startActivity(MapActivity.class);
                 break;
+            case R.id.bd_access_token:
+                getBDAccessToken();
+                break;
+            case R.id.id_card:
+                getIdCardInfo();
+                break;
         }
     }
 
-    @OnClick(R.id.bd_access_token)
-    public void onViewClicked() {
+    private void getIdCardInfo() {
+//        准备添加 身份证失败：http://ai.baidu.com/docs#/OCR-API/top
+        String localPicPath = Environment.getExternalStorageDirectory().getPath() + "/xiaotieie_id_card.png";
+
+        try {
+            byte[] imgData = FileUtil.readFileByBytes(localPicPath);
+            String imgStr = Base64Util.encode(imgData);
+            String base64EncodeImage = URLEncoder.encode(imgStr, "UTF-8");
+
+            BDIdCardRequestBody requestBody = BDIdCardRequestBody.BDIDBardRequestBodyFactory
+                    .getDefaultRequestBody(true, base64EncodeImage);
+            RequestBody body = RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), requestBody.toString());
+
+            ZKConnectionManager.getInstance().getZKApi().bdIDCard(body, accessToken).enqueue(new Callback<BDIdCardBean>() {
+                @Override
+                public void onResponse(Call<BDIdCardBean> call, Response<BDIdCardBean> response) {
+                    Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+                    BDIdCardBean bdIdCardBean = response.body();
+                    if (bdIdCardBean != null) {
+                        BDIdCardBean.WordsResultBean wordsResultBean = bdIdCardBean.getWords_result();
+
+                        if (wordsResultBean != null) {
+                            // TODO: 2017/12/15  在这里处理数据格式，并返回给主界面
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<BDIdCardBean> call, Throwable t) {
+
+                    Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getBDAccessToken() {
 //        参考地址：http://ai.baidu.com/docs#/Auth/top
 
         //{
@@ -117,5 +183,25 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+    }
+
+
+    /**
+     * Checks if the app has permission to write to device storage
+     * If the app does not has permission then the user will be prompted to
+     * grant permissions
+     *
+     * @param activity
+     */
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE);
+        }
     }
 }
