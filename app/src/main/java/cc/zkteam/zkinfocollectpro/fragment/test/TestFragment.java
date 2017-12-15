@@ -1,4 +1,4 @@
-package cc.zkteam.zkinfocollectpro.fragment;
+package cc.zkteam.zkinfocollectpro.fragment.test;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,15 +7,24 @@ import android.widget.TextView;
 import butterknife.BindView;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
+import cc.zkteam.zkinfocollectpro.fragment.test.mvp.TestPresenterImpl;
+import cc.zkteam.zkinfocollectpro.fragment.test.mvp.TestView;
 
 /**
  * TestFragment
  * Created by WangQing on 2017/12/15.
  */
 
-public class TestFragment extends BaseFragment {
+public class TestFragment extends BaseFragment implements TestView {
 
     public static final String ARG_SECTION_NUMBER = "ARG_SECTION_NUMBER";
+
+
+
+
+    @BindView(R.id.textView)
+    TextView textView;
+
 
     public static TestFragment newInstance(String text) {
         TestFragment fragment = new TestFragment();
@@ -25,9 +34,8 @@ public class TestFragment extends BaseFragment {
         return fragment;
     }
 
+    TestPresenterImpl presenter;
 
-    @BindView(R.id.textView)
-    TextView textView;
 
     @Override
     public int getLayoutId() {
@@ -47,6 +55,9 @@ public class TestFragment extends BaseFragment {
     @Override
     public void initData(Bundle savedInstanceState) {
 
+        presenter = new TestPresenterImpl(this);
+        presenter.loadData();
+
     }
 
     @Override
@@ -55,4 +66,23 @@ public class TestFragment extends BaseFragment {
     }
 
 
+    @Override
+    public void onLoading() {
+
+    }
+
+    @Override
+    public void onNoData() {
+
+    }
+
+    @Override
+    public void onNetFinished() {
+
+    }
+
+    @Override
+    public void requestFinish() {
+
+    }
 }

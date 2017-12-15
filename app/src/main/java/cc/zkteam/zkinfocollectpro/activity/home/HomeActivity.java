@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import butterknife.BindView;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
-import cc.zkteam.zkinfocollectpro.fragment.TestFragment;
+import cc.zkteam.zkinfocollectpro.fragment.test.TestFragment;
 import cc.zkteam.zkinfocollectpro.view.ZKViewPager;
 
 /**
