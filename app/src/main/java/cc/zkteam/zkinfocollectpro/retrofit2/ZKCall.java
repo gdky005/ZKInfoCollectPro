@@ -1,9 +1,12 @@
-package retrofit2;
+package cc.zkteam.zkinfocollectpro.retrofit2;
 
 import java.io.IOException;
 
 import cc.zkteam.zkinfocollectpro.bean.BaseBean;
 import okhttp3.Request;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * ZKCall

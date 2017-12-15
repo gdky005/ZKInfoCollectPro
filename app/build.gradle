@@ -21,10 +21,15 @@ android {
     lintOptions {
         abortOnError false
     }
+
     sourceSets {
         main {
             jniLibs.srcDirs = ["libs"]
         }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
     }
 }
 
@@ -59,6 +64,9 @@ dependencies {
 
     implementation deps.rvh
     implementation deps.okhttp_interceptor
+
+    implementation deps.dagger_support
+    annotationProcessor deps.dagger_processor
 
 
     testImplementation deps.junit

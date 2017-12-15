@@ -10,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * BaseFragment
  * Created by WangQing on 2017/11/7.
@@ -17,6 +20,7 @@ import android.view.ViewGroup;
 
 public abstract class BaseFragment extends Fragment {
     protected View rootView;
+    protected Unbinder unbinder;
     //context
     protected Context mContext = null;
 
@@ -42,6 +46,7 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rootView = view;
+        unbinder = ButterKnife.bind(this, rootView);
         initView(rootView);
     }
 
@@ -56,6 +61,12 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
 }
