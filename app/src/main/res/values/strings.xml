@@ -11,4 +11,5 @@
     <string name="deal_with_info">处理信息</string>
     <string name="deal_with_suggestion">处理意见</string>
     <string name="btn_commit">提交</string>
+    <string name="home_enter">主界面入口</string>
 </resources>
