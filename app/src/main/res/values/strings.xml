@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">ZKInfoCollectPro</string>
     <string name="action_settings">Settings</string>
+    <string name="problem_info">问题信息</string>
+    <string name="problem_source">来源</string>
+    <string name="input_problem_source">请输入问题来源</string>
+    <string name="prblem_type">类型</string>
+    <string name="problem_desc">描述</string>
+    <string name="select_location">选择定位</string>
+    <string name="problem_attachment">附件</string>
+    <string name="deal_with_info">处理信息</string>
+    <string name="deal_with_suggestion">处理意见</string>
+    <string name="btn_commit">提交</string>
 </resources>

@@ -3,6 +3,7 @@ package cc.zkteam.zkinfocollectpro;
 import android.app.Application;
 import android.content.Context;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.blankj.utilcode.util.Utils;
 
 /**
@@ -20,5 +21,7 @@ public class ZKICApplication extends Application {
         mContext = this;
         Utils.init(this);
         ZKBase.init(this);
+        //  百度地图
+        SDKInitializer.initialize(getApplicationContext());
     }
 }
