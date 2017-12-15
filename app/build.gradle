@@ -59,6 +59,9 @@ dependencies {
     implementation deps.rvh
     implementation deps.okhttp_interceptor
 
+    implementation deps.dagger_support
+    annotationProcessor deps.dagger_processor
+
 
     testImplementation deps.junit
 
