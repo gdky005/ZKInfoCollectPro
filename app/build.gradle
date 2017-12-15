@@ -22,10 +22,12 @@ android {
         abortOnError false
     }
 
+
     sourceSets {
         main {
             jniLibs.srcDirs = ["libs"]
         }
+    }
 
     compileOptions {
         targetCompatibility 1.8
