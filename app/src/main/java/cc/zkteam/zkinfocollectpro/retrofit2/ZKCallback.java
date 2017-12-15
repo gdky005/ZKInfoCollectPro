@@ -1,7 +1,10 @@
-package retrofit2;
+package cc.zkteam.zkinfocollectpro.retrofit2;
 
 
 import cc.zkteam.zkinfocollectpro.bean.BaseBean;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * ZKCallback
