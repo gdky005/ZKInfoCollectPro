@@ -20,6 +20,41 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_LOGS"/>
 
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <!-- Permission to vibrate - recommended, allows vibration feedback on scan -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- Permission to use camera - required -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- Camera features - recommended -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+
+
+    <!-- Don't require camera, as this requires a rear camera. This allows it to work on the Nexus 7 -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
+    <!-- TODO replace above two with next line after Android 4.2 -->
+    <!-- <uses-feature android:name="android.hardware.camera.any"/> -->
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+    <uses-feature android:name="android.hardware.screen.landscape" />
+
     <application
         android:name=".ZKICApplication"
         android:allowBackup="true"
@@ -51,6 +86,7 @@
         <activity android:name=".activity.PersonalInfoCollectActivity"></activity>
 
         <activity android:name=".activity.DataListActivity"/>
+        <activity android:name=".activity.IDCardScanActivity"/>
     </application>
 
 </manifest>

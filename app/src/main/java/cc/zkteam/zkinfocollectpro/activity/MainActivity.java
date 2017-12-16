@@ -44,10 +44,11 @@ public class MainActivity extends BaseActivity {
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE};
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA};
 
 
-    String accessToken = "";
+    public static String accessToken = "";
     int expires_in = 0; //单位是秒
 
 
@@ -116,7 +117,11 @@ public class MainActivity extends BaseActivity {
                 getIdCardInfo();
                 break;
             case R.id.camera_btn:
-                ToastUtils.showShort("hello");
+
+//                身份证识别地址
+//                http://ai.baidu.com/tech/ocr/cards
+
+                PageCtrl.startActivity(IDCardScanActivity.class);
                 break;
         }
     }
