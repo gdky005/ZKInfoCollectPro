@@ -1,4 +1,4 @@
-package cc.zkteam.zkinfocollectpro.activity.problem.mvp;
+package cc.zkteam.zkinfocollectpro.fragment.problem.mvp;
 
 import cc.zkteam.zkinfocollectpro.base.mvp.BaseMVPView;
 

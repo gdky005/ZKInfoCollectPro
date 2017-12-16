@@ -17,6 +17,7 @@ import butterknife.BindView;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.MyBean;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
+import cc.zkteam.zkinfocollectpro.fragment.problem.ProblemReportFragment;
 import cc.zkteam.zkinfocollectpro.fragment.test.TestFragment;
 import cc.zkteam.zkinfocollectpro.view.ZKViewPager;
 import dagger.android.AndroidInjection;
@@ -177,7 +178,7 @@ public class HomeActivity extends BaseActivity implements HasSupportFragmentInje
                 case NAV_TYPE_DATA_COLLECT:
                     return TestFragment.newInstance("Two");
                 case NAV_TYPE_QUESTION_UPLOAD:
-                    return TestFragment.newInstance("Three");
+                    return ProblemReportFragment.newInstance();
             }
 
             return null;

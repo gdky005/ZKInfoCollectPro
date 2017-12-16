@@ -4,17 +4,23 @@
     <string name="problem_info">问题信息</string>
     <string name="problem_source">来源</string>
     <string name="input_problem_source">请输入问题来源</string>
-    <string name="prblem_type">类型</string>
+    <string name="problem_type">类型</string>
     <string name="problem_desc">描述</string>
-    <string name="select_location">选择定位</string>
+    <string name="problem_location">地址</string>
+    <string name="select_location">选择地址</string>
     <string name="problem_attachment">附件</string>
     <string name="deal_with_info">处理信息</string>
     <string name="deal_with_suggestion">处理意见</string>
     <string name="btn_commit">提交</string>
     <string name="home_enter">主界面入口</string>
-
+    <string name="title_select_gallery">选择照片</string>
     <string name="home_tab_main">首页</string>
     <string name="home_tab_data_collect">数据采集</string>
     <string name="home_tab_question_upload">问题上报</string>
+    <string name="input_problem_type">请输入问题类型</string>
+    <string name="input_problem_desc">请输入问题描述</string>
+    <string name="input_problem_location">请选择或输入地址</string>
+    <string name="input_problem_suggestion">请输入处理意见</string>
+    <string name="label_gallery_select_max_size">最多只能选择%s张…</string>
 
 </resources>
