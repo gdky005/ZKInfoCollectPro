@@ -26,12 +26,11 @@
         android:id="@+id/home_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="116dp"
         android:text="@string/home_enter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
         android:id="@+id/bd_access_token"
@@ -49,11 +48,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="地图展示入口"
+        android:text="数据采集放展示入口"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bd_access_token"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/bd_access_token"/>
 
     <Button
         android:id="@+id/id_card"
