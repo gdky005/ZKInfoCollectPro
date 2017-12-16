@@ -49,6 +49,8 @@
         <activity android:name=".activity.home.HomeActivity"/>
 
         <activity android:name=".activity.PersonalInfoCollectActivity"></activity>
+
+        <activity android:name=".activity.DataListActivity"/>
     </application>
 
 </manifest>
