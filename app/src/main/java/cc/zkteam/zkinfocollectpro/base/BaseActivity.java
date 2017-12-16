@@ -40,7 +40,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void initViews();
 
-    //设置标题
     protected abstract void initListener();
 
     protected abstract void initData();
