@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="152dp">
+
+        <cc.zkteam.zkinfocollectpro.view.ZKImageView
+            android:id="@+id/img_personal_avatar"
+            android:layout_width="79dp"
+            android:layout_height="118dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="118dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_personal_info_collect_name"
+                style="@style/TvPersonalInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                tools:text="姓名：张三" />
+
+            <TextView
+                android:id="@+id/tv_personal_info_collect_id"
+                style="@style/TvPersonalInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                tools:text="身份证号:13013111111111" />
+
+            <TextView
+                android:id="@+id/tv_personal_info_collect_project"
+                style="@style/TvPersonalInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                tools:text="采集项：" />
+
+            <TextView
+                android:id="@+id/tv_personal_info_collect_completed"
+                style="@style/TvPersonalInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                tools:text="已完成" />
+
+            <TextView
+                android:id="@+id/tv_personal_info_collect_completion"
+                style="@style/TvPersonalInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="完成度"
+                tools:text="身份证号:13013111111111" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_personal_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="17dp"
+        android:background="#ffffff" />
+
+</LinearLayout>
