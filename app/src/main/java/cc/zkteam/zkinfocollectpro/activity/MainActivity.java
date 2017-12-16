@@ -7,9 +7,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
-import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -64,6 +61,8 @@ public class MainActivity extends BaseActivity {
     Button map;
     @BindView(R.id.id_card)
     Button idCard;
+    @BindView(R.id.camera_btn)
+    Button cameraBtn;
 
     @Override
     protected int getLayoutId() {
@@ -99,7 +98,7 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.toolbar, R.id.home_btn, R.id.map, R.id.bd_access_token, R.id.id_card})
+    @OnClick({R.id.toolbar, R.id.home_btn, R.id.map, R.id.bd_access_token, R.id.id_card, R.id.camera_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar:
@@ -115,6 +114,9 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.id_card:
                 getIdCardInfo();
+                break;
+            case R.id.camera_btn:
+                ToastUtils.showShort("hello");
                 break;
         }
     }
