@@ -11,7 +11,7 @@ public class PersonalInfoCollectActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_content;
+        return R.layout.activity_personal_info_collect;
     }
 
     @Override
