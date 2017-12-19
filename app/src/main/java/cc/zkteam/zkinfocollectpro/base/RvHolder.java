@@ -3,6 +3,8 @@ package cc.zkteam.zkinfocollectpro.base;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import java.util.List;
+
 /**
  * Created by wustor
  * 日期  2017-10-30.
@@ -24,4 +26,7 @@ public abstract class RvHolder<T> extends RecyclerView.ViewHolder {
 
     public abstract void bindHolder(T t, int position);
 
+    public void bindHolder(List<T> data, int position) {
+
+    }
 }

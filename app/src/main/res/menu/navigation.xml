@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_main"
+        android:icon="@drawable/home_tab_icon_main"
+        android:title="@string/home_tab_main"/>
+
+    <item
+        android:id="@+id/navigation_data_collect"
+        android:icon="@drawable/home_tab_icon_data_collect"
+        android:title="@string/home_tab_data_collect"/>
+
+    <item
+        android:id="@+id/navigation_question_upload"
+        android:icon="@drawable/home_tab_icon_question_upload"
+        android:title="@string/home_tab_question_upload"/>
+
+</menu>
