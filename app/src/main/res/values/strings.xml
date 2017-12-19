@@ -9,6 +9,7 @@
     <string name="home_tab_question_upload">问题上报</string>
 
     <string name="problem_info">问题信息</string>
+    <string name="person_info">个人信息</string>
     <string name="problem_source">来源</string>
     <string name="problem_type">类型</string>
     <string name="problem_desc">描述</string>
@@ -28,5 +29,6 @@
     <string name="addressinfo">让我们想象一下，在应用程序中有一个视频播放器的情况。在同一个activity中，我们也可能会有其他操作最终可能会出现如下所示的</string>
     <string name="push_server">更新到服务器</string>
     <string name="perons_info">人员列表信息:</string>
+    <string name="search">搜索</string>
 
 </resources>
