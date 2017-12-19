@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/title"
+        android:visibility="gone">
+    </include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:background="@color/white"
+        android:layout_alignParentLeft="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="90dp"
+                android:background="@mipmap/ic_launcher"/>
+
+            <RelativeLayout
+                android:id="@+id/textviewlayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/logo"
+                android:layout_marginTop="40dp"
+                android:background="@color/white">
+
+                <EditText
+                    android:id="@+id/et_userNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:drawableLeft="@mipmap/ic_launcher"
+                    android:drawablePadding="25dp"
+                    android:hint="请输入账号"
+                    android:text=""
+                    android:inputType="text"
+                    android:theme="@style/MyEditText"
+                    android:paddingLeft="25dp"
+                    android:textColorHint="@color/gray2"
+                    android:textCursorDrawable="@null"
+                    android:textSize="14dp"/>
+
+                <EditText
+                    android:id="@+id/et_userPwd"
+                    android:theme="@style/MyEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/et_userNum"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:drawableLeft="@mipmap/ic_launcher"
+                    android:drawablePadding="25dp"
+                    android:hint="请输入密码"
+                    android:text=""
+                    android:inputType="textPassword"
+                    android:paddingLeft="25dp"
+                    android:textColorHint="@color/gray2"
+                    android:textCursorDrawable="@null"
+                    android:textSize="14dp"
+                    />
+            </RelativeLayout>
+
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@+id/textviewlayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/login_button"
+                android:elevation="10dp"
+                android:text="登录"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18dp"/>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
