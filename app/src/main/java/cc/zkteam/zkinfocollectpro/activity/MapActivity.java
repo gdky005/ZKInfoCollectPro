@@ -1,5 +1,6 @@
 package cc.zkteam.zkinfocollectpro.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -10,6 +11,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -96,10 +98,7 @@ public class MapActivity extends BaseActivity implements TextWatcher, SensorEven
         mSearchInMap.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mHintFlag = false;
-                mSearch.reverseGeoCode(new ReverseGeoCodeOption()
-                        .location(mPoiInfo.get(position).location));
-                mCurrPoiInfo = mPoiInfo.get(position);
+                selectLocationFromList(position);
             }
         });
 
@@ -111,12 +110,24 @@ public class MapActivity extends BaseActivity implements TextWatcher, SensorEven
                     ToastUtils.showShort("未选择合适的地理位置...");
                     return;
                 }
-                Intent intent = new Intent();
-                intent.putExtra(NEW_LOCATION, mCurrPoiInfo);
-                setResult(RESULT_OK, intent);
-                finish();
+                finishAndReturnResult();
             }
         });
+    }
+
+    private void finishAndReturnResult() {
+        Intent intent = new Intent();
+        intent.putExtra(NEW_LOCATION, mCurrPoiInfo);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    private void selectLocationFromList(int position) {
+        mHintFlag = false;
+        mSearch.reverseGeoCode(new ReverseGeoCodeOption()
+                .location(mPoiInfo.get(position).location));
+        mCurrPoiInfo = mPoiInfo.get(position);
+        closetInput();
     }
 
     @Override
@@ -147,6 +158,7 @@ public class MapActivity extends BaseActivity implements TextWatcher, SensorEven
 
     /**
      * 初始化 Map
+     *
      * @param location 位置信息
      */
     private void initMap(BDLocation location) {
@@ -223,6 +235,16 @@ public class MapActivity extends BaseActivity implements TextWatcher, SensorEven
         mPoiSearch.searchInCity(mSearchOption.keyword(s.toString()).pageNum(20));
     }
 
+    /**
+     * 手动关闭键盘
+     */
+    private void closetInput() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+        }
+    }
+
     @Override
     public void onSensorChanged(SensorEvent event) {
         changeIconDirection(event);
@@ -230,6 +252,7 @@ public class MapActivity extends BaseActivity implements TextWatcher, SensorEven
 
     /**
      * 设置图标方向
+     *
      * @param event 传感器事件
      */
     private void changeIconDirection(SensorEvent event) {
@@ -323,6 +346,7 @@ public class MapActivity extends BaseActivity implements TextWatcher, SensorEven
         //获取POI检索结果
         mSearchLocationList.clear();
         mPoiInfo.clear();
+        mPoiInfo = allPoi;
         for (PoiInfo r : allPoi) {
             Log.e("Tag", r.address);
             if (!TextUtils.isEmpty(r.address)) {
@@ -333,7 +357,6 @@ public class MapActivity extends BaseActivity implements TextWatcher, SensorEven
             ToastUtils.showShort("未找到合适位置...");
             return;
         }
-        mPoiInfo = allPoi;
         setLocationIntoAutoComplete();
     }
 

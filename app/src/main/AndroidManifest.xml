@@ -81,9 +81,10 @@
 
         <activity android:name=".activity.MapActivity"/>
 
-        <activity android:name=".activity.home.HomeActivity"/>
+        <activity android:name=".activity.home.HomeActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
 
-        <activity android:name=".activity.PersonalInfoCollectActivity"></activity>
+        <activity android:name=".activity.PersonalInfoCollectActivity" />
 
         <activity android:name=".activity.DataListActivity"/>
         <activity android:name=".activity.IDCardScanActivity"/>
