@@ -26,7 +26,7 @@ import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardRequestBody;
 import cc.zkteam.zkinfocollectpro.bean.BDTokenBean;
-import cc.zkteam.zkinfocollectpro.managers.ZKConnectionManager;
+import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.utils.baidu.Base64Util;
 import cc.zkteam.zkinfocollectpro.utils.baidu.FileUtil;
@@ -139,7 +139,7 @@ public class MainActivity extends BaseActivity {
                     .getDefaultRequestBody(true, base64EncodeImage);
             RequestBody body = RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), requestBody.toString());
 
-            ZKConnectionManager.getInstance().getZKApi().bdIDCard(body, accessToken).enqueue(new Callback<BDIdCardBean>() {
+            ZHConnectionManager.getInstance().getZHApi().bdIDCard(body, accessToken).enqueue(new Callback<BDIdCardBean>() {
                 @Override
                 public void onResponse(Call<BDIdCardBean> call, Response<BDIdCardBean> response) {
                     Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
@@ -176,7 +176,7 @@ public class MainActivity extends BaseActivity {
         //  "expires_in":2592000
         // }
 
-        ZKConnectionManager.getInstance().getZKApi().bdAccessToken(Constant.BD_GRANT_TYPE,
+        ZHConnectionManager.getInstance().getZHApi().bdAccessToken(Constant.BD_GRANT_TYPE,
                 Constant.BD_API_KEY, Constant.BD_SECRET_KEY).enqueue(new Callback<BDTokenBean>() {
             @Override
             public void onResponse(Call<BDTokenBean> call, Response<BDTokenBean> response) {

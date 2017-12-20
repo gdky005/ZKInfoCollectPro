@@ -5,7 +5,7 @@ package cc.zkteam.zkinfocollectpro.bean;
  * Created by WangQing on 2017/10/27.
  */
 
-public class BaseBean<T> {
+public class ZKTestBaseBean<T> {
     private int code;
     private String message;
     private T result;

@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import cc.zkteam.zkinfocollectpro.Constant;
 import cc.zkteam.zkinfocollectpro.ZKBase;
-import cc.zkteam.zkinfocollectpro.api.ZKApi;
+import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -20,21 +20,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * 单例使用教程: http://blog.csdn.net/lmj121212/article/details/68922401
  * Created by WangQing on 2017/10/28.
  */
-public class ZKConnectionManager {
+public class ZHConnectionManager {
 
     private static final String TAG = "ZKConnectionManager";
 
-    private static ZKConnectionManager instance = null;
+    private static ZHConnectionManager instance = null;
 
-    private ZKConnectionManager() {
+    private ZHConnectionManager() {
     }
 
-    public static ZKConnectionManager getInstance() {
+    public static ZHConnectionManager getInstance() {
         if (instance == null) {
-            synchronized (ZKConnectionManager.class) {
-                ZKConnectionManager temp = instance;
+            synchronized (ZHConnectionManager.class) {
+                ZHConnectionManager temp = instance;
                 if (temp == null) {
-                    temp = new ZKConnectionManager();
+                    temp = new ZHConnectionManager();
                     instance = temp;
                 }
             }
@@ -68,14 +68,14 @@ public class ZKConnectionManager {
         }
 
         return new Retrofit.Builder()
-                .baseUrl(Constant.ZKTEAM_DOMAIN_URL)
+                .baseUrl(Constant.ZHI_HUI_DOMAIN_URL)
                 .client(builder.build())
                 .addConverterFactory(GsonConverterFactory.create(getGson()))
                 .build();
     }
 
-    public ZKApi getZKApi() {
-        return getRetrofit().create(ZKApi.class);
+    public ZHApi getZHApi() {
+        return getRetrofit().create(ZHApi.class);
     }
 
     public void test() {

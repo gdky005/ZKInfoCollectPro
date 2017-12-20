@@ -30,7 +30,7 @@ import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardRequestBody;
 import cc.zkteam.zkinfocollectpro.camera.CameraManager;
 import cc.zkteam.zkinfocollectpro.camera.PreviewBorderView;
-import cc.zkteam.zkinfocollectpro.managers.ZKConnectionManager;
+import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.utils.baidu.Base64Util;
 import cc.zkteam.zkinfocollectpro.utils.baidu.FileUtil;
 import okhttp3.MediaType;
@@ -450,7 +450,7 @@ public class IDCardScanActivity extends AppCompatActivity implements SurfaceHold
                     .getDefaultRequestBody(true, base64EncodeImage);
             RequestBody body = RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), requestBody.toString());
 
-            ZKConnectionManager.getInstance().getZKApi().bdIDCard(body, MainActivity.accessToken).enqueue(new Callback<BDIdCardBean>() {
+            ZHConnectionManager.getInstance().getZHApi().bdIDCard(body, MainActivity.accessToken).enqueue(new Callback<BDIdCardBean>() {
                 @Override
                 public void onResponse(Call<BDIdCardBean> call, Response<BDIdCardBean> response) {
                     Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");

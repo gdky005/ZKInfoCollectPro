@@ -5,7 +5,7 @@ package cc.zkteam.zkinfocollectpro.bean;
  * Created by WangQing on 2017/10/27.
  */
 
-public class CategoryBean {
+public class ZKTestCategoryBean {
 
     /**
      * id : 6792

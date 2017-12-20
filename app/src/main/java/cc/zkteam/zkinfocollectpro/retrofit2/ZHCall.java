@@ -2,23 +2,22 @@ package cc.zkteam.zkinfocollectpro.retrofit2;
 
 import java.io.IOException;
 
-import cc.zkteam.zkinfocollectpro.bean.BaseBean;
+import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * ZKCall
+ * ZHCall
  * Created by WangQing on 2017/10/28.
  */
-public interface ZKCall<K> extends Call<BaseBean<K>> {
+public interface ZHCall<K> extends Call<ZHBaseBean<K>> {
+    @Override
+    Response<ZHBaseBean<K>> execute() throws IOException;
 
     @Override
-    Response<BaseBean<K>> execute() throws IOException;
-
-    @Override
-    void enqueue(Callback<BaseBean<K>> callback);
+    void enqueue(Callback<ZHBaseBean<K>> callback);
 
     @Override
     boolean isExecuted();
@@ -30,7 +29,7 @@ public interface ZKCall<K> extends Call<BaseBean<K>> {
     boolean isCanceled();
 
     @Override
-    Call<BaseBean<K>> clone();
+    Call<ZHBaseBean<K>> clone();
 
     @Override
     Request request();

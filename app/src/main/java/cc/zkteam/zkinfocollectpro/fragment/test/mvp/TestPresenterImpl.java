@@ -1,12 +1,8 @@
 package cc.zkteam.zkinfocollectpro.fragment.test.mvp;
 
-import java.util.List;
-
-import cc.zkteam.zkinfocollectpro.api.ZKApi;
+import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.mvp.BaseMVPPresenter;
-import cc.zkteam.zkinfocollectpro.bean.CategoryBean;
-import cc.zkteam.zkinfocollectpro.managers.ZKConnectionManager;
-import cc.zkteam.zkinfocollectpro.retrofit2.ZKCallback;
+import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.utils.L;
 
 /**
@@ -16,7 +12,7 @@ import cc.zkteam.zkinfocollectpro.utils.L;
 
 public class TestPresenterImpl extends BaseMVPPresenter<TestView, TestModule> implements TestPresenter {
 
-    ZKApi zkApi;
+    ZHApi zkApi;
 
     public TestPresenterImpl(TestView testView) {
         this.mView = testView;
@@ -24,26 +20,26 @@ public class TestPresenterImpl extends BaseMVPPresenter<TestView, TestModule> im
     }
 
     private void init() {
-        zkApi = ZKConnectionManager.getInstance().getZKApi();
+        zkApi = ZHConnectionManager.getInstance().getZHApi();
     }
 
     @Override
     public void loadData() {
         L.d("loadData: Hello");
 
-        zkApi.categoryData(20).enqueue(new ZKCallback<List<CategoryBean>>() {
-            @Override
-            public void onResponse(List<CategoryBean> result) {
-
-                L.d("onResponse: " + result.toString());
-            }
-
-            @Override
-            public void onFailure(Throwable throwable) {
-
-                L.d("onFailure: " + throwable.toString());
-            }
-        });
+//        zkApi.categoryData(20).enqueue(new ZHCallback<List<ZKTestCategoryBean>>() {
+//            @Override
+//            public void onResponse(List<ZKTestCategoryBean> result) {
+//
+//                L.d("onResponse: " + result.toString());
+//            }
+//
+//            @Override
+//            public void onFailure(Throwable throwable) {
+//
+//                L.d("onFailure: " + throwable.toString());
+//            }
+//        });
 
 
 
