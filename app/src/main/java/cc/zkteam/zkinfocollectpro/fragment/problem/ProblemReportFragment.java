@@ -1,5 +1,6 @@
 package cc.zkteam.zkinfocollectpro.fragment.problem;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.baidu.mapapi.search.core.PoiInfo;
 import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
@@ -19,11 +21,14 @@ import cc.zkteam.zkinfocollectpro.fragment.problem.mvp.PRPresenterImpl;
 import cc.zkteam.zkinfocollectpro.fragment.problem.mvp.PRView;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by Administrator on 2017/12/15.
  */
 
 public class ProblemReportFragment extends BaseFragment implements PRView {
+    private static final int GO_MAP = 1;
     @BindView(R.id.et_problem_source)
     EditText mProblemSource;
     @BindView(R.id.sp_problem_type)
@@ -65,10 +70,10 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         //  建立数据源
         String[] mItems = getResources().getStringArray(R.array.problem_type);
         //  建立Adapter并且绑定数据源
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(getContext(),R.layout.item_problem_item, mItems);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.item_problem_item, mItems);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //  绑定 Adapter到控件
-        mProblemType .setAdapter(adapter);
+        mProblemType.setAdapter(adapter);
     }
 
     @Override
@@ -82,7 +87,9 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         mSelectLocationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PageCtrl.startActivity(MapActivity.class);
+//                PageCtrl.startActivity(MapActivity.class);
+                startActivityForResult(new Intent(getActivity(),
+                        MapActivity.class), GO_MAP);
             }
         });
         mCommitBtn.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +98,19 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
                 judgeInput();
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == GO_MAP) {
+            if (data != null) {
+                PoiInfo poiInfo = data.getParcelableExtra(MapActivity.NEW_LOCATION);
+                if (poiInfo != null) {
+                    mProblemLocation.setText(poiInfo.address);
+                }
+            }
+        }
     }
 
     /**
@@ -148,5 +168,10 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     @Override
     public void requestFinish() {
 
+    }
+
+    @Override
+    public void setLocationInfo(String location) {
+        mProblemLocation.setText(location);
     }
 }

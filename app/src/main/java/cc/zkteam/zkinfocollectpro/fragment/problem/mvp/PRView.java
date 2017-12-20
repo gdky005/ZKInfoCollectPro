@@ -7,4 +7,6 @@ import cc.zkteam.zkinfocollectpro.base.mvp.BaseMVPView;
  */
 
 public interface PRView extends BaseMVPView {
+
+    void setLocationInfo(String location);
 }

@@ -65,7 +65,8 @@
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:paddingTop="3dp"
-                    android:text="@string/problem_source" />
+                    android:text="@string/problem_source"
+                    android:textColor="@color/text_main" />
 
                 <EditText
                     android:id="@+id/et_problem_source"
@@ -96,7 +97,8 @@
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:paddingTop="3dp"
-                    android:text="@string/problem_type" />
+                    android:text="@string/problem_type"
+                    android:textColor="@color/text_main" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -126,18 +128,19 @@
                 <TextView
                     android:layout_width="75dp"
                     android:layout_height="match_parent"
-
                     android:paddingBottom="3dp"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:paddingTop="3dp"
-                    android:text="@string/problem_desc" />
+                    android:text="@string/problem_desc"
+                    android:textColor="@color/text_main" />
 
                 <EditText
                     android:id="@+id/et_problem_desc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/bg_problem_report"
+                    android:gravity="start"
                     android:hint="@string/input_problem_desc"
                     android:padding="5dp"
                     android:textColor="@color/text_main"
@@ -160,7 +163,8 @@
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:paddingTop="3dp"
-                    android:text="@string/problem_location" />
+                    android:text="@string/problem_location"
+                    android:textColor="@color/text_main" />
 
                 <EditText
                     android:id="@+id/et_problem_location"
@@ -203,7 +207,8 @@
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:paddingTop="3dp"
-                    android:text="@string/problem_attachment" />
+                    android:text="@string/problem_attachment"
+                    android:textColor="@color/text_main" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_pic"
@@ -231,6 +236,7 @@
             android:paddingStart="16dp"
             android:paddingTop="12dp"
             android:text="@string/deal_with_info"
+            android:textColor="@color/text_main"
             android:textSize="15sp"
             tools:ignore="RtlSymmetry" />
 
@@ -254,13 +260,15 @@
                 android:paddingBottom="3dp"
                 android:paddingLeft="16dp"
                 android:paddingTop="3dp"
-                android:text="@string/deal_with_suggestion" />
+                android:text="@string/deal_with_suggestion"
+                android:textColor="@color/text_main" />
 
             <EditText
                 android:id="@+id/et_problem_suggestion"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/bg_problem_report"
+                android:gravity="start"
                 android:hint="@string/input_problem_suggestion"
                 android:padding="5dp"
                 android:textColor="@color/text_main"
