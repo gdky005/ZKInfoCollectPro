@@ -1,15 +1,12 @@
 package cc.zkteam.zkinfocollectpro.fragment.problem.mvp;
 
-import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 
 import cc.zkteam.zkinfocollectpro.ZKBase;
-import cc.zkteam.zkinfocollectpro.ZKICApplication;
-import cc.zkteam.zkinfocollectpro.activity.MapActivity;
-import cc.zkteam.zkinfocollectpro.api.ZKApi;
+import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.mvp.BaseMVPPresenter;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 
@@ -20,7 +17,7 @@ import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implements PRPresenter {
     public LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
-    private ZHApi zkApi;
+    private ZHApi zhApi;
 
     public PRPresenterImpl(PRView view) {
         this.mView = view;
@@ -28,7 +25,7 @@ public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implemen
     }
 
     private void init() {
-        zkApi = ZHConnectionManager.getInstance().getZHApi();
+        zhApi = ZHConnectionManager.getInstance().getZHApi();
     }
 
     @Override
