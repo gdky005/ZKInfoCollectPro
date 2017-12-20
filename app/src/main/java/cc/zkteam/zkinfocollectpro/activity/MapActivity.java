@@ -1,19 +1,22 @@
 package cc.zkteam.zkinfocollectpro.activity;
 
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 
@@ -22,6 +25,10 @@ import cc.zkteam.zkinfocollectpro.base.BaseActivity;
  */
 
 public class MapActivity extends BaseActivity {
+    @BindView(R.id.et_search_in_map)
+    EditText mSearchInMap;
+    @BindView(R.id.btn_select_location)
+    Button mSelectLocationBtn;
     private TextureMapView mMapView;
     private BaiduMap mBDMap;
     private MyLocationListener myListener = new MyLocationListener();

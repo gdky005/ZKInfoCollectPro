@@ -1,12 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:padding="12dp">
+
+        <EditText
+            android:id="@+id/et_search_in_map"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_problem_report"
+            android:drawableLeft="@drawable/icon_edit"
+            android:drawableStart="@drawable/icon_edit"
+            android:hint="@string/search"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btn_select_location"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:background="@drawable/bg_btn_commit"
+            android:drawableLeft="@drawable/icon_edit"
+            android:drawableStart="@drawable/icon_edit"
+            android:text="@string/select_location"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+    </LinearLayout>
 
     <com.baidu.mapapi.map.TextureMapView
         android:id="@+id/mTexturemap"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </com.baidu.mapapi.map.TextureMapView>
+        android:layout_height="match_parent" />
 
-</RelativeLayout>
+</LinearLayout>

@@ -9,6 +9,9 @@
     <color name="gray2">#999999</color>
     <color name="white">#fff</color>
 
+    <color name="text_main">#333333</color>
+    <color name="text_hint">#999999</color>
+
     <color name="black_alpha_112">#70000000</color>
     <color name="white_alpha_192">#c0ffffff</color>
 

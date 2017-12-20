@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -57,7 +58,17 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
 
     @Override
     public void initView(View rootView) {
+        initSpinner();
+    }
 
+    private void initSpinner() {
+        //  建立数据源
+        String[] mItems = getResources().getStringArray(R.array.problem_type);
+        //  建立Adapter并且绑定数据源
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(getContext(),R.layout.item_problem_item, mItems);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //  绑定 Adapter到控件
+        mProblemType .setAdapter(adapter);
     }
 
     @Override

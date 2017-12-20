@@ -11,25 +11,46 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="32dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:paddingBottom="11dp"
             android:paddingLeft="16dp"
             android:paddingStart="16dp"
+            android:paddingTop="12dp"
             android:text="@string/problem_info"
-            android:textSize="15sp"
+            android:textColor="@color/text_main"
+            android:textSize="18sp"
             tools:ignore="RtlSymmetry" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:background="@color/colorPrimary" />
+            android:background="@color/itemdecor" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingBottom="11dp"
+            android:paddingLeft="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:text="@string/person_info"
+            android:textColor="@color/text_main"
+            android:textSize="15sp"
+            tools:ignore="RtlSymmetry" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#e6e6e6" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:background="@drawable/bg_problem_report"
-            android:orientation="vertical">
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            android:paddingRight="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -38,141 +59,150 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="3dp"
                     android:text="@string/problem_source" />
 
                 <EditText
                     android:id="@+id/et_problem_source"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_problem_report"
                     android:ellipsize="end"
                     android:hint="@string/input_problem_source"
+                    android:padding="5dp"
                     android:singleLine="true"
-                    android:textSize="14sp"
-                    android:background="@null"/>
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp" />
 
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#ddd" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="3dp"
                     android:text="@string/problem_type" />
 
-                <Spinner
-                    android:id="@+id/sp_problem_type"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:prompt="@string/problem_location"
-                    android:entries="@array/problem_type"/>
+                    android:background="@drawable/bg_problem_report">
+
+                    <Spinner
+                        android:id="@+id/sp_problem_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/problem_type"
+                        android:paddingBottom="3dp"
+                        android:paddingTop="3dp"
+                        android:prompt="@string/problem_location"
+                        android:theme="@style/SpnStyle" />
+
+                </LinearLayout>
 
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#ddd" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
+                android:layout_marginTop="6dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
+
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="3dp"
                     android:text="@string/problem_desc" />
 
                 <EditText
                     android:id="@+id/et_problem_desc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@null"
+                    android:background="@drawable/bg_problem_report"
                     android:hint="@string/input_problem_desc"
                     android:padding="5dp"
-                    android:textSize="14sp" />
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#ddd" />
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="3dp"
                     android:text="@string/problem_location" />
 
                 <EditText
                     android:id="@+id/et_problem_location"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginRight="6dp"
                     android:layout_weight="1"
-                    android:background="@null"
+                    android:background="@drawable/bg_problem_report"
                     android:hint="@string/input_problem_location"
                     android:padding="5dp"
-                    android:textSize="14sp" />
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/btn_select_location"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
-                    android:text="@string/select_location"
+                    android:layout_height="24dp"
                     android:background="@drawable/bg_btn_commit"
+                    android:drawableLeft="@drawable/icon_edit"
+                    android:drawableStart="@drawable/icon_edit"
+                    android:text="@string/select_location"
                     android:textColor="@color/white"
-                    android:textSize="12sp"
-                    android:layout_marginRight="9dp"/>
+                    android:textSize="12sp" />
 
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#ddd" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
+                android:layout_marginTop="6dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="3dp"
                     android:text="@string/problem_attachment" />
 
                 <android.support.v7.widget.RecyclerView
@@ -184,76 +214,71 @@
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#ddd" />
-
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="16dp"
-            android:background="#ddd" />
+            android:layout_height="0.5dp"
+            android:layout_marginTop="12dp"
+            android:background="#e6e6e6" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="32dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:paddingBottom="11dp"
             android:paddingLeft="16dp"
             android:paddingStart="16dp"
+            android:paddingTop="12dp"
             android:text="@string/deal_with_info"
             android:textSize="15sp"
             tools:ignore="RtlSymmetry" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/colorPrimary" />
-
+            android:layout_height="0.5dp"
+            android:background="#e6e6e6" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_margin="16dp"
-            android:background="@drawable/bg_problem_report"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
+                android:layout_width="75dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
+                android:paddingBottom="3dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="3dp"
                 android:text="@string/deal_with_suggestion" />
 
             <EditText
                 android:id="@+id/et_problem_suggestion"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@null"
+                android:background="@drawable/bg_problem_report"
                 android:hint="@string/input_problem_suggestion"
                 android:padding="5dp"
-                android:textSize="14sp" />
+                android:textColor="@color/text_main"
+                android:textColorHint="@color/text_hint"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#ddd" />
-
         <Button
             android:id="@+id/btn_commit"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/bg_btn_commit"
             android:text="@string/btn_commit"
-            android:textColor="@color/white"
-            android:layout_marginBottom="24dp"/>
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
