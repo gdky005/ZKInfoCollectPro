@@ -1,19 +1,14 @@
 package cc.zkteam.zkinfocollectpro.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.view.ZKImageView;
@@ -39,12 +34,10 @@ public class PersonalInfoCollectFragment extends BaseFragment {
     TextView tvPersonalInfoCollectCompletion;
     @BindView(R.id.list_personal_info)
     RecyclerView listPersonalInfo;
-    Unbinder unbinder;
     @BindView(R.id.img_personal_info_back)
     ImageView imgPersonalInfoBack;
     @BindView(R.id.img_personal_info_scan)
     ImageView imgPersonalInfoScan;
-    Unbinder unbinder1;
 
     @Override
     public int getLayoutId() {
@@ -64,21 +57,6 @@ public class PersonalInfoCollectFragment extends BaseFragment {
     @Override
     public void initListener() {
 
-    }
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        if (rootView != null)
-            unbinder = ButterKnife.bind(this, rootView);
-        unbinder1 = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 
     @OnClick({R.id.img_personal_info_back, R.id.img_personal_info_scan})
