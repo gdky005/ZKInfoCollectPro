@@ -1,41 +1,31 @@
 package cc.zkteam.zkinfocollectpro.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.view.LayoutInflater;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
-import cc.zkteam.zkinfocollectpro.view.ZKImageView;
 
 /**
  * Created by loong on 2017/12/15.
  */
 
 public class SingInFragment extends BaseFragment {
+
+    @BindView(R.id.img_personal_info_back)
+    ImageView imgPersonalInfoBack;
+    @BindView(R.id.img_personal_info_scan)
+    ImageView imgPersonalInfoScan;
+    @BindView(R.id.toolbar_personal_info_collection)
+    Toolbar toolbarPersonalInfoCollection;
+    @BindView(R.id.img_title_text)
+    ImageView imgTitleText;
     @BindView(R.id.img_sign_main)
-    ZKImageView imgSignMain;
-    @BindView(R.id.tv_collect_total_number)
-    TextView tvCollectTotalNumber;
-    @BindView(R.id.tv_collect_complete)
-    TextView tvCollectComplete;
-    @BindView(R.id.tv_collect_complete_proportion)
-    TextView tvCollectCompleteProportion;
-    @BindView(R.id.tv_collect_current)
-    TextView tvCollectCurrent;
-    @BindView(R.id.tv_collect_current_proportion)
-    TextView tvCollectCurrentProportion;
-    @BindView(R.id.tv_collect_not_yet)
-    TextView tvCollectNotYet;
-    @BindView(R.id.tv_collect_not_yet_proportion)
-    TextView tvCollectNotYetProportion;
-    Unbinder unbinder;
+    RelativeLayout imgSignMain;
 
     @Override
     public int getLayoutId() {
@@ -55,19 +45,5 @@ public class SingInFragment extends BaseFragment {
     @Override
     public void initListener() {
 
-    }
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        if (rootView != null)
-            unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 }
