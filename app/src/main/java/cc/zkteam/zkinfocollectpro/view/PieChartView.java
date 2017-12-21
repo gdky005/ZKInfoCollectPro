@@ -35,22 +35,21 @@ public class PieChartView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         circlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        circlePaint.setStyle(Paint.Style.STROKE);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawColor(Color.RED);
-        RectF oval = new RectF(0, 0, getWidth(), getHeight());
+        circlePaint.setStrokeWidth(getWidth() / 4);
+        RectF oval = new RectF(getWidth() / 8, getHeight() / 8, getWidth() * 7 / 8, getHeight() * 7 / 8);
 
-//        circlePaint.setColor(Color.RED);
-//        circlePaint.setStrokeWidth(20);
-//        circlePaint.setColor(Color.parseColor("#35cddd"));
-//        canvas.drawArc(oval, 60, 180, false, circlePaint);
-//        circlePaint.setColor(Color.parseColor("##f6bd2e"));
-//        canvas.drawArc(oval, 180, 300, false, circlePaint);
-//        circlePaint.setColor(Color.parseColor("#0092d1"));
-//        canvas.drawArc(oval, -60, 60, false, circlePaint);
+        circlePaint.setColor(Color.parseColor("#35cddd"));
+        canvas.drawArc(oval, -150, 120, false, circlePaint);
+        circlePaint.setColor(Color.parseColor("#f6bd2e"));
+        canvas.drawArc(oval, -30, 120, false, circlePaint);
+        circlePaint.setColor(Color.parseColor("#0092d1"));
+        canvas.drawArc(oval, 90, 120, false, circlePaint);
     }
 }

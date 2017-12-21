@@ -1,5 +1,6 @@
 package cc.zkteam.zkinfocollectpro.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -12,8 +13,8 @@ import cc.zkteam.zkinfocollectpro.ZKBase;
 
 public class PageCtrl {
 
-    public static void startActivity(Class cls) {
-        Context context = ZKBase.getContext();
+    public static void startActivity(Activity context, Class cls) {
+        if (context == null || cls == null) return;
         Intent intent = new Intent(context, cls);
         context.startActivity(intent);
     }
