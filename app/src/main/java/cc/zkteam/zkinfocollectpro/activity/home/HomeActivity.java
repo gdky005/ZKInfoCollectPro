@@ -17,6 +17,7 @@ import butterknife.BindView;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.MyBean;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
+import cc.zkteam.zkinfocollectpro.fragment.SingInFragment;
 import cc.zkteam.zkinfocollectpro.fragment.problem.ProblemReportFragment;
 import cc.zkteam.zkinfocollectpro.fragment.test.TestFragment;
 import cc.zkteam.zkinfocollectpro.view.ZKViewPager;
@@ -174,7 +175,7 @@ public class HomeActivity extends BaseActivity implements HasSupportFragmentInje
         public Fragment getItem(int position) {
             switch (position) {
                 case NAV_TYPE_MAIN:
-                    return TestFragment.newInstance("One");
+                    return new SingInFragment();
                 case NAV_TYPE_DATA_COLLECT:
                     return TestFragment.newInstance("Two");
                 case NAV_TYPE_QUESTION_UPLOAD:

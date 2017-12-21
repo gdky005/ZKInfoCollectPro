@@ -7,10 +7,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
@@ -38,6 +40,11 @@ public class PersonalInfoCollectFragment extends BaseFragment {
     @BindView(R.id.list_personal_info)
     RecyclerView listPersonalInfo;
     Unbinder unbinder;
+    @BindView(R.id.img_personal_info_back)
+    ImageView imgPersonalInfoBack;
+    @BindView(R.id.img_personal_info_scan)
+    ImageView imgPersonalInfoScan;
+    Unbinder unbinder1;
 
     @Override
     public int getLayoutId() {
@@ -64,6 +71,7 @@ public class PersonalInfoCollectFragment extends BaseFragment {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         if (rootView != null)
             unbinder = ButterKnife.bind(this, rootView);
+        unbinder1 = ButterKnife.bind(this, rootView);
         return rootView;
     }
 
@@ -71,5 +79,17 @@ public class PersonalInfoCollectFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @OnClick({R.id.img_personal_info_back, R.id.img_personal_info_scan})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.img_personal_info_back:
+                getActivity().finish();
+                break;
+            case R.id.img_personal_info_scan:
+                // TODO 扫一扫
+                break;
+        }
     }
 }
