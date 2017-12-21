@@ -66,6 +66,8 @@ public interface ZHApi {
     Call<ZHBaseBean<ZHLoginBean>> login(@Query("username") String username,
                                         @Query("password") String password);
 
+    @GET("datamanage.php/Admin/AppInterface/get_sign")
+    Call<ZHBaseBean> getSignStatus(@Query("userid") String userId);
 
     /**
      * 统计接口

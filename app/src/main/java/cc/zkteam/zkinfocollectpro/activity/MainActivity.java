@@ -105,10 +105,10 @@ public class MainActivity extends BaseActivity {
             case R.id.toolbar:
                 break;
             case R.id.home_btn:
-                PageCtrl.startActivity(HomeActivity.class);
+                PageCtrl.startActivity(MainActivity.this,HomeActivity.class);
                 break;
             case R.id.map:
-                PageCtrl.startActivity(DataListActivity.class);
+                PageCtrl.startActivity(MainActivity.this,DataListActivity.class);
                 break;
             case R.id.bd_access_token:
                 getBDAccessToken();
@@ -121,7 +121,7 @@ public class MainActivity extends BaseActivity {
 //                身份证识别地址
 //                http://ai.baidu.com/tech/ocr/cards
 
-                PageCtrl.startActivity(IDCardScanActivity.class);
+                PageCtrl.startActivity(MainActivity.this,IDCardScanActivity.class);
                 break;
         }
     }
