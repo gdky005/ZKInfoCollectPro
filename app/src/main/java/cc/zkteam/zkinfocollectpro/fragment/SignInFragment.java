@@ -1,9 +1,10 @@
 package cc.zkteam.zkinfocollectpro.fragment;
 
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHTongJiBean;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
+import cc.zkteam.zkinfocollectpro.view.ZKImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -61,24 +63,36 @@ public class SignInFragment extends BaseFragment {
     TextView tvNumNone;
     @BindView(R.id.tv_percent_none)
     TextView tvPercentNone;
-    Unbinder unbinder;
     @BindView(R.id.tv_sign_success_msg)
     TextView tvSignSuccessMsg;
     @BindView(R.id.tv_sign_success_submit)
     TextView tvSignSuccessSubmit;
     @BindView(R.id.layout_sign_success)
     LinearLayout layoutSignSuccess;
+    @BindView(R.id.img_about_avatar)
+    ZKImageView imgAboutAvatar;
+    @BindView(R.id.tv_about_name)
+    TextView tvAboutName;
+    @BindView(R.id.tv_about_message)
+    TextView tvAboutMessage;
+    @BindView(R.id.tv_about_setting)
+    TextView tvAboutSetting;
+    @BindView(R.id.tv_about_quit)
+    TextView tvAboutQuit;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
 
     private ZHApi zhApi;
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_sign;
+        return R.layout.fragment_sign_slide;
     }
 
     @Override
     public void initView(View rootView) {
         zhApi = ZHConnectionManager.getInstance().getZHApi();
+
     }
 
     @Override
@@ -141,25 +155,12 @@ public class SignInFragment extends BaseFragment {
 
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
-    @OnClick({R.id.img_personal_info_about, R.id.img_personal_info_search, R.id.tv_sign, R.id.tv_sign_success_submit})
+    @OnClick({R.id.img_personal_info_about, R.id.img_personal_info_search, R.id.tv_sign, R.id.tv_sign_success_submit,
+            R.id.tv_about_message, R.id.tv_about_setting, R.id.tv_about_quit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_personal_info_about:
-                Toast.makeText(getContext(), "关于", Toast.LENGTH_SHORT).show();
+                drawerLayout.openDrawer(Gravity.LEFT);
                 break;
             case R.id.img_personal_info_search:
                 Toast.makeText(getContext(), "搜索", Toast.LENGTH_SHORT).show();
@@ -169,6 +170,12 @@ public class SignInFragment extends BaseFragment {
                 break;
             case R.id.tv_sign_success_submit:
                 layoutSignSuccess.setVisibility(View.GONE);
+                break;
+            case R.id.tv_about_message:
+                break;
+            case R.id.tv_about_setting:
+                break;
+            case R.id.tv_about_quit:
                 break;
         }
     }
