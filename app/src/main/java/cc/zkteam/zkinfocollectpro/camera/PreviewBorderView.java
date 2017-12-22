@@ -28,7 +28,7 @@ public class PreviewBorderView extends SurfaceView implements SurfaceHolder.Call
     private Paint mPaintLine;
     private SurfaceHolder mHolder;
     private Thread mThread;
-    private static final String DEFAULT_TIPS_TEXT = "";
+    private static final String DEFAULT_TIPS_TEXT = "将身份证放入框内";
     private static final int DEFAULT_TIPS_TEXT_SIZE = 16;
     private static final int DEFAULT_TIPS_TEXT_COLOR = Color.GREEN;
 
@@ -129,7 +129,7 @@ public class PreviewBorderView extends SurfaceView implements SurfaceHolder.Call
             mPaintLine.setTextSize(tipTextSize);
             mPaintLine.setAntiAlias(true);
             mPaintLine.setDither(true);
-            this.mCanvas.drawText(tipText, this.mScreenW / 2 -mPaintLine.measureText(tipText,0,tipText.length())/2, this.mScreenH / 2 , mPaintLine);
+            this.mCanvas.drawText(tipText, this.mScreenW / 2 - mPaintLine.measureText(tipText,0,tipText.length())/2, this.mScreenH / 2 - heightOffset, mPaintLine);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

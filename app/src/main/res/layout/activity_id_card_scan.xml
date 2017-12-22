@@ -34,11 +34,15 @@
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
+
+
     <SurfaceView
         android:id="@+id/surfaceview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar_personal_info_collection"/>
+
+
 
     <cc.zkteam.zkinfocollectpro.camera.PreviewBorderView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -118,5 +122,15 @@
             android:text="重新扫描"
             />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearlaout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="80dp"
+        android:textColor="@color/white"
+        android:text="将身份证放入框内即可自动扫描 \n未扫描到身份证，可从相册添加"/>
 
 </RelativeLayout>
