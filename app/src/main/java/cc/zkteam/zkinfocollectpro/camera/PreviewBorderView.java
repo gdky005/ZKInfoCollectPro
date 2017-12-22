@@ -28,7 +28,7 @@ public class PreviewBorderView extends SurfaceView implements SurfaceHolder.Call
     private Paint mPaintLine;
     private SurfaceHolder mHolder;
     private Thread mThread;
-    private static final String DEFAULT_TIPS_TEXT = "请将方框对准证件拍摄";
+    private static final String DEFAULT_TIPS_TEXT = "";
     private static final int DEFAULT_TIPS_TEXT_SIZE = 16;
     private static final int DEFAULT_TIPS_TEXT_COLOR = Color.GREEN;
     /**
