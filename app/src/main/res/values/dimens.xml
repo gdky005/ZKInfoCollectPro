@@ -5,4 +5,11 @@
     <dimen name="dp_20">20dp</dimen>
     <dimen name="dp_5">5dp</dimen>
     <dimen name="dp_2">2dp</dimen>
+
+    <dimen name="basic_textview1_marleft">25dp</dimen>
+    <dimen name="basic_textview2_marleft">30dp</dimen>
+    <dimen name="basic_textview_size">15sp</dimen>
+    <dimen name="basic_layout_hight">40dip</dimen>
+    <dimen name="basic_texiview_width">130dip</dimen>
+    <dimen name="basic_item_hight">50dip</dimen>
 </resources>

@@ -38,7 +38,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:src="@mipmap/search"
+        android:src="@mipmap/right_menu"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="16dp" />

@@ -31,4 +31,18 @@
         <item name="android:colorControlNormal" tools:targetApi="lollipop">@color/colorPrimary</item>
     </style>
 
+    <style name="BasicinfoActivity_button" parent="@android:style/Widget.Button">
+        <item name="android:textSize">@dimen/basic_textview_size</item>
+        <item name="android:textColor">@color/black_333</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginBottom">7dip</item>
+        <item name="android:layout_marginLeft">25dip</item>
+        <item name="android:layout_marginTop">7dip</item>
+        <item name="android:layout_marginRight">25dip</item>
+        <item name="android:background">@drawable/basicinfo_input_back</item>
+
+    </style>
+
+
 </resources>
