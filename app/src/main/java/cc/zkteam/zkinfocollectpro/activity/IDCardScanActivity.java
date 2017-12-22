@@ -21,6 +21,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ToastUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Field;
@@ -505,6 +507,12 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
                 @Override
                 public void onFailure(Call<BDIdCardBean> call, Throwable t) {
 
+                    borderview.setVisibility(View.GONE);
+                    viewScanResult.setVisibility(View.VISIBLE);
+                    tv.setText("识别 失败");
+                    progress.setVisibility(View.GONE);
+
+                    ToastUtils.showShort("识别 失败");
                     Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
                 }
             });
