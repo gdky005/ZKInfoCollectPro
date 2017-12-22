@@ -18,4 +18,11 @@ public class PageCtrl {
         Intent intent = new Intent(context, cls);
         context.startActivity(intent);
     }
+
+    public static void startActivity(Context context, Class cls) {
+        if (context == null || cls == null) return;
+        Intent intent = new Intent(context, cls);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
 }

@@ -78,7 +78,7 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.btn_personal).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,PersonalInfoCollectActivity.class));
+                startActivity(new Intent(MainActivity.this, PersonalInfoCollectActivity.class));
             }
         });
     }
@@ -96,16 +96,17 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.toolbar, R.id.home_btn, R.id.map, R.id.bd_access_token, R.id.id_card, R.id.camera_btn})
+    @OnClick({R.id.toolbar, R.id.home_btn, R.id.map, R.id.bd_access_token,
+            R.id.id_card, R.id.camera_btn, R.id.btn_problem_list})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar:
                 break;
             case R.id.home_btn:
-                PageCtrl.startActivity(MainActivity.this,HomeActivity.class);
+                PageCtrl.startActivity(MainActivity.this, HomeActivity.class);
                 break;
             case R.id.map:
-                PageCtrl.startActivity(MainActivity.this,DataListActivity.class);
+                PageCtrl.startActivity(MainActivity.this, DataListActivity.class);
                 break;
             case R.id.bd_access_token:
                 getBDAccessToken();
@@ -118,7 +119,10 @@ public class MainActivity extends BaseActivity {
 //                身份证识别地址
 //                http://ai.baidu.com/tech/ocr/cards
 
-                PageCtrl.startActivity(MainActivity.this,IDCardScanActivity.class);
+                PageCtrl.startActivity(MainActivity.this, IDCardScanActivity.class);
+                break;
+            case R.id.btn_problem_list:
+                PageCtrl.startActivity(MainActivity.this, MyProblemListActivity.class);
                 break;
         }
     }

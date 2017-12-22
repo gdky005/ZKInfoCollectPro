@@ -12,7 +12,7 @@ import java.util.List;
 import butterknife.BindView;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
-import cc.zkteam.zkinfocollectpro.base.DateCollectRvAdapter;
+import cc.zkteam.zkinfocollectpro.adapter.DateCollectRvAdapter;
 import cc.zkteam.zkinfocollectpro.base.RvListener;
 import cc.zkteam.zkinfocollectpro.bean.RentInfo;
 import cc.zkteam.zkinfocollectpro.utils.CommonUtils;
@@ -63,7 +63,7 @@ public class DataListActivity extends BaseActivity implements RvListener {
         }
 
         mRecycle.setLayoutManager(new LinearLayoutManager(this));
-        mRecycle.addItemDecoration(new DividerItemDecoration(getResources().getColor(R.color.itemdecor), CommonUtils.dip2px(this, 1)));
+        mRecycle.addItemDecoration(new DividerItemDecoration(getResources().getColor(R.color.item_decor), CommonUtils.dip2px(this, 1)));
         mRecycle.setAdapter(new DateCollectRvAdapter(this, infos, this));
     }
 

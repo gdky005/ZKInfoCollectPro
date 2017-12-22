@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tv_problem_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_main"
+            android:textSize="12sp"
+            tools:text="编号：12345665222" />
+
+        <TextView
+            android:id="@+id/tv_problem_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_problem_no"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/text_main"
+            android:textSize="12sp"
+            tools:text="描述：这是一个不太清晰的描述" />
+
+        <TextView
+            android:id="@+id/tv_problem_report_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_problem_desc"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/text_main"
+            android:textSize="12sp"
+            tools:text="报上时间：2017-12-01  10:13:45" />
+
+        <Button
+            android:id="@+id/btn_check_problem_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_alignBottom="@id/tv_problem_report_time"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bg_btn_commit"
+            android:text="@string/check_problem_detail"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/item_decor" />
+
+</LinearLayout>

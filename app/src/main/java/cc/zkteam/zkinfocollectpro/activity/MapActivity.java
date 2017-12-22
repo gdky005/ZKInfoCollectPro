@@ -6,6 +6,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -16,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -32,7 +35,6 @@ import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
-import com.baidu.mapapi.search.geocode.GeoCodeOption;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
 import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
@@ -50,6 +52,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 
@@ -65,6 +68,10 @@ public class MapActivity extends BaseActivity implements TextWatcher, SensorEven
     Button mSelectLocationBtn;
     @BindView(R.id.mTexturemap)
     TextureMapView mMapView;
+    @BindView(R.id.tv_toolbar_title)
+    TextView mToolbarTitle;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     private BaiduMap mBDMap;
     private MyLocationListener myListener = new MyLocationListener();
     private boolean mIsFirstLoc = true;
@@ -88,7 +95,8 @@ public class MapActivity extends BaseActivity implements TextWatcher, SensorEven
 
     @Override
     protected void initViews() {
-
+        initToolbar(mToolbar);
+        mToolbarTitle.setText("位置");
     }
 
     @Override
@@ -272,6 +280,13 @@ public class MapActivity extends BaseActivity implements TextWatcher, SensorEven
 
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
     /**
      * 定位SDK监听函数
      */
@@ -364,7 +379,7 @@ public class MapActivity extends BaseActivity implements TextWatcher, SensorEven
      * 设置提示数据
      */
     private void setLocationIntoAutoComplete() {
-        ArrayAdapter<String> mAdapter = new ArrayAdapter<>(MapActivity.this, R.layout.item_problem_item, mSearchLocationList);
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<>(MapActivity.this, R.layout.item_problem_type, mSearchLocationList);
         mSearchInMap.setAdapter(mAdapter);
         mSearchInMap.showDropDown();
     }

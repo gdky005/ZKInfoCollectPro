@@ -49,7 +49,7 @@ public class HomeActivity extends BaseActivity implements HasSupportFragmentInje
     private static Fragment[] TABLE_FRAGMENT = new Fragment[] {
             SignInFragment.newInstance(),
             TestFragment.newInstance("Two"),
-            ProblemReportFragment.newInstance()};
+            ProblemReportFragment.newInstance(true)};
 
     public static int [] NAV_TYPE = new int[]{NAV_TYPE_MAIN, NAV_TYPE_DATA_COLLECT, NAV_TYPE_QUESTION_UPLOAD};
 

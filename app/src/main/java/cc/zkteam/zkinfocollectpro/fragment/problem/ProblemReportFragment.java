@@ -2,13 +2,18 @@ package cc.zkteam.zkinfocollectpro.fragment.problem;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.blankj.utilcode.util.ToastUtils;
@@ -19,7 +24,6 @@ import cc.zkteam.zkinfocollectpro.activity.MapActivity;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.fragment.problem.mvp.PRPresenterImpl;
 import cc.zkteam.zkinfocollectpro.fragment.problem.mvp.PRView;
-import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -29,6 +33,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class ProblemReportFragment extends BaseFragment implements PRView {
     private static final int GO_MAP = 1;
+    private static final String PROBLEM_EDIT_FLAG = "problem_edit_flag";
     @BindView(R.id.et_problem_source)
     EditText mProblemSource;
     @BindView(R.id.sp_problem_type)
@@ -45,15 +50,26 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     EditText mProblemSuggestion;
     @BindView(R.id.btn_commit)
     Button mCommitBtn;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.tv_toolbar_title)
+    TextView mToolbarTitle;
     private PRPresenterImpl mPresenter;
+    private boolean mIsEditPage = false;
 
-    public static ProblemReportFragment newInstance() {
-
+    public static ProblemReportFragment newInstance(boolean isEdit) {
         Bundle args = new Bundle();
-
+        args.putBoolean(PROBLEM_EDIT_FLAG, isEdit);
         ProblemReportFragment fragment = new ProblemReportFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mIsEditPage = getArguments().getBoolean(PROBLEM_EDIT_FLAG);
+        Log.e("TAG", "" + mIsEditPage);
     }
 
     @Override
@@ -64,13 +80,55 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     @Override
     public void initView(View rootView) {
         initSpinner();
+        isPageCanEdit();
+    }
+
+    private void isPageCanEdit() {
+        if (mIsEditPage) {
+            mToolbarTitle.setText("问题信息填写");
+        } else {
+            showProblemDetail();
+        }
+    }
+
+    private void showProblemDetail() {
+        mToolbarTitle.setText("问题信息详情");
+        initToolbar(mToolbar);
+        forbidClick();
+        judgeAndShowProblemDetail();
+        mSelectLocationBtn.setVisibility(View.GONE);
+        mCommitBtn.setVisibility(View.GONE);
+    }
+
+    protected void initToolbar(Toolbar toolbar) {
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        //  设置了左上角的返回按钮
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
+    }
+
+    private void judgeAndShowProblemDetail() {
+        mProblemSource.setText("无数据");
+        mProblemDesc.setText("无数据");
+        mProblemLocation.setText("无数据");
+        mProblemSuggestion.setText("无数据");
+    }
+
+    private void forbidClick() {
+        mProblemSource.setFocusable(false);
+        mProblemDesc.setFocusable(false);
+        mProblemLocation.setFocusable(false);
+        mProblemSuggestion.setFocusable(false);
+        mProblemType.setEnabled(false);
     }
 
     private void initSpinner() {
         //  建立数据源
         String[] mItems = getResources().getStringArray(R.array.problem_type);
         //  建立Adapter并且绑定数据源
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.item_problem_item, mItems);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.item_problem_type, mItems);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //  绑定 Adapter到控件
         mProblemType.setAdapter(adapter);
@@ -79,7 +137,9 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     @Override
     public void initData(Bundle savedInstanceState) {
         mPresenter = new PRPresenterImpl(this);
-        mPresenter.loadData();
+        if (mIsEditPage) {
+            mPresenter.loadData();
+        }
     }
 
     @Override

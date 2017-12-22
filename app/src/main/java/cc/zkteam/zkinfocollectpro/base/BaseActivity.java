@@ -33,8 +33,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         initData();
     }
 
-
-
     //获取资源ID
     protected abstract int getLayoutId();
 
@@ -44,4 +42,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void initData();
 
+    protected void initToolbar(Toolbar toolbar) {
+        setSupportActionBar(toolbar);
+        //  设置了左上角的返回按钮
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+    }
 }

@@ -1,4 +1,4 @@
-package cc.zkteam.zkinfocollectpro.base;
+package cc.zkteam.zkinfocollectpro.viewholder;
 
 import android.graphics.Color;
 import android.view.View;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.base.RvHolder;
+import cc.zkteam.zkinfocollectpro.base.RvListener;
 import cc.zkteam.zkinfocollectpro.bean.RentInfo;
 
 /**

@@ -1,4 +1,4 @@
-package cc.zkteam.zkinfocollectpro.base;
+package cc.zkteam.zkinfocollectpro.adapter;
 
 import android.content.Context;
 import android.view.View;
@@ -6,7 +6,11 @@ import android.view.View;
 import java.util.List;
 
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.base.RvAdapter;
+import cc.zkteam.zkinfocollectpro.base.RvHolder;
+import cc.zkteam.zkinfocollectpro.base.RvListener;
 import cc.zkteam.zkinfocollectpro.bean.RentInfo;
+import cc.zkteam.zkinfocollectpro.viewholder.DataCollectRvHolder;
 
 /**
  * Created by Administrator on 2017/12/15.
