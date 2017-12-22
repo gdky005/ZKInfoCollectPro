@@ -2,8 +2,8 @@ package cc.zkteam.zkinfocollectpro.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,7 +16,6 @@ import com.blankj.utilcode.util.ToastUtils;
 import java.net.URLEncoder;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.Constant;
 import cc.zkteam.zkinfocollectpro.R;
@@ -25,6 +24,10 @@ import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardRequestBody;
 import cc.zkteam.zkinfocollectpro.bean.BDTokenBean;
+import cc.zkteam.zkinfocollectpro.dialog.OnZKDialogCancelListener;
+import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragmentHelper;
+import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragment;
+import cc.zkteam.zkinfocollectpro.dialog.ZKDialogResultListener;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.utils.baidu.Base64Util;
@@ -62,6 +65,8 @@ public class MainActivity extends BaseActivity {
     Button idCard;
     @BindView(R.id.camera_btn)
     Button cameraBtn;
+    @BindView(R.id.dialog)
+    Button dialog;
 
     @Override
     protected int getLayoutId() {
@@ -89,15 +94,9 @@ public class MainActivity extends BaseActivity {
         verifyStoragePermissions(this);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 
     @OnClick({R.id.toolbar, R.id.home_btn, R.id.map, R.id.bd_access_token,
-            R.id.id_card, R.id.camera_btn, R.id.btn_problem_list})
+            R.id.id_card, R.id.camera_btn, R.id.btn_problem_list, R.id.dialog})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar:
@@ -123,6 +122,76 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.btn_problem_list:
                 PageCtrl.startActivity(MainActivity.this, MyProblemListActivity.class);
+                break;
+            case R.id.dialog:
+
+//                ZKDialogFragment dialogFragment = ZKDialogFragmentHelper.showSingleBtnDialog(getSupportFragmentManager(),
+//                        "hello",
+//                        "我是内容",
+//                        new ZKDialogResultListener<Integer>() {
+//                            @Override
+//                            public void onDataResult(Integer result) {
+//
+//                                switch (result) {
+//                                    case DialogInterface.BUTTON_POSITIVE: //确定
+//                                        ToastUtils.showShort("确定");
+//                                        break;
+//                                    case DialogInterface.BUTTON_NEGATIVE: // 取消
+//                                        ToastUtils.showShort("取消");
+//                                        break;
+//                                }
+//                            }
+//                        }, new OnZKDialogCancelListener() {
+//                            @Override
+//                            public void onCancel() {
+//                                ToastUtils.showShort("取消了本次操作");
+//                            }
+//                        });
+
+
+                ZKDialogFragment dialogFragment = ZKDialogFragmentHelper.showDialog(getSupportFragmentManager(),
+                        "hello",
+                        "我是内容",
+                        new ZKDialogResultListener<Integer>() {
+                    @Override
+                    public void onDataResult(Integer result) {
+
+                        switch (result) {
+                            case DialogInterface.BUTTON_POSITIVE: //确定
+                                ToastUtils.showShort("确定");
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE: // 取消
+                                ToastUtils.showShort("取消");
+                                break;
+                        }
+                    }
+                }, new OnZKDialogCancelListener() {
+                    @Override
+                    public void onCancel() {
+                        ToastUtils.showShort("取消了本次操作");
+                    }
+                });
+
+
+
+                view.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialogFragment.dismissAllowingStateLoss();
+                    }
+                }, 3000);
+
+//                TestDialogManager testDialogManager = TestDialogManager.getInstance(getSupportFragmentManager());
+//                testDialogManager.showConfirmDialog();
+//                testDialogManager.showDateDialog();
+//                testDialogManager.showInsertDialog();
+//                testDialogManager.showListDialog();
+//                testDialogManager.showPasswordInsertDialog();
+//                ZKDialogFragmentHelper.showProgress(getSupportFragmentManager(), "正在加载中");
+//                testDialogManager.showTimeDialog();
+//                ZKDialogFragmentHelper.showTips(getSupportFragmentManager(), "你进入了无网的异次元中");
+
+
                 break;
         }
     }
@@ -218,4 +287,7 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+    
+
+
 }
