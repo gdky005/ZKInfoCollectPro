@@ -5,9 +5,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -17,9 +15,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
@@ -83,6 +79,16 @@ public class SignInFragment extends BaseFragment {
     DrawerLayout drawerLayout;
 
     private ZHApi zhApi;
+
+
+    public static SignInFragment newInstance() {
+        SignInFragment fragment = new SignInFragment();
+        Bundle args = new Bundle();
+//        args.putString(ARG_SECTION_NUMBER, text);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 
     @Override
     public int getLayoutId() {

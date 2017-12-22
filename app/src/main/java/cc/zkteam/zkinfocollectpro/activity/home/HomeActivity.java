@@ -43,6 +43,14 @@ public class HomeActivity extends BaseActivity implements HasSupportFragmentInje
     // 问题上报
     public static final int NAV_TYPE_QUESTION_UPLOAD = 2;
 
+    /**
+     * 首页三个 table 页面对应的 Fragment.
+     */
+    private static Fragment[] TABLE_FRAGMENT = new Fragment[] {
+            SignInFragment.newInstance(),
+            TestFragment.newInstance("Two"),
+            ProblemReportFragment.newInstance()};
+
     public static int [] NAV_TYPE = new int[]{NAV_TYPE_MAIN, NAV_TYPE_DATA_COLLECT, NAV_TYPE_QUESTION_UPLOAD};
 
 
@@ -175,11 +183,11 @@ public class HomeActivity extends BaseActivity implements HasSupportFragmentInje
         public Fragment getItem(int position) {
             switch (position) {
                 case NAV_TYPE_MAIN:
-                    return new SignInFragment();
+                    return TABLE_FRAGMENT[0];
                 case NAV_TYPE_DATA_COLLECT:
-                    return TestFragment.newInstance("Two");
+                    return TABLE_FRAGMENT[1];
                 case NAV_TYPE_QUESTION_UPLOAD:
-                    return ProblemReportFragment.newInstance();
+                    return TABLE_FRAGMENT[2];
             }
 
             return null;
@@ -190,6 +198,7 @@ public class HomeActivity extends BaseActivity implements HasSupportFragmentInje
             return NAV_TYPE.length;
         }
     }
+
 
     @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
