@@ -4,9 +4,9 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawerLayout"
     tools:context="cc.zkteam.zkinfocollectpro.activity.BasicInfoActivity">
 
 
@@ -22,13 +22,13 @@
             <include
                 android:id="@+id/title"
                 layout="@layout/title"
-                android:visibility="visible">
-            </include>
+                android:visibility="visible"></include>
+
             <RelativeLayout
                 android:id="@+id/rel1"
-                android:layout_below="@+id/title"
                 android:layout_width="match_parent"
-                android:layout_height="45dip">
+                android:layout_height="45dip"
+                android:layout_below="@+id/title">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -97,6 +97,8 @@
                     android:id="@+id/sexedittext"
                     style="@style/BasicinfoActivity_button"
                     android:layout_toRightOf="@id/sex"
+                    android:drawableLeft="@mipmap/left_arrow"
+                    android:drawableRight="@mipmap/right_arrow"
                     android:text="男" />
 
 
@@ -122,6 +124,7 @@
                     android:id="@+id/bornedittext"
                     style="@style/BasicinfoActivity_button"
                     android:layout_toRightOf="@id/born"
+                    android:drawableRight="@mipmap/data_icon"
                     android:text="2017年12月25日" />
 
 
@@ -287,6 +290,8 @@
                     android:id="@+id/edittext23"
                     style="@style/BasicinfoActivity_button"
                     android:layout_toRightOf="@id/textview23"
+                    android:drawableLeft="@mipmap/left_arrow"
+                    android:drawableRight="@mipmap/right_arrow"
                     android:text="某某单位" />
 
 
@@ -365,6 +370,7 @@
                     android:textSize="@dimen/basic_textview_size" />
 
                 <Button
+                    android:drawableRight="@mipmap/data_icon"
                     android:id="@+id/edittext26"
                     style="@style/BasicinfoActivity_button"
                     android:layout_toRightOf="@id/textview26"
@@ -396,11 +402,11 @@
 
     <fragment
         android:id="@+id/reghtview"
-        android:layout_width="307dip"
-        android:layout_gravity="end"
-        tools:layout="@layout/fragment_baseinfo_right"
         android:name="cc.zkteam.zkinfocollectpro.fragment.BaseinfoRightFragment"
-        android:layout_height="match_parent">
+        android:layout_width="240dip"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        tools:layout="@layout/fragment_baseinfo_right">
 
     </fragment>
 
