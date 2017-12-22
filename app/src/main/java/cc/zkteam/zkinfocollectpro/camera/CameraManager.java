@@ -138,9 +138,14 @@ public class CameraManager {
             Log.d(TAG, "系统默认的_pictureSize: " + pictureSize.width + ", " + pictureSize.height);
 
             if (pictureSize.width < 1000) {
-                fixPictureSize = pictureSize;
-            } else {
-                break;
+
+                if (fixPictureSize == null) {
+                    fixPictureSize = pictureSize;
+                }
+
+                if (pictureSize.width > fixPictureSize.width) {
+                    fixPictureSize = pictureSize;
+                }
             }
         }
 
