@@ -21,4 +21,6 @@
     <color name="black_333">#333333</color>
     <color name="red">#e65162</color>
     <color name="green">#b32cc95c</color>
+
+    <color name="tab_color">#41A4CE</color>
 </resources>

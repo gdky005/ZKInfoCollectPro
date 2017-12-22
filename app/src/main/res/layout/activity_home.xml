@@ -22,4 +22,9 @@
         android:background="?android:attr/windowBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/navigation"/>
+
+    <!--字体和图片的状态统一蓝色-->
+    <!--app:itemTextColor="@color/tab_color"-->
+    <!--app:itemIconTint="@color/tab_color"-->
+
 </android.support.constraint.ConstraintLayout>
