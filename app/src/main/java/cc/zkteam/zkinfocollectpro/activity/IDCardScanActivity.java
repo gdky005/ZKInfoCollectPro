@@ -289,7 +289,10 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
             int width = bitmap2.getWidth();
             int scanWidth = width * 15 / 16;
             int scanHeight = (int) (scanWidth * 0.63f);
-            final Bitmap bitmap1 = Bitmap.createBitmap(bitmap2, (width - scanWidth) / 2, (height - scanHeight) / 2, scanWidth, scanHeight);
+            final Bitmap bitmap1 = Bitmap.createBitmap(bitmap2,
+                    (width - scanWidth) / 2,
+                    (height - scanHeight - PreviewBorderView.heightOffset) / 2,
+                    scanWidth, scanHeight);
 
             File path = new File(filePath);
             if (!path.exists()) {

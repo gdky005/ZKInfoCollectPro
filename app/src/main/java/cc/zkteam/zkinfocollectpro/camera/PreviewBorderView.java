@@ -35,7 +35,7 @@ public class PreviewBorderView extends SurfaceView implements SurfaceHolder.Call
     /**
      * 相框的偏移量
      */
-    private int heightOffset = 300;
+    public static int heightOffset = 300;
 
     /**
      * 自定义属性
