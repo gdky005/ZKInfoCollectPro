@@ -1,6 +1,5 @@
 package cc.zkteam.zkinfocollectpro.activity;
 
-import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -9,7 +8,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
@@ -48,7 +46,9 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-
+//        SystemBarTintManager systemBarTintManager = new SystemBarTintManager(this);
+//        systemBarTintManager.setStatusBarTintEnabled(false);
+//        systemBarTintManager.setNavigationBarTintEnabled(false);
     }
 
     @Override
@@ -59,13 +59,6 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void initData() {
 
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 
     @OnClick(R.id.btn_submit)

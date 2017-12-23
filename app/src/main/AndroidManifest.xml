@@ -60,7 +60,6 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -71,13 +70,7 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity android:name=".activity.MapActivity"/>
 
@@ -89,8 +82,11 @@
         <activity android:name=".activity.DataListActivity"/>
         <activity android:name=".activity.IDCardScanActivity"/>
 
+        <!--键盘参考：https://www.cnblogs.com/zhujiabin/p/5851999.html-->
         <activity
-            android:name=".activity.LoginActivity">
+            android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:theme="@style/TranslucentTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -98,21 +94,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.BasicInfoActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activity.NewResidentsInfoActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+        <activity android:name=".activity.BasicInfoActivity"/>
+        <activity android:name=".activity.NewResidentsInfoActivity"/>
 
         <activity android:name=".activity.MyProblemListActivity"/>
 

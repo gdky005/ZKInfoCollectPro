@@ -29,6 +29,7 @@ versions.utilcode = "1.9.3"
 versions.runner = "1.0.1"
 versions.wave_swipe_refresh_layout = "1.6"
 versions.zk_fresco = "1.0.0"
+versions.systembartint = "1.0.3"
 ext.versions = versions
 
 
@@ -113,6 +114,7 @@ deps.dagger_support = "com.google.dagger:dagger-android-support:$versions.dagger
 deps.dagger_processor = "com.google.dagger:dagger-compiler:$versions.dagger"
 
 deps.runner = "com.android.support.test:runner:$versions.runner"
+deps.systembartint = "com.readystatesoftware.systembartint:systembartint:$versions.systembartint"
 
 deps.support = support
 deps.lifecycle = lifecycle
