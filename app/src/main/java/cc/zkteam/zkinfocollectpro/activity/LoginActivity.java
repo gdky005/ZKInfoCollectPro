@@ -10,8 +10,10 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
+import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 
 /**
  * Created by Administrator on 2017/12/15.
@@ -64,5 +66,10 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.btn_submit)
+    public void onViewClicked() {
+        PageCtrl.startActivity(this,MainActivity.class);
     }
 }
