@@ -59,6 +59,26 @@
         android:background="#d8edf6" />
 
     <TextView
+        android:id="@+id/tv_question_upload"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:drawableLeft="@drawable/icon_message"
+        android:drawablePadding="10dp"
+        android:drawableRight="@drawable/icon_more"
+        android:gravity="center_vertical"
+        android:text="我的问题上报"
+        android:textColor="#333333"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:background="#d8edf6" />
+
+    <TextView
         android:id="@+id/tv_about_setting"
         android:layout_width="match_parent"
         android:layout_height="67dp"
