@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cc.zkteam.zkinfocollectpro.activity.BasicInfoActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@color/titleColor"
+                android:elevation="5dp"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="left|center_vertical"
+                    android:clickable="true"
+                    android:padding="17dp"
+                    android:src="@mipmap/nav_back"
+                    android:tag="skin:nav_back:src" />
+
+                <TextView
+                    android:id="@+id/title_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="新增住户信息填写"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
+
+                <ImageView
+                    android:id="@+id/right_icon"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:src="@mipmap/right_menu"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
+
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/address_name"
+                android:layout_below="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="45dip"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/basic_textview1_marleft"
+                android:text="XX街道  XX社区  XX小区  XX团  XX栋  XX单元  XX室 "
+                android:textColor="@color/black_333"
+                android:textSize="17dip" />
+
+
+            <RelativeLayout
+                android:id="@+id/rel1"
+                android:layout_width="match_parent"
+                android:layout_height="45dip"
+                android:layout_below="@+id/address_name">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dip"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/gray2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/basic_textview1_marleft"
+                    android:text="个人信息"
+                    android:textColor="@color/black_333"
+                    android:textSize="18dip" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dip"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/gray2" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/namelayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/basic_layout_hight"
+                android:layout_below="@+id/rel1">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="@dimen/basic_texiview_width"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/basic_textview2_marleft"
+                    android:text="1    姓名"
+                    android:textSize="@dimen/basic_textview_size" />
+
+                <EditText
+                    android:id="@+id/nameedittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="25dip"
+                    android:layout_marginRight="25dip"
+                    android:layout_toRightOf="@+id/name"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textSize="@dimen/basic_textview_size" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/sexlayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/basic_layout_hight"
+
+                android:layout_below="@+id/namelayout">
+
+                <TextView
+                    android:id="@+id/sex"
+                    android:layout_width="@dimen/basic_texiview_width"
+
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/basic_textview2_marleft"
+                    android:text="2    性别"
+                    android:textSize="@dimen/basic_textview_size" />
+
+                <Button
+                    android:id="@+id/sexedittext"
+                    style="@style/BasicinfoActivity_button"
+                    android:layout_toRightOf="@id/sex"
+                    android:drawableLeft="@mipmap/left_arrow"
+                    android:drawableRight="@mipmap/right_arrow"
+                    android:text="男" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/bornlayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/basic_layout_hight"
+                android:layout_below="@+id/sexlayout">
+
+                <TextView
+                    android:id="@+id/born"
+                    android:layout_width="@dimen/basic_texiview_width"
+
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/basic_textview2_marleft"
+                    android:text="3    出生日期"
+                    android:textSize="@dimen/basic_textview_size" />
+
+                <Button
+                    android:id="@+id/bornedittext"
+                    style="@style/BasicinfoActivity_button"
+                    android:layout_toRightOf="@id/born"
+                    android:drawableRight="@mipmap/data_icon"
+                    android:text="2017年12月25日" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/nationallayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/basic_layout_hight"
+                android:layout_below="@+id/bornlayout">
+
+                <TextView
+                    android:id="@+id/national"
+                    android:layout_width="@dimen/basic_texiview_width"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/basic_textview2_marleft"
+                    android:text="4    民族"
+                    android:textSize="@dimen/basic_textview_size" />
+
+                <EditText
+                    android:id="@+id/nationaledittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="25dip"
+                    android:layout_marginRight="25dip"
+                    android:layout_toRightOf="@+id/national"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textSize="@dimen/basic_textview_size" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cardlayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/basic_layout_hight"
+                android:layout_below="@+id/nationallayout">
+
+                <TextView
+                    android:id="@+id/card"
+                    android:layout_width="@dimen/basic_texiview_width"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/basic_textview2_marleft"
+                    android:text="5    证件类型"
+                    android:textSize="@dimen/basic_textview_size" />
+
+                <Button
+                    android:id="@+id/card_button"
+                    style="@style/BasicinfoActivity_button"
+                    android:layout_toRightOf="@id/card"
+                    android:drawableLeft="@mipmap/left_arrow"
+                    android:drawableRight="@mipmap/right_arrow"
+                    android:text="身份证" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/layout21"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/basic_layout_hight"
+                android:layout_below="@+id/cardlayout">
+
+                <TextView
+                    android:id="@+id/textview21"
+                    android:layout_width="@dimen/basic_texiview_width"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/basic_textview2_marleft"
+                    android:text="6    证件号码"
+                    android:textSize="@dimen/basic_textview_size" />
+
+                <EditText
+                    android:id="@+id/edittext21"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="25dip"
+                    android:layout_marginRight="25dip"
+                    android:layout_toRightOf="@+id/textview21"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textSize="@dimen/basic_textview_size" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout22"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/basic_layout_hight"
+                android:layout_below="@+id/layout21">
+
+                <TextView
+                    android:id="@+id/textview22"
+                    android:layout_width="@dimen/basic_texiview_width"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/basic_textview2_marleft"
+                    android:text="7    户口地址"
+                    android:textSize="@dimen/basic_textview_size" />
+
+                <EditText
+                    android:id="@+id/edittext22"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="25dip"
+                    android:layout_marginRight="25dip"
+                    android:layout_toRightOf="@+id/textview22"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textSize="@dimen/basic_textview_size" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout23"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/basic_layout_hight"
+                android:layout_below="@+id/layout22">
+
+                <TextView
+                    android:id="@+id/textview23"
+                    android:layout_width="@dimen/basic_texiview_width"
+
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/basic_textview2_marleft"
+                    android:text="8    与户主的关系"
+                    android:textSize="@dimen/basic_textview_size" />
+
+                <Button
+                    android:id="@+id/edittext23"
+                    style="@style/BasicinfoActivity_button"
+                    android:layout_toRightOf="@id/textview23"
+                    android:drawableLeft="@mipmap/left_arrow"
+                    android:drawableRight="@mipmap/right_arrow"
+                    android:text="房东与租客" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dip"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/gray2" />
+
+            </RelativeLayout>
+
+
+            <Button
+                android:id="@+id/savecommit"
+                android:layout_width="250dip"
+                android:layout_height="40dip"
+                android:layout_below="@+id/layout23"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dip"
+                android:background="@drawable/basicinfo_btn_commit"
+                android:text="保存并提交"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+
+    <fragment
+        android:id="@+id/reghtview"
+        android:name="cc.zkteam.zkinfocollectpro.fragment.BaseinfoRightFragment"
+        android:layout_width="240dip"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        tools:layout="@layout/fragment_baseinfo_right">
+
+    </fragment>
+
+
+</android.support.v4.widget.DrawerLayout>
