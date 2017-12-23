@@ -10,7 +10,9 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.activity.IDCardScanActivity;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
+import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.view.ZKImageView;
 
 /**
@@ -66,7 +68,7 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                 getActivity().finish();
                 break;
             case R.id.img_personal_info_scan:
-                // TODO 扫一扫
+                PageCtrl.startActivity(getActivity(), IDCardScanActivity.class);
                 break;
         }
     }
