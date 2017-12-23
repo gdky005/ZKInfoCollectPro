@@ -7,9 +7,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ToastUtils;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.activity.home.HomeActivity;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 
@@ -59,10 +62,21 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void initData() {
 
+        // TODO: 2017/12/23  这是测试代码哦
+        btnSubmit.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                PageCtrl.startActivity( LoginActivity.this, HomeActivity.class);
+                finish();
+            }
+        }, 3000);
+        ToastUtils.showLong("默认三秒后自动进入主页 [调试状态]");
+
     }
 
     @OnClick(R.id.btn_submit)
     public void onViewClicked() {
-        PageCtrl.startActivity(this,MainActivity.class);
+        PageCtrl.startActivity(this,HomeActivity.class);
+        finish();
     }
 }
