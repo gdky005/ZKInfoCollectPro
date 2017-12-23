@@ -7,8 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -18,14 +17,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Field;
 import java.net.URLEncoder;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardRequestBody;
 import cc.zkteam.zkinfocollectpro.camera.CameraManager;
@@ -34,17 +40,41 @@ import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.utils.baidu.Base64Util;
 import cc.zkteam.zkinfocollectpro.utils.baidu.FileUtil;
 import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class IDCardScanActivity extends AppCompatActivity implements SurfaceHolder.Callback {
-    private LinearLayout mLinearLayout;
-    private PreviewBorderView mPreviewBorderView;
-    private SurfaceView mSurfaceView;
+public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Callback {
+    @BindView(R.id.title_bar_left_iv)
+    ImageView titleBarLeftIv;
+    @BindView(R.id.title_bar_text_tv)
+    TextView titleBarTextTv;
+    @BindView(R.id.title_bar_right_iv)
+    ImageView titleBarRightIv;
+    @BindView(R.id.toolbar_personal_info_collection)
+    Toolbar toolbarPersonalInfoCollection;
+    @BindView(R.id.surfaceview)
+    SurfaceView surfaceview;
+    @BindView(R.id.borderview)
+    PreviewBorderView borderview;
+    @BindView(R.id.take)
+    Button take;
+    @BindView(R.id.light)
+    Button light;
+    @BindView(R.id.linearlaout)
+    LinearLayout linearlaout;
+    @BindView(R.id.progress)
+    ProgressBar progress;
+    @BindView(R.id.tv)
+    TextView tv;
+    @BindView(R.id.img)
+    ImageView img;
+    @BindView(R.id.re_scan)
+    Button reScan;
+    @BindView(R.id.view_scan_result)
+    RelativeLayout viewScanResult;
 
     private CameraManager cameraManager;
     private boolean hasSurface;
@@ -55,39 +85,51 @@ public class IDCardScanActivity extends AppCompatActivity implements SurfaceHold
     private String filePath;
     private String fileName;
     private String type;
-    private Button take, light;
     private boolean toggleLight;
-    private OkHttpClient mOkHttpClient = new OkHttpClient();
-    private View view_scan_result;
-    private TextView tv_result;
-    private ImageView im_result;
-    private View progress;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_id_card_scan);
-        initView();
-        initIntent();
-        initLayoutParams();
-
+    protected int getLayoutId() {
+        return R.layout.activity_id_card_scan;
     }
 
-    private void initView() {
-        view_scan_result = findViewById(R.id.view_scan_result);
-        progress = findViewById(R.id.progress);
-        tv_result = (TextView) findViewById(R.id.tv);
-        im_result = (ImageView) findViewById(R.id.img);
-        findViewById(R.id.re_scan).setOnClickListener(new View.OnClickListener() {
+    @Override
+    protected void initViews() {
+        initLayoutParams();
+    }
+
+    @Override
+    protected void initListener() {
+        reScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
                 startActivity(new Intent(getBaseContext(), IDCardScanActivity.class));
             }
         });
+
+        take.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cameraManager.takePicture(null, null, myjpegCallback);
+            }
+        });
+
+        light.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!toggleLight) {
+                    toggleLight = true;
+                    cameraManager.openLight();
+                } else {
+                    toggleLight = false;
+                    cameraManager.offLight();
+                }
+            }
+        });
     }
 
-    private void initIntent() {
+    @Override
+    protected void initData() {
         mIntent = getIntent();
         filePath = mIntent.getStringExtra("path");
         fileName = mIntent.getStringExtra("name");
@@ -108,39 +150,16 @@ public class IDCardScanActivity extends AppCompatActivity implements SurfaceHold
      * 重置surface宽高比例为3:4，不重置的话图形会拉伸变形
      */
     private void initLayoutParams() {
-        take = (Button) findViewById(R.id.take);
-        light = (Button) findViewById(R.id.light);
-        take.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cameraManager.takePicture(null, null, myjpegCallback);
-            }
-        });
-        light.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!toggleLight) {
-                    toggleLight = true;
-                    cameraManager.openLight();
-                } else {
-                    toggleLight = false;
-                    cameraManager.offLight();
-                }
-            }
-        });
+
 
         //重置宽高，3:4
         int widthPixels = getScreenWidth(this);
         int heightPixels = getScreenHeight(this);
-        mLinearLayout = (LinearLayout) findViewById(R.id.linearlaout);
-        mPreviewBorderView = (PreviewBorderView) findViewById(R.id.borderview);
-        mSurfaceView = (SurfaceView) findViewById(R.id.surfaceview);
 
-
-//        FrameLayout.LayoutParams surfaceviewParams = (FrameLayout.LayoutParams) mSurfaceView.getLayoutParams();
+//        FrameLayout.LayoutParams surfaceviewParams = (FrameLayout.LayoutParams) surfaceview.getLayoutParams();
 //        surfaceviewParams.width = heightPixels * 4 / 3;
 //        surfaceviewParams.height = heightPixels;
-//        mSurfaceView.setLayoutParams(surfaceviewParams);
+//        surfaceview.setLayoutParams(surfaceviewParams);
 //
 //        FrameLayout.LayoutParams borderViewParams = (FrameLayout.LayoutParams) mPreviewBorderView.getLayoutParams();
 //        borderViewParams.width = heightPixels * 4 / 3;
@@ -166,8 +185,7 @@ public class IDCardScanActivity extends AppCompatActivity implements SurfaceHold
          * 初始化camera
          */
         cameraManager = new CameraManager();
-        SurfaceView surfaceView = (SurfaceView) findViewById(R.id.surfaceview);
-        SurfaceHolder surfaceHolder = surfaceView.getHolder();
+        SurfaceHolder surfaceHolder = surfaceview.getHolder();
 
         if (hasSurface) {
             // activity在paused时但不会stopped,因此surface仍旧存在；
@@ -246,8 +264,7 @@ public class IDCardScanActivity extends AppCompatActivity implements SurfaceHold
         cameraManager.stopPreview();
         cameraManager.closeDriver();
         if (!hasSurface) {
-            SurfaceView surfaceView = (SurfaceView) findViewById(R.id.surfaceview);
-            SurfaceHolder surfaceHolder = surfaceView.getHolder();
+            SurfaceHolder surfaceHolder = surfaceview.getHolder();
             surfaceHolder.removeCallback(this);
         }
         super.onPause();
@@ -272,7 +289,10 @@ public class IDCardScanActivity extends AppCompatActivity implements SurfaceHold
             int width = bitmap2.getWidth();
             int scanWidth = width * 15 / 16;
             int scanHeight = (int) (scanWidth * 0.63f);
-            final Bitmap bitmap1 = Bitmap.createBitmap(bitmap2, (width - scanWidth) / 2, (height - scanHeight) / 2, scanWidth, scanHeight);
+            final Bitmap bitmap1 = Bitmap.createBitmap(bitmap2,
+                    (width - scanWidth) / 2,
+                    (height - scanHeight - PreviewBorderView.heightOffset) / 2,
+                    scanWidth, scanHeight);
 
             File path = new File(filePath);
             if (!path.exists()) {
@@ -424,9 +444,9 @@ public class IDCardScanActivity extends AppCompatActivity implements SurfaceHold
 //                        @Override
 //                        public void run() {
 //                            mPreviewBorderView.setVisibility(View.GONE);
-//                            view_scan_result.setVisibility(View.VISIBLE);
-//                            tv_result.setText(builder.toString());
-//                            im_result.setImageURI(Uri.fromFile(file));
+//                            viewScanResult.setVisibility(View.VISIBLE);
+//                            tv.setText(builder.toString());
+//                            img.setImageURI(Uri.fromFile(file));
 //                            progress.setVisibility(View.GONE);
 //                        }
 //                    });
@@ -437,6 +457,7 @@ public class IDCardScanActivity extends AppCompatActivity implements SurfaceHold
 
 
     private static final String TAG = "IDCardScanActivity";
+
     private void getIdCardInfo(String localPicPath) {
 //        准备添加 身份证失败：http://ai.baidu.com/docs#/OCR-API/top
 //        String localPicPath = Environment.getExternalStorageDirectory().getPath() + "/xiaotieie_id_card.png";
@@ -476,12 +497,10 @@ public class IDCardScanActivity extends AppCompatActivity implements SurfaceHold
                             sb.append("。");
 
 
-
-
-                            mPreviewBorderView.setVisibility(View.GONE);
-                            view_scan_result.setVisibility(View.VISIBLE);
-                            tv_result.setText(sb.toString());
-                            im_result.setImageURI(Uri.fromFile(new File(localPicPath)));
+                            borderview.setVisibility(View.GONE);
+                            viewScanResult.setVisibility(View.VISIBLE);
+                            tv.setText(sb.toString());
+                            img.setImageURI(Uri.fromFile(new File(localPicPath)));
                             progress.setVisibility(View.GONE);
 
                         }
@@ -491,6 +510,12 @@ public class IDCardScanActivity extends AppCompatActivity implements SurfaceHold
                 @Override
                 public void onFailure(Call<BDIdCardBean> call, Throwable t) {
 
+                    borderview.setVisibility(View.GONE);
+                    viewScanResult.setVisibility(View.VISIBLE);
+                    tv.setText("识别 失败");
+                    progress.setVisibility(View.GONE);
+
+                    ToastUtils.showShort("识别 失败");
                     Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
                 }
             });
@@ -499,4 +524,13 @@ public class IDCardScanActivity extends AppCompatActivity implements SurfaceHold
         }
     }
 
+    @OnClick({R.id.title_bar_left_iv, R.id.title_bar_right_iv})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.title_bar_left_iv:
+                break;
+            case R.id.title_bar_right_iv:
+                break;
+        }
+    }
 }

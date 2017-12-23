@@ -31,5 +31,10 @@
     <string name="perons_info">人员列表信息:</string>
     <string name="search">搜索</string>
     <string name="check_problem_detail">查看详情</string>
+    <string name="dialog_default_title">---</string>
+    <string name="dialog_default_content">---------------------------</string>
+    <string name="dialog_default_sure_btn_text">是</string>
+    <string name="dialog_default_fail_btn_text">否</string>
+    <string name="activity_id_card_title_text">二代身份证扫描</string>
 
 </resources>

@@ -28,9 +28,15 @@ public class PreviewBorderView extends SurfaceView implements SurfaceHolder.Call
     private Paint mPaintLine;
     private SurfaceHolder mHolder;
     private Thread mThread;
-    private static final String DEFAULT_TIPS_TEXT = "请将方框对准证件拍摄";
+    private static final String DEFAULT_TIPS_TEXT = "将身份证放入框内";
     private static final int DEFAULT_TIPS_TEXT_SIZE = 16;
     private static final int DEFAULT_TIPS_TEXT_COLOR = Color.GREEN;
+
+    /**
+     * 相框的偏移量
+     */
+    public static int heightOffset = 300;
+
     /**
      * 自定义属性
      */
@@ -100,24 +106,30 @@ public class PreviewBorderView extends SurfaceView implements SurfaceHolder.Call
         try {
             this.mCanvas = this.mHolder.lockCanvas();
             this.mCanvas.drawARGB(100, 0, 0, 0);
-            Log.e("TAG","mScreenW:"+mScreenW+" mScreenH:"+mScreenH);
-            this.mCanvas.drawRect(new RectF((mScreenW-mScanWidth)/2, (this.mScreenH - mScanHeight)/2,mScanWidth+(mScreenW-mScanWidth)/2, (this.mScreenH - mScanHeight)/2+mScanHeight),mPaint);
-            this.mCanvas.drawLine((mScreenW-mScanWidth)/2,(this.mScreenH - mScanHeight)/2,(mScreenW-mScanWidth)/2+mScanWidth/10,(this.mScreenH - mScanHeight)/2,mPaintLine);
-            this.mCanvas.drawLine((mScreenW-mScanWidth)/2,(this.mScreenH - mScanHeight)/2,(mScreenW-mScanWidth)/2,(this.mScreenH - mScanHeight)/2+mScanHeight/10,mPaintLine);
+            Log.e("TAG", "mScreenW:" + mScreenW + " mScreenH:" + mScreenH);
 
-            this.mCanvas.drawLine(mScanWidth+(mScreenW-mScanWidth)/2,(this.mScreenH - mScanHeight)/2,mScanWidth+(mScreenW-mScanWidth)/2-mScanWidth/10,(this.mScreenH - mScanHeight)/2,mPaintLine);
-            this.mCanvas.drawLine(mScanWidth+(mScreenW-mScanWidth)/2,(this.mScreenH - mScanHeight)/2,mScanWidth+(mScreenW-mScanWidth)/2,(this.mScreenH - mScanHeight)/2+mScanHeight/10,mPaintLine);
+            this.mCanvas.drawRect(new RectF((mScreenW - mScanWidth) / 2,
+                            (this.mScreenH - mScanHeight) / 2 - heightOffset,
+                            mScanWidth + (mScreenW - mScanWidth) / 2,
+                            (this.mScreenH - mScanHeight) / 2 + mScanHeight - heightOffset),
+                    mPaint);
 
-            this.mCanvas.drawLine((mScreenW-mScanWidth)/2,mScanHeight+(this.mScreenH - mScanHeight)/2,(mScreenW-mScanWidth)/2+mScanWidth/10,mScanHeight+(this.mScreenH - mScanHeight)/2,mPaintLine);
-            this.mCanvas.drawLine((mScreenW-mScanWidth)/2,mScanHeight+(this.mScreenH - mScanHeight)/2,(mScreenW-mScanWidth)/2,mScanHeight+(this.mScreenH - mScanHeight)/2-mScanHeight/10,mPaintLine);
+            this.mCanvas.drawLine((mScreenW - mScanWidth) / 2, (this.mScreenH - mScanHeight) / 2 - heightOffset, (mScreenW - mScanWidth) / 2 + mScanWidth / 10, (this.mScreenH - mScanHeight) / 2 - heightOffset, mPaintLine);
+            this.mCanvas.drawLine((mScreenW - mScanWidth) / 2, (this.mScreenH - mScanHeight) / 2 - heightOffset, (mScreenW - mScanWidth) / 2, (this.mScreenH - mScanHeight) / 2 + mScanHeight / 10 - heightOffset, mPaintLine);
 
-            this.mCanvas.drawLine(mScanWidth+(mScreenW-mScanWidth)/2,mScanHeight+(this.mScreenH - mScanHeight)/2,mScanWidth+(mScreenW-mScanWidth)/2-mScanWidth/10,mScanHeight+(this.mScreenH - mScanHeight)/2,mPaintLine);
-            this.mCanvas.drawLine(mScanWidth+(mScreenW-mScanWidth)/2,mScanHeight+(this.mScreenH - mScanHeight)/2,mScanWidth+(mScreenW-mScanWidth)/2,mScanHeight+(this.mScreenH - mScanHeight)/2-mScanHeight/10,mPaintLine);
+            this.mCanvas.drawLine(mScanWidth + (mScreenW - mScanWidth) / 2, (this.mScreenH - mScanHeight) / 2 - heightOffset, mScanWidth + (mScreenW - mScanWidth) / 2 - mScanWidth / 10, (this.mScreenH - mScanHeight) / 2 - heightOffset, mPaintLine);
+            this.mCanvas.drawLine(mScanWidth + (mScreenW - mScanWidth) / 2, (this.mScreenH - mScanHeight) / 2 - heightOffset, mScanWidth + (mScreenW - mScanWidth) / 2, (this.mScreenH - mScanHeight) / 2 + mScanHeight / 10 - heightOffset, mPaintLine);
+
+            this.mCanvas.drawLine((mScreenW - mScanWidth) / 2, mScanHeight + (this.mScreenH - mScanHeight) / 2 - heightOffset, (mScreenW - mScanWidth) / 2 + mScanWidth / 10, mScanHeight + (this.mScreenH - mScanHeight) / 2 - heightOffset, mPaintLine);
+            this.mCanvas.drawLine((mScreenW - mScanWidth) / 2, mScanHeight + (this.mScreenH - mScanHeight) / 2 - heightOffset, (mScreenW - mScanWidth) / 2, mScanHeight + (this.mScreenH - mScanHeight) / 2 - mScanHeight / 10 - heightOffset, mPaintLine);
+
+            this.mCanvas.drawLine(mScanWidth + (mScreenW - mScanWidth) / 2, mScanHeight + (this.mScreenH - mScanHeight) / 2 - heightOffset, mScanWidth + (mScreenW - mScanWidth) / 2 - mScanWidth / 10, mScanHeight + (this.mScreenH - mScanHeight) / 2 - heightOffset, mPaintLine);
+            this.mCanvas.drawLine(mScanWidth + (mScreenW - mScanWidth) / 2, mScanHeight + (this.mScreenH - mScanHeight) / 2 - heightOffset, mScanWidth + (mScreenW - mScanWidth) / 2, mScanHeight + (this.mScreenH - mScanHeight) / 2 - mScanHeight / 10 - heightOffset, mPaintLine);
 
             mPaintLine.setTextSize(tipTextSize);
             mPaintLine.setAntiAlias(true);
             mPaintLine.setDither(true);
-            this.mCanvas.drawText(tipText, this.mScreenW / 2 -mPaintLine.measureText(tipText,0,tipText.length())/2, this.mScreenH / 2 , mPaintLine);
+            this.mCanvas.drawText(tipText, this.mScreenW / 2 - mPaintLine.measureText(tipText,0,tipText.length())/2, this.mScreenH / 2 - heightOffset, mPaintLine);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

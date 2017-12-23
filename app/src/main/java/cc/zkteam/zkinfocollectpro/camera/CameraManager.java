@@ -6,6 +6,9 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 
 import java.io.IOException;
+import java.util.List;
+
+import cc.zkteam.zkinfocollectpro.utils.L;
 
 /**
  * User:lizhangqu(513163535@qq.com)
@@ -86,11 +89,71 @@ public class CameraManager {
         if (!initialized) {
             initialized = true;
             parameters = camera.getParameters();
-            parameters.setPreviewSize(800, 600);
             parameters.setPictureFormat(ImageFormat.JPEG);
             parameters.setJpegQuality(100);
-            parameters.setPictureSize(800, 600);
+
+            setPreviewSizes();
+            setFixPictureSize();
+
             theCamera.setParameters(parameters);
+        }
+    }
+
+    /**
+     * 2017/12/23  预览的图片尺寸，默认获取最大的尺寸。防止某些大小顺序是反的。
+     */
+    private void setPreviewSizes() {
+        List<Camera.Size> previewSizes = parameters.getSupportedPreviewSizes();
+
+        Camera.Size fixPreviewSize = null;
+        if (previewSizes != null) {
+            Camera.Size currentPreviewSize = previewSizes.get(0);
+            if (currentPreviewSize.width > 0 && currentPreviewSize.height >0) {
+                fixPreviewSize = currentPreviewSize;
+            } else {
+                fixPreviewSize = previewSizes.get(previewSizes.size() - 1);
+            }
+
+            for (Camera.Size previewSize : previewSizes) {
+                Log.d(TAG, "系统默认的_previewSize: " + previewSize.width + ", " + previewSize.height);
+            }
+        }
+
+        if (fixPreviewSize != null) {
+            int width = fixPreviewSize.width;
+            int height = fixPreviewSize.height;
+            L.i("最合适 预览图片尺寸是：" + width + "x" + height);
+            parameters.setPreviewSize(width, height);
+        }
+    }
+
+    /**
+     * 2017/12/23  图片的大小 宽度在1000以内最合适，图片过大可能造成时间长或者限制导致的失败。过小会造成身份证识别错误。
+     */
+    private void setFixPictureSize() {
+        List<Camera.Size> pictureSizes = parameters.getSupportedPictureSizes();
+
+        Camera.Size fixPictureSize = null;
+        for (Camera.Size pictureSize : pictureSizes) {
+            Log.d(TAG, "系统默认的_pictureSize: " + pictureSize.width + ", " + pictureSize.height);
+
+            if (pictureSize.width < 1000) {
+
+                if (fixPictureSize == null) {
+                    fixPictureSize = pictureSize;
+                }
+
+                if (pictureSize.width > fixPictureSize.width) {
+                    fixPictureSize = pictureSize;
+                }
+            }
+        }
+
+        if (fixPictureSize != null) {
+            int width = fixPictureSize.width;
+            int height = fixPictureSize.height;
+            L.i("最合适 生成图片尺寸是：" + width + "x" + height);
+            parameters.setPictureSize(fixPictureSize.width, fixPictureSize.height);
         }
     }
 

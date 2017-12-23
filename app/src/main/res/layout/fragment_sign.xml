@@ -11,7 +11,7 @@
         android:id="@+id/toolbar_personal_info_collection"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#007dbd"
+        android:background="@color/theme_color"
         app:contentInsetStart="0dp">
 
         <RelativeLayout

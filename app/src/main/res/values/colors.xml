@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3ba3d0</color>
-    <color name="colorPrimaryDark">#3ba3d0</color>
+    <!--默认的浅蓝色，主题色-->
+    <color name="theme_color">#41A4CE</color>
+
+    <color name="colorPrimary">@color/theme_color</color>
+    <color name="colorPrimaryDark">@color/theme_color</color>
 
     <color name="colorAccent">#FF4081</color>
     <color name="titleColor">#3BA3D0</color>
     <color name="black3">#999898</color>
     <color name="gray2">#999999</color>
-    <color name="white">#fff</color>
+    <color name="white">@android:color/white</color>
 
     <color name="text_main">#333333</color>
     <color name="text_hint">#999999</color>
@@ -22,5 +25,5 @@
     <color name="red">#e65162</color>
     <color name="green">#b32cc95c</color>
 
-    <color name="tab_color">#41A4CE</color>
+
 </resources>
