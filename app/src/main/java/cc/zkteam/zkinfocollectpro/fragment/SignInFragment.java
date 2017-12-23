@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -17,11 +18,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.activity.MainActivity;
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHTongJiBean;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
+import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.view.ZKImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -77,6 +80,8 @@ public class SignInFragment extends BaseFragment {
     TextView tvAboutQuit;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+    @BindView(R.id.test_btn)
+    Button testBtn;
 
     private ZHApi zhApi;
 
@@ -162,7 +167,7 @@ public class SignInFragment extends BaseFragment {
     }
 
     @OnClick({R.id.img_personal_info_about, R.id.img_personal_info_search, R.id.tv_sign, R.id.tv_sign_success_submit,
-            R.id.tv_about_message, R.id.tv_about_setting, R.id.tv_about_quit})
+            R.id.tv_about_message, R.id.tv_about_setting, R.id.tv_about_quit, R.id.test_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_personal_info_about:
@@ -182,6 +187,9 @@ public class SignInFragment extends BaseFragment {
             case R.id.tv_about_setting:
                 break;
             case R.id.tv_about_quit:
+                break;
+            case R.id.test_btn:
+                PageCtrl.startActivity(getActivity(), MainActivity.class);
                 break;
         }
     }
@@ -206,4 +214,5 @@ public class SignInFragment extends BaseFragment {
         });
 
     }
+
 }
