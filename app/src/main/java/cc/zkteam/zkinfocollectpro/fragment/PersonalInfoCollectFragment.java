@@ -1,5 +1,6 @@
 package cc.zkteam.zkinfocollectpro.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -7,13 +8,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ToastUtils;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.IDCardScanActivity;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
-import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
+import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
+import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.view.ZKImageView;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by loong on 2017/12/16.
@@ -68,7 +74,30 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                 getActivity().finish();
                 break;
             case R.id.img_personal_info_scan:
-                PageCtrl.startActivity(getActivity(), IDCardScanActivity.class);
+                Intent intent = new Intent(getActivity(), IDCardScanActivity.class);
+                startActivityForResult(intent, 100);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (resultCode) {
+            case RESULT_OK:
+                if (data != null && requestCode == 100) {
+                    Bundle bundle = data.getExtras();
+                    if (bundle != null) {
+                        BDIdCardBean.WordsResultBean wordsResultBean = (BDIdCardBean.WordsResultBean) bundle.getSerializable(IDCardScanActivity.KEY_ID_CARD_INFO_BEAN);
+
+                        if (wordsResultBean != null) {
+                            String name = wordsResultBean.getName().getWords();
+                            L.i("扫描的姓名是；" + name);
+                            ToastUtils.showShort("扫描的姓名是：" + name);
+                        }
+                    }
+                }
                 break;
         }
     }
