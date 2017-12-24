@@ -115,6 +115,8 @@ deps.dagger_processor = "com.google.dagger:dagger-compiler:$versions.dagger"
 
 deps.runner = "com.android.support.test:runner:$versions.runner"
 deps.systembartint = "com.readystatesoftware.systembartint:systembartint:$versions.systembartint"
+
+// 图片选择库 https://github.com/lovetuzitong/MultiImageSelector/blob/master/README_zh.md
 deps.multi_image_selector = "com.github.lovetuzitong:MultiImageSelector:$versions.multi_image_selector"
 
 deps.support = support

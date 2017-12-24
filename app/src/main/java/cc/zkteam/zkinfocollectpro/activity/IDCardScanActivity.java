@@ -363,7 +363,6 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
             if(resultCode == RESULT_OK){
                 // 获取返回的图片列表
                 List<String> pics = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
-                // 处理你自己的逻辑 ....
 
                 if (pics != null && pics.size() > 0) {
                     String galleyPicPath = pics.get(0);
@@ -376,8 +375,6 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
                         ToastUtils.showShort(e.getMessage());
                     }
                 }
-
-
             }
         }
     }
