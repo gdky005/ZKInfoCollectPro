@@ -6,6 +6,7 @@ import android.content.Context;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
+import com.blankj.utilcode.util.Utils;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import cc.zkteam.zkinfocollectpro.exception.ZKBaseNullPointerException;
@@ -28,8 +29,9 @@ public final class ZKBase {
    * 初始化工具类
    */
   public static void init(@NonNull Application app) {
-    Fresco.initialize(app.getApplicationContext());
-    ZKBase.context = app.getApplicationContext();
+      Fresco.initialize(app.getApplicationContext());
+      ZKBase.context = app.getApplicationContext();
+      Utils.init(app);
   }
 
   public static void init(@NonNull Context context, boolean debug) {

@@ -32,6 +32,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
+import cc.zkteam.zkinfocollectpro.bd.ZKBDIDCardManager;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardRequestBody;
 import cc.zkteam.zkinfocollectpro.camera.CameraManager;
@@ -471,7 +472,7 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
                     .getDefaultRequestBody(true, base64EncodeImage);
             RequestBody body = RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), requestBody.toString());
 
-            ZHConnectionManager.getInstance().getZHApi().bdIDCard(body, MainActivity.accessToken).enqueue(new Callback<BDIdCardBean>() {
+            ZHConnectionManager.getInstance().getZHApi().bdIDCard(body, ZKBDIDCardManager.getInstance().getAccessToken()).enqueue(new Callback<BDIdCardBean>() {
                 @Override
                 public void onResponse(Call<BDIdCardBean> call, Response<BDIdCardBean> response) {
                     Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
