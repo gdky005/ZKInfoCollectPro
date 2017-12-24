@@ -21,6 +21,7 @@ import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.base.RvListener;
 import cc.zkteam.zkinfocollectpro.bean.RentInfo;
 import cc.zkteam.zkinfocollectpro.utils.CommonUtils;
+import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.view.DividerItemDecoration;
 
 /**
@@ -92,7 +93,8 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
 
             case R.id.create_new:
 
-                break;
+                PageCtrl.startActivity(this, NewResidentsInfoActivity.class);
+                return;
         }
         Toast.makeText(mContext, "hello" + position, Toast.LENGTH_SHORT).show();
     }

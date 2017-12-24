@@ -1,5 +1,6 @@
 package cc.zkteam.zkinfocollectpro.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -17,6 +18,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
+import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
+import cc.zkteam.zkinfocollectpro.utils.L;
 import cn.qqtheme.framework.picker.DatePicker;
 import cn.qqtheme.framework.picker.OptionPicker;
 import cn.qqtheme.framework.util.ConvertUtils;
@@ -24,6 +27,7 @@ import cn.qqtheme.framework.widget.WheelView;
 
 public class NewResidentsInfoActivity extends BaseActivity {
 
+    private static final int SCAN_REQUEST_CODE = 100;
 
     @BindView(R.id.nameedittext)
     EditText nameedittext;
@@ -192,8 +196,47 @@ public class NewResidentsInfoActivity extends BaseActivity {
             case R.id.right_icon:
 //                drawerLayout.openDrawer(Gravity.END);
                 ToastUtils.showLong("按钮点击");
+
+                Intent intent = new Intent(this, IDCardScanActivity.class);
+                startActivityForResult(intent, SCAN_REQUEST_CODE);
+
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode) {
+            case RESULT_OK:
+                if (data != null && requestCode == SCAN_REQUEST_CODE) {
+                    Bundle bundle = data.getExtras();
+                    if (bundle != null) {
+                        BDIdCardBean.WordsResultBean wordsResultBean = (BDIdCardBean.WordsResultBean) bundle.getSerializable(IDCardScanActivity.KEY_ID_CARD_INFO_BEAN);
+
+                        if (wordsResultBean != null) {
+                            String name = wordsResultBean.getName().getWords();
+                            String sex = wordsResultBean.getSex().getWords();
+                            String birthday = wordsResultBean.getBirthday().getWords();
+                            String idCardNumber = wordsResultBean.getIdCardNumber().getWords();
+                            String address = wordsResultBean.getAddress().getWords();
+                            String nation = wordsResultBean.getNation().getWords();
+
+                            L.i("扫描的姓名是；" + name);
+
+                            nameedittext.setText(name);
+                            sexedittext.setText(sex);
+                            // TODO: 2017/12/24 请处理这里的数据 ，并修改 UI
+                            bornedittext.setText(birthday);
+                            nationaledittext.setText(nation);
+                            edittext21.setText(idCardNumber);
+                            edittext22.setText(address);
+                        }
+                    }
+                }
+                break;
+        }
+
     }
 
     @OnClick(R.id.back)
