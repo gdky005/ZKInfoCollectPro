@@ -67,6 +67,8 @@ dependencies {
     implementation deps.rvh
     implementation deps.okhttp_interceptor
 
+    implementation deps.multi_image_selector
+
     implementation deps.dagger_support
     annotationProcessor deps.dagger_processor
 

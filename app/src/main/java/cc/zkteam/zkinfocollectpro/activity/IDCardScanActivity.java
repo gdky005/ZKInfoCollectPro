@@ -24,6 +24,7 @@ import com.blankj.utilcode.util.ToastUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -36,6 +37,8 @@ import cc.zkteam.zkinfocollectpro.camera.CameraManager;
 import cc.zkteam.zkinfocollectpro.camera.PreviewBorderView;
 import cc.zkteam.zkinfocollectpro.exception.ZKIdCardException;
 import cc.zkteam.zkinfocollectpro.utils.L;
+import me.nereo.multi_image_selector.MultiImageSelector;
+import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,6 +47,7 @@ import retrofit2.Response;
 public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Callback {
 
     public static final String KEY_ID_CARD_INFO_BEAN = "key_id_card_info_bean";
+    public static final int REQUEST_IMAGE = 1000;
 
     /**
      * 默认图片生成的名称
@@ -344,7 +348,37 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
             case R.id.title_bar_left_iv:
                 break;
             case R.id.title_bar_right_iv:
+                MultiImageSelector.create()
+                        .showCamera(false)
+                        .single() // single mode
+                        .start(this, REQUEST_IMAGE);
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_IMAGE){
+            if(resultCode == RESULT_OK){
+                // 获取返回的图片列表
+                List<String> pics = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+                // 处理你自己的逻辑 ....
+
+                if (pics != null && pics.size() > 0) {
+                    String galleyPicPath = pics.get(0);
+                    L.d("当前图片地址是：" + galleyPicPath);
+
+                    try {
+                        uploadAndRecognize(galleyPicPath);
+                    } catch (ZKIdCardException e) {
+                        e.printStackTrace();
+                        ToastUtils.showShort(e.getMessage());
+                    }
+                }
+
+
+            }
         }
     }
 }

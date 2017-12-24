@@ -30,8 +30,8 @@ versions.runner = "1.0.1"
 versions.wave_swipe_refresh_layout = "1.6"
 versions.zk_fresco = "1.0.0"
 versions.systembartint = "1.0.3"
+versions.multi_image_selector = "1.2"
 ext.versions = versions
-
 
 
 def support = [:]
@@ -115,6 +115,7 @@ deps.dagger_processor = "com.google.dagger:dagger-compiler:$versions.dagger"
 
 deps.runner = "com.android.support.test:runner:$versions.runner"
 deps.systembartint = "com.readystatesoftware.systembartint:systembartint:$versions.systembartint"
+deps.multi_image_selector = "com.github.lovetuzitong:MultiImageSelector:$versions.multi_image_selector"
 
 deps.support = support
 deps.lifecycle = lifecycle
