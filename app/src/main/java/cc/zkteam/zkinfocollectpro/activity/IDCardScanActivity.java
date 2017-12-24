@@ -32,6 +32,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
+import cc.zkteam.zkinfocollectpro.bd.ZKBDIDCardManager;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardRequestBody;
 import cc.zkteam.zkinfocollectpro.camera.CameraManager;
@@ -471,7 +472,7 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
                     .getDefaultRequestBody(true, base64EncodeImage);
             RequestBody body = RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), requestBody.toString());
 
-            ZHConnectionManager.getInstance().getZHApi().bdIDCard(body, MainActivity.accessToken).enqueue(new Callback<BDIdCardBean>() {
+            ZHConnectionManager.getInstance().getZHApi().bdIDCard(body, ZKBDIDCardManager.getInstance().getAccessToken()).enqueue(new Callback<BDIdCardBean>() {
                 @Override
                 public void onResponse(Call<BDIdCardBean> call, Response<BDIdCardBean> response) {
                     Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
@@ -483,17 +484,17 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
                             // TODO: 2017/12/15  在这里处理数据格式，并返回给主界面
 
                             StringBuilder sb = new StringBuilder();
-                            sb.append(wordsResultBean.get住址().getWords());
+                            sb.append(wordsResultBean.getAddress().getWords());
                             sb.append("; ");
-                            sb.append(wordsResultBean.get公民身份号码().getWords());
+                            sb.append(wordsResultBean.getIdCardNumber().getWords());
                             sb.append("; ");
-                            sb.append(wordsResultBean.get出生().getWords());
+                            sb.append(wordsResultBean.getBirthday().getWords());
                             sb.append("; ");
-                            sb.append(wordsResultBean.get姓名().getWords());
+                            sb.append(wordsResultBean.getName().getWords());
                             sb.append("; ");
-                            sb.append(wordsResultBean.get性别().getWords());
+                            sb.append(wordsResultBean.getSex().getWords());
                             sb.append("; ");
-                            sb.append(wordsResultBean.get民族().getWords());
+                            sb.append(wordsResultBean.getNation().getWords());
                             sb.append("。");
 
 

@@ -3,8 +3,6 @@ package cc.zkteam.zkinfocollectpro;
 import android.content.Context;
 
 import com.baidu.mapapi.SDKInitializer;
-import com.blankj.utilcode.util.Utils;
-import com.facebook.drawee.backends.pipeline.Fresco;
 
 import cc.zkteam.zkinfocollectpro.di.DaggerAppComponent;
 import dagger.android.AndroidInjector;
@@ -23,11 +21,10 @@ public class ZKICApplication extends DaggerApplication {
     public void onCreate() {
         super.onCreate();
         mContext = this;
-        Utils.init(this);
+        // 2017/12/24  其他的类初始化都在这个内部
         ZKBase.init(this);
         //  百度地图
         SDKInitializer.initialize(getApplicationContext());
-        Fresco.initialize(this);
     }
 
     @Override
