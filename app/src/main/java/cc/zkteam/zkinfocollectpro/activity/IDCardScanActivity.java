@@ -484,17 +484,17 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
                             // TODO: 2017/12/15  在这里处理数据格式，并返回给主界面
 
                             StringBuilder sb = new StringBuilder();
-                            sb.append(wordsResultBean.get住址().getWords());
+                            sb.append(wordsResultBean.getAddress().getWords());
                             sb.append("; ");
-                            sb.append(wordsResultBean.get公民身份号码().getWords());
+                            sb.append(wordsResultBean.getIdCardNumber().getWords());
                             sb.append("; ");
-                            sb.append(wordsResultBean.get出生().getWords());
+                            sb.append(wordsResultBean.getBirthday().getWords());
                             sb.append("; ");
-                            sb.append(wordsResultBean.get姓名().getWords());
+                            sb.append(wordsResultBean.getName().getWords());
                             sb.append("; ");
-                            sb.append(wordsResultBean.get性别().getWords());
+                            sb.append(wordsResultBean.getSex().getWords());
                             sb.append("; ");
-                            sb.append(wordsResultBean.get民族().getWords());
+                            sb.append(wordsResultBean.getNation().getWords());
                             sb.append("。");
 
 

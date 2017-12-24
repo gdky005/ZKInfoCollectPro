@@ -1,6 +1,9 @@
 package cc.zkteam.zkinfocollectpro.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
+ * BDIdCardBean
  * Created by WangQing on 2017/12/15.
  */
 
@@ -90,491 +93,156 @@ public class BDIdCardBean {
          * 民族 : {"location":{"left":492,"top":279,"width":30,"height":37},"words":"汉"}
          */
 
-        private 住址Bean 住址;
-        private 公民身份号码Bean 公民身份号码;
-        private 出生Bean 出生;
-        private 姓名Bean 姓名;
-        private 性别Bean 性别;
-        private 民族Bean 民族;
+        @SerializedName("住址")
+        private AddressBean address;
+        @SerializedName("公民身份号码")
+        private IdCardNumberBean idCardNumber;
+        @SerializedName("出生")
+        private BirthdayBean birthday;
+        @SerializedName("姓名")
+        private NameBean name;
+        @SerializedName("性别")
+        private SexBean sex;
+        @SerializedName("民族")
+        private NationBean nation;
 
-        public 住址Bean get住址() {
-            return 住址;
+        public AddressBean getAddress() {
+            return address;
         }
 
-        public void set住址(住址Bean 住址) {
-            this.住址 = 住址;
+        public void setAddress(AddressBean address) {
+            this.address = address;
         }
 
-        public 公民身份号码Bean get公民身份号码() {
-            return 公民身份号码;
+        public IdCardNumberBean getIdCardNumber() {
+            return idCardNumber;
         }
 
-        public void set公民身份号码(公民身份号码Bean 公民身份号码) {
-            this.公民身份号码 = 公民身份号码;
+        public void setIdCardNumber(IdCardNumberBean idCardNumber) {
+            this.idCardNumber = idCardNumber;
         }
 
-        public 出生Bean get出生() {
-            return 出生;
+        public BirthdayBean getBirthday() {
+            return birthday;
         }
 
-        public void set出生(出生Bean 出生) {
-            this.出生 = 出生;
+        public void setBirthday(BirthdayBean birthday) {
+            this.birthday = birthday;
         }
 
-        public 姓名Bean get姓名() {
-            return 姓名;
+        public NameBean getName() {
+            return name;
         }
 
-        public void set姓名(姓名Bean 姓名) {
-            this.姓名 = 姓名;
+        public void setName(NameBean name) {
+            this.name = name;
         }
 
-        public 性别Bean get性别() {
-            return 性别;
+        public SexBean getSex() {
+            return sex;
         }
 
-        public void set性别(性别Bean 性别) {
-            this.性别 = 性别;
+        public void setSex(SexBean sex) {
+            this.sex = sex;
         }
 
-        public 民族Bean get民族() {
-            return 民族;
+        public NationBean getNation() {
+            return nation;
         }
 
-        public void set民族(民族Bean 民族) {
-            this.民族 = 民族;
+        public void setNation(NationBean nation) {
+            this.nation = nation;
         }
 
-        public static class 住址Bean {
-            /**
-             * location : {"left":267,"top":453,"width":459,"height":99}
-             * words : 南京市江宁区弘景大道3889号
-             */
+    }
 
-            private LocationBean location;
-            private String words;
+    public static class AddressBean extends IdentifyBean {
+    }
 
-            public LocationBean getLocation() {
-                return location;
-            }
+    public static class IdCardNumberBean extends IdentifyBean {
+    }
 
-            public void setLocation(LocationBean location) {
-                this.location = location;
-            }
+    public static class BirthdayBean extends IdentifyBean {
+    }
 
-            public String getWords() {
-                return words;
-            }
+    public static class NameBean extends IdentifyBean {
+    }
 
-            public void setWords(String words) {
-                this.words = words;
-            }
+    public static class SexBean extends IdentifyBean {
+    }
 
-            public static class LocationBean {
-                /**
-                 * left : 267
-                 * top : 453
-                 * width : 459
-                 * height : 99
-                 */
+    public static class NationBean extends IdentifyBean {
+    }
 
-                private int left;
-                private int top;
-                private int width;
-                private int height;
+    public static class IdentifyBean {
+        /**
+         * location : {"left":267,"top":453,"width":459,"height":99}
+         * words : 南京市江宁区弘景大道3889号
+         */
 
-                public int getLeft() {
-                    return left;
-                }
+        private LocationBean location;
+        private String words;
 
-                public void setLeft(int left) {
-                    this.left = left;
-                }
-
-                public int getTop() {
-                    return top;
-                }
-
-                public void setTop(int top) {
-                    this.top = top;
-                }
-
-                public int getWidth() {
-                    return width;
-                }
-
-                public void setWidth(int width) {
-                    this.width = width;
-                }
-
-                public int getHeight() {
-                    return height;
-                }
-
-                public void setHeight(int height) {
-                    this.height = height;
-                }
-            }
+        public LocationBean getLocation() {
+            return location;
         }
 
-        public static class 公民身份号码Bean {
-            /**
-             * location : {"left":443,"top":681,"width":589,"height":45}
-             * words : 330881199904173914
-             */
-
-            private LocationBeanX location;
-            private String words;
-
-            public LocationBeanX getLocation() {
-                return location;
-            }
-
-            public void setLocation(LocationBeanX location) {
-                this.location = location;
-            }
-
-            public String getWords() {
-                return words;
-            }
-
-            public void setWords(String words) {
-                this.words = words;
-            }
-
-            public static class LocationBeanX {
-                /**
-                 * left : 443
-                 * top : 681
-                 * width : 589
-                 * height : 45
-                 */
-
-                private int left;
-                private int top;
-                private int width;
-                private int height;
-
-                public int getLeft() {
-                    return left;
-                }
-
-                public void setLeft(int left) {
-                    this.left = left;
-                }
-
-                public int getTop() {
-                    return top;
-                }
-
-                public void setTop(int top) {
-                    this.top = top;
-                }
-
-                public int getWidth() {
-                    return width;
-                }
-
-                public void setWidth(int width) {
-                    this.width = width;
-                }
-
-                public int getHeight() {
-                    return height;
-                }
-
-                public void setHeight(int height) {
-                    this.height = height;
-                }
-            }
+        public void setLocation(LocationBean location) {
+            this.location = location;
         }
 
-        public static class 出生Bean {
-            /**
-             * location : {"left":270,"top":355,"width":357,"height":45}
-             * words : 19990417
-             */
-
-            private LocationBeanXX location;
-            private String words;
-
-            public LocationBeanXX getLocation() {
-                return location;
-            }
-
-            public void setLocation(LocationBeanXX location) {
-                this.location = location;
-            }
-
-            public String getWords() {
-                return words;
-            }
-
-            public void setWords(String words) {
-                this.words = words;
-            }
-
-            public static class LocationBeanXX {
-                /**
-                 * left : 270
-                 * top : 355
-                 * width : 357
-                 * height : 45
-                 */
-
-                private int left;
-                private int top;
-                private int width;
-                private int height;
-
-                public int getLeft() {
-                    return left;
-                }
-
-                public void setLeft(int left) {
-                    this.left = left;
-                }
-
-                public int getTop() {
-                    return top;
-                }
-
-                public void setTop(int top) {
-                    this.top = top;
-                }
-
-                public int getWidth() {
-                    return width;
-                }
-
-                public void setWidth(int width) {
-                    this.width = width;
-                }
-
-                public int getHeight() {
-                    return height;
-                }
-
-                public void setHeight(int height) {
-                    this.height = height;
-                }
-            }
+        public String getWords() {
+            return words;
         }
 
-        public static class 姓名Bean {
-            /**
-             * location : {"left":267,"top":176,"width":152,"height":50}
-             * words : 伍云龙
-             */
+        public void setWords(String words) {
+            this.words = words;
+        }
+    }
 
-            private LocationBeanXXX location;
-            private String words;
+    public static class LocationBean {
+        /**
+         * left : 267
+         * top : 453
+         * width : 459
+         * height : 99
+         */
 
-            public LocationBeanXXX getLocation() {
-                return location;
-            }
+        private int left;
+        private int top;
+        private int width;
+        private int height;
 
-            public void setLocation(LocationBeanXXX location) {
-                this.location = location;
-            }
-
-            public String getWords() {
-                return words;
-            }
-
-            public void setWords(String words) {
-                this.words = words;
-            }
-
-            public static class LocationBeanXXX {
-                /**
-                 * left : 267
-                 * top : 176
-                 * width : 152
-                 * height : 50
-                 */
-
-                private int left;
-                private int top;
-                private int width;
-                private int height;
-
-                public int getLeft() {
-                    return left;
-                }
-
-                public void setLeft(int left) {
-                    this.left = left;
-                }
-
-                public int getTop() {
-                    return top;
-                }
-
-                public void setTop(int top) {
-                    this.top = top;
-                }
-
-                public int getWidth() {
-                    return width;
-                }
-
-                public void setWidth(int width) {
-                    this.width = width;
-                }
-
-                public int getHeight() {
-                    return height;
-                }
-
-                public void setHeight(int height) {
-                    this.height = height;
-                }
-            }
+        public int getLeft() {
+            return left;
         }
 
-        public static class 性别Bean {
-            /**
-             * location : {"left":269,"top":262,"width":33,"height":52}
-             * words : 男
-             */
-
-            private LocationBeanXXXX location;
-            private String words;
-
-            public LocationBeanXXXX getLocation() {
-                return location;
-            }
-
-            public void setLocation(LocationBeanXXXX location) {
-                this.location = location;
-            }
-
-            public String getWords() {
-                return words;
-            }
-
-            public void setWords(String words) {
-                this.words = words;
-            }
-
-            public static class LocationBeanXXXX {
-                /**
-                 * left : 269
-                 * top : 262
-                 * width : 33
-                 * height : 52
-                 */
-
-                private int left;
-                private int top;
-                private int width;
-                private int height;
-
-                public int getLeft() {
-                    return left;
-                }
-
-                public void setLeft(int left) {
-                    this.left = left;
-                }
-
-                public int getTop() {
-                    return top;
-                }
-
-                public void setTop(int top) {
-                    this.top = top;
-                }
-
-                public int getWidth() {
-                    return width;
-                }
-
-                public void setWidth(int width) {
-                    this.width = width;
-                }
-
-                public int getHeight() {
-                    return height;
-                }
-
-                public void setHeight(int height) {
-                    this.height = height;
-                }
-            }
+        public void setLeft(int left) {
+            this.left = left;
         }
 
-        public static class 民族Bean {
-            /**
-             * location : {"left":492,"top":279,"width":30,"height":37}
-             * words : 汉
-             */
+        public int getTop() {
+            return top;
+        }
 
-            private LocationBeanXXXXX location;
-            private String words;
+        public void setTop(int top) {
+            this.top = top;
+        }
 
-            public LocationBeanXXXXX getLocation() {
-                return location;
-            }
+        public int getWidth() {
+            return width;
+        }
 
-            public void setLocation(LocationBeanXXXXX location) {
-                this.location = location;
-            }
+        public void setWidth(int width) {
+            this.width = width;
+        }
 
-            public String getWords() {
-                return words;
-            }
+        public int getHeight() {
+            return height;
+        }
 
-            public void setWords(String words) {
-                this.words = words;
-            }
-
-            public static class LocationBeanXXXXX {
-                /**
-                 * left : 492
-                 * top : 279
-                 * width : 30
-                 * height : 37
-                 */
-
-                private int left;
-                private int top;
-                private int width;
-                private int height;
-
-                public int getLeft() {
-                    return left;
-                }
-
-                public void setLeft(int left) {
-                    this.left = left;
-                }
-
-                public int getTop() {
-                    return top;
-                }
-
-                public void setTop(int top) {
-                    this.top = top;
-                }
-
-                public int getWidth() {
-                    return width;
-                }
-
-                public void setWidth(int width) {
-                    this.width = width;
-                }
-
-                public int getHeight() {
-                    return height;
-                }
-
-                public void setHeight(int height) {
-                    this.height = height;
-                }
-            }
+        public void setHeight(int height) {
+            this.height = height;
         }
     }
 }

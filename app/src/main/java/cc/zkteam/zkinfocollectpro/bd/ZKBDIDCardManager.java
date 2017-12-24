@@ -27,7 +27,7 @@ import retrofit2.Response;
 public class ZKBDIDCardManager {
 
     private String accessToken = "";
-    private int expiresIn = 0; //单位是秒
+    private long expiresIn = 0; //单位是秒
 
     private String charsetName = "UTF-8";
     private String mediaType = "application/x-www-form-urlencoded";
@@ -60,7 +60,7 @@ public class ZKBDIDCardManager {
         if (TextUtils.isEmpty(accessToken)) {
             ZKBDAccessTokenSP accessTokenSP = new ZKBDAccessTokenSP();
 
-            expiresIn = (int) accessTokenSP.get(ZKBDAccessTokenSP.KEY_EXPIRES_IN, 0);
+            expiresIn = (long) accessTokenSP.get(ZKBDAccessTokenSP.KEY_EXPIRES_IN, 0L);
             long currentTime = System.currentTimeMillis();
             if (currentTime > expiresIn) {
                 refreshAccessToken();
