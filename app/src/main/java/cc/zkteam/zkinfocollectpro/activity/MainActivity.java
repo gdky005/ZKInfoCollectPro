@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.ZKBase;
 import cc.zkteam.zkinfocollectpro.activity.home.HomeActivity;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.bd.ZKBDIDCardManager;
@@ -23,6 +25,7 @@ import cc.zkteam.zkinfocollectpro.dialog.OnZKDialogCancelListener;
 import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragment;
 import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragmentHelper;
 import cc.zkteam.zkinfocollectpro.dialog.ZKDialogResultListener;
+import cc.zkteam.zkinfocollectpro.exception.ZKIdCardException;
 import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import retrofit2.Call;
@@ -78,8 +81,31 @@ public class MainActivity extends BaseActivity {
     protected void initData() {
 
         verifyStoragePermissions(this);
+
+        ZKBase.getSDCardPath();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode) {
+            case RESULT_OK:
+                if (data != null && requestCode == 100) {
+                    Bundle bundle = data.getExtras();
+                    if (bundle != null) {
+                        BDIdCardBean.WordsResultBean wordsResultBean = (BDIdCardBean.WordsResultBean) bundle.getSerializable(IDCardScanActivity.KEY_ID_CARD_INFO_BEAN);
+
+                        if (wordsResultBean != null) {
+                            String name = wordsResultBean.getName().getWords();
+                            L.i("扫描的姓名是；" + name);
+                            ToastUtils.showShort("扫描的姓名是：" + name);
+                        }
+                    }
+                }
+                break;
+        }
+
+    }
 
     @OnClick({R.id.toolbar, R.id.home_btn, R.id.map, R.id.bd_access_token,
             R.id.id_card, R.id.camera_btn, R.id.btn_problem_list, R.id.dialog})
@@ -97,14 +123,21 @@ public class MainActivity extends BaseActivity {
                 getBDAccessToken();
                 break;
             case R.id.id_card:
-                getIdCardInfo();
+                try {
+                    getIdCardInfo();
+                } catch (ZKIdCardException e) {
+                    e.printStackTrace();
+                    ToastUtils.showShort("出现异常原因：" + e.getMessage());
+                }
                 break;
             case R.id.camera_btn:
-
 //                身份证识别地址
 //                http://ai.baidu.com/tech/ocr/cards
 
-                PageCtrl.startActivity(MainActivity.this, IDCardScanActivity.class);
+                // TODO: 2017/12/24  启动身份证扫描页面，得到结果集合
+                Intent intent = new Intent(this, IDCardScanActivity.class);
+                startActivityForResult(intent, 100);
+
                 break;
             case R.id.btn_problem_list:
                 PageCtrl.startActivity(MainActivity.this, MyProblemListActivity.class);
@@ -133,7 +166,6 @@ public class MainActivity extends BaseActivity {
 //                                ToastUtils.showShort("取消了本次操作");
 //                            }
 //                        });
-
 
                 ZKDialogFragment dialogFragment = ZKDialogFragmentHelper.showDialog(getSupportFragmentManager(),
                         "hello",
@@ -182,33 +214,32 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void getIdCardInfo() {
+    /**
+     * 务必确保 SD 卡有这个测试身份证的文件：/xiaotieie_id_card.png
+     */
+    private void getIdCardInfo() throws ZKIdCardException {
 //        准备添加 身份证失败：http://ai.baidu.com/docs#/OCR-API/top
         String localPicPath = Environment.getExternalStorageDirectory().getPath() + "/xiaotieie_id_card.png";
 
-        try {
-            ZKBDIDCardManager.getInstance().getIdCardInfo(localPicPath, new Callback<BDIdCardBean>() {
-                @Override
-                public void onResponse(Call<BDIdCardBean> call, Response<BDIdCardBean> response) {
-                    L.d("onResponse() called with: call = [" + call + "], response = [" + response + "]");
-                    BDIdCardBean bdIdCardBean = response.body();
-                    if (bdIdCardBean != null) {
-                        BDIdCardBean.WordsResultBean wordsResultBean = bdIdCardBean.getWords_result();
+        ZKBDIDCardManager.getInstance().getIdCardInfo(localPicPath, new Callback<BDIdCardBean>() {
+            @Override
+            public void onResponse(Call<BDIdCardBean> call, Response<BDIdCardBean> response) {
+                L.d("onResponse() called with: call = [" + call + "], response = [" + response + "]");
+                BDIdCardBean bdIdCardBean = response.body();
+                if (bdIdCardBean != null) {
+                    BDIdCardBean.WordsResultBean wordsResultBean = bdIdCardBean.getWords_result();
 
-                        if (wordsResultBean != null) {
-                            // TODO: 2017/12/15  在这里处理数据格式，并返回给主界面
-                        }
+                    if (wordsResultBean != null) {
+                        // TODO: 2017/12/15  在这里处理数据格式，并返回给主界面
                     }
                 }
+            }
 
-                @Override
-                public void onFailure(Call<BDIdCardBean> call, Throwable t) {
-                    L.e("onFailure() called with: call = [" + call + "], t = [" + t + "]");
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            @Override
+            public void onFailure(Call<BDIdCardBean> call, Throwable t) {
+                L.e("onFailure() called with: call = [" + call + "], t = [" + t + "]");
+            }
+        });
     }
 
     public void getBDAccessToken() {

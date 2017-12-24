@@ -10,6 +10,7 @@ import cc.zkteam.zkinfocollectpro.Constant;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardRequestBody;
 import cc.zkteam.zkinfocollectpro.bean.BDTokenBean;
+import cc.zkteam.zkinfocollectpro.exception.ZKIdCardException;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.utils.baidu.Base64Util;
@@ -109,33 +110,28 @@ public class ZKBDIDCardManager {
      * 获取身份证识别的信息
      * 参考：http://ai.baidu.com/docs#/OCR-API/top
      */
-    public void getIdCardInfo(String localPicPath, Callback<BDIdCardBean> callback) {
+    public void getIdCardInfo(String localPicPath, Callback<BDIdCardBean> callback) throws ZKIdCardException {
         // 2017/12/24 Check 文件大小是否正常
         if (callback == null){
-            L.e("callback is not null!");
-            return;
+            throw new ZKIdCardException("callback is not null!");
         }
 
         if (TextUtils.isEmpty(localPicPath)){
-            L.e("localPicPath is not null!");
-            return;
+            throw new ZKIdCardException("localPicPath is not null!");
         }
 
         File file = new File(localPicPath);
         if (!file.exists()) {
-            L.e("file is not exist!");
-            return;
+            throw new ZKIdCardException("file is not exist!");
         }
 
         if (file.length() > 4 * 1024 * 1024) {
-            L.e("File is too large");
-            return;
+            throw new ZKIdCardException("File is too large");
         }
 
         String accessToken = ZKBDIDCardManager.getInstance().getAccessToken();
         if (TextUtils.isEmpty(accessToken)) {
-            L.e("accessToken is not null, it will auto refresh");
-            return;
+            throw new ZKIdCardException("accessToken is not null, it will auto refresh");
         }
 
         try {
@@ -149,13 +145,8 @@ public class ZKBDIDCardManager {
 
             ZHConnectionManager.getInstance().getZHApi().bdIDCard(body, accessToken).enqueue(callback);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ZKIdCardException("generate bd params error", e);
         }
     }
-
-
-
-
-
 
 }

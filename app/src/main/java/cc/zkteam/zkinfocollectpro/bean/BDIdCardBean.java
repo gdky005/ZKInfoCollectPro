@@ -2,12 +2,14 @@ package cc.zkteam.zkinfocollectpro.bean;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * BDIdCardBean
  * Created by WangQing on 2017/12/15.
  */
 
-public class BDIdCardBean {
+public class BDIdCardBean implements Serializable {
 
     /**
      * log_id : 2648325511
@@ -83,7 +85,7 @@ public class BDIdCardBean {
         this.words_result_num = words_result_num;
     }
 
-    public static class WordsResultBean {
+    public static class WordsResultBean implements Serializable {
         /**
          * 住址 : {"location":{"left":267,"top":453,"width":459,"height":99},"words":"南京市江宁区弘景大道3889号"}
          * 公民身份号码 : {"location":{"left":443,"top":681,"width":589,"height":45},"words":"330881199904173914"}
@@ -174,7 +176,7 @@ public class BDIdCardBean {
     public static class NationBean extends IdentifyBean {
     }
 
-    public static class IdentifyBean {
+    public static class IdentifyBean implements Serializable {
         /**
          * location : {"left":267,"top":453,"width":459,"height":99}
          * words : 南京市江宁区弘景大道3889号
@@ -200,7 +202,7 @@ public class BDIdCardBean {
         }
     }
 
-    public static class LocationBean {
+    public static class LocationBean implements Serializable {
         /**
          * left : 267
          * top : 453
