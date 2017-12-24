@@ -2,9 +2,9 @@ package cc.zkteam.zkinfocollectpro.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,11 +13,14 @@ import com.blankj.utilcode.util.ToastUtils;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.activity.BasicInfoActivity;
 import cc.zkteam.zkinfocollectpro.activity.IDCardScanActivity;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
 import cc.zkteam.zkinfocollectpro.utils.L;
+import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.view.ZKImageView;
+import cc.zkteam.zkinfocollectpro.view.ZKRecyclerView;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -41,11 +44,15 @@ public class PersonalInfoCollectFragment extends BaseFragment {
     @BindView(R.id.tv_personal_info_collect_completion)
     TextView tvPersonalInfoCollectCompletion;
     @BindView(R.id.list_personal_info)
-    RecyclerView listPersonalInfo;
+    ZKRecyclerView listPersonalInfo;
     @BindView(R.id.img_personal_info_back)
     ImageView imgPersonalInfoBack;
     @BindView(R.id.img_personal_info_scan)
     ImageView imgPersonalInfoScan;
+    @BindView(R.id.btn_modification_info)
+    Button btnModificationInfo;
+    @BindView(R.id.btn_test_detail)
+    Button btnTestDetail;
 
     @Override
     public int getLayoutId() {
@@ -54,7 +61,7 @@ public class PersonalInfoCollectFragment extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
-
+        tvPersonalInfoCollectName.setText("姓名");
     }
 
     @Override
@@ -67,7 +74,8 @@ public class PersonalInfoCollectFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.img_personal_info_back, R.id.img_personal_info_scan})
+    @OnClick({R.id.img_personal_info_back, R.id.img_personal_info_scan, R.id.btn_modification_info,
+            R.id.btn_test_detail})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_personal_info_back:
@@ -76,6 +84,12 @@ public class PersonalInfoCollectFragment extends BaseFragment {
             case R.id.img_personal_info_scan:
                 Intent intent = new Intent(getActivity(), IDCardScanActivity.class);
                 startActivityForResult(intent, 100);
+                break;
+            case R.id.btn_modification_info:
+
+                break;
+            case R.id.btn_test_detail:
+                PageCtrl.startActivity(getActivity(), BasicInfoActivity.class);
                 break;
         }
     }
@@ -101,4 +115,5 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                 break;
         }
     }
+
 }

@@ -7,18 +7,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="152dp">
+        android:layout_height="wrap_content">
 
         <cc.zkteam.zkinfocollectpro.view.ZKImageView
             android:id="@+id/img_personal_avatar"
             android:layout_width="79dp"
             android:layout_height="118dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            android:background="@mipmap/ic_launcher"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="118dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="20dp"
             android:orientation="vertical">
@@ -30,7 +31,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:textStyle="bold"
-                tools:text="姓名：张三" />
+                android:text="姓名：张三" />
 
             <TextView
                 android:id="@+id/tv_personal_info_collect_id"
@@ -38,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                tools:text="身份证号:13013111111111" />
+                android:text="身份证号:13013111111111" />
 
             <TextView
                 android:id="@+id/tv_personal_info_collect_project"
@@ -46,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                tools:text="采集项：" />
+                android:text="采集项：" />
 
             <TextView
                 android:id="@+id/tv_personal_info_collect_completed"
@@ -54,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                tools:text="已完成" />
+                android:text="已完成" />
 
             <TextView
                 android:id="@+id/tv_personal_info_collect_completion"
@@ -62,14 +63,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="完成度"
-                tools:text="身份证号:13013111111111" />
+                android:text="完成度"/>
+
+            <Button
+                android:id="@+id/btn_modification_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="@dimen/dp_20"
+                android:text="修改状态"/>
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <Button
+        android:id="@+id/btn_test_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳转到 Item 详情页面"/>
+
+    <cc.zkteam.zkinfocollectpro.view.ZKRecyclerView
         android:id="@+id/list_personal_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

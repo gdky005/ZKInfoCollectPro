@@ -3,12 +3,17 @@ package cc.zkteam.zkinfocollectpro.activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.blankj.utilcode.util.FragmentUtils;
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.List;
 
@@ -20,6 +25,7 @@ import cc.zkteam.zkinfocollectpro.adapter.DateCollectRvAdapter;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.base.RvListener;
 import cc.zkteam.zkinfocollectpro.bean.RentInfo;
+import cc.zkteam.zkinfocollectpro.fragment.PersonalInfoCollectFragment;
 import cc.zkteam.zkinfocollectpro.utils.CommonUtils;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.view.DividerItemDecoration;
@@ -31,6 +37,7 @@ import cc.zkteam.zkinfocollectpro.view.DividerItemDecoration;
 public class RentPersonInfoActivity extends BaseActivity implements RvListener, RentPersonView {
 
     RentPersonPresenterImpl mPresent;
+    FragmentManager fragmentManager;
 
    /* @BindView(R.id.create_new)
     Button createNewRenter;
@@ -57,6 +64,8 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
 
     @Override
     protected void initViews() {
+
+        fragmentManager = getSupportFragmentManager();
         mRecycle.setLayoutManager(new LinearLayoutManager(this));
         mRecycle.addItemDecoration(new DividerItemDecoration(getResources().getColor(R.color.item_decor), CommonUtils.dip2px(this, 1)));
         mPresent = new RentPersonPresenterImpl(this);
@@ -76,10 +85,22 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
     }
 
     @Override
+    public void onBackPressed() {
+        Fragment current = FragmentUtils.getTopShow(fragmentManager);
+        if (current != null) {
+            FragmentUtils.remove(current);
+            return;
+        }
+
+        super.onBackPressed();
+    }
+
+    @Override
     public void onItemClick(int id, int position) {
         switch (id) {
             case R.id.caiji:
-
+                ToastUtils.showShort("采集信息");
+                FragmentUtils.add(fragmentManager, new PersonalInfoCollectFragment(), R.id.container_layout);
                 break;
 
             case R.id.out:
