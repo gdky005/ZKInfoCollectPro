@@ -36,5 +36,8 @@
     <string name="dialog_default_sure_btn_text">是</string>
     <string name="dialog_default_fail_btn_text">否</string>
     <string name="activity_id_card_title_text">二代身份证扫描</string>
+    <string name="outsetting_tips">设置迁出后，将无法再对该人员进行信息采集及修改，请谨慎确认是否确认设置为迁出。</string>
+    <string name="confirm_out">确认迁出</string>
+    <string name="cancel">取消</string>
 
 </resources>

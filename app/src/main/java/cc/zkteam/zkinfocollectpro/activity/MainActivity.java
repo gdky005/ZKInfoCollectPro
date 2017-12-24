@@ -105,7 +105,7 @@ public class MainActivity extends BaseActivity {
                 PageCtrl.startActivity(MainActivity.this, HomeActivity.class);
                 break;
             case R.id.map:
-                PageCtrl.startActivity(MainActivity.this, DataListActivity.class);
+                PageCtrl.startActivity(MainActivity.this, RentPersonInfoActivity.class);
                 break;
             case R.id.bd_access_token:
                 getBDAccessToken();

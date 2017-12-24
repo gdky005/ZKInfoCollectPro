@@ -79,7 +79,8 @@
 
         <activity android:name=".activity.PersonalInfoCollectActivity" />
 
-        <activity android:name=".activity.DataListActivity"/>
+        <activity android:name=".activity.RentPersonInfoActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".activity.IDCardScanActivity"/>
 
         <!--键盘参考：https://www.cnblogs.com/zhujiabin/p/5851999.html-->

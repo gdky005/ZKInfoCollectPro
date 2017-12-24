@@ -16,10 +16,10 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.MyBean;
+import cc.zkteam.zkinfocollectpro.activity.datacollectfirst.DataCollectFragment;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.fragment.SignInFragment;
 import cc.zkteam.zkinfocollectpro.fragment.problem.ProblemReportFragment;
-import cc.zkteam.zkinfocollectpro.fragment.test.TestFragment;
 import cc.zkteam.zkinfocollectpro.view.ZKViewPager;
 import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
@@ -48,7 +48,7 @@ public class HomeActivity extends BaseActivity implements HasSupportFragmentInje
      */
     private static Fragment[] TABLE_FRAGMENT = new Fragment[] {
             SignInFragment.newInstance(),
-            TestFragment.newInstance("Two"),
+            DataCollectFragment.newInstance(),
             ProblemReportFragment.newInstance(true)};
 
     public static int [] NAV_TYPE = new int[]{NAV_TYPE_MAIN, NAV_TYPE_DATA_COLLECT, NAV_TYPE_QUESTION_UPLOAD};

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_height="wrap_content">
 
@@ -10,10 +11,11 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10">
 
-        <TextView
+        <EditText
             android:layout_width="@dimen/dp_0"
             android:layout_height="60dp"
             android:layout_gravity="left"
@@ -22,17 +24,23 @@
             android:padding="@dimen/dp_5"
             android:text="@string/addressinfo"
             android:textColor="#444444"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:gravity="start"
+            />
 
-        <Button
-            android:id="@+id/update_person"
+        <TextView
+            android:id="@+id/create_new"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/dp_10"
             android:background="@drawable/bg_btn_commit"
             android:gravity="center"
-            android:text="@string/new_person"
+            android:textSize="15sp"
+            android:text=" 新增业主"
+            android:paddingLeft="9dp"
+            android:paddingRight="9dp"
+            android:drawableLeft="@drawable/create_new_person"
             android:textColor="#fff" />
 
     </LinearLayout>
@@ -44,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_10"
         android:text="@string/perons_info"
+        android:textColor="#333333"
         android:textSize="18dp" />
 
     <View
@@ -51,6 +60,8 @@
         android:layout_height="@dimen/dp_1"
         android:layout_marginBottom="@dimen/dp_10"
         android:background="#cbe1f1" />
+
+    <!--<include layout="@layout/tab_view_head"/>-->
 
 
 </LinearLayout>

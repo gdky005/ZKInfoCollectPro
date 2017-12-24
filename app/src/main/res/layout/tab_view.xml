@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_40"
+    android:layout_marginLeft="@dimen/dp_10"
+    android:layout_marginRight="@dimen/dp_10"
     android:orientation="horizontal">
 
 
@@ -16,7 +18,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="num"
+        android:text="序号"
         android:textSize="15dp" />
 
     <View
@@ -30,7 +32,7 @@
         android:layout_height="match_parent"
         android:layout_weight="2.5"
         android:gravity="center"
-        android:text="name"
+        android:text="姓名"
         android:textSize="15dp" />
 
     <View
@@ -44,7 +46,7 @@
         android:layout_height="match_parent"
         android:layout_weight="3"
         android:gravity="center"
-        android:text="relattion"
+        android:text="与户主关系"
         android:textSize="15dp" />
 
     <View
@@ -53,13 +55,30 @@
         android:background="#e6e6e6" />
 
     <TextView
-        android:id="@+id/update"
+        android:id="@+id/update_title"
         android:layout_width="@dimen/dp_0"
         android:layout_height="match_parent"
         android:layout_weight="1.5"
         android:gravity="center"
-        android:text="update"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        />
+
+    <FrameLayout
+        android:visibility="gone"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="match_parent"
+        android:layout_weight="1.5"
+        android:id="@+id/image_container"
+        >
+        <ImageView
+            android:id="@+id/update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/noupdate"
+            />
+
+    </FrameLayout>
 
     <View
 
@@ -73,6 +92,7 @@
         android:layout_height="match_parent"
         android:layout_weight="3"
         android:gravity="center"
+        android:text="操作"
         />
 
     <LinearLayout
