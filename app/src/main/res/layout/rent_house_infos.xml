@@ -3,40 +3,39 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:orientation="horizontal"
         android:layout_margin="@dimen/dp_5"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="街道："
-            android:textSize="18dp"
             android:gravity="center"
-            />
+            android:text="街道："
+            android:textSize="18dp"/>
 
         <LinearLayout
-            android:background="@drawable/bg_table_shape"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_table_shape">
+
             <ImageView
-                android:paddingLeft="@dimen/dp_10"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/updated"
-                />
+                android:paddingLeft="@dimen/dp_10"
+                android:src="@drawable/updated"/>
+
             <Spinner
                 android:id="@+id/road_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:theme="@style/SpnStyle"></Spinner>
+                android:entries="@array/street"
+                android:theme="@style/SpnStyle"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -44,33 +43,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:orientation="horizontal"
         android:layout_margin="@dimen/dp_5"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="社区："
-            android:textSize="18dp"
             android:gravity="center"
-            />
+            android:text="社区："
+            android:textSize="18dp"/>
 
         <LinearLayout
-            android:background="@drawable/bg_table_shape"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_table_shape">
+
             <ImageView
-                android:paddingLeft="@dimen/dp_10"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/updated"
-                />
+                android:paddingLeft="@dimen/dp_10"
+                android:src="@drawable/updated"/>
+
             <Spinner
                 android:id="@+id/cummunity_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:theme="@style/SpnStyle"></Spinner>
+                android:entries="@array/community"
+                android:theme="@style/SpnStyle"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -78,33 +77,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:orientation="horizontal"
         android:layout_margin="@dimen/dp_5"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="小区："
-            android:textSize="18dp"
             android:gravity="center"
-            />
+            android:text="小区："
+            android:textSize="18dp"/>
 
         <LinearLayout
-            android:background="@drawable/bg_table_shape"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_table_shape">
+
             <ImageView
-                android:paddingLeft="@dimen/dp_10"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/updated"
-                />
+                android:paddingLeft="@dimen/dp_10"
+                android:src="@drawable/updated"/>
+
             <Spinner
                 android:id="@+id/neighborhood_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:theme="@style/SpnStyle"></Spinner>
+                android:entries="@array/neighborhoods"
+                android:theme="@style/SpnStyle"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -112,33 +111,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:orientation="horizontal"
         android:layout_margin="@dimen/dp_5"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="楼栋："
-            android:textSize="18dp"
             android:gravity="center"
-            />
+            android:text="楼栋："
+            android:textSize="18dp"/>
 
         <LinearLayout
-            android:background="@drawable/bg_table_shape"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_table_shape">
+
             <ImageView
-                android:paddingLeft="@dimen/dp_10"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/updated"
-                />
+                android:paddingLeft="@dimen/dp_10"
+                android:src="@drawable/updated"/>
+
             <Spinner
                 android:id="@+id/house_num_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:theme="@style/SpnStyle"></Spinner>
+                android:entries="@array/building"
+                android:theme="@style/SpnStyle"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -146,48 +145,41 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:orientation="horizontal"
         android:layout_margin="@dimen/dp_5"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="单元："
-            android:textSize="18dp"
             android:gravity="center"
-            />
+            android:text="单元："
+            android:textSize="18dp"/>
 
         <LinearLayout
-            android:background="@drawable/bg_table_shape"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_table_shape">
+
             <ImageView
-                android:paddingLeft="@dimen/dp_10"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/updated"
-                />
+                android:paddingLeft="@dimen/dp_10"
+                android:src="@drawable/updated"/>
+
             <Spinner
                 android:id="@+id/unit_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:theme="@style/SpnStyle"></Spinner>
+                android:entries="@array/unit"
+                android:theme="@style/SpnStyle"/>
 
         </LinearLayout>
     </LinearLayout>
 
 
-
-
     <android.support.v4.widget.Space
         android:layout_width="match_parent"
-        android:layout_height="21dp"
-        />
-
-
-
-
+        android:layout_height="21dp"/>
 
 
 </LinearLayout>
