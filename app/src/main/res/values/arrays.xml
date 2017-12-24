@@ -9,36 +9,22 @@
     </string-array>
 
     <string-array name="street">
-        <item>延安路 </item>
-        <item>徐家汇</item>
-        <item>文泽路</item>
+        <item>等待数据加载…</item>
     </string-array>
 
     <string-array name="community">
-        <item>新华街道</item>
-        <item>西溪街道 </item>
-        <item>西湖街道</item>
+        <item>等待数据加载…</item>
     </string-array>
 
     <string-array name="neighborhoods">
-        <item>西溪北苑</item>
-        <item>湘云雅苑 </item>
-        <item>滨江花园</item>
-        <item>武林壹号</item>
-        <item>长江小区</item>
+        <item>等待数据加载…</item>
     </string-array>
 
     <string-array name="building">
-        <item>1 栋</item>
-        <item>2 栋 </item>
-        <item>3 栋</item>
-        <item>4 栋</item>
-        <item>5 栋</item>
+        <item>等待数据加载…</item>
     </string-array>
 
     <string-array name="unit">
-        <item>1 单元</item>
-        <item>2 单元</item>
-        <item>3 单元</item>
+        <item>等待数据加载…</item>
     </string-array>
 </resources>

@@ -144,20 +144,12 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
 
     @Override
     public void initListener() {
-        mSelectLocationBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mSelectLocationBtn.setOnClickListener(v -> {
 //                PageCtrl.startActivity(MapActivity.class);
-                startActivityForResult(new Intent(getActivity(),
-                        MapActivity.class), GO_MAP);
-            }
+            startActivityForResult(new Intent(getActivity(),
+                    MapActivity.class), GO_MAP);
         });
-        mCommitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                judgeInput();
-            }
-        });
+        mCommitBtn.setOnClickListener(v -> judgeInput());
     }
 
     @Override

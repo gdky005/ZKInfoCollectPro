@@ -1,5 +1,6 @@
 package cc.zkteam.zkinfocollectpro.fragment.datacollectfirst.mvp;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -8,7 +9,12 @@ import java.util.List;
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.mvp.BaseMVPPresenter;
 import cc.zkteam.zkinfocollectpro.bean.HouseInfo;
+import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
+import cc.zkteam.zkinfocollectpro.retrofit2.ZHCallback;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * TestPresenterImpl
@@ -38,5 +44,27 @@ public class DcPresenterImpl extends BaseMVPPresenter<DcView, DcModel> implement
             houseInfos.add(houseInfo);
         }
         mView.updateRecycle(houseInfos);
+
+        loadStreetCommunity("1", "0");
+    }
+
+    public void loadStreetCommunity(String id, String type) {
+        Log.e("TAG", "loadStreetCommunity " + id + "-" + type);
+        zkApi.shequliandong(id, type).enqueue(new Callback<ZHCommunityBean>() {
+            @Override
+            public void onResponse(@NonNull Call<ZHCommunityBean> call, @NonNull Response<ZHCommunityBean> response) {
+                if (response.isSuccessful()) {
+                    ZHCommunityBean zhCommunityBean = response.body();
+                    if (zhCommunityBean != null) {
+                        mView.loadSpinner(zhCommunityBean, type);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ZHCommunityBean> call, @NonNull Throwable t) {
+
+            }
+        });
     }
 }

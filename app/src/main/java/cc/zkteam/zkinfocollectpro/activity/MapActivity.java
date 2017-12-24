@@ -103,23 +103,15 @@ public class MapActivity extends BaseActivity implements TextWatcher, SensorEven
     protected void initListener() {
         mSearchInMap.addTextChangedListener(this);
 
-        mSearchInMap.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectLocationFromList(position);
-            }
-        });
+        mSearchInMap.setOnItemClickListener((parent, view, position, id) -> selectLocationFromList(position));
 
-        mSelectLocationBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (TextUtils.isEmpty(mSelectLocationBtn.getText().toString())
-                        || mCurrPoiInfo == null) {
-                    ToastUtils.showShort("未选择合适的地理位置...");
-                    return;
-                }
-                finishAndReturnResult();
+        mSelectLocationBtn.setOnClickListener(v -> {
+            if (TextUtils.isEmpty(mSelectLocationBtn.getText().toString())
+                    || mCurrPoiInfo == null) {
+                ToastUtils.showShort("未选择合适的地理位置...");
+                return;
             }
+            finishAndReturnResult();
         });
     }
 
@@ -278,13 +270,6 @@ public class MapActivity extends BaseActivity implements TextWatcher, SensorEven
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 
     /**
