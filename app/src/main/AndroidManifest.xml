@@ -72,23 +72,35 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop"/>
 
         <activity android:name=".activity.MapActivity"/>
 
         <activity android:name=".activity.home.HomeActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden"
+                  android:configChanges="orientation|screenSize"
+                  android:launchMode="singleTop"/>
 
-        <activity android:name=".activity.PersonalInfoCollectActivity" />
+        <activity android:name=".activity.PersonalInfoCollectActivity"
+                  android:configChanges="orientation|screenSize"
+                  android:launchMode="singleTop"/>
 
         <activity android:name=".activity.RentPersonInfoActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan"/>
-        <activity android:name=".activity.IDCardScanActivity"/>
+            android:windowSoftInputMode="stateHidden|adjustPan"
+                  android:configChanges="orientation|screenSize"
+                  android:launchMode="singleTop"/>
+        <activity android:name=".activity.IDCardScanActivity"
+                  android:configChanges="orientation|screenSize"
+                  android:launchMode="singleTop"/>
 
         <!--键盘参考：https://www.cnblogs.com/zhujiabin/p/5851999.html-->
         <activity
             android:name=".activity.LoginActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop"
             android:theme="@style/TranslucentTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -97,16 +109,25 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.BasicInfoActivity"/>
-        <activity android:name=".activity.NewResidentsInfoActivity"/>
+        <activity android:name=".activity.BasicInfoActivity"
+                  android:configChanges="orientation|screenSize"
+                  android:launchMode="singleTop"/>
+        <activity android:name=".activity.NewResidentsInfoActivity"
+                  android:configChanges="orientation|screenSize"
+                  android:launchMode="singleTop"/>
 
-        <activity android:name=".activity.MyProblemListActivity"/>
+        <activity android:name=".activity.MyProblemListActivity"
+                  android:configChanges="orientation|screenSize"
+                  android:launchMode="singleTop"/>
 
-        <activity android:name=".activity.ProblemDetailActivity"/>
+        <activity android:name=".activity.ProblemDetailActivity"
+                  android:configChanges="orientation|screenSize"
+                  android:launchMode="singleTop"/>
 
         <!--Image Selector Entry-->
         <activity
             android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop"
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity" />
     </application>
 
