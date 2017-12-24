@@ -1,4 +1,4 @@
-package cc.zkteam.zkinfocollectpro.activity.datacollectfirst;
+package cc.zkteam.zkinfocollectpro.fragment.datacollectfirst;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
