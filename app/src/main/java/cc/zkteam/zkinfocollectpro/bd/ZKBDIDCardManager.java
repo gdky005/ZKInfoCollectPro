@@ -74,6 +74,18 @@ public class ZKBDIDCardManager {
     }
 
     /**
+     * 自动刷新 Token, 如果在有效期以内就不用刷新，否则就刷新。
+     */
+    public void autoRefreshToken() {
+        String token = getAccessToken();
+        if (TextUtils.isEmpty(token)) {
+            L.d("本次获取的 Token 为 null or '', 已经自动刷新一次 Token");
+        } else {
+            L.d("当前默认的 Token 是：" + token);
+        }
+    }
+
+    /**
      * 参考地址：http://ai.baidu.com/docs#/Auth/top
      */
     public void refreshAccessToken() {
@@ -95,7 +107,7 @@ public class ZKBDIDCardManager {
                     accessTokenSP.put(ZKBDAccessTokenSP.KEY_ACCESS_TOKEN, accessToken);
                     accessTokenSP.put(ZKBDAccessTokenSP.KEY_EXPIRES_IN, expiresTime);
 
-                    L.d("获取 accessToken 成功");
+                    L.d("获取成功 accessToken=" + accessToken);
                 }
             }
 

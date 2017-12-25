@@ -5,15 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.hardware.Camera;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -61,24 +58,20 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
     SurfaceView surfaceview;
     @BindView(R.id.borderview)
     PreviewBorderView borderview;
-    @BindView(R.id.take)
-    Button take;
-    @BindView(R.id.light)
-    Button light;
-    @BindView(R.id.linearlaout)
-    LinearLayout linearlaout;
     @BindView(R.id.progress)
     ProgressBar progress;
-    @BindView(R.id.tv)
-    TextView tv;
-    @BindView(R.id.img)
-    ImageView img;
-    @BindView(R.id.re_scan)
-    Button reScan;
-    @BindView(R.id.view_scan_result)
-    RelativeLayout viewScanResult;
-    @BindView(R.id.textView2)
+    @BindView(R.id.waring_text)
     TextView textView2;
+    @BindView(R.id.photo_album_iv)
+    ImageView photoAlbumIv;
+    @BindView(R.id.take_photo_iv)
+    ImageView takePhotoIv;
+    @BindView(R.id.light_iv)
+    ImageView lightIv;
+    @BindView(R.id.operate_rl)
+    RelativeLayout operateRl;
+    @BindView(R.id.progress_layout)
+    RelativeLayout progressLayout;
 
     private CameraManager cameraManager;
     private boolean hasSurface;
@@ -102,33 +95,6 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
 
     @Override
     protected void initListener() {
-        reScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-                startActivity(new Intent(getBaseContext(), IDCardScanActivity.class));
-            }
-        });
-
-        take.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cameraManager.takePicture(null, null, myjpegCallback);
-            }
-        });
-
-        light.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!toggleLight) {
-                    toggleLight = true;
-                    cameraManager.openLight();
-                } else {
-                    toggleLight = false;
-                    cameraManager.offLight();
-                }
-            }
-        });
     }
 
     @Override
@@ -271,7 +237,7 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
     };
 
     private void uploadAndRecognize(final String filePath) throws ZKIdCardException {
-        progress.setVisibility(View.VISIBLE);
+        progressLayout.setVisibility(View.VISIBLE);
         if (!TextUtils.isEmpty(filePath)) {
             getIdCardInfo(filePath);
         }
@@ -288,50 +254,27 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
 
                     if (wordsResultBean != null) {
                         // 2017/12/15  在这里处理数据格式，并返回给主界面
-
-                        StringBuilder sb = null;
-                        try {
-                            sb = new StringBuilder();
-                            sb.append(" 住址：");
-                            sb.append(wordsResultBean.getAddress().getWords());
-                            sb.append("; \n 身份证号码：");
-                            sb.append(wordsResultBean.getIdCardNumber().getWords());
-                            sb.append("; \n 出生：");
-                            sb.append(wordsResultBean.getBirthday().getWords());
-                            sb.append("; \n 姓名：");
-                            sb.append(wordsResultBean.getName().getWords());
-                            sb.append("; \n 性别：");
-                            sb.append(wordsResultBean.getSex().getWords());
-                            sb.append("; \n 民族：");
-                            sb.append(wordsResultBean.getNation().getWords());
-                            sb.append("。 \n");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                        borderview.setVisibility(View.GONE);
-                        viewScanResult.setVisibility(View.VISIBLE);
-                        tv.setText(sb.toString());
-                        img.setImageURI(Uri.fromFile(new File(localPicPath)));
-                        progress.setVisibility(View.GONE);
-
+                        progressLayout.setVisibility(View.GONE);
                         finishUi(wordsResultBean);
+                        return;
                     }
                 }
+                scanFailWarning();
             }
 
             @Override
             public void onFailure(Call<BDIdCardBean> call, Throwable t) {
-
-                borderview.setVisibility(View.GONE);
-                viewScanResult.setVisibility(View.VISIBLE);
-                tv.setText("识别 失败");
-                progress.setVisibility(View.GONE);
-
-                ToastUtils.showShort("识别 失败");
                 L.e("onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                scanFailWarning();
             }
         });
+    }
+
+    private void scanFailWarning() {
+        progressLayout.setVisibility(View.GONE);
+        cameraManager.startPreview();
+
+        ToastUtils.showShort("识别失败， 请重新扫描");
     }
 
     private void finishUi(BDIdCardBean.WordsResultBean wordsResultBean) {
@@ -341,22 +284,37 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
 
-        // TODO: 2017/12/24  测试完成以后 结束界面
-//        IDCardScanActivity.this.finish();
+        // 2017/12/24  测试完成以后 结束界面
+        IDCardScanActivity.this.finish();
     }
 
-    @OnClick({R.id.common_title_iv_left, R.id.common_title_iv_right})
+    @OnClick({R.id.common_title_iv_left, R.id.common_title_iv_right,
+            R.id.take_photo_iv, R.id.light_iv, R.id.photo_album_iv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.common_title_iv_left:
                 onBackPressed();
                 break;
             case R.id.common_title_iv_right:
+            case R.id.photo_album_iv:
                 MultiImageSelector.create()
                         .showCamera(false)
                         .single() // single mode
                         .start(this, REQUEST_IMAGE);
                 break;
+            case R.id.take_photo_iv:
+                cameraManager.takePicture(null, null, myjpegCallback);
+                break;
+            case R.id.light_iv:
+                if (!toggleLight) {
+                    toggleLight = true;
+                    cameraManager.openLight();
+                } else {
+                    toggleLight = false;
+                    cameraManager.offLight();
+                }
+                break;
+
         }
     }
 
