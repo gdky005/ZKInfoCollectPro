@@ -18,14 +18,21 @@ import android.widget.TextView;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.blankj.utilcode.util.ToastUtils;
 
+import java.util.List;
+
 import butterknife.BindView;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.MapActivity;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
+import cc.zkteam.zkinfocollectpro.exception.ZKIdCardException;
 import cc.zkteam.zkinfocollectpro.fragment.problem.mvp.PRPresenterImpl;
 import cc.zkteam.zkinfocollectpro.fragment.problem.mvp.PRView;
+import cc.zkteam.zkinfocollectpro.utils.L;
+import me.nereo.multi_image_selector.MultiImageSelector;
+import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 import static android.app.Activity.RESULT_OK;
+import static cc.zkteam.zkinfocollectpro.activity.IDCardScanActivity.REQUEST_IMAGE;
 
 /**
  * Created by Administrator on 2017/12/15.
@@ -56,6 +63,7 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     TextView mToolbarTitle;
     private PRPresenterImpl mPresenter;
     private boolean mIsEditPage = false;
+    private String mCurrPicPath = "";
 
     public static ProblemReportFragment newInstance(boolean isEdit) {
         Bundle args = new Bundle();
@@ -163,6 +171,18 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
                 }
             }
         }
+        if (requestCode == REQUEST_IMAGE) {
+            if (resultCode == RESULT_OK) {
+                // 获取返回的图片列表
+                List<String> pics = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+
+                if (pics != null && pics.size() > 0) {
+                    String galleyPicPath = pics.get(0);
+                    L.d("当前图片地址是：" + galleyPicPath);
+                    mCurrPicPath = galleyPicPath;
+                }
+            }
+        }
     }
 
     /**
@@ -174,10 +194,19 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
                 || inputIsEmpty(mProblemDesc, R.string.input_problem_desc)
                 || inputIsEmpty(mProblemLocation, R.string.input_problem_location)
                 || inputIsEmpty(mProblemSuggestion, R.string.input_problem_suggestion)) {
+            MultiImageSelector.create()
+                    .showCamera(false)
+                    .single() // single mode
+                    .start(this, REQUEST_IMAGE);
             return;
         }
 
-        mPresenter.loadData();
+        mPresenter.report(mProblemSource.getText().toString(),
+                mProblemType.getSelectedItem().toString(),
+                mProblemDesc.getText().toString(),
+                mProblemLocation.getText().toString(),
+                mProblemSuggestion.getText().toString(),
+                mCurrPicPath);
     }
 
     private boolean inputIsEmpty(View view, int msgId) {
