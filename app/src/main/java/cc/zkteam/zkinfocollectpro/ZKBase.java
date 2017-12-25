@@ -13,6 +13,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 
 import java.io.File;
 
+import cc.zkteam.zkinfocollectpro.bd.ZKBDIDCardManager;
 import cc.zkteam.zkinfocollectpro.exception.ZKBaseNullPointerException;
 import cc.zkteam.zkinfocollectpro.utils.L;
 
@@ -40,6 +41,7 @@ public final class ZKBase {
       ZKBase.context = app.getApplicationContext();
       Utils.init(app);
       initSDCardPath();
+      ZKBDIDCardManager.getInstance().autoRefreshToken();
   }
 
   public static void init(@NonNull Context context, boolean debug) {
