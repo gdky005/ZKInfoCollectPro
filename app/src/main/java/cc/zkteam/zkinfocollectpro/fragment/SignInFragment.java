@@ -1,10 +1,9 @@
 package cc.zkteam.zkinfocollectpro.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +20,16 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.activity.LoginActivity;
 import cc.zkteam.zkinfocollectpro.activity.MyProblemListActivity;
+import cc.zkteam.zkinfocollectpro.activity.PersonalInfoCollectActivity;
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHTongJiBean;
+import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragment;
+import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragmentHelper;
+import cc.zkteam.zkinfocollectpro.dialog.ZKDialogResultListener;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.view.ZKImageView;
@@ -81,23 +85,37 @@ public class SignInFragment extends BaseFragment {
     TextView tvAboutSetting;
     @BindView(R.id.tv_about_quit)
     TextView tvAboutQuit;
-    @BindView(R.id.drawer_layout)
-    DrawerLayout drawerLayout;
     @BindView(R.id.tv_question_upload)
     TextView tvQuestionUpload;
     Unbinder unbinder;
+    @BindView(R.id.layout_slide_menu)
+    LinearLayout layoutSlideMenu;
+
 
     private ZHApi zhApi;
+
+    public boolean isSetIsShow() {
+        return setIsShow;
+    }
+
+    public void setSetIsShow(boolean setIsShow) {
+        this.setIsShow = setIsShow;
+    }
+
+    public void hideSetPage() {
+        layoutSlideMenu.setVisibility(View.GONE);
+        setIsShow = false;
+    }
+
+    private boolean setIsShow;
 
 
     public static SignInFragment newInstance() {
         SignInFragment fragment = new SignInFragment();
         Bundle args = new Bundle();
-//        args.putString(ARG_SECTION_NUMBER, text);
         fragment.setArguments(args);
         return fragment;
     }
-
 
     @Override
     public int getLayoutId() {
@@ -107,7 +125,6 @@ public class SignInFragment extends BaseFragment {
     @Override
     public void initView(View rootView) {
         zhApi = ZHConnectionManager.getInstance().getZHApi();
-
     }
 
     @Override
@@ -175,10 +192,11 @@ public class SignInFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_personal_info_about:
-                drawerLayout.openDrawer(Gravity.LEFT);
+                layoutSlideMenu.setVisibility(View.VISIBLE);
+                setIsShow = true;
                 break;
             case R.id.img_personal_info_search:
-                Toast.makeText(getContext(), "搜索", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), PersonalInfoCollectActivity.class));
                 break;
             case R.id.tv_sign:
                 doSign();
@@ -191,6 +209,10 @@ public class SignInFragment extends BaseFragment {
             case R.id.tv_about_setting:
                 break;
             case R.id.tv_about_quit:
+                if (getActivity() != null) {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                    getActivity().finish();
+                }
                 break;
             case R.id.tv_question_upload:
                 PageCtrl.startActivity(getActivity(), MyProblemListActivity.class);
@@ -202,13 +224,23 @@ public class SignInFragment extends BaseFragment {
         zhApi.sign("22", "23", "66233.32432", "3322.004324", "kskss").enqueue(new Callback<ZHBaseBean>() {
             @Override
             public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
-                layoutSignSuccess.setVisibility(View.VISIBLE);
-                tvSign.setOnClickListener(null);
-                tvSign.setText("已签到");
+//                layoutSignSuccess.setVisibility(View.VISIBLE);
                 ZHBaseBean zhBaseBean = response.body();
                 if (zhBaseBean != null && !TextUtils.isEmpty(zhBaseBean.getMsg())) {
                     tvSignSuccessMsg.setText(zhBaseBean.getMsg());
                 }
+
+                ZKDialogFragment zkDialogFragment = ZKDialogFragmentHelper.showDialog(SignInFragment.this.getChildFragmentManager(),
+                        "签到成功", zhBaseBean.getMsg(), "确定", "", false,
+                        new ZKDialogResultListener<Integer>() {
+                            @Override
+                            public void onDataResult(Integer result) {
+
+                            }
+                        }, null);
+
+                tvSign.setOnClickListener(null);
+                tvSign.setText("已签到");
             }
 
             @Override

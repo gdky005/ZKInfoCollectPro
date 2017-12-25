@@ -20,10 +20,11 @@
 
             <ImageView
                 android:id="@+id/img_personal_info_about"
-                android:layout_width="15dp"
-                android:layout_height="12dp"
+                android:layout_width="35dp"
+                android:layout_height="32dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
+                android:padding="10dp"
                 android:src="@drawable/icon_about" />
 
             <TextView
@@ -36,13 +37,14 @@
 
             <ImageView
                 android:id="@+id/img_personal_info_search"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="5dp"
-                android:padding="4dp"
-                android:src="@drawable/icon_search" />
+                android:padding="10dp"
+                android:src="@drawable/icon_search"
+                android:visibility="visible"/>
 
 
         </RelativeLayout>
