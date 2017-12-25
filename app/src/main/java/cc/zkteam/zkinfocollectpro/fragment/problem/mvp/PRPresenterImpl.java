@@ -1,25 +1,14 @@
 package cc.zkteam.zkinfocollectpro.fragment.problem.mvp;
 
-import android.util.Log;
-
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.google.gson.Gson;
-
-import java.util.HashMap;
 
 import cc.zkteam.zkinfocollectpro.ZKBase;
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.mvp.BaseMVPPresenter;
-import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.http.Field;
 
 /**
  * Created by Administrator on 2017/12/15.
@@ -46,29 +35,29 @@ public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implemen
     }
 
     private void report() {
-        Gson gson=new Gson();
-        HashMap<String,String> paramsMap=new HashMap<>();
-        paramsMap.put("number","wenti1514199904");
-        paramsMap.put("reporter","reporter");
-        paramsMap.put("problemposition","0,0");
-        paramsMap.put("problemcontent","problemcontent");
-        paramsMap.put("remarks","remarks");
-        paramsMap.put("type","type");
-        paramsMap.put("path","path/path");
-        paramsMap.put("filetype","png");
-        String strEntity = gson.toJson(paramsMap);
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"),strEntity);
-        zhApi.report(body).enqueue(new Callback<ZHBaseBean>() {
-            @Override
-            public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
-                Log.e("TAG", response.toString());
-            }
-
-            @Override
-            public void onFailure(Call<ZHBaseBean> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+//        Gson gson=new Gson();
+//        HashMap<String,String> paramsMap=new HashMap<>();
+//        paramsMap.put("number","wenti1514199904");
+//        paramsMap.put("reporter","reporter");
+//        paramsMap.put("problemposition","0,0");
+//        paramsMap.put("problemcontent","problemcontent");
+//        paramsMap.put("remarks","remarks");
+//        paramsMap.put("type","type");
+//        paramsMap.put("path","path/path");
+//        paramsMap.put("filetype","png");
+//        String strEntity = gson.toJson(paramsMap);
+//        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"),strEntity);
+//        zhApi.report(body, null).enqueue(new Callback<ZHBaseBean>() {
+//            @Override
+//            public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
+//                Log.e("TAG", response.toString());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ZHBaseBean> call, Throwable t) {
+//                t.printStackTrace();
+//            }
+//        });
     }
 
     private void getLocationInfo() {

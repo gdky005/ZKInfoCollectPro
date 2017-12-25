@@ -11,6 +11,7 @@ import cc.zkteam.zkinfocollectpro.bean.ZHLoginBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHTongJiBean;
 import cc.zkteam.zkinfocollectpro.bean.ZKTestBaseBean;
 import cc.zkteam.zkinfocollectpro.bean.ZKTestCategoryBean;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -18,7 +19,9 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 /**
@@ -131,23 +134,17 @@ public interface ZHApi {
 
 
     /**
-     * 接收表单数据录入接口
+     * 问题上报接口已经提交
      */
-    @FormUrlEncoded
+    @Multipart
     @POST("Datamanage.php/Admin/AppInterface/wenti_submit.html")
-    Call<ZHBaseBean> report(@Field("number") String number,
-                            @Field("reporter") String reporter,
-                            @Field("problemposition") String problemposition,
-                            @Field("problemcontent") String problemcontent,
-                            @Field("remarks") String remarks,
-                            @Field("type") String type,
-                            @Field("path") String path,
-                            @Field("filetype") String filetype);
-
-    /**
-     * 接收表单数据录入接口
-     */
-    @POST("Datamanage.php/Admin/AppInterface/wenti_submit.html")
-    Call<ZHBaseBean> report(@Body RequestBody problem);
+    Call<ZHBaseBean> report(@Part MultipartBody.Part number,
+                            @Part MultipartBody.Part reporter,
+                            @Part MultipartBody.Part problemposition,
+                            @Part MultipartBody.Part problemcontent,
+                            @Part MultipartBody.Part remarks,
+                            @Part MultipartBody.Part type,
+                            @Part MultipartBody.Part path,
+                            @Part MultipartBody.Part filetype);
 
 }
