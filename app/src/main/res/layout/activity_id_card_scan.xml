@@ -5,43 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_personal_info_collection"
+
+    <cc.zkteam.zkinfocollectpro.view.ZKTitleView
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/theme_color"
-        app:contentInsetStart="0dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/title_bar_left_iv"
-                style="@style/TitleBarLeftIconStyle"
-                android:src="@drawable/icon_back"/>
-
-            <TextView
-                android:id="@+id/title_bar_text_tv"
-                style="@style/TitleBarTextStyle"
-                android:text="@string/activity_id_card_title_text"/>
-
-            <ImageView
-                android:id="@+id/title_bar_right_iv"
-                style="@style/TitleBarRightIconStyle"
-                android:src="@drawable/icon_about"/>
-
-        </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
-
+        android:layout_height="wrap_content"
+        android:id="@+id/zk_title_view"/>
 
 
     <SurfaceView
         android:id="@+id/surfaceview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar_personal_info_collection"/>
-
+        android:layout_below="@+id/zk_title_view"/>
 
 
     <cc.zkteam.zkinfocollectpro.camera.PreviewBorderView
@@ -49,12 +24,11 @@
         android:id="@+id/borderview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/toolbar_personal_info_collection"
+        android:layout_below="@+id/zk_title_view"
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
         app:tipTextColor="@color/colorPrimary"
-        app:tipTextSize="16dp"/>
+        app:tipTextSize="@dimen/sp_16"/>
 
     <LinearLayout
         android:id="@+id/linearlaout"

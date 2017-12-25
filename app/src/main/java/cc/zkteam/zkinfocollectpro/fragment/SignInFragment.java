@@ -8,7 +8,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -22,7 +21,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
-import cc.zkteam.zkinfocollectpro.activity.MainActivity;
 import cc.zkteam.zkinfocollectpro.activity.MyProblemListActivity;
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
@@ -85,8 +83,6 @@ public class SignInFragment extends BaseFragment {
     TextView tvAboutQuit;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
-    @BindView(R.id.test_btn)
-    Button testBtn;
     @BindView(R.id.tv_question_upload)
     TextView tvQuestionUpload;
     Unbinder unbinder;
@@ -175,7 +171,7 @@ public class SignInFragment extends BaseFragment {
     }
 
     @OnClick({R.id.img_personal_info_about, R.id.img_personal_info_search, R.id.tv_sign, R.id.tv_sign_success_submit,
-            R.id.tv_about_message, R.id.tv_about_setting, R.id.tv_about_quit, R.id.tv_question_upload, R.id.test_btn})
+            R.id.tv_about_message, R.id.tv_about_setting, R.id.tv_about_quit, R.id.tv_question_upload})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_personal_info_about:
@@ -198,9 +194,6 @@ public class SignInFragment extends BaseFragment {
                 break;
             case R.id.tv_question_upload:
                 PageCtrl.startActivity(getActivity(), MyProblemListActivity.class);
-                break;
-            case R.id.test_btn:
-                PageCtrl.startActivity(getActivity(), MainActivity.class);
                 break;
         }
     }

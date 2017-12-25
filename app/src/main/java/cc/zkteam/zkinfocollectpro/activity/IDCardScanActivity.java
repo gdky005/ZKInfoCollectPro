@@ -7,7 +7,6 @@ import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -37,6 +36,7 @@ import cc.zkteam.zkinfocollectpro.camera.CameraManager;
 import cc.zkteam.zkinfocollectpro.camera.PreviewBorderView;
 import cc.zkteam.zkinfocollectpro.exception.ZKIdCardException;
 import cc.zkteam.zkinfocollectpro.utils.L;
+import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
 import me.nereo.multi_image_selector.MultiImageSelector;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 import retrofit2.Call;
@@ -54,22 +54,9 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
      */
     private static final String DEFAULT_NAME = "zk_temp_picture.jpg";
 
-    private CameraManager cameraManager;
-    private boolean hasSurface;
 
-    private String filePath;
-    private String fileName;
-    private boolean toggleLight;
-
-
-    @BindView(R.id.title_bar_left_iv)
-    ImageView titleBarLeftIv;
-    @BindView(R.id.title_bar_text_tv)
-    TextView titleBarTextTv;
-    @BindView(R.id.title_bar_right_iv)
-    ImageView titleBarRightIv;
-    @BindView(R.id.toolbar_personal_info_collection)
-    Toolbar toolbarPersonalInfoCollection;
+    @BindView(R.id.zk_title_view)
+    ZKTitleView zkTitleView;
     @BindView(R.id.surfaceview)
     SurfaceView surfaceview;
     @BindView(R.id.borderview)
@@ -90,6 +77,15 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
     Button reScan;
     @BindView(R.id.view_scan_result)
     RelativeLayout viewScanResult;
+    @BindView(R.id.textView2)
+    TextView textView2;
+
+    private CameraManager cameraManager;
+    private boolean hasSurface;
+
+    private String filePath;
+    private String fileName;
+    private boolean toggleLight;
 
 
     @Override
@@ -99,7 +95,9 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
 
     @Override
     protected void initViews() {
-
+        zkTitleView.setLeftIVSrc(R.drawable.icon_back);
+        zkTitleView.setRightIVSrc(R.drawable.ic_more);
+        zkTitleView.setCenterTVText(R.string.activity_id_card_title_text);
     }
 
     @Override
@@ -291,20 +289,25 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
                     if (wordsResultBean != null) {
                         // 2017/12/15  在这里处理数据格式，并返回给主界面
 
-                        StringBuilder sb = new StringBuilder();
-                        sb.append(" 住址：");
-                        sb.append(wordsResultBean.getAddress().getWords());
-                        sb.append("; \n 身份证号码：");
-                        sb.append(wordsResultBean.getIdCardNumber().getWords());
-                        sb.append("; \n 出生：");
-                        sb.append(wordsResultBean.getBirthday().getWords());
-                        sb.append("; \n 姓名：");
-                        sb.append(wordsResultBean.getName().getWords());
-                        sb.append("; \n 性别：");
-                        sb.append(wordsResultBean.getSex().getWords());
-                        sb.append("; \n 民族：");
-                        sb.append(wordsResultBean.getNation().getWords());
-                        sb.append("。 \n");
+                        StringBuilder sb = null;
+                        try {
+                            sb = new StringBuilder();
+                            sb.append(" 住址：");
+                            sb.append(wordsResultBean.getAddress().getWords());
+                            sb.append("; \n 身份证号码：");
+                            sb.append(wordsResultBean.getIdCardNumber().getWords());
+                            sb.append("; \n 出生：");
+                            sb.append(wordsResultBean.getBirthday().getWords());
+                            sb.append("; \n 姓名：");
+                            sb.append(wordsResultBean.getName().getWords());
+                            sb.append("; \n 性别：");
+                            sb.append(wordsResultBean.getSex().getWords());
+                            sb.append("; \n 民族：");
+                            sb.append(wordsResultBean.getNation().getWords());
+                            sb.append("。 \n");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         borderview.setVisibility(View.GONE);
                         viewScanResult.setVisibility(View.VISIBLE);
@@ -342,12 +345,13 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
 //        IDCardScanActivity.this.finish();
     }
 
-    @OnClick({R.id.title_bar_left_iv, R.id.title_bar_right_iv})
+    @OnClick({R.id.common_title_iv_left, R.id.common_title_iv_right})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.title_bar_left_iv:
+            case R.id.common_title_iv_left:
+                onBackPressed();
                 break;
-            case R.id.title_bar_right_iv:
+            case R.id.common_title_iv_right:
                 MultiImageSelector.create()
                         .showCamera(false)
                         .single() // single mode
@@ -359,8 +363,8 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_IMAGE){
-            if(resultCode == RESULT_OK){
+        if (requestCode == REQUEST_IMAGE) {
+            if (resultCode == RESULT_OK) {
                 // 获取返回的图片列表
                 List<String> pics = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
 
@@ -378,4 +382,5 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
             }
         }
     }
+
 }

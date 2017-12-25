@@ -3,6 +3,7 @@ package cc.zkteam.zkinfocollectpro.view;
 import android.content.Context;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -67,6 +68,10 @@ public class ZKTitleView extends LinearLayout {
 
     public void setLeftIVSrc(@DrawableRes int id) {
         leftIV.setImageResource(id);
+    }
+
+    public void setCenterTVText(@StringRes int string) {
+        setCenterTVText(getContext().getString(string));
     }
 
     public void setCenterTVText(String title) {

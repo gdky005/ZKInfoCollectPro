@@ -27,7 +27,7 @@
             <TextView
                 android:id="@+id/common_title_tv_text"
                 style="@style/TitleBarTextStyle"
-                android:text="@string/activity_id_card_title_text"/>
+                android:text="@string/common_default_title"/>
 
             <ImageView
                 android:id="@+id/common_title_iv_right"
