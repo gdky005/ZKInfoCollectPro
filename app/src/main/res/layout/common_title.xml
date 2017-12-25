@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.AppBarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/AppTheme.AppBarOverlay">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/common_title_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/theme_color"
+        app:contentInsetStart="0dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <RelativeLayout
+            android:id="@+id/common_title_rl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/common_title_iv_left"
+                style="@style/TitleBarLeftIconStyle"
+                android:src="@drawable/icon_back"/>
+
+            <TextView
+                android:id="@+id/common_title_tv_text"
+                style="@style/TitleBarTextStyle"
+                android:text="@string/activity_id_card_title_text"/>
+
+            <ImageView
+                android:id="@+id/common_title_iv_right"
+                style="@style/TitleBarRightIconStyle"
+                android:src="@drawable/icon_about"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+</android.support.design.widget.AppBarLayout>

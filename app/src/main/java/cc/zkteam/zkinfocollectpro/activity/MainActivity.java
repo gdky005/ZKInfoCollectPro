@@ -6,9 +6,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -28,6 +28,7 @@ import cc.zkteam.zkinfocollectpro.dialog.ZKDialogResultListener;
 import cc.zkteam.zkinfocollectpro.exception.ZKIdCardException;
 import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
+import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,20 +43,27 @@ public class MainActivity extends BaseActivity {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA};
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    @BindView(R.id.btn_personal)
+    Button btnPersonal;
     @BindView(R.id.home_btn)
     Button homeBtn;
-    @BindView(R.id.bd_access_token)
-    Button bdAccessToken;
     @BindView(R.id.map)
     Button map;
+    @BindView(R.id.bd_access_token)
+    Button bdAccessToken;
     @BindView(R.id.id_card)
     Button idCard;
     @BindView(R.id.camera_btn)
     Button cameraBtn;
+    @BindView(R.id.linearLayout)
+    LinearLayout linearLayout;
+    @BindView(R.id.btn_problem_list)
+    Button btnProblemList;
     @BindView(R.id.dialog)
     Button dialog;
+    @BindView(R.id.zk_title_view)
+    ZKTitleView zkTitleView;
+
 
     @Override
     protected int getLayoutId() {
@@ -64,7 +72,25 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-        setSupportActionBar(toolbar);
+
+        zkTitleView.setLeftIVSrc(R.drawable.icon_back);
+        zkTitleView.setRightIVSrc(R.drawable.icon_about);
+
+        zkTitleView.leftIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showShort("点击了标题栏左边的按钮");
+            }
+        });
+
+        zkTitleView.centerTextTV.setText("旧主页面");
+
+        zkTitleView.rightIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showShort("点击了标题栏右边的按钮");
+            }
+        });
     }
 
     @Override
@@ -83,6 +109,7 @@ public class MainActivity extends BaseActivity {
         verifyStoragePermissions(this);
 
         ZKBase.getSDCardPath();
+
     }
 
     @Override
@@ -107,12 +134,10 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.toolbar, R.id.home_btn, R.id.map, R.id.bd_access_token,
+    @OnClick({R.id.home_btn, R.id.map, R.id.bd_access_token,
             R.id.id_card, R.id.camera_btn, R.id.btn_problem_list, R.id.dialog})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.toolbar:
-                break;
             case R.id.home_btn:
                 PageCtrl.startActivity(MainActivity.this, HomeActivity.class);
                 break;
@@ -171,25 +196,24 @@ public class MainActivity extends BaseActivity {
                         "hello",
                         "我是内容",
                         new ZKDialogResultListener<Integer>() {
-                    @Override
-                    public void onDataResult(Integer result) {
+                            @Override
+                            public void onDataResult(Integer result) {
 
-                        switch (result) {
-                            case DialogInterface.BUTTON_POSITIVE: //确定
-                                ToastUtils.showShort("确定");
-                                break;
-                            case DialogInterface.BUTTON_NEGATIVE: // 取消
-                                ToastUtils.showShort("取消");
-                                break;
-                        }
-                    }
-                }, new OnZKDialogCancelListener() {
-                    @Override
-                    public void onCancel() {
-                        ToastUtils.showShort("取消了本次操作");
-                    }
-                });
-
+                                switch (result) {
+                                    case DialogInterface.BUTTON_POSITIVE: //确定
+                                        ToastUtils.showShort("确定");
+                                        break;
+                                    case DialogInterface.BUTTON_NEGATIVE: // 取消
+                                        ToastUtils.showShort("取消");
+                                        break;
+                                }
+                            }
+                        }, new OnZKDialogCancelListener() {
+                            @Override
+                            public void onCancel() {
+                                ToastUtils.showShort("取消了本次操作");
+                            }
+                        });
 
 
                 view.postDelayed(new Runnable() {
@@ -260,5 +284,6 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
 
 }

@@ -7,18 +7,13 @@
         <item name="android:padding">@dimen/dp_15</item>
     </style>
 
+    <!--TitleBar 通用标题 左边图片 样式-->
     <style name="TitleBarLeftIconStyle" parent="TitleBarStyle">
         <item name="android:layout_marginLeft">@dimen/dp_15</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
 
-    <style name="TitleBarRightIconStyle" parent="TitleBarStyle">
-        <item name="android:layout_marginRight">@dimen/dp_15</item>
-        <item name="android:layout_centerVertical">true</item>
-        <item name="android:layout_alignParentRight">true</item>
-    </style>
-
-
+    <!--TitleBar 通用标题 文字 样式-->
     <style name="TitleBarTextStyle" parent="TitleBarStyle">
         <item name="android:padding">0dp</item>
         <item name="android:layout_centerInParent">true</item>
@@ -26,4 +21,10 @@
         <item name="android:textSize">@dimen/sp_14</item>
     </style>
 
+    <!--TitleBar 通用标题 右边图片 样式-->
+    <style name="TitleBarRightIconStyle" parent="TitleBarStyle">
+        <item name="android:layout_marginRight">@dimen/dp_15</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
 </resources>
