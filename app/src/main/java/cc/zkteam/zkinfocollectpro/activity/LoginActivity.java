@@ -1,9 +1,11 @@
 package cc.zkteam.zkinfocollectpro.activity;
 
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -41,6 +43,8 @@ public class LoginActivity extends BaseActivity {
     RelativeLayout textviewlayout;
     @BindView(R.id.btn_submit)
     Button btnSubmit;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     private ZHApi zhApi;
 
@@ -51,6 +55,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+        progressBar.setVisibility(View.GONE);
 //        SystemBarTintManager systemBarTintManager = new SystemBarTintManager(this);
 //        systemBarTintManager.setStatusBarTintEnabled(false);
 //        systemBarTintManager.setNavigationBarTintEnabled(false);
@@ -81,13 +86,16 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.btn_submit)
     public void onViewClicked() {
+        progressBar.setVisibility(View.VISIBLE);
+
         String userNum = etUserNum.getText().toString();
 //        String userPwd = EncodeUtils.urlEncode(etUserPwd.getText().toString());
-        String userPwd =etUserPwd.getText().toString();
+        String userPwd = etUserPwd.getText().toString();
 
         zhApi.login(userNum, userPwd).enqueue(new ZHCallback<ZHLoginBean>() {
             @Override
             public void onResponse(ZHBaseBean<ZHLoginBean> baseBean, ZHLoginBean result) {
+                progressBar.setVisibility(View.GONE);
                 if (result != null) {
                     L.d("onResponse: " + result.toString());
 
@@ -103,9 +111,10 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void onFailure(Throwable throwable) {
+                progressBar.setVisibility(View.GONE);
+                ToastUtils.showShort(throwable.getMessage());
             }
         });
 
     }
-
 }

@@ -5,6 +5,7 @@
 
     <color name="colorPrimary">@color/theme_color</color>
     <color name="colorPrimaryDark">@color/theme_color</color>
+    <color name="transparent">@android:color/transparent</color>
 
     <color name="scan_loading_color">#8041a4ce</color>
 
