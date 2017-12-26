@@ -25,8 +25,14 @@
     <color name="item_decor">#e6e6e6</color>
 
     <color name="black_333">#333333</color>
+
+    <color name="gray_3">#333333</color>
+    <color name="gray_6">#666666</color>
+    <color name="gray_9">#999999</color>
     <color name="red">#e65162</color>
     <color name="green">#b32cc95c</color>
+
+    <color name="gray_line">#ebebeb</color>
 
 
 </resources>
