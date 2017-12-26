@@ -21,10 +21,11 @@
 
             <ImageView
                 android:id="@+id/img_personal_info_back"
-                android:layout_width="10dp"
-                android:layout_height="18dp"
+                android:layout_width="30dp"
+                android:layout_height="38dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
+                android:padding="10dp"
                 android:src="@drawable/icon_back"/>
 
             <TextView
@@ -37,8 +38,9 @@
 
             <ImageView
                 android:id="@+id/img_personal_info_scan"
-                android:layout_width="25dp"
-                android:layout_height="18dp"
+                android:layout_width="45dp"
+                android:layout_height="38dp"
+                android:padding="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="5dp"

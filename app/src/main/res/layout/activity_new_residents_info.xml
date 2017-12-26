@@ -17,61 +17,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/title"
+            <cc.zkteam.zkinfocollectpro.view.ZKTitleView
+                android:id="@+id/zk_title_view"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:background="@color/titleColor"
-                android:elevation="5dp"
-                android:visibility="visible">
-
-                <ImageView
-                    android:id="@+id/back"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
-                    android:layout_gravity="left|center_vertical"
-                    android:clickable="true"
-                    android:padding="17dp"
-                    android:src="@mipmap/nav_back"
-                    android:tag="skin:nav_back:src" />
-
-                <TextView
-                    android:id="@+id/title_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="新增住户信息填写"
-                    android:textColor="@color/white"
-                    android:textSize="18dp" />
-
-                <ImageView
-                    android:id="@+id/right_icon"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:gravity="center"
-                    android:padding="15dp"
-                    android:src="@mipmap/right_menu"
-                    android:textColor="@color/white"
-                    android:textSize="16dp" />
-
-
-            </RelativeLayout>
+                android:layout_height="wrap_content" />
 
 
             <TextView
                 android:id="@+id/address_name"
-                android:layout_below="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="45dip"
+                android:layout_below="@+id/zk_title_view"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/basic_textview1_marleft"
+                android:layout_margin="8dp"
+                android:focusable="true"
                 android:text="XX街道  XX社区  XX小区  XX团  XX栋  XX单元  XX室 "
                 android:textColor="@color/black_333"
                 android:textSize="17dip" />
@@ -145,7 +104,6 @@
                 <TextView
                     android:id="@+id/sex"
                     android:layout_width="@dimen/basic_texiview_width"
-
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/basic_textview2_marleft"
@@ -158,7 +116,20 @@
                     android:layout_toRightOf="@id/sex"
                     android:drawableLeft="@mipmap/left_arrow"
                     android:drawableRight="@mipmap/right_arrow"
+                    android:paddingHorizontal="8dp"
                     android:text="男" />
+
+                <EditText
+                    android:id="@+id/sexedittext2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="25dip"
+                    android:layout_marginRight="25dip"
+                    android:layout_toRightOf="@+id/sex"
+                    android:background="@null"
+                    android:textSize="@dimen/basic_textview_size"
+                    android:focusable="false"
+                    android:visibility="gone" />
 
 
             </RelativeLayout>
@@ -181,11 +152,24 @@
 
                 <Button
                     android:id="@+id/bornedittext"
+
                     style="@style/BasicinfoActivity_button"
                     android:layout_toRightOf="@id/born"
                     android:drawableRight="@mipmap/data_icon"
+                    android:paddingHorizontal="8dp"
                     android:text="2017年12月25日" />
 
+                <EditText
+                    android:id="@+id/bornedittext2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="25dip"
+                    android:layout_marginRight="25dip"
+                    android:layout_toRightOf="@+id/born"
+                    android:background="@null"
+                    android:textSize="@dimen/basic_textview_size"
+                    android:focusable="false"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 
@@ -239,7 +223,21 @@
                     android:layout_toRightOf="@id/card"
                     android:drawableLeft="@mipmap/left_arrow"
                     android:drawableRight="@mipmap/right_arrow"
+                    android:paddingHorizontal="8dp"
                     android:text="身份证" />
+
+                <EditText
+                    android:id="@+id/card_button2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="25dip"
+                    android:layout_marginRight="25dip"
+                    android:layout_toRightOf="@+id/card"
+                    android:background="@null"
+                    android:textSize="@dimen/basic_textview_size"
+                    android:focusable="false"
+                    android:visibility="gone" />
+
 
             </RelativeLayout>
 
@@ -322,7 +320,21 @@
                     android:layout_toRightOf="@id/textview23"
                     android:drawableLeft="@mipmap/left_arrow"
                     android:drawableRight="@mipmap/right_arrow"
+                    android:paddingHorizontal="8dp"
                     android:text="房东与租客" />
+
+                <EditText
+                    android:id="@+id/edittext23_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="25dip"
+                    android:layout_marginRight="25dip"
+                    android:layout_toRightOf="@+id/textview23"
+                    android:background="@null"
+                    android:focusable="false"
+                    android:textSize="@dimen/basic_textview_size"
+                    android:visibility="gone" />
+
 
                 <TextView
                     android:layout_width="match_parent"

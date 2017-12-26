@@ -3,6 +3,7 @@ package cc.zkteam.zkinfocollectpro;
 import android.content.Context;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.bugtags.library.Bugtags;
 
 import cc.zkteam.zkinfocollectpro.di.DaggerAppComponent;
 import dagger.android.AndroidInjector;
@@ -25,6 +26,9 @@ public class ZKICApplication extends DaggerApplication {
         ZKBase.init(this);
         //  百度地图
         SDKInitializer.initialize(getApplicationContext());
+
+        //在这里初始化Bugtags
+        Bugtags.start("f1a4f3ae0071b52e8138b926f4763075", this, Bugtags.BTGInvocationEventBubble);
     }
 
     @Override

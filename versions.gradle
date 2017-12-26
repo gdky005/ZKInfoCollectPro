@@ -31,6 +31,7 @@ versions.wave_swipe_refresh_layout = "1.6"
 versions.zk_fresco = "1.0.0"
 versions.systembartint = "1.0.3"
 versions.multi_image_selector = "1.2"
+versions.bugtags = "latest.integration"
 ext.versions = versions
 
 
@@ -118,6 +119,8 @@ deps.systembartint = "com.readystatesoftware.systembartint:systembartint:$versio
 
 // 图片选择库 https://github.com/lovetuzitong/MultiImageSelector/blob/master/README_zh.md
 deps.multi_image_selector = "com.github.lovetuzitong:MultiImageSelector:$versions.multi_image_selector"
+deps.bugtags = "com.bugtags.library:bugtags-gradle:$versions.bugtags"
+deps.bugtags_lib = "com.bugtags.library:bugtags-lib:$versions.bugtags"
 
 deps.support = support
 deps.lifecycle = lifecycle

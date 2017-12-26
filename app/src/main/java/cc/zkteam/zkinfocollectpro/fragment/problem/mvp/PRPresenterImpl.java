@@ -1,15 +1,16 @@
 package cc.zkteam.zkinfocollectpro.fragment.problem.mvp;
 
+import android.os.Environment;
 import android.util.Log;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.google.gson.Gson;
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.io.File;
-import java.util.HashMap;
+import java.util.concurrent.Executors;
 
 import cc.zkteam.zkinfocollectpro.ZKBase;
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
@@ -22,7 +23,6 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Field;
 
 /**
  * Created by Administrator on 2017/12/15.
@@ -45,40 +45,50 @@ public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implemen
     @Override
     public void loadData() {
         getLocationInfo();
-        report();
     }
 
-    private void report() {
-        Gson gson = new Gson();
-        HashMap<String, String> paramsMap = new HashMap<>();
-        paramsMap.put("number", "wenti15141999133");
-        paramsMap.put("reporter", "reporter");
-        paramsMap.put("problemposition", "余杭区同顺街");
-        paramsMap.put("problemcontent", "problemcontent");
-        paramsMap.put("remarks", "remarks");
-        paramsMap.put("type", "type");
-        paramsMap.put("path", "path/path");
-        paramsMap.put("filetype", "png");
-        String strEntity = gson.toJson(paramsMap);
-        File file = new File("/sdcard/configmanager.json");
-        // 创建 RequestBody，用于封装 请求RequestBody
-        RequestBody requestFile =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+    public void report(String source, String typeStr, String desc, String location, String suggestion, String picPath) {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            MultipartBody.Part number = MultipartBody.Part.createFormData("number", "wenti" + System.currentTimeMillis());
+            MultipartBody.Part reporter = MultipartBody.Part.createFormData("reporter", "小王");
+            MultipartBody.Part problemposition = MultipartBody.Part.createFormData("problemposition", location);
+            MultipartBody.Part problemcontent = MultipartBody.Part.createFormData("problemcontent", desc);
+            MultipartBody.Part type = MultipartBody.Part.createFormData("type", typeStr);
+            MultipartBody.Part filetype = MultipartBody.Part.createFormData("filetype", "jpg");
+            MultipartBody.Part remarks = MultipartBody.Part.createFormData("remarks", suggestion);
 
-        // MultipartBody.Part is used to send also the actual file name
-        MultipartBody.Part body =
-                MultipartBody.Part.createFormData("image", strEntity, requestFile);
-        zhApi.report(body).enqueue(new Callback<ZHBaseBean>() {
-            @Override
-            public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
-                Log.e("TAG", response.toString());
-                Log.e("TAG", response.body().getMsg());
-            }
+            File file = new File(picPath);
+            RequestBody requestBody =
+                    RequestBody.create(MediaType.parse("image/png"), file);
 
-            @Override
-            public void onFailure(Call<ZHBaseBean> call, Throwable t) {
-                t.printStackTrace();
-            }
+            //参数1 数组名，参数2 文件名。
+            MultipartBody.Part photo1part =
+                    MultipartBody.Part.createFormData("path", "pic", requestBody);
+
+            zhApi.report(number,
+                    reporter,
+                    problemposition,
+                    problemcontent,
+                    remarks,
+                    type,
+                    photo1part,
+                    filetype).enqueue(new Callback<ZHBaseBean>() {
+                @Override
+                public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
+                    ZHBaseBean zhBaseBean = response.body();
+                    if (zhBaseBean != null) {
+                        Log.d("TAG", "onResponse: " + zhBaseBean.toString());
+                        if (zhBaseBean.getStatus() == 1) {
+                            ToastUtils.showShort("上报成功");
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ZHBaseBean> call, Throwable t) {
+                    t.printStackTrace();
+                }
+            });
         });
     }
 

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="66dp"
+    android:layout_margin="5dp"
     android:paddingBottom="6dp">
 
     <LinearLayout
@@ -17,14 +18,14 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="12dp"
+            android:layout_marginLeft="14dp"
             android:src="@drawable/icon_personal" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="14dp"
+            android:layout_marginLeft="15dp"
             android:orientation="vertical">
 
             <TextView
@@ -32,17 +33,16 @@
                 style="@style/TvPersonalInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                tools:text="基本信息  19项" />
+                android:text="基本信息  19项" />
 
             <TextView
                 android:id="@+id/tv_personal_info_item_completion"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#cc333333"
                 android:textSize="10sp"
-                tools:text="已完成 80% 8项" />
+                tools:text="已完成 80% 8项"
+                android:visibility="gone"/>
         </LinearLayout>
 
         <RelativeLayout
@@ -52,18 +52,21 @@
 
             <ImageView
                 android:id="@+id/img_personal_info_item_edit"
-                android:layout_width="19dp"
-                android:layout_height="19dp"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="17dp"
+                android:scaleType="fitXY"
+                android:padding="5dp"
                 android:src="@drawable/icon_edit" />
 
             <cc.zkteam.zkinfocollectpro.view.SimpleCircleProgressBar
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="30dp"
-                android:layout_toLeftOf="@+id/img_personal_info_item_edit" />
+                android:layout_toLeftOf="@+id/img_personal_info_item_edit"
+                android:visibility="gone" />
 
         </RelativeLayout>
     </LinearLayout>

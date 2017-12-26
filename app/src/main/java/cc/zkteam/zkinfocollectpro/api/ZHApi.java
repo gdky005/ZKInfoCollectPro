@@ -133,10 +133,16 @@ public interface ZHApi {
                                        @Field("house_number") String house_number);
 
     /**
-     * 接收表单数据录入接口
+     * 问题上报接口已经提交
      */
     @Multipart
     @POST("Datamanage.php/Admin/AppInterface/wenti_submit.html")
-    Call<ZHBaseBean> report(@Part MultipartBody.Part file);
-
+    Call<ZHBaseBean> report(@Part MultipartBody.Part number,
+                            @Part MultipartBody.Part reporter,
+                            @Part MultipartBody.Part problemposition,
+                            @Part MultipartBody.Part problemcontent,
+                            @Part MultipartBody.Part remarks,
+                            @Part MultipartBody.Part type,
+                            @Part MultipartBody.Part path,
+                            @Part MultipartBody.Part filetype);
 }

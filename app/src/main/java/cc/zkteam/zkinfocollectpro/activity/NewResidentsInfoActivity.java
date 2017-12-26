@@ -1,5 +1,6 @@
 package cc.zkteam.zkinfocollectpro.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,8 +9,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 
@@ -19,7 +18,12 @@ import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
+import cc.zkteam.zkinfocollectpro.dialog.OnZKDialogCancelListener;
+import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragment;
+import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragmentHelper;
+import cc.zkteam.zkinfocollectpro.dialog.ZKDialogResultListener;
 import cc.zkteam.zkinfocollectpro.utils.L;
+import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
 import cn.qqtheme.framework.picker.DatePicker;
 import cn.qqtheme.framework.picker.OptionPicker;
 import cn.qqtheme.framework.util.ConvertUtils;
@@ -51,15 +55,19 @@ public class NewResidentsInfoActivity extends BaseActivity {
 
     @BindView(R.id.drawerLayout)
     DrawerLayout drawerLayout;
-    @BindView(R.id.back)
-    ImageView back;
-    @BindView(R.id.title_name)
-    TextView titleName;
-    @BindView(R.id.right_icon)
-    ImageView rightIcon;
+
     @BindView(R.id.card_button)
     Button cardButton;
-
+    @BindView(R.id.zk_title_view)
+    ZKTitleView zkTitleView;
+    @BindView(R.id.sexedittext2)
+    EditText sexedittext2;
+    @BindView(R.id.bornedittext2)
+    EditText bornedittext2;
+    @BindView(R.id.card_button2)
+    EditText cardButton2;
+    @BindView(R.id.edittext23_2)
+    EditText edittext232;
 
     @Override
     protected int getLayoutId() {
@@ -68,10 +76,45 @@ public class NewResidentsInfoActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+
+
+
+        sexedittext.setVisibility(View.VISIBLE);
+        bornedittext.setVisibility(View.VISIBLE);
+        cardButton.setVisibility(View.VISIBLE);
+        edittext23.setVisibility(View.VISIBLE);
+
+        sexedittext2.setVisibility(View.GONE);
+        bornedittext2.setVisibility(View.GONE);
+        cardButton2.setVisibility(View.GONE);
+        edittext232.setVisibility(View.GONE);
+
         drawerLayout.setScrimColor(Color.TRANSPARENT);
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED,
                 Gravity.END);
 
+
+        zkTitleView.setLeftIVSrc(R.drawable.icon_back);
+        zkTitleView.setRightIVSrc(R.drawable.icon_saoyisao);
+
+        zkTitleView.leftIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        zkTitleView.centerTextTV.setText("新增住户信息填写");
+
+        zkTitleView.rightIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showLong("按钮点击");
+
+                Intent intent = new Intent(NewResidentsInfoActivity.this, IDCardScanActivity.class);
+                startActivityForResult(intent, SCAN_REQUEST_CODE);
+            }
+        });
 
     }
 
@@ -82,7 +125,6 @@ public class NewResidentsInfoActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        titleName.setText("基本信息填写");
 
     }
 
@@ -93,7 +135,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.sexedittext,R.id.card_button, R.id.bornedittext, R.id.edittext23, R.id.savecommit, R.id.right_icon})
+    @OnClick({R.id.sexedittext, R.id.card_button, R.id.bornedittext, R.id.edittext23, R.id.savecommit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.sexedittext:
@@ -191,16 +233,30 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 break;
 
             case R.id.savecommit:
-                ToastUtils.showShort("信息保存成功");
-                break;
-            case R.id.right_icon:
-//                drawerLayout.openDrawer(Gravity.END);
-                ToastUtils.showLong("按钮点击");
+                ZKDialogFragment dialogFragment = ZKDialogFragmentHelper.showDialog(getSupportFragmentManager(),
+                        "提交成功",
+                        "根据后台返回数据显示",
+                        new ZKDialogResultListener<Integer>() {
+                            @Override
+                            public void onDataResult(Integer result) {
 
-                Intent intent = new Intent(this, IDCardScanActivity.class);
-                startActivityForResult(intent, SCAN_REQUEST_CODE);
-
+                                switch (result) {
+                                    case DialogInterface.BUTTON_POSITIVE: //确定
+                                        ToastUtils.showShort("确定");
+                                        break;
+                                    case DialogInterface.BUTTON_NEGATIVE: // 取消
+                                        ToastUtils.showShort("取消");
+                                        break;
+                                }
+                            }
+                        }, new OnZKDialogCancelListener() {
+                            @Override
+                            public void onCancel() {
+                                ToastUtils.showShort("取消了本次操作");
+                            }
+                        });
                 break;
+
         }
     }
 
@@ -223,14 +279,37 @@ public class NewResidentsInfoActivity extends BaseActivity {
                             String nation = wordsResultBean.getNation().getWords();
 
                             L.i("扫描的姓名是；" + name);
-
-                            nameedittext.setText(name);
-                            sexedittext.setText(sex);
                             // TODO: 2017/12/24 请处理这里的数据 ，并修改 UI
-                            bornedittext.setText(birthday);
+
+
+                            sexedittext.setVisibility(View.GONE);
+                            bornedittext.setVisibility(View.GONE);
+                            cardButton.setVisibility(View.GONE);
+                            edittext23.setVisibility(View.GONE);
+
+                            sexedittext2.setVisibility(View.VISIBLE);
+                            bornedittext2.setVisibility(View.VISIBLE);
+                            cardButton2.setVisibility(View.VISIBLE);
+                            edittext232.setVisibility(View.VISIBLE);
+
+                            cardButton2.setText("身份证");
+                            edittext232.setText("房东与租客");
+                            nameedittext.setText(name);
+                            sexedittext2.setText(sex);
+                            bornedittext2.setText(birthday);
                             nationaledittext.setText(nation);
                             edittext21.setText(idCardNumber);
                             edittext22.setText(address);
+
+                            nameedittext.setFocusable(false);
+                            nationaledittext.setFocusable(false);
+                            edittext21.setFocusable(false);
+                            edittext22.setFocusable(false);
+
+                            nameedittext.setFocusableInTouchMode(false);
+                            nationaledittext.setFocusableInTouchMode(false);
+                            edittext21.setFocusableInTouchMode(false);
+                            edittext22.setFocusableInTouchMode(false);
                         }
                     }
                 }
@@ -238,11 +317,5 @@ public class NewResidentsInfoActivity extends BaseActivity {
         }
 
     }
-
-    @OnClick(R.id.back)
-    public void onViewClicked() {
-        finish();
-    }
-
 
 }
