@@ -43,10 +43,17 @@ public class ZHCommunityBean {
     }
 
     public static class DataBean {
+        public DataBean(String id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
         /**
          * id : 1
          * name : 城北社区
          */
+
+
 
         private String id;
         private String name;

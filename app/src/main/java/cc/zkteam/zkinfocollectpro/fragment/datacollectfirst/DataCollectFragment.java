@@ -9,15 +9,13 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -25,8 +23,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import cc.zkteam.zkinfocollectpro.ArgsInterface;
 import cc.zkteam.zkinfocollectpro.R;
-import cc.zkteam.zkinfocollectpro.activity.MapActivity;
 import cc.zkteam.zkinfocollectpro.activity.RentPersonInfoActivity;
+import cc.zkteam.zkinfocollectpro.adapter.LDSpinnerAdapter;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.bean.HouseInfo;
 import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
@@ -40,7 +38,7 @@ import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
  * Created by Administrator on 2017/12/16.
  */
 
-public class DataCollectFragment extends BaseFragment implements DcView, ArgsInterface {
+public class DataCollectFragment extends BaseFragment implements DcView, ArgsInterface, AdapterView.OnItemSelectedListener {
 
     @Inject
     DcPresenterImpl mPresenter;
@@ -66,7 +64,14 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
     TextView mToolbarTitle;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    private ZHCommunityBean[] mCommunityBeans;
+    private LDSpinnerAdapter roadAdapter;
+    private LDSpinnerAdapter communityAdapter;
+    private LDSpinnerAdapter houseAdapter;
+    private LDSpinnerAdapter neibAdapter;
+    private LDSpinnerAdapter unitAdapter;
+    private HashMap<Integer, LDSpinnerAdapter> adapterMap;
+    private HashMap<Integer, Spinner> spinnerMap;
+
 
     public static DataCollectFragment newInstance() {
 
@@ -89,36 +94,56 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        mCommunityBeans = new ZHCommunityBean[5];
+        initSpinner();
+        initCache();
         mPresenter = new DcPresenterImpl(this);
         mPresenter.loadData();
+    }
 
+    private void initCache() {
+        adapterMap = new HashMap<>();
+        adapterMap.put(0, roadAdapter);
+        adapterMap.put(1, communityAdapter);
+        adapterMap.put(2, neibAdapter);
+        adapterMap.put(3, houseAdapter);
+        adapterMap.put(4, unitAdapter);
+
+        spinnerMap = new HashMap<>();
+        spinnerMap.put(0, mRoadSpinner);
+        spinnerMap.put(1, mCommunitySpinner);
+        spinnerMap.put(2, mNeighborSpinner);
+        spinnerMap.put(3, mHouseSpinner);
+        spinnerMap.put(4, mUnitSpinner);
+
+    }
+
+    private void initSpinner() {
+        roadAdapter = new LDSpinnerAdapter(mContext);
+        mRoadSpinner.setAdapter(roadAdapter);
+        mRoadSpinner.setOnItemSelectedListener(this);
+
+        communityAdapter = new LDSpinnerAdapter(mContext);
+        mCommunitySpinner.setAdapter(communityAdapter);
+        mCommunitySpinner.setOnItemSelectedListener(this);
+
+        houseAdapter = new LDSpinnerAdapter(mContext);
+        mHouseSpinner.setAdapter(houseAdapter);
+        mHouseSpinner.setOnItemSelectedListener(this);
+
+        neibAdapter = new LDSpinnerAdapter(mContext);
+        mNeighborSpinner.setAdapter(neibAdapter);
+        mNeighborSpinner.setOnItemSelectedListener(this);
+
+        unitAdapter = new LDSpinnerAdapter(mContext);
+        mUnitSpinner.setAdapter(unitAdapter);
+        mUnitSpinner.setOnItemSelectedListener(this);
     }
 
     @Override
     public void initListener() {
-//        setSpinnerListener(mRoadSpinner ,"0");
-//        setSpinnerListener(mCommunitySpinner ,"1");
-//        setSpinnerListener(mNeighborSpinner ,"2");
-//        setSpinnerListener(mHouseSpinner ,"3");
-//        setSpinnerListener(mUnitSpinner ,null);
+
     }
 
-    private void setSpinnerListener(Spinner spinner, String type) {
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (type != null) {
-                    mPresenter.loadStreetCommunity(String.valueOf(id + 1), type);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
 
     @Override
     public void onLoading() {
@@ -143,60 +168,18 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
 
     @Override
     public void loadSpinner(ZHCommunityBean zhCommunity, String type) {
-        Log.e("TAG", "loadSpinner-" + type);
-        switch (type) {
-            case "0":
-                realLoadSpinner(mRoadSpinner, zhCommunity, type);
-                break;
-            case "1":
-                realLoadSpinner(mCommunitySpinner, zhCommunity, type);
-                break;
-            case "2":
-                realLoadSpinner(mNeighborSpinner, zhCommunity, type);
-                break;
-            case "3":
-                realLoadSpinner(mHouseSpinner, zhCommunity, type);
-                break;
-            case "4":
-                realLoadSpinner(mUnitSpinner, zhCommunity, type);
-                break;
-        }
 
-    }
-
-    private void realLoadSpinner(Spinner spinner, ZHCommunityBean zhCommunity, String type) {
-        int index = Integer.valueOf(type);
-        mCommunityBeans[index] = zhCommunity;
-        if (!"4".contains(type)) {
-            mPresenter.loadStreetCommunity("1", String.valueOf(index + 1));
-        }
-        fillSpinner(spinner, index);
-    }
-
-
-    private void fillSpinner(Spinner spinner, int index) {
-        ZHCommunityBean communityBean = mCommunityBeans[index];
-        if (communityBean.getData() == null) {
+        if (zhCommunity.getData() == null) {
             return;
         }
-        List<String> strings = getData(communityBean);
-        ArrayAdapter<String> mAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, strings);
-        spinner.setAdapter(mAdapter);
+        Log.e("TAG", "loadSpinner-" + type);
+        int index = Integer.valueOf(type);
+        LDSpinnerAdapter adapter = adapterMap.get(index);
+        if (adapter != null) {
+            adapter.setData(zhCommunity.getData());
+        }
     }
 
-    private List<String> getData(ZHCommunityBean communityBean) {
-        List<String> strings = new ArrayList<>();
-        for (ZHCommunityBean.DataBean dataBean : communityBean.getData()) {
-            if (dataBean.getName() != null) {
-                strings.add(dataBean.getName());
-                Log.e("TAG", dataBean.getName());
-            }
-        }
-        if (strings.isEmpty()) {
-            strings.add("未获取到数据…");
-        }
-        return strings;
-    }
 
     @Override
     public void updateRecycle(List<HouseInfo> mData) {
@@ -235,6 +218,58 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
             }
             mHouseContainer.addView(linearLayout);
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+        int index = -1;
+
+        switch (adapterView.getId()) {
+            case R.id.road_spinner:
+                index = 0;
+                break;
+
+            case R.id.cummunity_spinner:
+                index = 1;
+                break;
+
+            case R.id.neighborhood_spinner:
+                index = 2;
+                break;
+
+            case R.id.house_num_spinner:
+                index = 3;
+                break;
+            case R.id.unit_spinner:
+                index = 4;
+                break;
+        }
+
+        if (i == 0) {   //选择第一个数据不做任何动作
+            return;
+        }
+
+        LDSpinnerAdapter adapter = adapterMap.get(index);
+        if (index < 4) {
+            clearSpinnerData(index);
+            index++;
+            mPresenter.loadStreetCommunity(adapter.getItem(i).getId(), index + "");
+        }else if (index == 4){
+            // TODO: 2017/12/25 调用更新住房信息接口 
+        }
+    }
+
+
+    private void clearSpinnerData(int startIndex) {
+        for (int i = startIndex + 1; i <= 4; i++) {
+            adapterMap.get(i).reSetData();
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+        Log.i("chris", "onNothingSelected: ");
     }
 
     class RoomClickListener implements View.OnClickListener {

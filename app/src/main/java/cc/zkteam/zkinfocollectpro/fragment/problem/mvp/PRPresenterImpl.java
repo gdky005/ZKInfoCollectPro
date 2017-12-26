@@ -8,6 +8,7 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.util.HashMap;
 
 import cc.zkteam.zkinfocollectpro.ZKBase;
@@ -15,6 +16,8 @@ import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.mvp.BaseMVPPresenter;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,22 +49,30 @@ public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implemen
     }
 
     private void report() {
-        Gson gson=new Gson();
-        HashMap<String,String> paramsMap=new HashMap<>();
-        paramsMap.put("number","wenti1514199904");
-        paramsMap.put("reporter","reporter");
-        paramsMap.put("problemposition","0,0");
-        paramsMap.put("problemcontent","problemcontent");
-        paramsMap.put("remarks","remarks");
-        paramsMap.put("type","type");
-        paramsMap.put("path","path/path");
-        paramsMap.put("filetype","png");
+        Gson gson = new Gson();
+        HashMap<String, String> paramsMap = new HashMap<>();
+        paramsMap.put("number", "wenti15141999133");
+        paramsMap.put("reporter", "reporter");
+        paramsMap.put("problemposition", "余杭区同顺街");
+        paramsMap.put("problemcontent", "problemcontent");
+        paramsMap.put("remarks", "remarks");
+        paramsMap.put("type", "type");
+        paramsMap.put("path", "path/path");
+        paramsMap.put("filetype", "png");
         String strEntity = gson.toJson(paramsMap);
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"),strEntity);
+        File file = new File("/sdcard/configmanager.json");
+        // 创建 RequestBody，用于封装 请求RequestBody
+        RequestBody requestFile =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+        // MultipartBody.Part is used to send also the actual file name
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("image", strEntity, requestFile);
         zhApi.report(body).enqueue(new Callback<ZHBaseBean>() {
             @Override
             public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
                 Log.e("TAG", response.toString());
+                Log.e("TAG", response.body().getMsg());
             }
 
             @Override

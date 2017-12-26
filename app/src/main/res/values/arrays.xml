@@ -9,22 +9,22 @@
     </string-array>
 
     <string-array name="street">
-        <item>等待数据加载…</item>
+        <item>请选择</item>
     </string-array>
 
     <string-array name="community">
-        <item>等待数据加载…</item>
+        <item>请选择</item>
     </string-array>
 
     <string-array name="neighborhoods">
-        <item>等待数据加载…</item>
+        <item>请选择</item>
     </string-array>
 
     <string-array name="building">
-        <item>等待数据加载…</item>
+        <item>请选择</item>
     </string-array>
 
     <string-array name="unit">
-        <item>等待数据加载…</item>
+        <item>请选择</item>
     </string-array>
 </resources>
