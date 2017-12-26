@@ -40,5 +40,6 @@
     <string name="outsetting_tips">设置迁出后，将无法再对该人员进行信息采集及修改，请谨慎确认是否确认设置为迁出。</string>
     <string name="confirm_out">确认迁出</string>
     <string name="cancel">取消</string>
+    <string name="ic_card_warning_text">将身份证放入框内即可自动扫描\n点击按钮确认\n\n未扫描到身份证，可从相册添加</string>
 
 </resources>

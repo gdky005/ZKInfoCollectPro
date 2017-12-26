@@ -11,6 +11,7 @@ import cc.zkteam.zkinfocollectpro.bean.ZHLoginBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHTongJiBean;
 import cc.zkteam.zkinfocollectpro.bean.ZKTestBaseBean;
 import cc.zkteam.zkinfocollectpro.bean.ZKTestCategoryBean;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -18,7 +19,9 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 /**
@@ -88,20 +91,20 @@ public interface ZHApi {
      */
     @GET("datamanage.php/Admin/AppInterface/gethouses")
     Call<ZHBaseBean> getHouses(@Query("jiedao") String jiedao,
-                                 @Query("shequ") String shequ,
-                                 @Query("xiaoqu") String xiaoqu,
-                                 @Query("lou") String lou,
-                                 @Query("danyuan") String danyuan);
+                               @Query("shequ") String shequ,
+                               @Query("xiaoqu") String xiaoqu,
+                               @Query("lou") String lou,
+                               @Query("danyuan") String danyuan);
 
     /**
      * 首页-签到接口
      */
     @GET("datamanage.php/Admin/AppInterface/sign")
     Call<ZHBaseBean> sign(@Query("username") String username,
-                                 @Query("userid") String userid,
-                                 @Query("long") String lon,
-                                 @Query("lat") String lat,
-                                 @Query("address") String address);
+                          @Query("userid") String userid,
+                          @Query("long") String lon,
+                          @Query("lat") String lat,
+                          @Query("address") String address);
 
     /**
      * 新增住户接口
@@ -109,12 +112,12 @@ public interface ZHApi {
     @FormUrlEncoded
     @POST("datamanage.php/Admin/AppInterface/addhouse")
     Call<ZHBaseBean> addHouse(@Field("community") String community,
-                          @Field("cunjuid") String cunjuid,
-                          @Field("gridding") String gridding,
-                          @Field("hsid") String hsid,
-                          @Field("house_serial") String house_serial,
-                          @Field("louceng") String address,
-                          @Field("house_number") String house_number);
+                              @Field("cunjuid") String cunjuid,
+                              @Field("gridding") String gridding,
+                              @Field("hsid") String hsid,
+                              @Field("house_serial") String house_serial,
+                              @Field("louceng") String address,
+                              @Field("house_number") String house_number);
 
     /**
      * 接收表单数据录入接口
@@ -122,12 +125,26 @@ public interface ZHApi {
     @FormUrlEncoded
     @POST("datamanage.php/Admin/AppInterface/addpersonbaseinfo")
     Call<ZHBaseBean> addPersonBaseInfo(@Field("community") String community,
-                          @Field("cunjuid") String cunjuid,
-                          @Field("gridding") String gridding,
-                          @Field("hsid") String hsid,
-                          @Field("house_serial") String house_serial,
-                          @Field("louceng") String address,
-                          @Field("house_number") String house_number);
+                                       @Field("cunjuid") String cunjuid,
+                                       @Field("gridding") String gridding,
+                                       @Field("hsid") String hsid,
+                                       @Field("house_serial") String house_serial,
+                                       @Field("louceng") String address,
+                                       @Field("house_number") String house_number);
 
+
+    /**
+     * 问题上报接口已经提交
+     */
+    @Multipart
+    @POST("Datamanage.php/Admin/AppInterface/wenti_submit.html")
+    Call<ZHBaseBean> report(@Part MultipartBody.Part number,
+                            @Part MultipartBody.Part reporter,
+                            @Part MultipartBody.Part problemposition,
+                            @Part MultipartBody.Part problemcontent,
+                            @Part MultipartBody.Part remarks,
+                            @Part MultipartBody.Part type,
+                            @Part MultipartBody.Part path,
+                            @Part MultipartBody.Part filetype);
 
 }

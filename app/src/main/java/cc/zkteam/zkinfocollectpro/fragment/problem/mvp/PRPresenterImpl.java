@@ -1,14 +1,28 @@
 package cc.zkteam.zkinfocollectpro.fragment.problem.mvp;
 
+import android.os.Environment;
+import android.util.Log;
+
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 
+import java.io.File;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 import cc.zkteam.zkinfocollectpro.ZKBase;
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.mvp.BaseMVPPresenter;
+import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Administrator on 2017/12/15.
@@ -31,6 +45,48 @@ public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implemen
     @Override
     public void loadData() {
         getLocationInfo();
+    }
+
+    public void report(String source, String typeStr, String desc, String location, String suggestion, String picPath) {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            MultipartBody.Part number = MultipartBody.Part.createFormData("number", "wenti" + System.currentTimeMillis());
+            MultipartBody.Part reporter = MultipartBody.Part.createFormData("reporter", "小王");
+            MultipartBody.Part problemposition = MultipartBody.Part.createFormData("problemposition", location);
+            MultipartBody.Part problemcontent = MultipartBody.Part.createFormData("problemcontent", desc);
+            MultipartBody.Part type = MultipartBody.Part.createFormData("type", typeStr);
+            MultipartBody.Part filetype = MultipartBody.Part.createFormData("filetype", "jpg");
+            MultipartBody.Part remarks = MultipartBody.Part.createFormData("remarks", suggestion);
+
+            File file = new File(picPath);
+            RequestBody requestBody =
+                    RequestBody.create(MediaType.parse("image/png"), file);
+
+            //参数1 数组名，参数2 文件名。
+            MultipartBody.Part photo1part =
+                    MultipartBody.Part.createFormData("path", "pic", requestBody);
+
+            zhApi.report(number,
+                    reporter,
+                    problemposition,
+                    problemcontent,
+                    remarks,
+                    type,
+                    photo1part,
+                    filetype).enqueue(new Callback<ZHBaseBean>() {
+                @Override
+                public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
+                    ZHBaseBean zhBaseBean = response.body();
+                    if (zhBaseBean != null) {
+                        Log.d("TAG", "onResponse: " + zhBaseBean.toString());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ZHBaseBean> call, Throwable t) {
+                    t.printStackTrace();
+                }
+            });
+        });
     }
 
     private void getLocationInfo() {

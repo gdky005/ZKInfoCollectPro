@@ -92,10 +92,32 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         mCommunityBeans = new ZHCommunityBean[5];
         mPresenter = new DcPresenterImpl(this);
         mPresenter.loadData();
+
     }
 
     @Override
     public void initListener() {
+//        setSpinnerListener(mRoadSpinner ,"0");
+//        setSpinnerListener(mCommunitySpinner ,"1");
+//        setSpinnerListener(mNeighborSpinner ,"2");
+//        setSpinnerListener(mHouseSpinner ,"3");
+//        setSpinnerListener(mUnitSpinner ,null);
+    }
+
+    private void setSpinnerListener(Spinner spinner, String type) {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (type != null) {
+                    mPresenter.loadStreetCommunity(String.valueOf(id + 1), type);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
@@ -124,58 +146,42 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         Log.e("TAG", "loadSpinner-" + type);
         switch (type) {
             case "0":
-                mCommunityBeans[0] = zhCommunity;
-                mPresenter.loadStreetCommunity("1", "1");
-                fillSpinner(mRoadSpinner, 0);
+                realLoadSpinner(mRoadSpinner, zhCommunity, type);
                 break;
             case "1":
-                mCommunityBeans[1] = zhCommunity;
-                mPresenter.loadStreetCommunity("1", "2");
-                fillSpinner(mCommunitySpinner, 1);
+                realLoadSpinner(mCommunitySpinner, zhCommunity, type);
                 break;
             case "2":
-                mCommunityBeans[2] = zhCommunity;
-                mPresenter.loadStreetCommunity("1", "3");
-                fillSpinner(mNeighborSpinner, 2);
+                realLoadSpinner(mNeighborSpinner, zhCommunity, type);
                 break;
             case "3":
-                mCommunityBeans[3] = zhCommunity;
-                mPresenter.loadStreetCommunity("1", "4");
-                fillSpinner(mHouseSpinner, 3);
+                realLoadSpinner(mHouseSpinner, zhCommunity, type);
                 break;
             case "4":
-                mCommunityBeans[4] = zhCommunity;
-                fillSpinner(mUnitSpinner, 4);
+                realLoadSpinner(mUnitSpinner, zhCommunity, type);
                 break;
         }
+
     }
+
+    private void realLoadSpinner(Spinner spinner, ZHCommunityBean zhCommunity, String type) {
+        int index = Integer.valueOf(type);
+        mCommunityBeans[index] = zhCommunity;
+        if (!"4".contains(type)) {
+            mPresenter.loadStreetCommunity("1", String.valueOf(index + 1));
+        }
+        fillSpinner(spinner, index);
+    }
+
 
     private void fillSpinner(Spinner spinner, int index) {
         ZHCommunityBean communityBean = mCommunityBeans[index];
         if (communityBean.getData() == null) {
             return;
         }
-//        setSpinnerListener(spinner, index);
         List<String> strings = getData(communityBean);
         ArrayAdapter<String> mAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, strings);
         spinner.setAdapter(mAdapter);
-    }
-
-    private void setSpinnerListener(Spinner spinner, int index) {
-        if (spinner.getOnItemSelectedListener() != null) {
-            return;
-        }
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mPresenter.loadStreetCommunity(String.valueOf(id + 1), String.valueOf(index));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
 
     private List<String> getData(ZHCommunityBean communityBean) {
