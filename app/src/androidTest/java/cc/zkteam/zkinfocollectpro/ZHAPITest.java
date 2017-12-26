@@ -54,7 +54,7 @@ public class ZHAPITest {
     public void testLogin() {
         zhApi.login("admin", "admin").enqueue(new ZHCallback<ZHLoginBean>() {
             @Override
-            public void onResponse(ZHLoginBean result) {
+            public void onResponse(ZHBaseBean<ZHLoginBean> baseBean, ZHLoginBean result) {
                 if (result != null) {
                     Log.d(TAG, "onResponse: " + result.toString());
                 }

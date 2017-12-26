@@ -18,7 +18,7 @@ public abstract class ZHCallback<T> implements Callback<ZHBaseBean<T>> {
 
         if (baseBean != null) {
             T results = baseBean.getData();
-            onResponse(results);
+            onResponse(baseBean, results);
         } else {
             onFailure(new Throwable("baseBean is null!"));
         }
@@ -29,7 +29,7 @@ public abstract class ZHCallback<T> implements Callback<ZHBaseBean<T>> {
         onFailure(throwable);
     }
 
-    public abstract void onResponse(T result);
+    public abstract void onResponse(ZHBaseBean<T> baseBean, T result);
 
     public abstract void onFailure(Throwable throwable);
 }

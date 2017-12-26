@@ -6,12 +6,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.blankj.utilcode.util.ToastUtils;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.home.HomeActivity;
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
+import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHLoginBean;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.retrofit2.ZHCallback;
@@ -84,15 +87,18 @@ public class LoginActivity extends BaseActivity {
 
         zhApi.login(userNum, userPwd).enqueue(new ZHCallback<ZHLoginBean>() {
             @Override
-            public void onResponse(ZHLoginBean result) {
+            public void onResponse(ZHBaseBean<ZHLoginBean> baseBean, ZHLoginBean result) {
                 if (result != null) {
                     L.d("onResponse: " + result.toString());
 
-
-                    PageCtrl.startActivity(LoginActivity.this, HomeActivity.class);
-                    finish();
+                    if (1 == baseBean.getStatus()) {
+                        PageCtrl.startActivity(LoginActivity.this, HomeActivity.class);
+                        finish();
+                        return;
+                    }
                 }
 
+                ToastUtils.showShort(baseBean.getMsg());
             }
 
             @Override
