@@ -55,6 +55,14 @@ public class NewResidentsInfoActivity extends BaseActivity {
     Button cardButton;
     @BindView(R.id.zk_title_view)
     ZKTitleView zkTitleView;
+    @BindView(R.id.sexedittext2)
+    EditText sexedittext2;
+    @BindView(R.id.bornedittext2)
+    EditText bornedittext2;
+    @BindView(R.id.card_button2)
+    EditText cardButton2;
+    @BindView(R.id.edittext23_2)
+    EditText edittext232;
 
     @Override
     protected int getLayoutId() {
@@ -63,14 +71,26 @@ public class NewResidentsInfoActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+
+
+
+        sexedittext.setVisibility(View.VISIBLE);
+        bornedittext.setVisibility(View.VISIBLE);
+        cardButton.setVisibility(View.VISIBLE);
+        edittext23.setVisibility(View.VISIBLE);
+
+        sexedittext2.setVisibility(View.GONE);
+        bornedittext2.setVisibility(View.GONE);
+        cardButton2.setVisibility(View.GONE);
+        edittext232.setVisibility(View.GONE);
+
         drawerLayout.setScrimColor(Color.TRANSPARENT);
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED,
                 Gravity.END);
 
 
-
         zkTitleView.setLeftIVSrc(R.drawable.icon_back);
-        zkTitleView.setRightIVSrc(R.drawable.icon_about);
+        zkTitleView.setRightIVSrc(R.drawable.icon_saoyisao);
 
         zkTitleView.leftIV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +130,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.sexedittext,R.id.card_button, R.id.bornedittext, R.id.edittext23, R.id.savecommit})
+    @OnClick({R.id.sexedittext, R.id.card_button, R.id.bornedittext, R.id.edittext23, R.id.savecommit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.sexedittext:
@@ -233,14 +253,37 @@ public class NewResidentsInfoActivity extends BaseActivity {
                             String nation = wordsResultBean.getNation().getWords();
 
                             L.i("扫描的姓名是；" + name);
-
-                            nameedittext.setText(name);
-                            sexedittext.setText(sex);
                             // TODO: 2017/12/24 请处理这里的数据 ，并修改 UI
-                            bornedittext.setText(birthday);
+
+
+                            sexedittext.setVisibility(View.GONE);
+                            bornedittext.setVisibility(View.GONE);
+                            cardButton.setVisibility(View.GONE);
+                            edittext23.setVisibility(View.GONE);
+
+                            sexedittext2.setVisibility(View.VISIBLE);
+                            bornedittext2.setVisibility(View.VISIBLE);
+                            cardButton2.setVisibility(View.VISIBLE);
+                            edittext232.setVisibility(View.VISIBLE);
+
+                            cardButton2.setText("身份证");
+                            edittext232.setText("房东与租客");
+                            nameedittext.setText(name);
+                            sexedittext2.setText(sex);
+                            bornedittext2.setText(birthday);
                             nationaledittext.setText(nation);
                             edittext21.setText(idCardNumber);
                             edittext22.setText(address);
+
+                            nameedittext.setFocusable(false);
+                            nationaledittext.setFocusable(false);
+                            edittext21.setFocusable(false);
+                            edittext22.setFocusable(false);
+
+                            nameedittext.setFocusableInTouchMode(false);
+                            nationaledittext.setFocusableInTouchMode(false);
+                            edittext21.setFocusableInTouchMode(false);
+                            edittext22.setFocusableInTouchMode(false);
                         }
                     }
                 }
