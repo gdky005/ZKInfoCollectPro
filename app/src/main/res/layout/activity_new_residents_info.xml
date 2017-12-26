@@ -29,7 +29,7 @@
                 android:layout_height="45dip"
                 android:layout_below="@+id/zk_title_view"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/basic_textview1_marleft"
+                android:layout_margin="8dp"
                 android:focusable="true"
                 android:text="XX街道  XX社区  XX小区  XX团  XX栋  XX单元  XX室 "
                 android:textColor="@color/black_333"

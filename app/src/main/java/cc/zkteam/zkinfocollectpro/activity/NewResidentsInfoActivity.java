@@ -1,5 +1,6 @@
 package cc.zkteam.zkinfocollectpro.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,6 +18,10 @@ import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
+import cc.zkteam.zkinfocollectpro.dialog.OnZKDialogCancelListener;
+import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragment;
+import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragmentHelper;
+import cc.zkteam.zkinfocollectpro.dialog.ZKDialogResultListener;
 import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
 import cn.qqtheme.framework.picker.DatePicker;
@@ -228,7 +233,28 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 break;
 
             case R.id.savecommit:
-                ToastUtils.showShort("信息保存成功");
+                ZKDialogFragment dialogFragment = ZKDialogFragmentHelper.showDialog(getSupportFragmentManager(),
+                        "提交成功",
+                        "根据后台返回数据显示",
+                        new ZKDialogResultListener<Integer>() {
+                            @Override
+                            public void onDataResult(Integer result) {
+
+                                switch (result) {
+                                    case DialogInterface.BUTTON_POSITIVE: //确定
+                                        ToastUtils.showShort("确定");
+                                        break;
+                                    case DialogInterface.BUTTON_NEGATIVE: // 取消
+                                        ToastUtils.showShort("取消");
+                                        break;
+                                }
+                            }
+                        }, new OnZKDialogCancelListener() {
+                            @Override
+                            public void onCancel() {
+                                ToastUtils.showShort("取消了本次操作");
+                            }
+                        });
                 break;
 
         }
