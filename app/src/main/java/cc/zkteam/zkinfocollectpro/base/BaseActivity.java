@@ -10,6 +10,7 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.bugtags.library.Bugtags;
+import com.networkbench.agent.impl.NBSAppAgent;
 
 import butterknife.ButterKnife;
 
@@ -30,6 +31,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
+        NBSAppAgent.leaveBreadcrumb(getClass().getSimpleName() + " onCreate");
         mContext = this;
         initViews();
         initListener();
@@ -59,6 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onResume();
         //注：回调 1
         Bugtags.onResume(this);
+        NBSAppAgent.leaveBreadcrumb(getClass().getSimpleName() + " onResume");
     }
 
     @Override
@@ -66,6 +69,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onPause();
         //注：回调 2
         Bugtags.onPause(this);
+        NBSAppAgent.leaveBreadcrumb(getClass().getSimpleName() + " onPause");
     }
 
     @Override

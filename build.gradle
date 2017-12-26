@@ -6,6 +6,7 @@ buildscript {
     addRepos(repositories)
     dependencies {
         classpath deps.android_gradle_plugin
+        classpath deps.agent_gradle_plugin
         classpath deps.bugtags
 
 

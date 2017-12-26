@@ -33,7 +33,7 @@
                 android:layout_centerInParent="true"
                 android:text="数据采集"
                 android:textColor="#ffffff"
-                android:textSize="15sp" />
+                android:textSize="@dimen/sp_16" />
 
             <ImageView
                 android:id="@+id/img_personal_info_search"

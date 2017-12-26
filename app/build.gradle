@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 //应用 Bugtags 插件
 apply plugin: 'com.bugtags.library.plugin'
+apply plugin: 'newlens'
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -80,6 +81,7 @@ dependencies {
     implementation deps.multi_image_selector
 
     implementation deps.bugtags_lib
+    implementation deps.nbs_newlens_agent
 
     implementation deps.dagger_support
     annotationProcessor deps.dagger_processor

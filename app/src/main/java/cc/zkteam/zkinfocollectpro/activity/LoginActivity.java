@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.networkbench.agent.impl.NBSAppAgent;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -68,6 +69,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        NBSAppAgent.setLicenseKey("b8f35200fae249148ccac88c105c5bcd").withLocationServiceEnabled(true).start(this.getApplicationContext());
 
 //        // TODO: 2017/12/23  这是测试代码哦
 //        btnSubmit.postDelayed(new Runnable() {
