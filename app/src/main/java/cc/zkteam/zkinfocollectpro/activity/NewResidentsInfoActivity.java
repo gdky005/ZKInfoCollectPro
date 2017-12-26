@@ -8,8 +8,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 
@@ -20,6 +18,7 @@ import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
 import cc.zkteam.zkinfocollectpro.utils.L;
+import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
 import cn.qqtheme.framework.picker.DatePicker;
 import cn.qqtheme.framework.picker.OptionPicker;
 import cn.qqtheme.framework.util.ConvertUtils;
@@ -51,15 +50,11 @@ public class NewResidentsInfoActivity extends BaseActivity {
 
     @BindView(R.id.drawerLayout)
     DrawerLayout drawerLayout;
-    @BindView(R.id.back)
-    ImageView back;
-    @BindView(R.id.title_name)
-    TextView titleName;
-    @BindView(R.id.right_icon)
-    ImageView rightIcon;
+
     @BindView(R.id.card_button)
     Button cardButton;
-
+    @BindView(R.id.zk_title_view)
+    ZKTitleView zkTitleView;
 
     @Override
     protected int getLayoutId() {
@@ -73,6 +68,29 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 Gravity.END);
 
 
+
+        zkTitleView.setLeftIVSrc(R.drawable.icon_back);
+        zkTitleView.setRightIVSrc(R.drawable.icon_about);
+
+        zkTitleView.leftIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        zkTitleView.centerTextTV.setText("新增住户信息填写");
+
+        zkTitleView.rightIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showLong("按钮点击");
+
+                Intent intent = new Intent(NewResidentsInfoActivity.this, IDCardScanActivity.class);
+                startActivityForResult(intent, SCAN_REQUEST_CODE);
+            }
+        });
+
     }
 
     @Override
@@ -82,7 +100,6 @@ public class NewResidentsInfoActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        titleName.setText("基本信息填写");
 
     }
 
@@ -93,7 +110,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.sexedittext,R.id.card_button, R.id.bornedittext, R.id.edittext23, R.id.savecommit, R.id.right_icon})
+    @OnClick({R.id.sexedittext,R.id.card_button, R.id.bornedittext, R.id.edittext23, R.id.savecommit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.sexedittext:
@@ -193,14 +210,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
             case R.id.savecommit:
                 ToastUtils.showShort("信息保存成功");
                 break;
-            case R.id.right_icon:
-//                drawerLayout.openDrawer(Gravity.END);
-                ToastUtils.showLong("按钮点击");
 
-                Intent intent = new Intent(this, IDCardScanActivity.class);
-                startActivityForResult(intent, SCAN_REQUEST_CODE);
-
-                break;
         }
     }
 
@@ -238,11 +248,5 @@ public class NewResidentsInfoActivity extends BaseActivity {
         }
 
     }
-
-    @OnClick(R.id.back)
-    public void onViewClicked() {
-        finish();
-    }
-
 
 }

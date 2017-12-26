@@ -7,10 +7,6 @@
     android:background="@mipmap/login_bg"
     android:fitsSystemWindows="true">
 
-    <include
-        android:id="@+id/title"
-        layout="@layout/title"
-        android:visibility="gone"></include>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -97,7 +93,7 @@
                         android:drawablePadding="25dp"
                         android:drawableRight="@mipmap/login_help"
                         android:hint="请输入密码"
-                        android:inputType="text"
+                        android:inputType="textPassword"
                         android:paddingLeft="25dp"
                         android:text=""
                         android:textColorHint="@color/white"

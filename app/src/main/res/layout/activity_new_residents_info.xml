@@ -17,57 +17,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/title"
+            <cc.zkteam.zkinfocollectpro.view.ZKTitleView
+                android:id="@+id/zk_title_view"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:background="@color/titleColor"
-                android:elevation="5dp"
-                android:visibility="visible">
-
-                <ImageView
-                    android:id="@+id/back"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
-                    android:layout_gravity="left|center_vertical"
-                    android:clickable="true"
-                    android:padding="17dp"
-                    android:src="@mipmap/nav_back"
-                    android:tag="skin:nav_back:src" />
-
-                <TextView
-                    android:id="@+id/title_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="新增住户信息填写"
-                    android:textColor="@color/white"
-                    android:textSize="18dp" />
-
-                <ImageView
-                    android:id="@+id/right_icon"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:gravity="center"
-                    android:padding="15dp"
-                    android:src="@mipmap/right_menu"
-                    android:textColor="@color/white"
-                    android:textSize="16dp" />
-
-
-            </RelativeLayout>
+                android:layout_height="wrap_content"/>
 
 
             <TextView
                 android:id="@+id/address_name"
-                android:layout_below="@+id/title"
+                android:layout_below="@+id/zk_title_view"
                 android:layout_width="wrap_content"
                 android:layout_height="45dip"
                 android:layout_centerVertical="true"
@@ -153,6 +111,7 @@
                     android:textSize="@dimen/basic_textview_size" />
 
                 <Button
+                    android:paddingHorizontal="8dp"
                     android:id="@+id/sexedittext"
                     style="@style/BasicinfoActivity_button"
                     android:layout_toRightOf="@id/sex"
@@ -180,6 +139,8 @@
                     android:textSize="@dimen/basic_textview_size" />
 
                 <Button
+                    android:paddingHorizontal="8dp"
+
                     android:id="@+id/bornedittext"
                     style="@style/BasicinfoActivity_button"
                     android:layout_toRightOf="@id/born"
@@ -234,6 +195,8 @@
                     android:textSize="@dimen/basic_textview_size" />
 
                 <Button
+                    android:paddingHorizontal="8dp"
+
                     android:id="@+id/card_button"
                     style="@style/BasicinfoActivity_button"
                     android:layout_toRightOf="@id/card"
@@ -317,6 +280,7 @@
                     android:textSize="@dimen/basic_textview_size" />
 
                 <Button
+                    android:paddingHorizontal="8dp"
                     android:id="@+id/edittext23"
                     style="@style/BasicinfoActivity_button"
                     android:layout_toRightOf="@id/textview23"
