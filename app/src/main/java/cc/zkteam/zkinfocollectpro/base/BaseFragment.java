@@ -6,12 +6,15 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import cc.zkteam.zkinfocollectpro.R;
 
 /**
  * BaseFragment
@@ -25,7 +28,8 @@ public abstract class BaseFragment extends Fragment {
     protected Context mContext = null;
 
     // 获取布局资源文件
-    public abstract @LayoutRes int getLayoutId();
+    public abstract @LayoutRes
+    int getLayoutId();
 
     // 初始化布局
     public abstract void initView(View rootView);
@@ -67,6 +71,12 @@ public abstract class BaseFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    public void setText(TextView textView, String str) {
+        if (textView != null && null != str) {
+            textView.setText(str);
+        }
     }
 
 }
