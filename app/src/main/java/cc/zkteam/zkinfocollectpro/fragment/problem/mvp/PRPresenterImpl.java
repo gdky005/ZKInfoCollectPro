@@ -47,14 +47,16 @@ public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implemen
         getLocationInfo();
     }
 
-    public void report(String source, String typeStr, String desc, String location, String suggestion, String picPath) {
+    public void report(String source, String typeStr, String desc, String location, String attachmentName, String suggestion, String picPath) {
         Executors.newSingleThreadExecutor().execute(() -> {
             MultipartBody.Part number = MultipartBody.Part.createFormData("number", "wenti" + System.currentTimeMillis());
             MultipartBody.Part reporter = MultipartBody.Part.createFormData("reporter", "小王");
             MultipartBody.Part problemposition = MultipartBody.Part.createFormData("problemposition", location);
             MultipartBody.Part problemcontent = MultipartBody.Part.createFormData("problemcontent", desc);
             MultipartBody.Part type = MultipartBody.Part.createFormData("type", typeStr);
-            MultipartBody.Part filetype = MultipartBody.Part.createFormData("filetype", "jpg");
+            String suffix = attachmentName.split("[.]")[1];
+            Log.e("TAG", suffix);
+            MultipartBody.Part filetype = MultipartBody.Part.createFormData("filetype", suffix);
             MultipartBody.Part remarks = MultipartBody.Part.createFormData("remarks", suggestion);
 
             File file = new File(picPath);
@@ -63,7 +65,7 @@ public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implemen
 
             //参数1 数组名，参数2 文件名。
             MultipartBody.Part photo1part =
-                    MultipartBody.Part.createFormData("path", "pic", requestBody);
+                    MultipartBody.Part.createFormData("path", attachmentName, requestBody);
 
             zhApi.report(number,
                     reporter,

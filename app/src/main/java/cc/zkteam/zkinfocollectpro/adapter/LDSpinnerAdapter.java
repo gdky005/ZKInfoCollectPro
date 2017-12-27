@@ -20,7 +20,7 @@ import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
 public class LDSpinnerAdapter extends BaseAdapter {
 
 
-    protected   List<ZHCommunityBean.DataBean> mData;
+    protected List<ZHCommunityBean.DataBean> mData;
 
 
     protected Context context;
@@ -36,23 +36,23 @@ public class LDSpinnerAdapter extends BaseAdapter {
         return isHaveData() ? Integer.parseInt(mData.get(1).getBuildceng()) : 0;
     }
 
-    public int getHome(){
-        return isHaveData() ? Integer.parseInt(mData.get(1).getBuildhome()) : 0 ;
+    public int getHome() {
+        return isHaveData() ? Integer.parseInt(mData.get(1).getBuildhome()) : 0;
     }
 
-    public boolean isHaveData(){
-        return mData.size() == 1 ? false:true;
+    public boolean isHaveData() {
+        return mData.size() == 1 ? false : true;
     }
 
     public void setData(List<ZHCommunityBean.DataBean> tempData) {
-        if (tempData != null && tempData.size() > 0){
+        if (tempData != null && tempData.size() > 0) {
             reSetData();
             mData.addAll(tempData);
             notifyDataSetChanged();
         }
     }
 
-    public void reSetData(){
+    public void reSetData() {
         mData.clear();
         mData.add(new ZHCommunityBean.DataBean("-1", "请选择"));
         notifyDataSetChanged();
@@ -76,7 +76,7 @@ public class LDSpinnerAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        View result = LayoutInflater.from(context).inflate(R.layout.item_problem_type, null);
+        View result = LayoutInflater.from(context).inflate(android.R.layout.simple_spinner_dropdown_item, viewGroup, false);
         TextView title = (TextView) result.findViewById(android.R.id.text1);
         title.setText(mData.get(i).getName());
         return result;

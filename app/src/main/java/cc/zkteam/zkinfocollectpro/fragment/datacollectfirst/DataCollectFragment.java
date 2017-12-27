@@ -185,7 +185,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
 
     @Override
     public void updateRecycle(List<HouseInfo> mData) {
-        mHouseContainer.removeViews(1,mHouseContainer.getChildCount()-1);
+        mHouseContainer.removeViews(1, mHouseContainer.getChildCount() - 1);
         for (int i = 0; i < mData.size(); i++) {
 
             LinearLayout linearLayout = new LinearLayout(mContext);
@@ -265,7 +265,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
             // TODO: 2017/12/25 调用更新住房信息接口
             LDSpinnerAdapter adapter1 = adapterMap.get(index);
             List<HouseInfo> houseInfos = new ArrayList<>();
-            for (int j = 1; j <=  adapter1.getmCeng(); j++) {
+            for (int j = 1; j <= adapter1.getmCeng(); j++) {
                 HouseInfo houseInfo = new HouseInfo(j, adapter1.getHome());
                 houseInfos.add(houseInfo);
             }

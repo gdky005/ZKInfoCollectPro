@@ -18,7 +18,7 @@ import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
 public class HouseUnitAdapter extends LDSpinnerAdapter {
 
     public static final String Invaild = "0";
-    
+
     public HouseUnitAdapter(Context mContext) {
         super(mContext);
         reSetData();
@@ -28,7 +28,7 @@ public class HouseUnitAdapter extends LDSpinnerAdapter {
     @Override
     public void reSetData() {
         mData.clear();
-        mData.add(new ZHCommunityBean.DataBean(Invaild,Invaild,Invaild,Invaild));
+        mData.add(new ZHCommunityBean.DataBean(Invaild, Invaild, Invaild, Invaild));
         notifyDataSetChanged();
     }
 
@@ -41,13 +41,12 @@ public class HouseUnitAdapter extends LDSpinnerAdapter {
     public int getCount() {
 
 
-        return isHaveData() ? Integer.parseInt(mData.get(1).getBuildunit() )+1 :1;
+        return isHaveData() ? Integer.parseInt(mData.get(1).getBuildunit()) + 1 : 1;
     }
 
 
-
     public void setUnitData(List<ZHCommunityBean.DataBean> tempData) {
-        if (tempData != null && tempData.size() > 0){
+        if (tempData != null && tempData.size() > 0) {
             reSetData();
             mData.addAll(tempData);
             notifyDataSetChanged();
@@ -56,12 +55,12 @@ public class HouseUnitAdapter extends LDSpinnerAdapter {
 
     @Override
     public Object getItem(int i) {
-        return i == 0 ? "请选择":i+" 单元";
+        return i == 0 ? "请选择" : i + " 单元";
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        View result = LayoutInflater.from(context).inflate(R.layout.item_problem_type, null);
+        View result = LayoutInflater.from(context).inflate(android.R.layout.simple_spinner_dropdown_item, viewGroup, false);
         TextView title = (TextView) result.findViewById(android.R.id.text1);
         title.setText(((String) getItem(i)));
         return result;

@@ -4,11 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,10 +22,11 @@ import com.blankj.utilcode.util.ToastUtils;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.MapActivity;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
-import cc.zkteam.zkinfocollectpro.exception.ZKIdCardException;
 import cc.zkteam.zkinfocollectpro.fragment.problem.mvp.PRPresenterImpl;
 import cc.zkteam.zkinfocollectpro.fragment.problem.mvp.PRView;
 import cc.zkteam.zkinfocollectpro.utils.L;
@@ -51,8 +53,6 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     EditText mProblemLocation;
     @BindView(R.id.btn_select_location)
     Button mSelectLocationBtn;
-    @BindView(R.id.rv_pic)
-    RecyclerView mPicListView;
     @BindView(R.id.et_problem_suggestion)
     EditText mProblemSuggestion;
     @BindView(R.id.btn_commit)
@@ -61,6 +61,10 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     Toolbar mToolbar;
     @BindView(R.id.tv_toolbar_title)
     TextView mToolbarTitle;
+    @BindView(R.id.et_problem_attachment)
+    EditText mProblemAttachment;
+    @BindView(R.id.btn_select_pic)
+    Button mSelectPicBtn;
     private PRPresenterImpl mPresenter;
     private boolean mIsEditPage = false;
     private String mCurrPicPath = "";
@@ -109,11 +113,11 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     }
 
     protected void initToolbar(Toolbar toolbar) {
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         //  设置了左上角的返回按钮
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
     }
 
@@ -158,6 +162,10 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
                     MapActivity.class), GO_MAP);
         });
         mCommitBtn.setOnClickListener(v -> judgeInput());
+        mSelectPicBtn.setOnClickListener(v -> MultiImageSelector.create()
+                .showCamera(false)
+                .single() // single mode
+                .start(ProblemReportFragment.this, REQUEST_IMAGE));
     }
 
     @Override
@@ -180,6 +188,8 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
                     String galleyPicPath = pics.get(0);
                     L.d("当前图片地址是：" + galleyPicPath);
                     mCurrPicPath = galleyPicPath;
+                    String path[] = galleyPicPath.split("/");
+                    mProblemAttachment.setText(path[path.length - 1]);
                 }
             }
         }
@@ -193,11 +203,8 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
                 || inputIsEmpty(mProblemType, R.string.input_problem_type)
                 || inputIsEmpty(mProblemDesc, R.string.input_problem_desc)
                 || inputIsEmpty(mProblemLocation, R.string.input_problem_location)
+                || inputIsEmpty(mProblemAttachment, R.string.select_problem_pic)
                 || inputIsEmpty(mProblemSuggestion, R.string.input_problem_suggestion)) {
-            MultiImageSelector.create()
-                    .showCamera(false)
-                    .single() // single mode
-                    .start(this, REQUEST_IMAGE);
             return;
         }
 
@@ -205,6 +212,7 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
                 mProblemType.getSelectedItem().toString(),
                 mProblemDesc.getText().toString(),
                 mProblemLocation.getText().toString(),
+                mProblemAttachment.getText().toString(),
                 mProblemSuggestion.getText().toString(),
                 mCurrPicPath);
     }

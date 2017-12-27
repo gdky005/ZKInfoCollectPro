@@ -15,6 +15,7 @@
     <string name="problem_desc">描述</string>
     <string name="problem_location">地址</string>
     <string name="select_location">选择地址</string>
+    <string name="select_attachment">上传附件</string>
     <string name="problem_attachment">附件</string>
     <string name="deal_with_info">处理信息</string>
     <string name="deal_with_suggestion">处理意见</string>
@@ -22,6 +23,7 @@
     <string name="input_problem_type">请输入问题类型</string>
     <string name="input_problem_desc">请输入问题描述</string>
     <string name="input_problem_location">请选择或输入地址</string>
+    <string name="select_problem_pic">请选择需要上传的图片</string>
     <string name="input_problem_suggestion">请输入处理意见</string>
     <string name="btn_commit">提交</string>
 
