@@ -62,21 +62,21 @@ public class MyProblemListActivity extends BaseActivity implements RvListener {
     }
 
     private void getProblemList() {
-        mProblemList.add(new ProblemPreview("编号：12345665222",
-                "描述：这是一个不太清晰的描述",
-                "报上时间：2017-12-01  10:13:45"));
-        mProblemList.add(new ProblemPreview("编号：12345665222",
-                "描述：这是一个不太清晰的描述",
-                "报上时间：2017-12-01  10:13:45"));
-        mProblemList.add(new ProblemPreview("编号：12345665222",
-                "描述：这是一个不太清晰的描述",
-                "报上时间：2017-12-01  10:13:45"));
-        mProblemList.add(new ProblemPreview("编号：12345665222",
-                "描述：这是一个不太清晰的描述",
-                "报上时间：2017-12-01  10:13:45"));
-        mProblemList.add(new ProblemPreview("编号：12345665222",
-                "描述：这是一个不太清晰的描述",
-                "报上时间：2017-12-01  10:13:45"));
+        mProblemList.add(new ProblemPreview("12345665222",
+                "这是一个不太清晰的描述",
+                "2017-12-01  10:13:45"));
+        mProblemList.add(new ProblemPreview("12345665222",
+                "这是一个不太清晰的描述",
+                "2017-12-01  10:13:45"));
+        mProblemList.add(new ProblemPreview("12345665222",
+                "这是一个不太清晰的描述",
+                "2017-12-01  10:13:45"));
+        mProblemList.add(new ProblemPreview("12345665222",
+                "这是一个不太清晰的描述",
+                "2017-12-01  10:13:45"));
+        mProblemList.add(new ProblemPreview("12345665222",
+                "这是一个不太清晰的描述",
+                "2017-12-01  10:13:45"));
     }
 
     @Override
