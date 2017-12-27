@@ -23,6 +23,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import cc.zkteam.zkinfocollectpro.ArgsInterface;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.ZKBase;
 import cc.zkteam.zkinfocollectpro.activity.RentPersonInfoActivity;
 import cc.zkteam.zkinfocollectpro.adapter.LDSpinnerAdapter;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
@@ -256,7 +257,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
             index++;
             mPresenter.loadStreetCommunity(adapter.getItem(i).getId(), index + "");
         }else if (index == 4){
-            // TODO: 2017/12/25 调用更新住房信息接口 
+            // TODO: 2017/12/25 调用更新住房信息接口
         }
     }
 

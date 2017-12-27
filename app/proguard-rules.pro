@@ -35,3 +35,11 @@
 -dontwarn org.apache.http.**
 -dontwarn android.net.http.AndroidHttpClient
 # End Bugtags
+
+# ProGuard configurations for NetworkBench Lens
+-keepattributes SourceFile,LineNumberTable
+
+-keep class com.networkbench.** { *; }
+-dontwarn com.networkbench.**
+-keepattributes Exceptions, Signature, InnerClasses
+# End NetworkBench Lens
