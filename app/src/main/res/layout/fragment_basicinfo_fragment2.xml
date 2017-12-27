@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/rel2"
+        android:layout_width="match_parent"
+        android:layout_height="45dip"
+        android:layout_below="@id/cardlayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/basic_textview1_marleft"
+            android:text="采集信息"
+            android:textColor="@color/black_333"
+            android:textSize="18dip" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dip"
+            android:layout_alignParentBottom="true"
+            android:background="@color/gray2" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout21"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_layout_hight"
+        android:layout_below="@+id/rel2">
+
+        <TextView
+            android:id="@+id/textview21"
+            android:layout_width="@dimen/basic_texiview_width"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/basic_textview2_marleft"
+            android:text="1    关联信息"
+            android:textSize="@dimen/basic_textview_size" />
+
+        <EditText
+            android:id="@+id/edittext21"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dip"
+            android:layout_marginRight="25dip"
+            android:layout_toRightOf="@+id/textview21"
+            android:background="@null"
+            android:hint="请输入"
+            android:textSize="@dimen/basic_textview_size" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout22"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_layout_hight"
+        android:layout_below="@+id/layout21">
+
+        <TextView
+            android:id="@+id/textview22"
+            android:layout_width="@dimen/basic_texiview_width"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/basic_textview2_marleft"
+            android:text="2    数据联审状态"
+            android:textSize="@dimen/basic_textview_size" />
+
+        <EditText
+            android:id="@+id/edittext22"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dip"
+            android:layout_marginRight="25dip"
+            android:layout_toRightOf="@+id/textview22"
+            android:background="@null"
+            android:hint="请输入"
+            android:textSize="@dimen/basic_textview_size" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout23"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_layout_hight"
+        android:layout_below="@+id/layout22">
+
+        <TextView
+            android:id="@+id/textview23"
+            android:layout_width="@dimen/basic_texiview_width"
+
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/basic_textview2_marleft"
+            android:text="3    数据归属单位"
+            android:textSize="@dimen/basic_textview_size" />
+
+        <Button
+            android:id="@+id/edittext23"
+            style="@style/BasicinfoActivity_button"
+            android:layout_toRightOf="@id/textview23"
+            android:drawableLeft="@mipmap/left_arrow"
+            android:drawableRight="@mipmap/right_arrow"
+            android:paddingHorizontal="8dp"
+            android:text="某某单位" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout24"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_layout_hight"
+        android:layout_below="@+id/layout23">
+
+        <TextView
+            android:id="@+id/textview24"
+            android:layout_width="@dimen/basic_texiview_width"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/basic_textview2_marleft"
+            android:text="4    注销类别代码"
+            android:textSize="@dimen/basic_textview_size" />
+
+        <EditText
+            android:id="@+id/edittext24"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dip"
+            android:layout_marginRight="25dip"
+            android:layout_toRightOf="@+id/textview24"
+            android:background="@null"
+            android:hint="请输入"
+            android:textSize="@dimen/basic_textview_size" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout25"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_layout_hight"
+        android:layout_below="@+id/layout24">
+
+        <TextView
+            android:id="@+id/textview25"
+            android:layout_width="@dimen/basic_texiview_width"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/basic_textview2_marleft"
+            android:text="5    证件类型"
+            android:textSize="@dimen/basic_textview_size" />
+
+        <EditText
+            android:id="@+id/edittext25"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dip"
+            android:layout_marginRight="25dip"
+            android:layout_toRightOf="@+id/textview25"
+            android:background="@null"
+            android:hint="请输入"
+            android:textSize="@dimen/basic_textview_size" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout26"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_layout_hight"
+        android:layout_below="@+id/layout25">
+
+        <TextView
+            android:id="@+id/textview26"
+            android:layout_width="@dimen/basic_texiview_width"
+
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/basic_textview2_marleft"
+            android:text="6    采集时间"
+            android:textSize="@dimen/basic_textview_size" />
+
+        <Button
+            android:id="@+id/edittext26"
+            style="@style/BasicinfoActivity_button"
+            android:layout_toRightOf="@id/textview26"
+            android:drawableRight="@mipmap/data_icon"
+            android:paddingHorizontal="8dp"
+            android:text="2017年12月25日" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dip"
+            android:layout_alignParentBottom="true"
+            android:background="@color/gray2" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/savecommit"
+        android:layout_width="250dip"
+        android:layout_height="40dip"
+        android:layout_below="@+id/layout26"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dip"
+        android:background="@drawable/basicinfo_btn_commit"
+        android:text="保存并提交"
+        android:textColor="@color/white" />
+</LinearLayout>
