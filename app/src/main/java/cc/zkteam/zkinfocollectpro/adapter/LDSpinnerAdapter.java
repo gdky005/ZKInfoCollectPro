@@ -14,22 +14,34 @@ import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
 
 /**
- * Created by lmj on 2017/12/25.
+ * Created by Administrator on 2017/12/25.
  */
 
 public class LDSpinnerAdapter extends BaseAdapter {
 
 
-    private  List<ZHCommunityBean.DataBean> mData;
+    protected   List<ZHCommunityBean.DataBean> mData;
 
 
-    private Context context;
+    protected Context context;
 
 
     public LDSpinnerAdapter(Context mContext) {
         this.context = mContext;
         mData = new ArrayList<>();
         mData.add(new ZHCommunityBean.DataBean("-1", "请选择"));
+    }
+
+    public int getmCeng() {
+        return isHaveData() ? Integer.parseInt(mData.get(1).getBuildceng()) : 0;
+    }
+
+    public int getHome(){
+        return isHaveData() ? Integer.parseInt(mData.get(1).getBuildhome()) : 0 ;
+    }
+
+    public boolean isHaveData(){
+        return mData.size() == 1 ? false:true;
     }
 
     public void setData(List<ZHCommunityBean.DataBean> tempData) {
@@ -53,7 +65,7 @@ public class LDSpinnerAdapter extends BaseAdapter {
     }
 
     @Override
-    public ZHCommunityBean.DataBean getItem(int i) {
+    public Object getItem(int i) {
         return mData.get(i);
     }
 
@@ -65,7 +77,7 @@ public class LDSpinnerAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         View result = LayoutInflater.from(context).inflate(R.layout.item_problem_type, null);
-        TextView title = result.findViewById(android.R.id.text1);
+        TextView title = (TextView) result.findViewById(android.R.id.text1);
         title.setText(mData.get(i).getName());
         return result;
     }

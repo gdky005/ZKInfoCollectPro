@@ -43,20 +43,24 @@ public class ZHCommunityBean {
     }
 
     public static class DataBean {
+
+
         public DataBean(String id, String name) {
             this.id = id;
             this.name = name;
+        }
+
+        public DataBean(String id, String buildunit, String buildceng, String buildhome) {
+            this.id = id;
+            this.buildunit = buildunit;
+            this.buildceng = buildceng;
+            this.buildhome = buildhome;
         }
 
         /**
          * id : 1
          * name : 城北社区
          */
-
-
-
-        private String id;
-        private String name;
 
         public String getId() {
             return id;
@@ -76,10 +80,51 @@ public class ZHCommunityBean {
 
         @Override
         public String toString() {
-            return "{" +
-                    "id:'" + id + '\'' +
-                    ", name:'" + name + '\'' +
+            return "DataBean{" +
+                    "id='" + id + '\'' +
+                    ", name='" + name + '\'' +
+                    ", buildunit='" + buildunit + '\'' +
+                    ", buildceng='" + buildceng + '\'' +
+                    ", buildhome='" + buildhome + '\'' +
                     '}';
         }
+
+        /**
+         * id : 3
+         * buildunit : 2
+         * buildceng : 32
+         * buildhome : 4
+         */
+
+        private String id;
+        private String name;
+        private String buildunit;
+        private String buildceng;
+        private String buildhome;
+
+        public String getBuildunit() {
+            return buildunit;
+        }
+
+        public void setBuildunit(String buildunit) {
+            this.buildunit = buildunit;
+        }
+
+        public String getBuildceng() {
+            return buildceng;
+        }
+
+        public void setBuildceng(String buildceng) {
+            this.buildceng = buildceng;
+        }
+
+        public String getBuildhome() {
+            return buildhome;
+        }
+
+        public void setBuildhome(String buildhome) {
+            this.buildhome = buildhome;
+        }
     }
+
 }

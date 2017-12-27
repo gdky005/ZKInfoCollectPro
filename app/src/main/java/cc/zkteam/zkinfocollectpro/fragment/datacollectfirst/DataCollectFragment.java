@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,8 +24,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import cc.zkteam.zkinfocollectpro.ArgsInterface;
 import cc.zkteam.zkinfocollectpro.R;
-import cc.zkteam.zkinfocollectpro.ZKBase;
 import cc.zkteam.zkinfocollectpro.activity.RentPersonInfoActivity;
+import cc.zkteam.zkinfocollectpro.adapter.HouseUnitAdapter;
 import cc.zkteam.zkinfocollectpro.adapter.LDSpinnerAdapter;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.bean.HouseInfo;
@@ -135,7 +136,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         mNeighborSpinner.setAdapter(neibAdapter);
         mNeighborSpinner.setOnItemSelectedListener(this);
 
-        unitAdapter = new LDSpinnerAdapter(mContext);
+        unitAdapter = new HouseUnitAdapter(mContext);
         mUnitSpinner.setAdapter(unitAdapter);
         mUnitSpinner.setOnItemSelectedListener(this);
     }
@@ -184,6 +185,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
 
     @Override
     public void updateRecycle(List<HouseInfo> mData) {
+        mHouseContainer.removeViews(1,mHouseContainer.getChildCount()-1);
         for (int i = 0; i < mData.size(); i++) {
 
             LinearLayout linearLayout = new LinearLayout(mContext);
@@ -255,9 +257,20 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         if (index < 4) {
             clearSpinnerData(index);
             index++;
-            mPresenter.loadStreetCommunity(adapter.getItem(i).getId(), index + "");
-        }else if (index == 4){
+
+            String id = ((ZHCommunityBean.DataBean) adapter.getItem(i)).getId();
+            mPresenter.loadStreetCommunity(id, index + "");
+
+        } else if (index == 4) {
             // TODO: 2017/12/25 调用更新住房信息接口
+            LDSpinnerAdapter adapter1 = adapterMap.get(index);
+            List<HouseInfo> houseInfos = new ArrayList<>();
+            for (int j = 1; j <=  adapter1.getmCeng(); j++) {
+                HouseInfo houseInfo = new HouseInfo(j, adapter1.getHome());
+                houseInfos.add(houseInfo);
+            }
+            updateRecycle(houseInfos);
+
         }
     }
 

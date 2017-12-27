@@ -11,7 +11,6 @@ import cc.zkteam.zkinfocollectpro.base.mvp.BaseMVPPresenter;
 import cc.zkteam.zkinfocollectpro.bean.HouseInfo;
 import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
-import cc.zkteam.zkinfocollectpro.retrofit2.ZHCallback;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,12 +37,12 @@ public class DcPresenterImpl extends BaseMVPPresenter<DcView, DcModel> implement
     @Override
     public void loadData() {
         Log.i(TAG, "loadData: ");
-        List<HouseInfo> houseInfos = new ArrayList<>();
+      /*  List<HouseInfo> houseInfos = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
             HouseInfo houseInfo = new HouseInfo(i, 5);
             houseInfos.add(houseInfo);
         }
-        mView.updateRecycle(houseInfos);
+        mView.updateRecycle(houseInfos);*/
 
         loadStreetCommunity("1", "0");
     }
@@ -66,5 +65,9 @@ public class DcPresenterImpl extends BaseMVPPresenter<DcView, DcModel> implement
 
             }
         });
+    }
+
+    public void getUnitInfos(String id, String typ){
+
     }
 }
