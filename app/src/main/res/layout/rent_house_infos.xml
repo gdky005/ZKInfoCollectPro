@@ -34,7 +34,6 @@
                 android:id="@+id/road_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:entries="@array/street"
                 android:theme="@style/SpnStyle"/>
 
         </LinearLayout>
@@ -68,7 +67,6 @@
                 android:id="@+id/cummunity_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:entries="@array/community"
                 android:theme="@style/SpnStyle"/>
 
         </LinearLayout>
@@ -102,7 +100,6 @@
                 android:id="@+id/neighborhood_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:entries="@array/neighborhoods"
                 android:theme="@style/SpnStyle"/>
 
         </LinearLayout>
@@ -136,7 +133,6 @@
                 android:id="@+id/house_num_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:entries="@array/building"
                 android:theme="@style/SpnStyle"/>
 
         </LinearLayout>
@@ -170,7 +166,6 @@
                 android:id="@+id/unit_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:entries="@array/unit"
                 android:theme="@style/SpnStyle"/>
 
         </LinearLayout>

@@ -134,9 +134,9 @@ public class SignInFragment extends BaseFragment {
             public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
                 ZHBaseBean zhBaseBean = response.body();
                 if (zhBaseBean != null) {
-                    if (zhBaseBean.getStatus() == 0) {
+                    if (zhBaseBean.getStatus() == 0 && tvSign != null) {
                         tvSign.setOnClickListener(null);
-                        tvSign.setText("已签到");
+                        setText(tvSign, "已签到");
                     }
                 }
             }
@@ -156,19 +156,19 @@ public class SignInFragment extends BaseFragment {
                     if (dataBeanList != null) {
                         for (ZHTongJiBean.DataBean dataBean : dataBeanList) {
                             if (!TextUtils.isEmpty(dataBean.getTotal())) {
-                                tvNumAll.setText(dataBean.getTotal());
+                                setText(tvNumAll, dataBean.getTotal());
                             } else if (!TextUtils.isEmpty(dataBean.getWancheng())) {
-                                tvNumComplete.setText("采集完成" + dataBean.getWancheng());
+                                setText(tvNumComplete, "采集完成" + dataBean.getWancheng());
                                 if (TextUtils.isEmpty(dataBean.getPercent())) continue;
-                                tvPercentComplete.setText(dataBean.getPercent());
+                                setText(tvPercentComplete, dataBean.getPercent());
                             } else if (!TextUtils.isEmpty(dataBean.getCaiji())) {
-                                tvNumCurrent.setText("正在采集" + dataBean.getCaiji());
+                                setText(tvNumCurrent, "正在采集" + dataBean.getCaiji());
                                 if (TextUtils.isEmpty(dataBean.getCaiji())) continue;
-                                tvPercentCurrent.setText(dataBean.getPercent());
+                                setText(tvPercentCurrent, dataBean.getPercent());
                             } else if (!TextUtils.isEmpty(dataBean.getWeicaiji())) {
-                                tvNumNone.setText("未完成" + dataBean.getWeicaiji());
+                                setText(tvNumNone, "未完成" + dataBean.getWeicaiji());
                                 if (TextUtils.isEmpty(dataBean.getPercent())) return;
-                                tvPercentNone.setText(dataBean.getPercent());
+                                setText(tvPercentNone, dataBean.getPercent());
                             }
                         }
                     }
@@ -227,7 +227,7 @@ public class SignInFragment extends BaseFragment {
 //                layoutSignSuccess.setVisibility(View.VISIBLE);
                 ZHBaseBean zhBaseBean = response.body();
                 if (zhBaseBean != null && !TextUtils.isEmpty(zhBaseBean.getMsg())) {
-                    tvSignSuccessMsg.setText(zhBaseBean.getMsg());
+                    setText(tvSignSuccessMsg, zhBaseBean.getMsg());
                 }
 
                 ZKDialogFragment zkDialogFragment = ZKDialogFragmentHelper.showDialog(SignInFragment.this.getChildFragmentManager(),
@@ -238,9 +238,10 @@ public class SignInFragment extends BaseFragment {
 
                             }
                         }, null);
-
-                tvSign.setOnClickListener(null);
-                tvSign.setText("已签到");
+                if (tvSign != null) {
+                    tvSign.setOnClickListener(null);
+                    tvSign.setText("已签到");
+                }
             }
 
             @Override

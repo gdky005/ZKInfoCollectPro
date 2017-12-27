@@ -132,7 +132,6 @@ public interface ZHApi {
                                        @Field("louceng") String address,
                                        @Field("house_number") String house_number);
 
-
     /**
      * 问题上报接口已经提交
      */
@@ -146,5 +145,4 @@ public interface ZHApi {
                             @Part MultipartBody.Part type,
                             @Part MultipartBody.Part path,
                             @Part MultipartBody.Part filetype);
-
 }

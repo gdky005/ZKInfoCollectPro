@@ -7,9 +7,9 @@ import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.io.File;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import cc.zkteam.zkinfocollectpro.ZKBase;
@@ -78,6 +78,9 @@ public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implemen
                     ZHBaseBean zhBaseBean = response.body();
                     if (zhBaseBean != null) {
                         Log.d("TAG", "onResponse: " + zhBaseBean.toString());
+                        if (zhBaseBean.getStatus() == 1) {
+                            ToastUtils.showShort("上报成功");
+                        }
                     }
                 }
 
