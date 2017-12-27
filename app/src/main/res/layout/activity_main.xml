@@ -11,11 +11,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <LinearLayout
+        android:id="@+id/test_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/zk_title_view">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+
+        <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView
+            android:id="@+id/filed_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+
+        <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledLayoutView
+            android:id="@+id/filed_layout_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+
+
+
+    </LinearLayout>
+
     <include
         layout="@layout/activity_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/zk_title_view"/>
+        android:layout_below="@+id/test_layout"/>
 
 </RelativeLayout>
 

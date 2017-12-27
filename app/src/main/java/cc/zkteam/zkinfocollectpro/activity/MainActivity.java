@@ -13,6 +13,10 @@ import android.widget.LinearLayout;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
@@ -29,6 +33,8 @@ import cc.zkteam.zkinfocollectpro.exception.ZKIdCardException;
 import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledLayoutView;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -73,6 +79,14 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initViews() {
 
+
+        testLayout();
+
+
+
+
+
+
         zkTitleView.setLeftIVSrc(R.drawable.icon_back);
         zkTitleView.setRightIVSrc(R.drawable.icon_about);
 
@@ -91,6 +105,30 @@ public class MainActivity extends BaseActivity {
                 ToastUtils.showShort("点击了标题栏右边的按钮");
             }
         });
+    }
+
+    private void testLayout() {
+        ZKFiledView filedView = findViewById(R.id.filed_view);
+        ZKFiledLayoutView fileLayoutView = findViewById(R.id.filed_layout_view);
+
+        filedView.setKeyValue("姓名", "小Q");
+
+        JSONArray jsonArray = null;
+        try {
+            jsonArray = new JSONArray();
+
+            for (int i = 0; i < 5; i++) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("Key" + 1, "Value" + 1);
+                jsonArray.put(jsonObject);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        fileLayoutView.setJsonArray(jsonArray);
+
     }
 
     @Override
