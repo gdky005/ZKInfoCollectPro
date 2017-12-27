@@ -43,7 +43,7 @@ public class ZKFiledView extends LinearLayout {
         View view = inflater.inflate(R.layout.kind_layout_text_field, null);
 
         keyFiled = view.findViewById(R.id.text_filed_key);
-        valueFiled = view.findViewById(R.id.text_filed_value);
+        valueFiled = view.findViewById(R.id.right_layout_text_filed_value);
         addView(view);
     }
 

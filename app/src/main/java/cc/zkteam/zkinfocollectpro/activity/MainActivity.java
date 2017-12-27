@@ -17,6 +17,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
@@ -33,6 +36,8 @@ import cc.zkteam.zkinfocollectpro.exception.ZKIdCardException;
 import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKEditFiledView;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledFormView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledLayoutView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView;
 import retrofit2.Call;
@@ -78,13 +83,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-
-
         testLayout();
-
-
-
-
 
 
         zkTitleView.setLeftIVSrc(R.drawable.icon_back);
@@ -110,6 +109,8 @@ public class MainActivity extends BaseActivity {
     private void testLayout() {
         ZKFiledView filedView = findViewById(R.id.filed_view);
         ZKFiledLayoutView fileLayoutView = findViewById(R.id.filed_layout_view);
+        ZKEditFiledView editFiledView = findViewById(R.id.eidt_filed_layout_view);
+        ZKFiledFormView zkFiledFormView = findViewById(R.id.edit_form_filed_view);
 
         filedView.setKeyValue("姓名", "小Q");
 
@@ -119,7 +120,7 @@ public class MainActivity extends BaseActivity {
 
             for (int i = 0; i < 5; i++) {
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("Key" + 1, "Value" + 1);
+                jsonObject.put("Key" + i, "Value" + i);
                 jsonArray.put(jsonObject);
             }
         } catch (JSONException e) {
@@ -128,6 +129,16 @@ public class MainActivity extends BaseActivity {
 
 
         fileLayoutView.setJsonArray(jsonArray);
+
+        editFiledView.setData("1", "姓名", "小小兔", 0, ZKEditFiledView.TYPE_FILED_FORM_TIME);
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        map.put(1, ZKEditFiledView.TYPE_FILED_FORM_EDIT_TEXT);
+        map.put(2, ZKEditFiledView.TYPE_FILED_FORM_SELECT_DATA);
+        map.put(3, ZKEditFiledView.TYPE_FILED_FORM_TIME);
+
+        zkFiledFormView.setJsonArray(jsonArray, map);
 
     }
 

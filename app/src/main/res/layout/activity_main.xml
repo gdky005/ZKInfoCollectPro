@@ -38,11 +38,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/colorAccent"/>
 
+
+        <cc.zkteam.zkinfocollectpro.view.kind.ZKEditFiledView
+            android:id="@+id/eidt_filed_layout_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+
+        <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledFormView
+            android:id="@+id/edit_form_filed_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
 
     </LinearLayout>
