@@ -14,6 +14,8 @@
             android:layout_height="match_parent">
 
 
+
+
             <cc.zkteam.zkinfocollectpro.view.ZKTitleView
                 android:id="@+id/zk_title_view"
                 android:layout_width="match_parent"
@@ -29,7 +31,19 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/colorAccent" />
+                    android:background="@color/colorAccent"
+                    android:layout_marginTop="100dp"/>
+
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView
+                    android:id="@+id/zk_filed_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorAccent"
+                    android:layout_marginBottom="100dp"/>
 
                 <cc.zkteam.zkinfocollectpro.view.kind.ZKKindTitle
                     android:id="@+id/zk_kind_title"

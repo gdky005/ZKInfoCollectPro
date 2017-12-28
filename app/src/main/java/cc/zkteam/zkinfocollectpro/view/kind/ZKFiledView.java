@@ -1,10 +1,9 @@
 package cc.zkteam.zkinfocollectpro.view.kind;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import cc.zkteam.zkinfocollectpro.R;
@@ -14,7 +13,7 @@ import cc.zkteam.zkinfocollectpro.R;
  * Created by wangqing on 2017/12/26.
  */
 
-public class ZKFiledView extends LinearLayout {
+public class ZKFiledView extends ZKBaseView {
 
     TextView keyFiled;
     TextView valueFiled;
@@ -22,29 +21,27 @@ public class ZKFiledView extends LinearLayout {
     String key;
     String value;
 
-
     public ZKFiledView(Context context) {
         super(context);
-        init();
     }
 
-    public ZKFiledView(Context context, AttributeSet attrs) {
+    public ZKFiledView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
 
-    public ZKFiledView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ZKFiledView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
     }
 
-    private void init() {
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        View view = inflater.inflate(R.layout.kind_layout_text_field, null);
+    @Override
+    protected int getLayoutId() {
+        return R.layout.kind_layout_text_field;
+    }
 
-        keyFiled = view.findViewById(R.id.text_filed_key);
-        valueFiled = view.findViewById(R.id.right_layout_text_filed_value);
-        addView(view);
+    @Override
+    protected void initViews(View rootView) {
+        keyFiled = findView(R.id.text_filed_key);
+        valueFiled = findView(R.id.right_layout_text_filed_value);
     }
 
     public void setKey(String key) {
@@ -64,12 +61,7 @@ public class ZKFiledView extends LinearLayout {
     }
 
     private void updateView(String k, String v){
-        if (k != null && keyFiled != null && !keyFiled.getText().equals(k)) {
-            keyFiled.setText(k);
-        }
-
-        if (v != null && valueFiled != null && !valueFiled.getText().equals(v)) {
-            valueFiled.setText(v);
-        }
+        setViewText(keyFiled, k);
+        setViewText(valueFiled, v);
     }
 }
