@@ -1,8 +1,9 @@
 package cc.zkteam.zkinfocollectpro.view.kind;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
+import android.view.View;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,26 +15,30 @@ import java.util.Map;
  * Created by wangqing on 2017/12/26.
  */
 
-public class ZKFiledFormView extends LinearLayout {
+public class ZKFiledFormView extends ZKBaseView {
 
     public ZKFiledFormView(Context context) {
         super(context);
-        init();
     }
 
-    public ZKFiledFormView(Context context, AttributeSet attrs) {
+    public ZKFiledFormView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
 
-    public ZKFiledFormView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ZKFiledFormView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
     }
 
-    private void init() {
+    @Override
+    protected int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    protected void initViews(View rootView) {
 
     }
+
 
     public void setJsonArray(JSONArray jsonArray) {
         setJsonArray(jsonArray, null);

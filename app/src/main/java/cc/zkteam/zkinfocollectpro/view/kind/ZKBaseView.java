@@ -41,11 +41,15 @@ public abstract class ZKBaseView extends LinearLayout {
         if (context instanceof Activity)
             this.activity = (Activity) context;
 
-        LayoutInflater inflater = LayoutInflater.from(context);
-        rootView = inflater.inflate(getLayoutId(), null);
-        initViews(rootView);
+        int layoutId = getLayoutId();
 
-        addView(rootView);
+        if (0 != layoutId) {
+            LayoutInflater inflater = LayoutInflater.from(context);
+            rootView = inflater.inflate(layoutId, null);
+            initViews(rootView);
+
+            addView(rootView);
+        }
     }
 
     //获取资源ID
