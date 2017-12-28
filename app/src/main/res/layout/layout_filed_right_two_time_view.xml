@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/right_layout_two_time_ll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/right_layout_two_time_left_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/right_layout_two_time_center_text"
+        android:background="@drawable/basicinfo_input_back"
+        android:drawableRight="@mipmap/data_icon"
+        android:gravity="center|left"
+        android:padding="@dimen/dp_5"
+        android:text="时间1"/>
+
+    <TextView
+        android:id="@+id/right_layout_two_time_center_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="@dimen/dp_10"
+        android:text="至"/>
+
+    <TextView
+        android:id="@+id/right_layout_two_time_right_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/right_layout_two_time_center_text"
+        android:background="@drawable/basicinfo_input_back"
+        android:drawableRight="@mipmap/data_icon"
+        android:gravity="center|left"
+        android:padding="@dimen/dp_5"
+        android:text="时间2"/>
+
+</RelativeLayout>

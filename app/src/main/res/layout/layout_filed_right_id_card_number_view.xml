@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/right_layout_id_card_number"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
+
+    <include
+        android:id="@+id/right_layout_left_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_toLeftOf="@+id/right_layout_id_card_serial_number_right_search_btn"
+        layout="@layout/layout_filed_right_edit_text_view"/>
+
+
+    <include
+        android:id="@+id/right_layout_id_card_serial_number_right_search_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        layout="@layout/layout_filed_right_search_btn_view"/>
+
+</RelativeLayout>

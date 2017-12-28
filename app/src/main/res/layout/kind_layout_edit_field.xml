@@ -27,11 +27,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
-            android:text="成员姓名"
+            android:text="hello"
             android:textColor="@color/gray_6"
             android:textSize="@dimen/sp_16"/>
     </LinearLayout>
-
 
     <RelativeLayout
         android:id="@+id/right_layout"
@@ -44,42 +43,79 @@
         android:padding="@dimen/dp_5"
         android:visibility="visible">
 
-        <EditText
-            android:id="@+id/right_layout_text_filed_value"
+        <!--输入框-->
+        <ViewStub
+            android:id="@+id/right_layout_left_et_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="请输入"
-            android:singleLine="true"
-            android:textColor="@color/gray_6"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:textSize="@dimen/sp_12"
-            android:visibility="gone"/>
+            android:layout_centerInParent="true"
+            android:inflatedId="@+id/right_layout_left_et"
+            android:layout="@layout/layout_filed_right_edit_text_view"/>
 
-        <TextView
-            android:id="@+id/right_layout_time_filed_value"
+        <!--时间选择器-->
+        <ViewStub
+            android:id="@+id/right_layout_time_filed_value_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/basicinfo_input_back"
-            android:drawableRight="@mipmap/data_icon"
-            android:padding="@dimen/dp_10"
-            android:text="2017年12月25日"
-            android:visibility="gone"/>
+            android:layout_centerInParent="true"
+            android:inflatedId="@+id/right_layout_time_filed_value"
+            android:layout="@layout/layout_filed_right_time_text_view"/>
 
-        <TextView
-            android:id="@+id/right_layout_select_data_filed_value"
+        <!--日期选择器-->
+        <ViewStub
+            android:id="@+id/right_layout_select_data_filed_value_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:inflatedId="@+id/right_layout_select_data_filed_value"
+            android:layout="@layout/layout_filed_right_select_data_filed_view"/>
+
+        <!--图片展示-->
+        <ViewStub
+            android:id="@+id/right_layout_image_view_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/basicinfo_input_back"
-            android:drawableLeft="@mipmap/left_arrow"
-            android:drawablePadding="@dimen/dp_10"
-            android:drawableRight="@mipmap/right_arrow"
-            android:padding="@dimen/dp_10"
-            android:text="某某单位"
-            android:textColor="@color/black_333"
-            android:visibility="visible"/>
+            android:inflatedId="@+id/right_layout_image_view"
+            android:layout="@layout/layout_filed_right_image_filed_view"/>
+
+        <!--双按钮-->
+        <ViewStub
+            android:id="@+id/right_layout_btn_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:inflatedId="@+id/right_layout_btn_ll"
+            android:layout="@layout/layout_filed_right_double_btn_view"/>
+
+        <!--双时间选择器-->
+        <ViewStub
+            android:id="@+id/right_layout_two_time_ll_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:inflatedId="@+id/right_layout_two_time_ll"
+            android:layout="@layout/layout_filed_right_two_time_view"/>
+
+        <!--身份证正反面-->
+        <ViewStub
+            android:id="@+id/right_layout_id_card_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:inflatedId="@+id/right_layout_id_card"
+            android:layout="@layout/layout_filed_right_id_card_image_view"/>
+
+
+        <!--输入框+按钮-->
+        <ViewStub
+            android:id="@+id/right_layout_id_card_number_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:inflatedId="@+id/right_layout_id_card_number"
+            android:layout="@layout/layout_filed_right_id_card_number_view"/>
+
 
     </RelativeLayout>
 

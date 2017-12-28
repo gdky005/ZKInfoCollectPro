@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/right_layout_id_card_serial_number_right_search_btn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_btn_blue_drawable"
+    android:drawablePadding="@dimen/dp_5"
+    android:drawableRight="@drawable/icon_search"
+    android:gravity="center"
+    android:padding="@dimen/dp_5"
+    android:text="查询"
+    android:textColor="@color/white"
+    android:textSize="@dimen/sp_16"
+    android:visibility="visible"/>

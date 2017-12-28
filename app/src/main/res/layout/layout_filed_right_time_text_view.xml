@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/right_layout_time_filed_value"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/basicinfo_input_back"
+    android:layout_gravity="center_horizontal"
+    android:drawableRight="@mipmap/data_icon"
+    android:padding="@dimen/dp_10"
+    android:text="2017年12月25日"
+    android:visibility="visible"/>

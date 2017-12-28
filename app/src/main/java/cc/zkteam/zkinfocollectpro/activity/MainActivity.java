@@ -108,19 +108,45 @@ public class MainActivity extends BaseActivity {
     }
 
     private void testLayout() {
+
+
+        ZKEditFiledView zkTestView = findViewById(R.id.zk_test_view);
+        zkTestView.setFocusableInTouchMode(true);
+
+        zkTestView.setData("1", "姓名", "小Q", 1);
+//        zkTestView.setData("2", "姓名", "小Q", 2, ZKEditFiledView.TYPE_FILED_FORM_TIME);
+//        zkTestView.setData("3", "姓名", "小Q", 3, ZKEditFiledView.TYPE_FILED_FORM_SELECT_DATA);
+//        zkTestView.setData("4", "姓名", "小Q", 4, ZKEditFiledView.TYPE_FILED_FORM_IMAGE);
+//        zkTestView.setData("5", "姓名", "小Q", 5, ZKEditFiledView.TYPE_FILED_FORM_DOUBLE_BUTTON);
+//        zkTestView.setData("6", "姓名", "小Q", 6, ZKEditFiledView.TYPE_FILED_FORM_TWO_TIME_BUTTON);
+//        zkTestView.setData("7", "姓名", "小Q", 7, ZKEditFiledView.TYPE_FILED_FORM_ID_CARD);
+//        zkTestView.setData("8", "姓名", "小Q", 8, ZKEditFiledView.TYPE_FILED_FORM_ID_CARD_NUMBER);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         ZKFiledView filedView = findViewById(R.id.filed_view);
         ZKFiledLayoutView fileLayoutView = findViewById(R.id.filed_layout_view);
         ZKEditFiledView editFiledView = findViewById(R.id.eidt_filed_layout_view);
         ZKFiledFormView zkFiledFormView = findViewById(R.id.edit_form_filed_view);
         ZKKindTitle zkKindTitle = findViewById(R.id.zk_kind_title);
-        ZKEditFiledView zkTestView = findViewById(R.id.zk_test_view);
-
-        zkTestView.setFocusableInTouchMode(true);
-
-//        zkTestView.setData("1", "姓名", "小Q", 1);
-//        zkTestView.setData("2", "姓名", "小Q", 2, ZKEditFiledView.TYPE_FILED_FORM_SELECT_DATA);
-        zkTestView.setData("3", "姓名", "小Q", 3, ZKEditFiledView.TYPE_FILED_FORM_TIME);
-
 
 //        zkKindTitle.setTextTitle("小小新的笔记");
 //        zkKindTitle.setButtonTitle("小小新的笔记");

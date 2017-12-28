@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/right_layout_select_data_filed_value"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:background="@drawable/basicinfo_input_back"
+    android:drawableLeft="@mipmap/left_arrow"
+    android:drawablePadding="@dimen/dp_10"
+    android:drawableRight="@mipmap/right_arrow"
+    android:padding="@dimen/dp_10"
+    android:text="某某单位"
+    android:textColor="@color/black_333"
+    android:visibility="visible"/>
