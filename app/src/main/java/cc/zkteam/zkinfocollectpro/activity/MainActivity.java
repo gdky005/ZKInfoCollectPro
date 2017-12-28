@@ -40,6 +40,7 @@ import cc.zkteam.zkinfocollectpro.view.kind.ZKEditFiledView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledFormView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledLayoutView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKKindTitle;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -111,6 +112,10 @@ public class MainActivity extends BaseActivity {
         ZKFiledLayoutView fileLayoutView = findViewById(R.id.filed_layout_view);
         ZKEditFiledView editFiledView = findViewById(R.id.eidt_filed_layout_view);
         ZKFiledFormView zkFiledFormView = findViewById(R.id.edit_form_filed_view);
+        ZKKindTitle zkKindTitle = findViewById(R.id.kind_title);
+
+
+        zkKindTitle.setData("小小新的笔记", null);
 
         filedView.setKeyValue("姓名", "小Q");
 
