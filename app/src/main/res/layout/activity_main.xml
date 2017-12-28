@@ -13,6 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <cc.zkteam.zkinfocollectpro.view.ZKTitleView
                 android:id="@+id/zk_title_view"
                 android:layout_width="match_parent"
@@ -31,7 +32,7 @@
                     android:background="@color/colorAccent" />
 
                 <cc.zkteam.zkinfocollectpro.view.kind.ZKKindTitle
-                    android:id="@+id/kind_title"
+                    android:id="@+id/zk_kind_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

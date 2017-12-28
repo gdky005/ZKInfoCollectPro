@@ -1,15 +1,17 @@
 package cc.zkteam.zkinfocollectpro.view.kind;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.blankj.utilcode.util.ToastUtils;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 import cc.zkteam.zkinfocollectpro.R;
 import cn.qqtheme.framework.picker.OptionPicker;
@@ -20,64 +22,91 @@ import cn.qqtheme.framework.widget.WheelView;
  * Created by wangqing on 2017/12/27.
  */
 
-public class ZKKindTitle extends LinearLayout {
+public class ZKKindTitle extends ZKBaseView {
 
     private TextView titleNameTV;
-    private Button rightSelectBtn;
-
-    private String titleName;
-    private String defaultText;
-
-    private Activity activity;
-    private Context context;
+    private TextView rightSelectTV;
+    private TextView rightCheckTV;
 
     public ZKKindTitle(Context context) {
         super(context);
-        init(context);
     }
 
     public ZKKindTitle(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(context);
     }
 
     public ZKKindTitle(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
     }
 
-    private void init(Context context) {
-        this.context = context;
-        if (context instanceof Activity)
-            this.activity = (Activity) context;
-
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        View view = inflater.inflate(R.layout.kind_layout_zk_title, null);
-        titleNameTV = view.findViewById(R.id.zk_title_kind_tv);
-        rightSelectBtn = view.findViewById(R.id.zk_title_kind_right_select_btn);
-
-        addView(view);
+    @Override
+    protected int getLayoutId() {
+        return R.layout.kind_layout_zk_title;
     }
 
-    public void setData(String name, String defaultText) {
-        this.titleName = name;
-        this.defaultText = defaultText;
-
-        updateView(name, defaultText);
+    @Override
+    protected void initViews(View rootView) {
+        titleNameTV = findView(R.id.zk_title_kind_tv);
+        rightSelectTV = findView(R.id.zk_title_kind_right_select_btn);
+        rightCheckTV = findView(R.id.zk_title_kind_right_check_btn);
     }
 
-    private void updateView(String name, String defaultText){
-        if (name != null && titleNameTV != null && !titleNameTV.getText().equals(name)) {
-            titleNameTV.setText(name);
+    /**
+     * 纯文本类型
+     */
+    public void setTextTitle(String name) {
+        setData(name, TYPE_NONE, null);
+    }
+
+    /**
+     * Button 类型
+     */
+    public void setButtonTitle(String name) {
+        setButtonTitle(name, "否");
+    }
+
+    /**
+     * Button 类型
+     */
+    public void setButtonTitle(String name, String defaultText) {
+        setData(name, TYPE_BUTTON, defaultText);
+    }
+
+    public void setSingleSelectTitle(String name, String defaultText) {
+        setData(name, TYPE_SINGLE_SELECT, defaultText);
+    }
+
+    public void setData(String name, @KindTitleType int kindTitleType, String defaultText) {
+        updateView(name, kindTitleType, defaultText);
+    }
+
+    private void updateView(String name, @KindTitleType int kindTitleType, String defaultText) {
+
+        switch (kindTitleType) {
+            case TYPE_NONE:
+                rightCheckTV.setVisibility(GONE);
+                rightSelectTV.setVisibility(GONE);
+                break;
+            case TYPE_BUTTON:
+                rightCheckTV.setVisibility(VISIBLE);
+                rightSelectTV.setVisibility(GONE);
+                break;
+            case TYPE_SINGLE_SELECT:
+                rightCheckTV.setVisibility(GONE);
+                rightSelectTV.setVisibility(VISIBLE);
+                break;
         }
 
-        if (defaultText != null && rightSelectBtn != null && !rightSelectBtn.getText().equals(name)) {
-            rightSelectBtn.setVisibility(VISIBLE);
-            rightSelectBtn.setText(defaultText);
-            rightSelectBtn.setOnClickListener(new OnClickListener() {
+        setViewText(titleNameTV, name);
+        setViewText(rightCheckTV, defaultText);
+        setViewText(rightSelectTV, defaultText);
+
+        if (rightSelectTV != null) {
+            rightSelectTV.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Button btn = (Button) view;
+                    TextView btn = (TextView) view;
                     OptionPicker picker3 = new OptionPicker(activity, new String[]{
                             "第一单位", "第二单位", "第三单位"
                     });
@@ -96,12 +125,39 @@ public class ZKKindTitle extends LinearLayout {
                     picker3.show();
                 }
             });
-        } else if (defaultText == null && rightSelectBtn != null) {
-            rightSelectBtn.setVisibility(INVISIBLE);
+
         }
 
+        if (rightCheckTV != null) {
+            rightCheckTV.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ToastUtils.showShort("你点击了查询按钮，这里应该 去访问服务器接口哦，然后处理逻辑");
+                }
+            });
+        }
+    }
 
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({TYPE_NONE, TYPE_SINGLE_SELECT, TYPE_BUTTON})
+    public @interface KindTitleType {
+        int key() default TYPE_NONE;
+    }
 
+    public static final int TYPE_NONE = 1;
+    public static final int TYPE_SINGLE_SELECT = 2;
+    public static final int TYPE_BUTTON = 3;
+
+    @KindTitleType
+    int key;
+
+    @KindTitleType
+    public int getConstant() {
+        return key;
+    }
+
+    public void setConstant(@KindTitleType int key) {
+        this.key = key;
     }
 
 }

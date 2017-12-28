@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,29 +16,58 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_20"
-            android:text="子女信息"
+            android:text="@string/common_default_title"
             android:textColor="@color/gray_3"
-            android:textSize="@dimen/sp_18" />
+            android:textSize="@dimen/sp_18"/>
 
-
-        <Button
-            android:id="@+id/zk_title_kind_right_select_btn"
-            style="@style/BasicinfoActivity_button"
-            android:layout_height="wrap_content"
+        <RelativeLayout
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:drawableLeft="@mipmap/left_arrow"
-            android:drawableRight="@mipmap/right_arrow"
-            android:paddingHorizontal="8dp"
-            android:text="否"
-            android:visibility="visible" />
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/zk_title_kind_right_select_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/basicinfo_input_back"
+                android:drawableEnd="@mipmap/right_arrow"
+                android:drawableLeft="@mipmap/left_arrow"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableRight="@mipmap/right_arrow"
+                android:drawableStart="@mipmap/left_arrow"
+                android:ems="10"
+                android:gravity="center"
+                android:padding="@dimen/dp_10"
+                android:text="否"
+                android:textSize="@dimen/sp_12"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/zk_title_kind_right_check_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_btn_blue_drawable"
+                android:paddingBottom="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_20"
+                android:paddingRight="@dimen/dp_20"
+                android:paddingTop="@dimen/dp_10"
+                android:text="查询"
+                android:textColor="@color/white"
+                android:visibility="gone"/>
+
+
+        </RelativeLayout>
+
 
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
-        android:background="@color/gray_9" />
+        android:background="@color/gray_9"/>
 
 </LinearLayout>

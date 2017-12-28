@@ -112,10 +112,13 @@ public class MainActivity extends BaseActivity {
         ZKFiledLayoutView fileLayoutView = findViewById(R.id.filed_layout_view);
         ZKEditFiledView editFiledView = findViewById(R.id.eidt_filed_layout_view);
         ZKFiledFormView zkFiledFormView = findViewById(R.id.edit_form_filed_view);
-        ZKKindTitle zkKindTitle = findViewById(R.id.kind_title);
+        ZKKindTitle zkKindTitle = findViewById(R.id.zk_kind_title);
 
-
-        zkKindTitle.setData("小小新的笔记", null);
+//        zkKindTitle.setTextTitle("小小新的笔记");
+//        zkKindTitle.setButtonTitle("小小新的笔记");
+//        zkKindTitle.setButtonTitle("小小新的笔记", "SayHello");
+        zkKindTitle.setSingleSelectTitle("小小新的笔记", "否");
+//        zkKindTitle.setSingleSelectTitle("小小新的笔记", null);
 
         filedView.setKeyValue("姓名", "小Q");
 
