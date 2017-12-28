@@ -2,7 +2,7 @@
 <LinearLayout
     android:id="@+id/right_layout_id_card"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="@dimen/dp_150"
     android:background="@drawable/basicinfo_input_back"
     android:orientation="horizontal"
     android:visibility="visible"

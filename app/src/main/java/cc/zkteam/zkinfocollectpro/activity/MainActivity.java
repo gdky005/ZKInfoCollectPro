@@ -108,9 +108,16 @@ public class MainActivity extends BaseActivity {
     }
 
     private void testLayout() {
+
+        // TODO: 2017/12/29 请先把 aessts 目录下面的文件都放到 SD 卡的根目录下测试。
+
         String[] list = new String[] {"哈哈哈", "第一单位", "第二单位", "第三单位"};
 
         String picPatch = Environment.getExternalStorageDirectory() + "/user_icon.jpeg";
+        String pics1 = Environment.getExternalStorageDirectory() + "/id_card_z.png";
+        String pics2 = Environment.getExternalStorageDirectory() + "/id_card_f.png";
+
+        String[] pics = new String[] {pics1, pics2};
 
 
         ZKFiled zkTestView = findViewById(R.id.zk_test_view);
@@ -122,8 +129,8 @@ public class MainActivity extends BaseActivity {
 //        zkTestView.setData("4", "姓名", picPatch, 4, ZKFiled.TYPE_FILED_FORM_IMAGE);
 //        zkTestView.setData("5", "姓名", "小Q", 5, ZKFiled.TYPE_FILED_FORM_DOUBLE_BUTTON);
 //        zkTestView.setData("6", "姓名", null, 6, ZKFiled.TYPE_FILED_FORM_TWO_TIME_BUTTON);
-//        zkTestView.setData("7", "姓名", "小Q", 7, ZKFiled.TYPE_FILED_FORM_ID_CARD);
-        zkTestView.setData("8", "姓名", "小Q", 8, ZKFiled.TYPE_FILED_FORM_ID_CARD_NUMBER);
+        zkTestView.setData("7", "姓名", pics, 7, ZKFiled.TYPE_FILED_FORM_ID_CARD);
+//        zkTestView.setData("8", "姓名", "小Q", 8, ZKFiled.TYPE_FILED_FORM_ID_CARD_NUMBER);
 
 
         findViewById(R.id.btn).setOnClickListener(view ->

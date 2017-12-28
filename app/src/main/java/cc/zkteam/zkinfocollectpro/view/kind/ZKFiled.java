@@ -237,6 +237,7 @@ public class ZKFiled extends ZKBaseView {
                         ImageView rightLayoutIdCardLeft = rightLayoutIdCard.findViewById(R.id.right_layout_id_card_left);
                         ImageView rightLayoutIdCardRight = rightLayoutIdCard.findViewById(R.id.right_layout_id_card_right);
 
+
                         rightLayoutIdCardLeft.setImageURI(Uri.parse(value[0]));
                         rightLayoutIdCardRight.setImageURI(Uri.parse(value[1]));
                     }
