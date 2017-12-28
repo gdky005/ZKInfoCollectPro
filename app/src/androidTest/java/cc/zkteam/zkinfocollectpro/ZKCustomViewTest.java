@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledLayoutView;
-import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView;
 
 /**
  * ZKCustomViewTest 自定义View的单元测试
@@ -41,7 +41,7 @@ public class ZKCustomViewTest {
      */
     @Test
     public void testZKFieldView() {
-        ZKFiledView zkFiledView = new ZKFiledView(context);
+        ZKKeyValueFiledView zkFiledView = new ZKKeyValueFiledView(context);
         zkFiledView.setKeyValue("姓名", "小黄");
         zkFiledView.setKey("年龄");
         zkFiledView.setValue("54");

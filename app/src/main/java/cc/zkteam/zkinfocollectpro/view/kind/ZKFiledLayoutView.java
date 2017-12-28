@@ -1,11 +1,11 @@
 package cc.zkteam.zkinfocollectpro.view.kind;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,30 +17,36 @@ import cc.zkteam.zkinfocollectpro.R;
  * Created by wangqing on 2017/12/26.
  */
 
-public class ZKFiledLayoutView extends LinearLayout {
+public class ZKFiledLayoutView extends ZKBaseView {
+
 
     public ZKFiledLayoutView(Context context) {
         super(context);
-        init();
     }
 
-    public ZKFiledLayoutView(Context context, AttributeSet attrs) {
+    public ZKFiledLayoutView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
 
-    public ZKFiledLayoutView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ZKFiledLayoutView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
     }
 
-    private void init() {
+
+    @Override
+    protected int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    protected void initViews(View rootView) {
 
     }
+
 
     public void setJsonArray(JSONArray jsonArray) {
 
-        ZKFiledView rightZkFiledView = null;
+        ZKKeyValueFiledView rightZkFiledView = null;
 
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject object = jsonArray.optJSONObject(i);
@@ -51,7 +57,7 @@ public class ZKFiledLayoutView extends LinearLayout {
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 View view = inflater.inflate(R.layout.kind_layout_view, null);
 
-                ZKFiledView leftZkFiledView = view.findViewById(R.id.left_zk_filed_view);
+                ZKKeyValueFiledView leftZkFiledView = view.findViewById(R.id.left_zk_filed_view);
                 rightZkFiledView = view.findViewById(R.id.right_zk_filed_view);
                 leftZkFiledView.setKeyValue(key, value);
 
@@ -67,13 +73,5 @@ public class ZKFiledLayoutView extends LinearLayout {
                 }
             }
         }
-
-
-
-
-
-
-
-
     }
 }

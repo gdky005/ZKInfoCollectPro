@@ -33,12 +33,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView
+        <cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView
             android:id="@+id/filed_id_num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView
+        <cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView
             android:id="@+id/filed_id_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

@@ -40,7 +40,7 @@
 
 
 
-                <cc.zkteam.zkinfocollectpro.view.kind.ZKEditFiledView
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView
                     android:id="@+id/zk_test_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -72,7 +72,7 @@
                     android:layout_height="1dp"
                     android:background="@color/colorAccent" />
 
-                <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView
                     android:id="@+id/filed_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -94,7 +94,7 @@
                     android:background="@color/colorAccent" />
 
 
-                <cc.zkteam.zkinfocollectpro.view.kind.ZKEditFiledView
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView
                     android:id="@+id/eidt_filed_layout_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

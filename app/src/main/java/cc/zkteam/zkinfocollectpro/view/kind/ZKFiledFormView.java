@@ -52,8 +52,8 @@ public class ZKFiledFormView extends ZKBaseView {
                 String key = object.names().optString(0);
                 String value = object.optString(key);
 
-                ZKEditFiledView zkEditFiledView = new ZKEditFiledView(getContext());
-                int type = ZKEditFiledView.TYPE_FILED_FORM_EDIT_TEXT;
+                ZKFiledView zkEditFiledView = new ZKFiledView(getContext());
+                int type = ZKFiledView.TYPE_FILED_FORM_EDIT_TEXT;
 
                 if (map != null && map.size() > 0) {
                     Integer integer = map.get(i);

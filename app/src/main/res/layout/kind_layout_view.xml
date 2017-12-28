@@ -5,13 +5,13 @@
     android:orientation="horizontal"
     android:weightSum="2">
 
-    <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView
+    <cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView
         android:id="@+id/left_zk_filed_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
-    <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView
+    <cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView
         android:id="@+id/right_zk_filed_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -36,10 +36,10 @@ import cc.zkteam.zkinfocollectpro.exception.ZKIdCardException;
 import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
-import cc.zkteam.zkinfocollectpro.view.kind.ZKEditFiledView;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledFormView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledLayoutView;
-import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKindTitle;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -110,7 +110,7 @@ public class MainActivity extends BaseActivity {
     private void testLayout() {
 
 
-        ZKEditFiledView zkTestView = findViewById(R.id.zk_test_view);
+        ZKFiledView zkTestView = findViewById(R.id.zk_test_view);
         zkTestView.setFocusableInTouchMode(true);
 
         zkTestView.setData("1", "姓名", "小Q", 1);
@@ -142,9 +142,9 @@ public class MainActivity extends BaseActivity {
 
 
 
-        ZKFiledView filedView = findViewById(R.id.filed_view);
+        ZKKeyValueFiledView filedView = findViewById(R.id.filed_view);
         ZKFiledLayoutView fileLayoutView = findViewById(R.id.filed_layout_view);
-        ZKEditFiledView editFiledView = findViewById(R.id.eidt_filed_layout_view);
+        ZKFiledView editFiledView = findViewById(R.id.eidt_filed_layout_view);
         ZKFiledFormView zkFiledFormView = findViewById(R.id.edit_form_filed_view);
         ZKKindTitle zkKindTitle = findViewById(R.id.zk_kind_title);
 
@@ -172,13 +172,13 @@ public class MainActivity extends BaseActivity {
 
         fileLayoutView.setJsonArray(jsonArray);
 
-        editFiledView.setData("1", "姓名", "小小兔", 0, ZKEditFiledView.TYPE_FILED_FORM_TIME);
+        editFiledView.setData("1", "姓名", "小小兔", 0, ZKFiledView.TYPE_FILED_FORM_TIME);
 
         Map<Integer, Integer> map = new HashMap<>();
 
-        map.put(1, ZKEditFiledView.TYPE_FILED_FORM_EDIT_TEXT);
-        map.put(2, ZKEditFiledView.TYPE_FILED_FORM_SELECT_DATA);
-        map.put(3, ZKEditFiledView.TYPE_FILED_FORM_TIME);
+        map.put(1, ZKFiledView.TYPE_FILED_FORM_EDIT_TEXT);
+        map.put(2, ZKFiledView.TYPE_FILED_FORM_SELECT_DATA);
+        map.put(3, ZKFiledView.TYPE_FILED_FORM_TIME);
 
         zkFiledFormView.setJsonArray(jsonArray, map);
 
