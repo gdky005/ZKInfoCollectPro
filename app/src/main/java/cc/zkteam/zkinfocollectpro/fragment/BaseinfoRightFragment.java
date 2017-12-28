@@ -1,9 +1,12 @@
 package cc.zkteam.zkinfocollectpro.fragment;
 
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +14,28 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ToastUtils;
+
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.adapter.BasicInfoItemAdapter;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
+import cc.zkteam.zkinfocollectpro.base.RvListener;
+import cc.zkteam.zkinfocollectpro.bean.BasicInfoItemBean;
 import cc.zkteam.zkinfocollectpro.eventbusbean.BasicItemClick;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BaseinfoRightFragment extends BaseFragment {
+public class BaseinfoRightFragment extends BaseFragment implements RvListener {
 
 
     @BindView(R.id.titleimage)
@@ -35,11 +46,8 @@ public class BaseinfoRightFragment extends BaseFragment {
     RelativeLayout titleview;
     @BindView(R.id.recycleview)
     RecyclerView recycleview;
-    Unbinder unbinder;
-    @BindView(R.id.item1)
-    RelativeLayout item1;
-    @BindView(R.id.item2)
-    RelativeLayout item2;
+    private BasicInfoItemAdapter adapter;
+    private List<BasicInfoItemBean> list;
 
     @Override
     public int getLayoutId() {
@@ -48,12 +56,25 @@ public class BaseinfoRightFragment extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
-
+        recycleview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        list = new ArrayList<>();
+        adapter = new BasicInfoItemAdapter(getActivity(), list,this);
+        recycleview.setAdapter(adapter);
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        Resources res=getResources();//统一命名规则 批量设置图片
+        for (int i = 0; i < 31; i++) {
+            int id=res.getIdentifier("basininfoitem"+(i),"drawable",getActivity().getPackageName());
+            String[] mItems = getResources().getStringArray(R.array.basininfoitem);
+            Log.d("idname",id+""+"basininfoitem"+(i));
+            BasicInfoItemBean bean = new BasicInfoItemBean();
+            bean.image=id;
+            bean.itemname=mItems[i];
+            list.add(bean);
+        }
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -80,17 +101,10 @@ public class BaseinfoRightFragment extends BaseFragment {
     public void onViewClicked() {
     }
 
-    @OnClick({R.id.item1, R.id.item2})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.item1:
-                EventBus.getDefault().post(new  BasicItemClick(0));
-                break;
-            case R.id.item2:
 
-                EventBus.getDefault().post(new  BasicItemClick(1));
 
-                break;
-        }
+    @Override
+    public void onItemClick(int id, int position) {
+        EventBus.getDefault().post(new  BasicItemClick(position));
     }
 }
