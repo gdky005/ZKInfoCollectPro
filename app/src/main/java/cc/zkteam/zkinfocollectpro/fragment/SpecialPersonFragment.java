@@ -14,7 +14,7 @@ import butterknife.BindView;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
-import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKFiled;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledFormView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledLayoutView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView;
@@ -99,7 +99,7 @@ public class SpecialPersonFragment extends BaseFragment {
         }
 
         Map<Integer, Integer> map = new HashMap<>();
-        map.put(2, ZKFiledView.TYPE_FILED_FORM_SELECT_DATA);
+        map.put(2, ZKFiled.TYPE_FILED_FORM_SELECT_DATA);
         editSpecialInfo.setJsonArray(jaSpecialInfo, map);
 
         kindCriminal.setSingleSelectTitle("是否重大刑事犯罪前科人员", "否");

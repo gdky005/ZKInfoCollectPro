@@ -28,6 +28,13 @@
                 android:layout_below="@+id/zk_title_view"
                 android:orientation="vertical">
 
+                <Button
+                    android:id="@+id/btn"
+                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="按钮"/>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -40,10 +47,12 @@
 
 
 
-                <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
                     android:id="@+id/zk_test_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+
+
 
 
 
@@ -94,7 +103,7 @@
                     android:background="@color/colorAccent" />
 
 
-                <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
                     android:id="@+id/eidt_filed_layout_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

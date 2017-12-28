@@ -67,6 +67,10 @@ public abstract class ZKBaseView extends LinearLayout {
                 && !textView.getText().equals(defaultText)) {
             textView.setText(defaultText);
         }
+
+        if (defaultText == null) {
+            setVisibility(textView,false);
+        }
     }
 
     public void setVisibility(View view, boolean isShow) {

@@ -52,8 +52,8 @@ public class ZKFiledFormView extends ZKBaseView {
                 String key = object.names().optString(0);
                 String value = object.optString(key);
 
-                ZKFiledView zkEditFiledView = new ZKFiledView(getContext());
-                int type = ZKFiledView.TYPE_FILED_FORM_EDIT_TEXT;
+                ZKFiled zkEditFiledView = new ZKFiled(getContext());
+                int type = ZKFiled.TYPE_FILED_FORM_EDIT_TEXT;
 
                 if (map != null && map.size() > 0) {
                     Integer integer = map.get(i);
@@ -72,7 +72,7 @@ public class ZKFiledFormView extends ZKBaseView {
 //
 //                ZKFiledView leftZkFiledView = view.findViewById(R.id.left_zk_filed_view);
 //                rightZkFiledView = view.findViewById(R.id.right_zk_filed_view);
-//                leftZkFiledView.setKeyValue(key, value);
+//                leftZkFiledView.setKeyValue(key, defaultValue);
 //
 //                rightZkFiledView.setVisibility(GONE);
 //
@@ -82,7 +82,7 @@ public class ZKFiledFormView extends ZKBaseView {
 //            } else {
 //                if (rightZkFiledView != null) {
 //                    rightZkFiledView.setVisibility(VISIBLE);
-//                    rightZkFiledView.setKeyValue(key, value);
+//                    rightZkFiledView.setKeyValue(key, defaultValue);
 //                }
 //            }
         }

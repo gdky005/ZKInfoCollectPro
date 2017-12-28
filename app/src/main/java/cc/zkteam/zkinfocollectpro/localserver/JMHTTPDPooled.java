@@ -144,7 +144,7 @@ public class JMHTTPDPooled {
             public void needRemoveEntry(Map.Entry eldest) {
                 String path = (String) eldest.getValue();
 
-                L.i("删除的数据是:  value:" + eldest.getValue());
+                L.i("删除的数据是:  defaultValue:" + eldest.getValue());
 
                 File file = new File(path);
                 if (file.exists()) file.delete();
@@ -521,7 +521,7 @@ public class JMHTTPDPooled {
         }
 
         /**
-         * Decodes the sent headers and loads the data into java Properties' key - value pairs
+         * Decodes the sent headers and loads the data into java Properties' key - defaultValue pairs
          **/
         private void decodeHeader(BufferedReader in, Properties pre, Properties parms, Properties header) throws InterruptedException {
             try {
@@ -604,7 +604,7 @@ public class JMHTTPDPooled {
         }
 
         /**
-         * Decodes the Multipart Body data and put it into java Properties' key - value pairs.
+         * Decodes the Multipart Body data and put it into java Properties' key - defaultValue pairs.
          **/
         private void decodeMultipartData(String boundary, byte[] fbuf, BufferedReader in, Properties parms, Properties files) throws InterruptedException {
             try {

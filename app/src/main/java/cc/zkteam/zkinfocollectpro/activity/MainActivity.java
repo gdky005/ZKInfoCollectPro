@@ -36,7 +36,7 @@ import cc.zkteam.zkinfocollectpro.exception.ZKIdCardException;
 import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
-import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKFiled;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledFormView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledLayoutView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView;
@@ -108,43 +108,32 @@ public class MainActivity extends BaseActivity {
     }
 
     private void testLayout() {
+        String[] list = new String[] {"哈哈哈", "第一单位", "第二单位", "第三单位"};
+
+        String picPatch = Environment.getExternalStorageDirectory() + "/user_icon.jpeg";
 
 
-        ZKFiledView zkTestView = findViewById(R.id.zk_test_view);
+        ZKFiled zkTestView = findViewById(R.id.zk_test_view);
         zkTestView.setFocusableInTouchMode(true);
 
-        zkTestView.setData("1", "姓名", "小Q", 1);
-//        zkTestView.setData("2", "姓名", "小Q", 2, ZKEditFiledView.TYPE_FILED_FORM_TIME);
-//        zkTestView.setData("3", "姓名", "小Q", 3, ZKEditFiledView.TYPE_FILED_FORM_SELECT_DATA);
-//        zkTestView.setData("4", "姓名", "小Q", 4, ZKEditFiledView.TYPE_FILED_FORM_IMAGE);
-//        zkTestView.setData("5", "姓名", "小Q", 5, ZKEditFiledView.TYPE_FILED_FORM_DOUBLE_BUTTON);
-//        zkTestView.setData("6", "姓名", "小Q", 6, ZKEditFiledView.TYPE_FILED_FORM_TWO_TIME_BUTTON);
-//        zkTestView.setData("7", "姓名", "小Q", 7, ZKEditFiledView.TYPE_FILED_FORM_ID_CARD);
-//        zkTestView.setData("8", "姓名", "小Q", 8, ZKEditFiledView.TYPE_FILED_FORM_ID_CARD_NUMBER);
+//        zkTestView.setData("1", "姓名", "", 1);
+//        zkTestView.setData("2", "姓名", null, 2, ZKFiled.TYPE_FILED_FORM_TIME); //不需要默认值，如果需要，请重新设置
+//        zkTestView.setData("3", "姓名", list, 3, ZKFiled.TYPE_FILED_FORM_SELECT_DATA);
+//        zkTestView.setData("4", "姓名", picPatch, 4, ZKFiled.TYPE_FILED_FORM_IMAGE);
+//        zkTestView.setData("5", "姓名", "小Q", 5, ZKFiled.TYPE_FILED_FORM_DOUBLE_BUTTON);
+//        zkTestView.setData("6", "姓名", null, 6, ZKFiled.TYPE_FILED_FORM_TWO_TIME_BUTTON);
+//        zkTestView.setData("7", "姓名", "小Q", 7, ZKFiled.TYPE_FILED_FORM_ID_CARD);
+        zkTestView.setData("8", "姓名", "小Q", 8, ZKFiled.TYPE_FILED_FORM_ID_CARD_NUMBER);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        findViewById(R.id.btn).setOnClickListener(view ->
+                ToastUtils.showShort(zkTestView.getResult()));
 
 
 
         ZKKeyValueFiledView filedView = findViewById(R.id.filed_view);
         ZKFiledLayoutView fileLayoutView = findViewById(R.id.filed_layout_view);
-        ZKFiledView editFiledView = findViewById(R.id.eidt_filed_layout_view);
+        ZKFiled editFiledView = findViewById(R.id.eidt_filed_layout_view);
         ZKFiledFormView zkFiledFormView = findViewById(R.id.edit_form_filed_view);
         ZKKindTitle zkKindTitle = findViewById(R.id.zk_kind_title);
 
@@ -172,13 +161,13 @@ public class MainActivity extends BaseActivity {
 
         fileLayoutView.setJsonArray(jsonArray);
 
-        editFiledView.setData("1", "姓名", "小小兔", 0, ZKFiledView.TYPE_FILED_FORM_TIME);
+        editFiledView.setData("1", "姓名", "小小兔", 0, ZKFiled.TYPE_FILED_FORM_TIME);
 
         Map<Integer, Integer> map = new HashMap<>();
 
-        map.put(1, ZKFiledView.TYPE_FILED_FORM_EDIT_TEXT);
-        map.put(2, ZKFiledView.TYPE_FILED_FORM_SELECT_DATA);
-        map.put(3, ZKFiledView.TYPE_FILED_FORM_TIME);
+        map.put(1, ZKFiled.TYPE_FILED_FORM_EDIT_TEXT);
+        map.put(2, ZKFiled.TYPE_FILED_FORM_SELECT_DATA);
+        map.put(3, ZKFiled.TYPE_FILED_FORM_TIME);
 
         zkFiledFormView.setJsonArray(jsonArray, map);
 
