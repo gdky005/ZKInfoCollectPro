@@ -2,7 +2,6 @@ package cc.zkteam.zkinfocollectpro.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +19,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.activity.CommonFragmentActivity;
 import cc.zkteam.zkinfocollectpro.activity.LoginActivity;
 import cc.zkteam.zkinfocollectpro.activity.MyProblemListActivity;
-import cc.zkteam.zkinfocollectpro.activity.PersonalInfoCollectActivity;
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
@@ -43,12 +42,10 @@ import retrofit2.Response;
 
 public class SignInFragment extends BaseFragment {
 
-    @BindView(R.id.img_personal_info_about)
-    ImageView imgPersonalInfoAbout;
-    @BindView(R.id.img_personal_info_search)
-    ImageView imgPersonalInfoSearch;
-    @BindView(R.id.toolbar_personal_info_collection)
-    Toolbar toolbarPersonalInfoCollection;
+    @BindView(R.id.img_sign_about)
+    ImageView imgSignAbout;
+    @BindView(R.id.img_sign_search)
+    ImageView imgSignSearch;
     @BindView(R.id.img_title_text)
     ImageView imgTitleText;
     @BindView(R.id.tv_sign)
@@ -87,7 +84,6 @@ public class SignInFragment extends BaseFragment {
     TextView tvAboutQuit;
     @BindView(R.id.tv_question_upload)
     TextView tvQuestionUpload;
-    Unbinder unbinder;
     @BindView(R.id.layout_slide_menu)
     LinearLayout layoutSlideMenu;
 
@@ -187,16 +183,16 @@ public class SignInFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.img_personal_info_about, R.id.img_personal_info_search, R.id.tv_sign, R.id.tv_sign_success_submit,
+    @OnClick({R.id.img_sign_about, R.id.img_sign_search, R.id.tv_sign, R.id.tv_sign_success_submit,
             R.id.tv_about_message, R.id.tv_about_setting, R.id.tv_about_quit, R.id.tv_question_upload})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.img_personal_info_about:
+            case R.id.img_sign_about:
                 layoutSlideMenu.setVisibility(View.VISIBLE);
                 setIsShow = true;
                 break;
-            case R.id.img_personal_info_search:
-                startActivity(new Intent(getActivity(), PersonalInfoCollectActivity.class));
+            case R.id.img_sign_search:
+                CommonFragmentActivity.startCommonFragmentActivity(getActivity(), SpecialPersonFragment.class.getName());
                 break;
             case R.id.tv_sign:
                 doSign();
@@ -250,19 +246,5 @@ public class SignInFragment extends BaseFragment {
             }
         });
 
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 }

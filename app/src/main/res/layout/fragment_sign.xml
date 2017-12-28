@@ -11,15 +11,16 @@
         android:id="@+id/toolbar_personal_info_collection"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/theme_color"
+        android:background="#007dbd"
         app:contentInsetStart="0dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <ImageView
-                android:id="@+id/img_personal_info_about"
+                android:id="@+id/img_sign_about"
                 android:layout_width="35dp"
                 android:layout_height="32dp"
                 android:layout_centerVertical="true"
@@ -27,16 +28,8 @@
                 android:padding="10dp"
                 android:src="@drawable/icon_about" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="数据采集"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/sp_16" />
-
             <ImageView
-                android:id="@+id/img_personal_info_search"
+                android:id="@+id/img_sign_search"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignParentRight="true"
