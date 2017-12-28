@@ -43,22 +43,23 @@ public class ZKFiledFormView extends LinearLayout {
         setOrientation(VERTICAL);
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject object = jsonArray.optJSONObject(i);
-            String key = object.names().optString(0);
-            String value = object.optString(key);
+            if (object != null) {
+                String key = object.names().optString(0);
+                String value = object.optString(key);
 
-            ZKEditFiledView zkEditFiledView = new ZKEditFiledView(getContext());
-            int type = ZKEditFiledView.TYPE_FILED_FORM_EDIT_TEXT;
+                ZKEditFiledView zkEditFiledView = new ZKEditFiledView(getContext());
+                int type = ZKEditFiledView.TYPE_FILED_FORM_EDIT_TEXT;
 
-            if (map != null && map.size() > 0) {
-                Integer integer = map.get(i);
-                if (integer !=  null) {
-                    type = integer;
+                if (map != null && map.size() > 0) {
+                    Integer integer = map.get(i);
+                    if (integer !=  null) {
+                        type = integer;
+                    }
                 }
+
+                zkEditFiledView.setData(String.valueOf(i), key, value, i, type);
+                addView(zkEditFiledView);
             }
-
-            zkEditFiledView.setData(String.valueOf(i), key, value, i, type);
-
-            addView(zkEditFiledView);
 
 //            if (i % 2 == 0) {
 //                LayoutInflater inflater = LayoutInflater.from(getContext());
