@@ -47,6 +47,8 @@
     <string name="see_problem_detail">查看详情</string>
 
     <string name="kind_default_key_suffix">: </string>
+    <string name="date_year_month_day">%s年%s月%s日</string>
+    <string name="date_title_top_text">%s-%s-%s</string>
 
 
 </resources>

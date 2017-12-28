@@ -113,6 +113,14 @@ public class MainActivity extends BaseActivity {
         ZKEditFiledView editFiledView = findViewById(R.id.eidt_filed_layout_view);
         ZKFiledFormView zkFiledFormView = findViewById(R.id.edit_form_filed_view);
         ZKKindTitle zkKindTitle = findViewById(R.id.zk_kind_title);
+        ZKEditFiledView zkTestView = findViewById(R.id.zk_test_view);
+
+        zkTestView.setFocusableInTouchMode(true);
+
+//        zkTestView.setData("1", "姓名", "小Q", 1);
+//        zkTestView.setData("2", "姓名", "小Q", 2, ZKEditFiledView.TYPE_FILED_FORM_SELECT_DATA);
+        zkTestView.setData("3", "姓名", "小Q", 3, ZKEditFiledView.TYPE_FILED_FORM_TIME);
+
 
 //        zkKindTitle.setTextTitle("小小新的笔记");
 //        zkKindTitle.setButtonTitle("小小新的笔记");

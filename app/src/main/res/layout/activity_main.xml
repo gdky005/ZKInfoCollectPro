@@ -34,10 +34,26 @@
                     android:background="@color/colorAccent"
                     android:layout_marginTop="100dp"/>
 
-                <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledView
-                    android:id="@+id/zk_filed_view"
+
+
+
+
+
+
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKEditFiledView
+                    android:id="@+id/zk_test_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+
+
+
+
+
+
+
+
+
+
 
                 <View
                     android:layout_width="match_parent"

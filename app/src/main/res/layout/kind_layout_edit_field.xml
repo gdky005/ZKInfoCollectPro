@@ -1,38 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal"
-              android:gravity="center"
-              android:padding="@dimen/dp_5">
-
-    <TextView
-        android:id="@+id/text_filed_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:text="1"
-        android:textColor="@color/gray_6"
-        android:textSize="@dimen/sp_12"/>
-
-    <TextView
-        android:id="@+id/text_filed_key"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:ems="8"
-        android:text="成员姓名"
-        android:textColor="@color/gray_6"
-        android:textSize="@dimen/sp_12"/>
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_5">
 
     <LinearLayout
-        android:id="@+id/right_layout"
-        android:layout_width="match_parent"
+        android:id="@+id/zk_form_filed_ll"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/text_filed_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:text="1"
+            android:textColor="@color/gray_6"
+            android:textSize="@dimen/sp_16"/>
+
+        <TextView
+            android:id="@+id/text_filed_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:text="成员姓名"
+            android:textColor="@color/gray_6"
+            android:textSize="@dimen/sp_16"/>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/right_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/zk_form_filed_ll"
+        android:gravity="right"
+        android:padding="@dimen/dp_5"
+        android:visibility="visible">
 
         <EditText
             android:id="@+id/right_layout_text_filed_value"
@@ -41,27 +51,36 @@
             android:hint="请输入"
             android:singleLine="true"
             android:textColor="@color/gray_6"
+            android:layout_marginLeft="@dimen/dp_10"
             android:textSize="@dimen/sp_12"
             android:visibility="gone"/>
 
-        <Button
+        <TextView
             android:id="@+id/right_layout_time_filed_value"
-            style="@style/BasicinfoActivity_button"
-            android:layout_toRightOf="@id/born"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/basicinfo_input_back"
             android:drawableRight="@mipmap/data_icon"
-            android:paddingHorizontal="8dp"
+            android:padding="@dimen/dp_10"
             android:text="2017年12月25日"
-            android:visibility="visible"/>
-
-        <Button
-            android:id="@+id/right_layout_select_data_filed_value"
-            style="@style/BasicinfoActivity_button"
-            android:drawableLeft="@mipmap/left_arrow"
-            android:drawableRight="@mipmap/right_arrow"
-            android:paddingHorizontal="8dp"
-            android:text="某某单位"
             android:visibility="gone"/>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/right_layout_select_data_filed_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/basicinfo_input_back"
+            android:drawableLeft="@mipmap/left_arrow"
+            android:drawablePadding="@dimen/dp_10"
+            android:drawableRight="@mipmap/right_arrow"
+            android:padding="@dimen/dp_10"
+            android:text="某某单位"
+            android:textColor="@color/black_333"
+            android:visibility="visible"/>
 
-</LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
