@@ -59,7 +59,7 @@ public class ZKKeyValueLayout extends ZKBaseView {
             // 根据数据个数分两列显示数据
             if (i % 2 == 0) {
                 LayoutInflater inflater = LayoutInflater.from(getContext());
-                View view = inflater.inflate(R.layout.kind_layout_view, null);
+                View view = inflater.inflate(R.layout.kind_layout_zk_key_value, null);
 
                 ZKKeyValueFiledView leftZkFiledView = view.findViewById(R.id.left_zk_filed_view);
                 rightZkFiledView = view.findViewById(R.id.right_zk_filed_view);
