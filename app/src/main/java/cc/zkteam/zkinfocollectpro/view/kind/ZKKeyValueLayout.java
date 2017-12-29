@@ -13,24 +13,24 @@ import org.json.JSONObject;
 import cc.zkteam.zkinfocollectpro.R;
 
 /**
- * ZKFiledLayoutView 自动扩展布局
+ * ZKKeyValueLayout 自动扩展布局
  *
  * 主要作用是将 key:value 的数据 用 ZKKeyValueFiledView 分两列动态计算并显示出来。
  *
  * Created by wangqing on 2017/12/26.
  */
-public class ZKFiledLayoutView extends ZKBaseView {
+public class ZKKeyValueLayout extends ZKBaseView {
 
 
-    public ZKFiledLayoutView(Context context) {
+    public ZKKeyValueLayout(Context context) {
         super(context);
     }
 
-    public ZKFiledLayoutView(Context context, @Nullable AttributeSet attrs) {
+    public ZKKeyValueLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public ZKFiledLayoutView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ZKKeyValueLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

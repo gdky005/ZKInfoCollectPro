@@ -100,7 +100,7 @@
                     android:layout_height="1dp"
                     android:background="@color/colorAccent" />
 
-                <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledLayoutView
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueLayout
                     android:id="@+id/filed_layout_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

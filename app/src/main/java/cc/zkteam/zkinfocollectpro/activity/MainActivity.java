@@ -43,7 +43,7 @@ import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiled;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledFormView;
-import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledLayoutView;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueLayout;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKindTitle;
 import retrofit2.Call;
@@ -193,7 +193,7 @@ public class MainActivity extends BaseActivity {
         //———————————————通用数据基本测试———————————————————
         //——————————————————————————————————————————————
         ZKKeyValueFiledView filedView = findViewById(R.id.filed_view);
-        ZKFiledLayoutView fileLayoutView = findViewById(R.id.filed_layout_view);
+        ZKKeyValueLayout fileLayoutView = findViewById(R.id.filed_layout_view);
         ZKFiled editFiledView = findViewById(R.id.eidt_filed_layout_view);
         ZKFiledFormView zkFiledFormView = findViewById(R.id.edit_form_filed_view);
         ZKKindTitle zkKindTitle = findViewById(R.id.zk_kind_title);
