@@ -49,6 +49,11 @@
 
 
 
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKModuleLayout
+                    android:id="@+id/zk_test_module_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
 
 
 
@@ -57,6 +62,7 @@
                 <cc.zkteam.zkinfocollectpro.view.kind.ZKFormLayout
                     android:id="@+id/zk_test_form_layout"
                     android:layout_width="match_parent"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"/>
 
 

@@ -48,6 +48,7 @@ import cc.zkteam.zkinfocollectpro.view.kind.ZKFormLayout;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueLayout;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKindTitle;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKModuleLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -131,6 +132,57 @@ public class MainActivity extends BaseActivity {
         String pics2 = sdPath + "/id_card_f.png";
 
         String[] pics = new String[]{pics1, pics2};
+
+
+
+        //——————————————————————————————————————————————
+        //———————————————ZKModuleLayout 模块控件———————————————————
+        //——————————————————————————————————————————————
+        ZKModuleLayout zkModuleLayout = findViewById(R.id.zk_test_module_layout);
+
+        JSONArray moduleArray = null;
+        try {
+            moduleArray = new JSONArray();
+
+            for (int i = 0; i < 8; i++) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("item" + i, "hello" + i);
+                moduleArray.put(jsonObject);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Map<Integer, Object> objectHashMap = new HashMap<>();
+
+        List datas1 = new ArrayList();
+        datas1.add(ZKFiled.TYPE_FILED_FORM_SELECT_DATA);
+        datas1.add(list);
+        objectHashMap.put(1, datas1);
+        objectHashMap.put(3, ZKFiled.TYPE_FILED_FORM_TIME);
+
+        List list2 = new ArrayList();
+        list2.add(ZKFiled.TYPE_FILED_FORM_IMAGE);
+        list2.add(picPatch);
+        objectHashMap.put(5, list2);
+        objectHashMap.put(7, ZKFiled.TYPE_FILED_FORM_TWO_TIME_BUTTON);
+
+//        Map<Integer, Object> kindHashMap = new HashMap<>();
+//        List titleList = new ArrayList();
+//        titleList.add(ZKKindTitle.TYPE_FILED_FORM_IMAGE);
+//        titleList.add(list);
+//        kindHashMap.put(ZKKindTitle.TYPE_SINGLE_SELECT, titleList);
+
+        List titleList = new ArrayList();
+        titleList.add("我是小标题");
+        titleList.add(ZKKindTitle.TYPE_BUTTON);
+        titleList.add(list);
+
+        zkModuleLayout.setJsonArray(moduleArray, objectHashMap, titleList);
+
+
+
+
 
 
         //——————————————————————————————————————————————
