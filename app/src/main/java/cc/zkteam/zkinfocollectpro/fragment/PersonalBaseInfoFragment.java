@@ -54,21 +54,21 @@ public class PersonalBaseInfoFragment extends BaseFragment {
             JSONObject avatar = new JSONObject();
             avatar.put("照片上传", "");
             arrayAvatar.put(avatar);
-            Map<Integer, Integer> mapAvatar = new HashMap<>();
+            Map<Integer, Object> mapAvatar = new HashMap<>();
             mapAvatar.put(0, ZKFiled.TYPE_FILED_FORM_IMAGE);
             editPersonalBaseInfo.setJsonArray(arrayAvatar, mapAvatar);
 
             JSONObject date = new JSONObject();
             date.put("出生日期", "");
             arrayDate.put(date);
-            Map<Integer, Integer> mapDate = new HashMap<>();
+            Map<Integer, Object> mapDate = new HashMap<>();
             mapDate.put(0, ZKFiled.TYPE_FILED_FORM_TIME);
             editPersonalDate.setJsonArray(arrayDate, mapDate);
 
             JSONObject idNum = new JSONObject();
             idNum.put("证件号码", "");
             arrayId.put(idNum);
-            Map<Integer, Integer> mapNum = new HashMap<>();
+            Map<Integer, Object> mapNum = new HashMap<>();
             mapNum.put(0, ZKFiled.TYPE_FILED_FORM_EDIT_TEXT);
             editPersonalBaseIdCard.setJsonArray(arrayDate, mapNum);
 

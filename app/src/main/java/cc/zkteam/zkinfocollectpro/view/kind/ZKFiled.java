@@ -32,7 +32,7 @@ import cn.qqtheme.framework.widget.WheelView;
  * ZKFiledView
  * Created by wangqing on 2017/12/26.
  */
-public class ZKFiled extends ZKBaseView implements IZKFiled{
+public class ZKFiled extends ZKBaseView implements IZKResult {
 
     private TextView keyFiled;
     private TextView numberFiled;

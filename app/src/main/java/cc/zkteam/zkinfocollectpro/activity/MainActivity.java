@@ -22,7 +22,9 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -116,10 +118,10 @@ public class MainActivity extends BaseActivity {
 
         // TODO: 2017/12/29 请先把 aessts 目录下面的文件都放到 SD 卡的根目录下测试。
         String sdPath = Environment.getExternalStorageDirectory().getPath() + "/pics";
-        copyFilesFassets(this, "pics",  sdPath);
+        copyFilesFassets(this, "pics", sdPath);
 
 
-        String[] list = new String[] {"哈哈哈", "第一单位", "第二单位", "第三单位"};
+        String[] list = new String[]{"哈哈哈", "第一单位", "第二单位", "第三单位"};
 
         // 用户图像测试数据
         String picPatch = sdPath + "/user_icon.jpeg";
@@ -128,7 +130,77 @@ public class MainActivity extends BaseActivity {
         String pics1 = sdPath + "/id_card_z.png";
         String pics2 = sdPath + "/id_card_f.png";
 
-        String[] pics = new String[] {pics1, pics2};
+        String[] pics = new String[]{pics1, pics2};
+
+
+        //——————————————————————————————————————————————
+        //———————————————ZKFormLayout 自动填充列表控件———————————————————
+        //——————————————————————————————————————————————
+        JSONArray formArray = null;
+        try {
+            formArray = new JSONArray();
+
+            for (int i = 0; i < 15; i++) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("item" + i, "hello" + i);
+                formArray.put(jsonObject);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Map<Integer, Object> formMap = new HashMap<>();
+
+
+        formMap.put(1, ZKFiled.TYPE_FILED_FORM_EDIT_TEXT);
+
+        List datas = new ArrayList();
+        datas.add(ZKFiled.TYPE_FILED_FORM_SELECT_DATA);
+        datas.add(list);
+        formMap.put(10, datas);
+        formMap.put(3, ZKFiled.TYPE_FILED_FORM_TIME);
+
+        List imageData = new ArrayList();
+        imageData.add(ZKFiled.TYPE_FILED_FORM_IMAGE);
+        imageData.add(picPatch);
+        formMap.put(13, imageData);
+        formMap.put(5, ZKFiled.TYPE_FILED_FORM_DOUBLE_BUTTON);
+        formMap.put(11, ZKFiled.TYPE_FILED_FORM_TWO_TIME_BUTTON);
+
+        List idCardData = new ArrayList();
+        idCardData.add(ZKFiled.TYPE_FILED_FORM_ID_CARD);
+        idCardData.add(pics);
+        formMap.put(7, idCardData);
+        formMap.put(0, ZKFiled.TYPE_FILED_FORM_ID_CARD_NUMBER);
+
+        ZKFormLayout zkTestFormLayout = findViewById(R.id.zk_test_form_layout);
+        zkTestFormLayout.setJsonArray(formArray, formMap);
+
+
+        //——————————————————————————————————————————————
+        //———————————————KeyValueLayout 自动填充控件———————————————————
+        //——————————————————————————————————————————————
+        JSONArray keyValueArray = null;
+        try {
+            keyValueArray = new JSONArray();
+
+            for (int i = 0; i < 5; i++) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("姓名" + i, "小智" + i);
+                keyValueArray.put(jsonObject);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        ZKKeyValueLayout zkTestValueLayout = findViewById(R.id.zk_test_value_layout);
+        zkTestValueLayout.setJsonArray(keyValueArray);
+
+
+        //——————————————————————————————————————————————
+        //———————————————Key-Value 控件———————————————————
+        //——————————————————————————————————————————————
+        ZKKeyValueFiledView zkTestKeyValueView = findViewById(R.id.zk_test_key_value_view);
+        zkTestKeyValueView.setKeyValue("姓名", "小黑");
 
 
         //——————————————————————————————————————————————
@@ -140,11 +212,6 @@ public class MainActivity extends BaseActivity {
 //        zkTestTitleView.setTextTitle("我的大标题哦！");
         zkTestTitleView.setSingleSelectTitle("选择框标题", list);
         zkTestTitleView.setButtonTitle("按钮标题");
-
-
-
-
-
 
 
         //——————————————————————————————————————————————
@@ -169,15 +236,15 @@ public class MainActivity extends BaseActivity {
 //        zkTestView.setDoubleBtn("这是双按钮");
 //        zkTestView.setDoubleTime("双时间显示");
 //        zkTestView.setIdCard("身份证正反面", pics);
-        zkTestView.setIdCardNumber("8","身份证信息");
-
-
+        zkTestView.setIdCardNumber("8", "身份证信息");
 
 
         //——————————————————————————————————————————————
         //———————————————获取以上结果的按钮———————————————————
         //——————————————————————————————————————————————
-        findViewById(R.id.btn).setOnClickListener(view -> {
+        Button btn = findViewById(R.id.btn);
+        btn.setFocusableInTouchMode(true);
+        btn.setOnClickListener(view -> {
             String result = zkTestView.getResult();
 
             if (TextUtils.isEmpty(result)) {
@@ -186,7 +253,6 @@ public class MainActivity extends BaseActivity {
 
             ToastUtils.showShort(result);
         });
-
 
 
         //——————————————————————————————————————————————
@@ -224,7 +290,7 @@ public class MainActivity extends BaseActivity {
 
         editFiledView.setData("1", "姓名", "小小兔", 0, ZKFiled.TYPE_FILED_FORM_TIME);
 
-        Map<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Object> map = new HashMap<>();
 
         map.put(1, ZKFiled.TYPE_FILED_FORM_EDIT_TEXT);
         map.put(2, ZKFiled.TYPE_FILED_FORM_SELECT_DATA);
@@ -427,12 +493,12 @@ public class MainActivity extends BaseActivity {
     }
 
 
-
     /**
-     *  从assets目录中复制整个文件夹内容
-     *  @param  context  Context 使用CopyFiles类的Activity
-     *  @param  oldPath  String  原文件路径  如：/aa
-     *  @param  newPath  String  复制后路径  如：xx:/bb/cc
+     * 从assets目录中复制整个文件夹内容
+     *
+     * @param context Context 使用CopyFiles类的Activity
+     * @param oldPath String  原文件路径  如：/aa
+     * @param newPath String  复制后路径  如：xx:/bb/cc
      */
     public void copyFilesFassets(Context context, String oldPath, String newPath) {
         try {
@@ -441,14 +507,14 @@ public class MainActivity extends BaseActivity {
                 File file = new File(newPath);
                 file.mkdirs();//如果文件夹不存在，则递归
                 for (String fileName : fileNames) {
-                    copyFilesFassets(context,oldPath + "/" + fileName,newPath+"/"+fileName);
+                    copyFilesFassets(context, oldPath + "/" + fileName, newPath + "/" + fileName);
                 }
             } else {//如果是文件
                 InputStream is = context.getAssets().open(oldPath);
                 FileOutputStream fos = new FileOutputStream(new File(newPath));
                 byte[] buffer = new byte[1024];
-                int byteCount=0;
-                while((byteCount=is.read(buffer))!=-1) {//循环从输入流读取 buffer字节
+                int byteCount = 0;
+                while ((byteCount = is.read(buffer)) != -1) {//循环从输入流读取 buffer字节
                     fos.write(buffer, 0, byteCount);//将读取的输入流写入到输出流
                 }
                 fos.flush();//刷新缓冲区

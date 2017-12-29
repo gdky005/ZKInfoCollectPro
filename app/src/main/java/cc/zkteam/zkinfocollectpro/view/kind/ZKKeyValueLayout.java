@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cc.zkteam.zkinfocollectpro.R;
 
 /**
@@ -19,8 +22,9 @@ import cc.zkteam.zkinfocollectpro.R;
  *
  * Created by wangqing on 2017/12/26.
  */
-public class ZKKeyValueLayout extends ZKBaseView {
+public class ZKKeyValueLayout extends ZKBaseView implements IZKResult<List<String>>{
 
+    private List<ZKKeyValueFiledView> zkKeyValueFiledViewList = new ArrayList<>();
 
     public ZKKeyValueLayout(Context context) {
         super(context);
@@ -68,14 +72,28 @@ public class ZKKeyValueLayout extends ZKBaseView {
                 rightZkFiledView.setVisibility(GONE);
 
 
+                zkKeyValueFiledViewList.add(leftZkFiledView);
                 LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 addView(view, layoutParams);
             } else {
                 if (rightZkFiledView != null) {
                     rightZkFiledView.setVisibility(VISIBLE);
                     rightZkFiledView.setKeyValue(key, value);
+                    zkKeyValueFiledViewList.add(rightZkFiledView);
                 }
             }
         }
+    }
+
+    @Override
+    public List<String> getResult() {
+        List<String> resultList = new ArrayList<>();
+
+        for (ZKKeyValueFiledView zkFiled :
+                zkKeyValueFiledViewList) {
+            resultList.add(zkFiled.getResult());
+        }
+
+        return resultList;
     }
 }

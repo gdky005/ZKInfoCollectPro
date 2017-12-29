@@ -49,8 +49,38 @@
 
 
 
+
+
+
+
+
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKFormLayout
+                    android:id="@+id/zk_test_form_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+
+
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueLayout
+                    android:id="@+id/zk_test_value_layout"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"/>
+
+
+
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView
+                    android:id="@+id/zk_test_key_value_view"
+                    android:layout_width="wrap_content"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"/>
+
+
+
                 <cc.zkteam.zkinfocollectpro.view.kind.ZKKindTitle
                     android:id="@+id/zk_test_title_view"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

@@ -23,7 +23,7 @@ import cn.qqtheme.framework.widget.WheelView;
  * Created by wangqing on 2017/12/27.
  */
 
-public class ZKKindTitle extends ZKBaseView implements IZKFiled {
+public class ZKKindTitle extends ZKBaseView implements IZKResult {
 
     private int type;
 

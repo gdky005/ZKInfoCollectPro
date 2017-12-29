@@ -16,8 +16,8 @@ import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiled;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFormLayout;
-import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueLayout;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueLayout;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKindTitle;
 
 /**
@@ -98,7 +98,7 @@ public class SpecialPersonFragment extends BaseFragment {
             e.printStackTrace();
         }
 
-        Map<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Object> map = new HashMap<>();
         map.put(2, ZKFiled.TYPE_FILED_FORM_TIME);
         editSpecialInfo.setJsonArray(jaSpecialInfo, map);
 
