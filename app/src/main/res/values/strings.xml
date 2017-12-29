@@ -53,5 +53,7 @@
     <string name="create_house_tip">该房屋未创建，需完善房屋信息后才能新增住户。</string>
     <string name="fill_info">确认，完善信息</string>
     <string name="no_edit">放弃编辑</string>
+    <string name="childbearing_age_info">育龄妇女信息</string>
+    <string name="children_info">子女信息</string>
 
 </resources>

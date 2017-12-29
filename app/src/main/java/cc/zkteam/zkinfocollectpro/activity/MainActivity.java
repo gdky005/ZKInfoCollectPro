@@ -31,6 +31,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.ZKBase;
+import cc.zkteam.zkinfocollectpro.activity.familyPlanningInfo.ChildbearingAgeAndChildrenInfoActivity;
 import cc.zkteam.zkinfocollectpro.activity.home.HomeActivity;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.bd.ZKBDIDCardManager;
@@ -436,7 +437,7 @@ public class MainActivity extends BaseActivity {
 
                 break;
             case R.id.btn_problem_list:
-                PageCtrl.startActivity(MainActivity.this, MyProblemListActivity.class);
+                PageCtrl.startActivity(MainActivity.this, ChildbearingAgeAndChildrenInfoActivity.class);
                 break;
             case R.id.dialog:
 

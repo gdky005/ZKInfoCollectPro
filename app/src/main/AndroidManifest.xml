@@ -135,6 +135,11 @@
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTop" />
 
+        <activity
+            android:name=".activity.familyPlanningInfo.ChildbearingAgeAndChildrenInfoActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop" />
+
         <!--Image Selector Entry-->
         <activity
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
