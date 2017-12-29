@@ -131,6 +131,9 @@ public class MainActivity extends BaseActivity {
         String[] pics = new String[] {pics1, pics2};
 
 
+        //——————————————————————————————————————————————
+        //———————————————大标题控件———————————————————
+        //——————————————————————————————————————————————
         ZKKindTitle zkTestTitleView = findViewById(R.id.zk_test_title_view);
 
         zkTestTitleView.setFocusableInTouchMode(true);
@@ -144,10 +147,9 @@ public class MainActivity extends BaseActivity {
 
 
 
-
-
-
-
+        //——————————————————————————————————————————————
+        //———————————————数据收集控件———————————————————
+        //——————————————————————————————————————————————
         ZKFiled zkTestView = findViewById(R.id.zk_test_view);
         zkTestView.setFocusableInTouchMode(true);
 
@@ -170,6 +172,11 @@ public class MainActivity extends BaseActivity {
         zkTestView.setIdCardNumber("8","身份证信息");
 
 
+
+
+        //——————————————————————————————————————————————
+        //———————————————获取以上结果的按钮———————————————————
+        //——————————————————————————————————————————————
         findViewById(R.id.btn).setOnClickListener(view -> {
             String result = zkTestView.getResult();
 
@@ -182,6 +189,9 @@ public class MainActivity extends BaseActivity {
 
 
 
+        //——————————————————————————————————————————————
+        //———————————————通用数据基本测试———————————————————
+        //——————————————————————————————————————————————
         ZKKeyValueFiledView filedView = findViewById(R.id.filed_view);
         ZKFiledLayoutView fileLayoutView = findViewById(R.id.filed_layout_view);
         ZKFiled editFiledView = findViewById(R.id.eidt_filed_layout_view);
