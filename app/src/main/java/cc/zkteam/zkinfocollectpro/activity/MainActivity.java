@@ -2,6 +2,7 @@ package cc.zkteam.zkinfocollectpro.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -110,12 +114,18 @@ public class MainActivity extends BaseActivity {
     private void testLayout() {
 
         // TODO: 2017/12/29 请先把 aessts 目录下面的文件都放到 SD 卡的根目录下测试。
+        String sdPath = Environment.getExternalStorageDirectory().getPath() + "/pics";
+        copyFilesFassets(this, "pics",  sdPath);
+
 
         String[] list = new String[] {"哈哈哈", "第一单位", "第二单位", "第三单位"};
 
-        String picPatch = Environment.getExternalStorageDirectory() + "/user_icon.jpeg";
-        String pics1 = Environment.getExternalStorageDirectory() + "/id_card_z.png";
-        String pics2 = Environment.getExternalStorageDirectory() + "/id_card_f.png";
+        // 用户图像测试数据
+        String picPatch = sdPath + "/user_icon.jpeg";
+
+        // 身份证测试数据
+        String pics1 = sdPath + "/id_card_z.png";
+        String pics2 = sdPath + "/id_card_f.png";
 
         String[] pics = new String[] {pics1, pics2};
 
@@ -129,8 +139,17 @@ public class MainActivity extends BaseActivity {
 //        zkTestView.setData("4", "姓名", picPatch, 4, ZKFiled.TYPE_FILED_FORM_IMAGE);
 //        zkTestView.setData("5", "姓名", "小Q", 5, ZKFiled.TYPE_FILED_FORM_DOUBLE_BUTTON);
 //        zkTestView.setData("6", "姓名", null, 6, ZKFiled.TYPE_FILED_FORM_TWO_TIME_BUTTON);
-        zkTestView.setData("7", "姓名", pics, 7, ZKFiled.TYPE_FILED_FORM_ID_CARD);
+//        zkTestView.setData("7", "姓名", pics, 7, ZKFiled.TYPE_FILED_FORM_ID_CARD);
 //        zkTestView.setData("8", "姓名", "小Q", 8, ZKFiled.TYPE_FILED_FORM_ID_CARD_NUMBER);
+
+//        zkTestView.setEditText("输入框");
+//        zkTestView.setTime("时间表");
+//        zkTestView.setSelectData("选择数据", list);
+//        zkTestView.setImage("用户图片", picPatch);
+//        zkTestView.setDoubleBtn("这是双按钮");
+//        zkTestView.setDoubleTime("双时间显示");
+//        zkTestView.setIdCard("身份证正反面", pics);
+        zkTestView.setIdCardNumber("8","身份证信息");
 
 
         findViewById(R.id.btn).setOnClickListener(view ->
@@ -370,6 +389,41 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+    }
+
+
+
+    /**
+     *  从assets目录中复制整个文件夹内容
+     *  @param  context  Context 使用CopyFiles类的Activity
+     *  @param  oldPath  String  原文件路径  如：/aa
+     *  @param  newPath  String  复制后路径  如：xx:/bb/cc
+     */
+    public void copyFilesFassets(Context context, String oldPath, String newPath) {
+        try {
+            String fileNames[] = context.getAssets().list(oldPath);//获取assets目录下的所有文件及目录名
+            if (fileNames.length > 0) {//如果是目录
+                File file = new File(newPath);
+                file.mkdirs();//如果文件夹不存在，则递归
+                for (String fileName : fileNames) {
+                    copyFilesFassets(context,oldPath + "/" + fileName,newPath+"/"+fileName);
+                }
+            } else {//如果是文件
+                InputStream is = context.getAssets().open(oldPath);
+                FileOutputStream fos = new FileOutputStream(new File(newPath));
+                byte[] buffer = new byte[1024];
+                int byteCount=0;
+                while((byteCount=is.read(buffer))!=-1) {//循环从输入流读取 buffer字节
+                    fos.write(buffer, 0, byteCount);//将读取的输入流写入到输出流
+                }
+                fos.flush();//刷新缓冲区
+                is.close();
+                fos.close();
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
 

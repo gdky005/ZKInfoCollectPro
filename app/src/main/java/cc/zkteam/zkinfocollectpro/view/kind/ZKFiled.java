@@ -90,6 +90,74 @@ public class ZKFiled extends ZKBaseView {
         dayStr = String.valueOf(day);
     }
 
+
+    // ———————————简易设置数据使用方法———————————
+    public void setEditText(String key) {
+        setEditText(null, key);
+    }
+
+    public void setEditText(String number, String key) {
+        setData(number, key, "", 0);
+    }
+
+    public void setTime(String key) {
+        setTime(null, key);
+    }
+
+    public void setTime(String number, String key) {
+        setData(number, key, null, 0, ZKFiled.TYPE_FILED_FORM_TIME);
+    }
+
+    public void setSelectData(String key, String[] strings) {
+        setSelectData(null, key, strings);
+    }
+
+    public void setSelectData(String number, String key, String[] strings) {
+        setData(number, key, strings, 0, ZKFiled.TYPE_FILED_FORM_SELECT_DATA);
+    }
+
+    public void setImage(String key, String picPath) {
+        setImage(null, key, picPath);
+    }
+
+    public void setImage(String number, String key, String picPath) {
+        setData(number, key, picPath, 0, ZKFiled.TYPE_FILED_FORM_IMAGE);
+    }
+
+    public void setDoubleBtn(String key) {
+        setDoubleBtn(null, key);
+    }
+
+    public void setDoubleBtn(String number, String key) {
+        setData(number, key, null, 0, ZKFiled.TYPE_FILED_FORM_DOUBLE_BUTTON);
+    }
+
+    public void setDoubleTime(String key) {
+        setDoubleTime(null, key);
+    }
+
+    public void setDoubleTime(String number, String key) {
+        setData(number, key, null, 0, ZKFiled.TYPE_FILED_FORM_TWO_TIME_BUTTON);
+    }
+
+    public void setIdCard(String key, String[] strings) {
+        setIdCard(null, key, strings);
+    }
+
+    public void setIdCard(String number, String key, String[] strings) {
+        setData(number, key, strings, 0, ZKFiled.TYPE_FILED_FORM_ID_CARD);
+    }
+
+    public void setIdCardNumber(String key) {
+        setIdCardNumber(null, key);
+    }
+
+    public void setIdCardNumber(String number, String key) {
+        setData(number, key, null, 0, ZKFiled.TYPE_FILED_FORM_ID_CARD_NUMBER);
+    }
+
+
+    // ———————————最原始设置数据方法———————————
     public void setData(String number, String key, String defaultValue, int index) {
         setData(number, key, defaultValue, index, TYPE_FILED_FORM_EDIT_TEXT);
     }
@@ -103,41 +171,8 @@ public class ZKFiled extends ZKBaseView {
         updateView(number, key, defaultValue, index, type);
     }
 
-    public String getResult() {
-        switch (type) {
-            case TYPE_FILED_FORM_EDIT_TEXT:
-                Editable editable = rightLayoutLeftEt.getText();
-                return editable.toString();
-            case TYPE_FILED_FORM_TIME:
-                CharSequence timeFiled = rightLayoutTimeFiledValue.getText();
-                return timeFiled.toString();
-            case TYPE_FILED_FORM_SELECT_DATA:
-                CharSequence selectFiled = rightLayoutSelectDataFiledValue.getText();
-                return selectFiled.toString();
-            case TYPE_FILED_FORM_IMAGE:
-                if (defaultValue instanceof String) {
-                    return (String) defaultValue;
-                }
-            case TYPE_FILED_FORM_DOUBLE_BUTTON:
-                return null;
-            case TYPE_FILED_FORM_TWO_TIME_BUTTON:
-                return rightLayoutTwoTimeLeftTv.getText().toString() +
-                        ":" +
-                        rightLayoutTwoTimeRightTv.getText().toString();
-            case TYPE_FILED_FORM_ID_CARD:
-                if (defaultValue instanceof String[]) {
-                    String[] value = (String[]) defaultValue;
-                    return Arrays.toString(value);
-                }
-            case TYPE_FILED_FORM_ID_CARD_NUMBER:
-                return rightLayoutLeftIdCardNumberEt.getText().toString();
 
-
-        }
-
-        return "";
-    }
-
+    // ———————————更新 View———————————
     private void updateView(String number, String key, Object defaultValue, int index, @FiledFormType int filedFormType) {
         setViewText(numberFiled, number);
         setViewText(keyFiled, key);
@@ -255,6 +290,45 @@ public class ZKFiled extends ZKBaseView {
         }
     }
 
+
+    // ———————————获取当前结果———————————
+    public String getResult() {
+        switch (type) {
+            case TYPE_FILED_FORM_EDIT_TEXT:
+                Editable editable = rightLayoutLeftEt.getText();
+                return editable.toString();
+            case TYPE_FILED_FORM_TIME:
+                CharSequence timeFiled = rightLayoutTimeFiledValue.getText();
+                return timeFiled.toString();
+            case TYPE_FILED_FORM_SELECT_DATA:
+                CharSequence selectFiled = rightLayoutSelectDataFiledValue.getText();
+                return selectFiled.toString();
+            case TYPE_FILED_FORM_IMAGE:
+                if (defaultValue instanceof String) {
+                    return (String) defaultValue;
+                }
+            case TYPE_FILED_FORM_DOUBLE_BUTTON:
+                return null;
+            case TYPE_FILED_FORM_TWO_TIME_BUTTON:
+                return rightLayoutTwoTimeLeftTv.getText().toString() +
+                        ":" +
+                        rightLayoutTwoTimeRightTv.getText().toString();
+            case TYPE_FILED_FORM_ID_CARD:
+                if (defaultValue instanceof String[]) {
+                    String[] value = (String[]) defaultValue;
+                    return Arrays.toString(value);
+                }
+            case TYPE_FILED_FORM_ID_CARD_NUMBER:
+                return rightLayoutLeftIdCardNumberEt.getText().toString();
+
+
+        }
+
+        return "";
+    }
+
+
+    // ———————————内部使用方法———————————
     private void setCurrentTime(TextView rightLayoutTwoTimeLeftTv) {
         rightLayoutTwoTimeLeftTv.setText(String.format(context.getString(R.string.date_year_month_day), yearStr, monthStr, dayStr));
     }
@@ -298,7 +372,6 @@ public class ZKFiled extends ZKBaseView {
         }
     }
 
-
     private void setDateTitleText(DatePicker picker2) {
         String year = picker2.getSelectedYear();
         String month = picker2.getSelectedMonth();
@@ -307,6 +380,8 @@ public class ZKFiled extends ZKBaseView {
         picker2.setTitleText(String.format(context.getString(R.string.date_title_top_text), year, month, day));
     }
 
+
+    // ———————————注解枚举———————————
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({TYPE_FILED_FORM_EDIT_TEXT, TYPE_FILED_FORM_SELECT_DATA, TYPE_FILED_FORM_TIME, TYPE_FILED_FORM_IMAGE,
             TYPE_FILED_FORM_DOUBLE_BUTTON, TYPE_FILED_FORM_TWO_TIME_BUTTON, TYPE_FILED_FORM_ID_CARD,
