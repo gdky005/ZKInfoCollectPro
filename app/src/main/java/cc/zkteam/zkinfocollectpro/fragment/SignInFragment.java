@@ -22,6 +22,7 @@ import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.CommonFragmentActivity;
 import cc.zkteam.zkinfocollectpro.activity.LoginActivity;
 import cc.zkteam.zkinfocollectpro.activity.MyProblemListActivity;
+import cc.zkteam.zkinfocollectpro.activity.PersonalInfoCollectActivity;
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
@@ -192,7 +193,7 @@ public class SignInFragment extends BaseFragment {
                 setIsShow = true;
                 break;
             case R.id.img_sign_search:
-                CommonFragmentActivity.startCommonFragmentActivity(getActivity(), SpecialPersonFragment.class.getName());
+                startActivity(new Intent(getActivity(), PersonalInfoCollectActivity.class));
                 break;
             case R.id.tv_sign:
                 doSign();

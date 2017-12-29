@@ -99,7 +99,7 @@ public class SpecialPersonFragment extends BaseFragment {
         }
 
         Map<Integer, Integer> map = new HashMap<>();
-        map.put(2, ZKFiled.TYPE_FILED_FORM_SELECT_DATA);
+        map.put(2, ZKFiled.TYPE_FILED_FORM_TIME);
         editSpecialInfo.setJsonArray(jaSpecialInfo, map);
 
         kindCriminal.setSingleSelectTitle("是否重大刑事犯罪前科人员", "否");
