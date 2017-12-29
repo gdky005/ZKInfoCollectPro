@@ -136,7 +136,7 @@ public class MainActivity extends BaseActivity {
         zkTestTitleView.setFocusableInTouchMode(true);
 //        zkTestTitleView.setTextTitle("我的大标题哦！");
         zkTestTitleView.setSingleSelectTitle("选择框标题", list);
-//        zkTestTitleView.setButtonTitle("按钮标题", "查询");
+        zkTestTitleView.setButtonTitle("按钮标题");
 
 
 

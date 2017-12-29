@@ -66,14 +66,7 @@ public class ZKKindTitle extends ZKBaseView implements IZKFiled {
      * Button 类型
      */
     public void setButtonTitle(String name) {
-        setButtonTitle(name, "否");
-    }
-
-    /**
-     * Button 类型
-     */
-    public void setButtonTitle(String name, String defaultText) {
-        setData(name, TYPE_BUTTON, defaultText);
+        setData(name, TYPE_BUTTON, null);
     }
 
     public void setSingleSelectTitle(String name, String[] defaultText) {
