@@ -35,7 +35,7 @@ public class ZKKeyValueFiledView extends ZKBaseView {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.kind_layout_text_field;
+        return R.layout.kind_layout_key_value_field;
     }
 
     @Override
