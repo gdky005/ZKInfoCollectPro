@@ -23,7 +23,7 @@
         android:layout_height="0.5dp"
         android:background="@color/divider_color" />
 
-    <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledFormView
+    <cc.zkteam.zkinfocollectpro.view.kind.ZKFormLayout
         android:id="@+id/edit_personal_base_avatar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledFormView
+    <cc.zkteam.zkinfocollectpro.view.kind.ZKFormLayout
         android:id="@+id/edit_personal_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledFormView
+    <cc.zkteam.zkinfocollectpro.view.kind.ZKFormLayout
         android:id="@+id/edit_personal_base_id_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

@@ -15,7 +15,7 @@ import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiled;
-import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledFormView;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKFormLayout;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKindTitle;
 
 /**
@@ -26,16 +26,16 @@ public class PersonalBaseInfoFragment extends BaseFragment {
     @BindView(R.id.title_special_person_info)
     ZKTitleView titleSpecialPersonInfo;
     @BindView(R.id.edit_personal_base_avatar)
-    ZKFiledFormView editPersonalBaseInfo;
+    ZKFormLayout editPersonalBaseInfo;
     Unbinder unbinder;
     @BindView(R.id.kind_personal_edit_sex)
     ZKKindTitle kindPersonalEditSex;
     @BindView(R.id.edit_personal_date)
-    ZKFiledFormView editPersonalDate;
+    ZKFormLayout editPersonalDate;
     @BindView(R.id.kind_personal_base_is_new)
     ZKKindTitle kindPersonalBaseIsNew;
     @BindView(R.id.edit_personal_base_id_card)
-    ZKFiledFormView editPersonalBaseIdCard;
+    ZKFormLayout editPersonalBaseIdCard;
     @BindView(R.id.kind_personal_base_work_type)
     ZKKindTitle kindPersonalBaseWorkType;
 

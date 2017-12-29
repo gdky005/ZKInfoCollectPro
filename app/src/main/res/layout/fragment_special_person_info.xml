@@ -59,7 +59,7 @@
             android:background="@color/divider_color" />
 
 
-        <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledFormView
+        <cc.zkteam.zkinfocollectpro.view.kind.ZKFormLayout
             android:id="@+id/edit_special_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

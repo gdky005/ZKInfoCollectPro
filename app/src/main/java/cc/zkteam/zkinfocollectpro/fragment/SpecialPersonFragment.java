@@ -15,7 +15,7 @@ import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiled;
-import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledFormView;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKFormLayout;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueLayout;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKindTitle;
@@ -35,7 +35,7 @@ public class SpecialPersonFragment extends BaseFragment {
     @BindView(R.id.kind_terror)
     ZKKindTitle kindTerror;
     @BindView(R.id.edit_special_info)
-    ZKFiledFormView editSpecialInfo;
+    ZKFormLayout editSpecialInfo;
     @BindView(R.id.kind_criminal)
     ZKKindTitle kindCriminal;
     @BindView(R.id.kind_narcotics)
