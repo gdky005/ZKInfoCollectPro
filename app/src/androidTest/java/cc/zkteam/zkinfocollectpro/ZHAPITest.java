@@ -191,27 +191,27 @@ public class ZHAPITest {
 
     @Test
     public void testAddHouse() {
-        zhApi.addHouse("JD001", "SQ001", "XQ001", "LF001", "DY001", "LC001", "FJ001").enqueue(new Callback<ZHBaseBean>() {
-            @Override
-            public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
-                ZHBaseBean zhBaseBean = response.body();
-                if (zhBaseBean != null) {
-                    Log.d(TAG, "onResponse: " + zhBaseBean.toString());
-                }
-                countDownLatch.countDown();
-            }
-
-            @Override
-            public void onFailure(Call<ZHBaseBean> call, Throwable t) {
-                countDownLatch.countDown();
-            }
-        });
-
-        try {
-            countDownLatch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        zhApi.addHouse("JD001", "SQ001", "XQ001", "LF001", "DY001", "LC001", "FJ001").enqueue(new Callback<ZHBaseBean>() {
+//            @Override
+//            public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
+//                ZHBaseBean zhBaseBean = response.body();
+//                if (zhBaseBean != null) {
+//                    Log.d(TAG, "onResponse: " + zhBaseBean.toString());
+//                }
+//                countDownLatch.countDown();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ZHBaseBean> call, Throwable t) {
+//                countDownLatch.countDown();
+//            }
+//        });
+//
+//        try {
+//            countDownLatch.await();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
 

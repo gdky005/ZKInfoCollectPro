@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -130,6 +131,23 @@ public class MainActivity extends BaseActivity {
         String[] pics = new String[] {pics1, pics2};
 
 
+        ZKKindTitle zkTestTitleView = findViewById(R.id.zk_test_title_view);
+
+        zkTestTitleView.setFocusableInTouchMode(true);
+//        zkTestTitleView.setTextTitle("我的大标题哦！");
+        zkTestTitleView.setSingleSelectTitle("选择框标题", list);
+//        zkTestTitleView.setButtonTitle("按钮标题", "查询");
+
+
+
+
+
+
+
+
+
+
+
         ZKFiled zkTestView = findViewById(R.id.zk_test_view);
         zkTestView.setFocusableInTouchMode(true);
 
@@ -152,8 +170,15 @@ public class MainActivity extends BaseActivity {
         zkTestView.setIdCardNumber("8","身份证信息");
 
 
-        findViewById(R.id.btn).setOnClickListener(view ->
-                ToastUtils.showShort(zkTestView.getResult()));
+        findViewById(R.id.btn).setOnClickListener(view -> {
+            String result = zkTestView.getResult();
+
+            if (TextUtils.isEmpty(result)) {
+                result = zkTestTitleView.getResult();
+            }
+
+            ToastUtils.showShort(result);
+        });
 
 
 
@@ -166,7 +191,7 @@ public class MainActivity extends BaseActivity {
 //        zkKindTitle.setTextTitle("小小新的笔记");
 //        zkKindTitle.setButtonTitle("小小新的笔记");
 //        zkKindTitle.setButtonTitle("小小新的笔记", "SayHello");
-        zkKindTitle.setSingleSelectTitle("小小新的笔记", "否");
+//        zkKindTitle.setSingleSelectTitle("小小新的笔记", "否");
 //        zkKindTitle.setSingleSelectTitle("小小新的笔记", null);
 
         filedView.setKeyValue("姓名", "小Q");

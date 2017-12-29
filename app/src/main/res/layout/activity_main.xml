@@ -47,8 +47,17 @@
 
 
 
+
+
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKKindTitle
+                    android:id="@+id/zk_test_title_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
                 <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
                     android:id="@+id/zk_test_view"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

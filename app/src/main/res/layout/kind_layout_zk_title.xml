@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical">
@@ -18,7 +19,8 @@
             android:layout_marginLeft="@dimen/dp_20"
             android:text="@string/common_default_title"
             android:textColor="@color/gray_3"
-            android:textSize="@dimen/sp_18"/>
+            android:textSize="@dimen/sp_18"
+            tools:text="我的大标题哦"/>
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -27,38 +29,19 @@
             android:layout_alignParentRight="true"
             android:gravity="center_vertical">
 
-            <TextView
-                android:id="@+id/zk_title_kind_right_select_btn"
+            <ViewStub
+                android:id="@+id/zk_title_kind_right_select_btn_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@drawable/basicinfo_input_back"
-                android:drawableEnd="@mipmap/right_arrow"
-                android:drawableLeft="@mipmap/left_arrow"
-                android:drawablePadding="@dimen/dp_10"
-                android:drawableRight="@mipmap/right_arrow"
-                android:drawableStart="@mipmap/left_arrow"
-                android:ems="10"
-                android:gravity="center"
-                android:padding="@dimen/dp_10"
-                android:text="否"
-                android:textSize="@dimen/sp_12"
-                android:visibility="gone"/>
+                android:inflatedId="@+id/zk_title_kind_right_select_btn"
+                android:layout="@layout/layout_filed_right_select_data_filed_view"/>
 
-            <TextView
-                android:id="@+id/zk_title_kind_right_check_btn"
+            <ViewStub
+                android:id="@+id/zk_title_kind_right_check_btn_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@drawable/bg_btn_blue_drawable"
-                android:paddingBottom="@dimen/dp_10"
-                android:paddingLeft="@dimen/dp_20"
-                android:paddingRight="@dimen/dp_20"
-                android:paddingTop="@dimen/dp_10"
-                android:text="查询"
-                android:textColor="@color/white"
-                android:visibility="gone"/>
-
+                android:inflatedId="@+id/zk_title_kind_right_check_btn"
+                android:layout="@layout/layout_filed_right_select_data_check_btn"/>
 
         </RelativeLayout>
 
