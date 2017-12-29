@@ -1,5 +1,6 @@
 package cc.zkteam.zkinfocollectpro.fragment.datacollectfirst;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -13,8 +14,6 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,11 +29,12 @@ import cc.zkteam.zkinfocollectpro.adapter.HouseUnitAdapter;
 import cc.zkteam.zkinfocollectpro.adapter.LDSpinnerAdapter;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.bean.HouseInfo;
-import cc.zkteam.zkinfocollectpro.bean.RentInfoParam;
+import cc.zkteam.zkinfocollectpro.bean.RentPersoner;
 import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
 import cc.zkteam.zkinfocollectpro.fragment.datacollectfirst.mvp.DcPresenterImpl;
 import cc.zkteam.zkinfocollectpro.fragment.datacollectfirst.mvp.DcView;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
+import okhttp3.MultipartBody;
 
 //import cc.zkteam.zkinfocollectpro.activity.RentPersonInfoActivity;
 
@@ -79,9 +79,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
 
 
     public static DataCollectFragment newInstance() {
-
         Bundle args = new Bundle();
-
         DataCollectFragment fragment = new DataCollectFragment();
         fragment.setArguments(args);
         return fragment;
@@ -183,6 +181,34 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         LDSpinnerAdapter adapter = adapterMap.get(index);
         if (adapter != null) {
             adapter.setData(zhCommunity.getData());
+        }
+    }
+
+    @Override
+    public void updata(RentPersoner data) {
+        List<RentPersoner.PersonlistBean> personlist = data.getPersonlist();
+        if (personlist != null && personlist.size() > 0){
+            Intent intent = new Intent();
+            intent.putExtra("rent_personers",data);
+            PageCtrl.startActivity(getContext(), RentPersonInfoActivity.class,intent);
+        }else {
+            View view = getLayoutInflater().inflate(R.layout.create_house_dialog, null, false);
+            Dialog dialog = new Dialog(mContext);
+            dialog.setContentView(view);
+            view.findViewById(R.id.confirm).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+            view.findViewById(R.id.cancel).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
         }
     }
 
@@ -305,13 +331,20 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         public void onClick(View view) {
             tempIds.put(5,mFloorNum+"");
             tempIds.put(6,"0"+mRoomNum+"");
-
-            Intent intent = new Intent();
-            RentInfoParam param = new RentInfoParam(tempIds);
-            intent.putExtra("rent_params",param);
-            ToastUtils.showShort(mFloorNum + "--" + mRoomNum);
-            PageCtrl.startActivity(getContext(), RentPersonInfoActivity.class,intent);
+            getRentPersoner(tempIds);
         }
+    }
+
+    private void getRentPersoner(HashMap<Integer, String> params) {
+        MultipartBody.Part community = MultipartBody.Part.createFormData("community", params.get(0));
+        MultipartBody.Part cunjuid = MultipartBody.Part.createFormData("cunjuid", params.get(1));
+        MultipartBody.Part gridding = MultipartBody.Part.createFormData("gridding", params.get(2));
+        MultipartBody.Part hsid = MultipartBody.Part.createFormData("buildid", params.get(3));
+        MultipartBody.Part houseSerial = MultipartBody.Part.createFormData("house_serial", params.get(4));
+        MultipartBody.Part address = MultipartBody.Part.createFormData("louceng", params.get(5));
+        MultipartBody.Part houseNumber = MultipartBody.Part.createFormData("house_number", params.get(6));
+        mPresenter.loadRentInfo(community, cunjuid, gridding,
+                hsid, houseSerial, address, houseNumber);
     }
 
 }

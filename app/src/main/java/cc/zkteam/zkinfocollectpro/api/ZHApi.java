@@ -5,6 +5,7 @@ import java.util.List;
 import cc.zkteam.zkinfocollectpro.Constant;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
 import cc.zkteam.zkinfocollectpro.bean.BDTokenBean;
+import cc.zkteam.zkinfocollectpro.bean.RentPersoner;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHLoginBean;
@@ -125,13 +126,13 @@ public interface ZHApi {
      */
     @Multipart
     @POST("datamanage.php/Admin/AppInterface/addhouse")
-    Call<ZHBaseBean> addHouse(@Part MultipartBody.Part community,
-                              @Part MultipartBody.Part cunjuid,
-                              @Part MultipartBody.Part gridding,
-                              @Part MultipartBody.Part houseid,
-                              @Part MultipartBody.Part house_serial,
-                              @Part MultipartBody.Part louceng,
-                              @Part MultipartBody.Part house_number);
+    Call<RentPersoner> addHouse(@Part MultipartBody.Part community,
+                                @Part MultipartBody.Part cunjuid,
+                                @Part MultipartBody.Part gridding,
+                                @Part MultipartBody.Part houseid,
+                                @Part MultipartBody.Part house_serial,
+                                @Part MultipartBody.Part louceng,
+                                @Part MultipartBody.Part house_number);
 
     /**
      * 问题上报接口已经提交

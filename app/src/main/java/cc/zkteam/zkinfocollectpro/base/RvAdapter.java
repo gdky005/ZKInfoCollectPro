@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,14 +21,20 @@ public abstract class RvAdapter<T> extends RecyclerView.Adapter<RvHolder> {
     protected RvListener listener;
     protected LayoutInflater mInflater;
 
-    public RvAdapter(Context context, List<T> list, RvListener listener) {
+    public RvAdapter(Context context, List<T> data, RvListener listener) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
-        this.list = list;
+        this.list = new ArrayList<>();
+        if (data != null)
+            this.list.addAll(data);
         this.listener = listener;
     }
 
 
+    public void addData(List<T> data){
+        this.list.addAll(data);
+        notifyDataSetChanged();
+    }
 
     @Override
     public RvHolder onCreateViewHolder(ViewGroup parent, int viewType) {

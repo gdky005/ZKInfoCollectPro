@@ -5,8 +5,10 @@ import android.util.Log;
 
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.mvp.BaseMVPPresenter;
+import cc.zkteam.zkinfocollectpro.bean.RentPersoner;
 import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,5 +70,26 @@ public class DcPresenterImpl extends BaseMVPPresenter<DcView, DcModel> implement
 
     public void getUnitInfos(String id, String typ){
 
+    }
+
+    public void loadRentInfo(MultipartBody.Part roadid, MultipartBody.Part cummunityId,
+                             MultipartBody.Part sqid, MultipartBody.Part hsid,
+                             MultipartBody.Part unitid, MultipartBody.Part floorid,
+                             MultipartBody.Part roomid){
+        zkApi.addHouse(roadid, cummunityId, sqid, hsid, unitid, floorid, roomid).enqueue(new Callback<RentPersoner>() {
+            @Override
+            public void onResponse(Call<RentPersoner> call, Response<RentPersoner> response) {
+                RentPersoner data = response.body();
+                if (data != null) {
+//                    List<RentPersoner.PersonlistBean> personlist = data.getPersonlist();
+                    mView.updata(data);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RentPersoner> call, Throwable t) {
+
+            }
+        });
     }
 }

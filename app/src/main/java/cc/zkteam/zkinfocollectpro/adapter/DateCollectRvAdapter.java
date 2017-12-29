@@ -6,19 +6,19 @@ import android.view.View;
 import java.util.List;
 
 import cc.zkteam.zkinfocollectpro.R;
-import cc.zkteam.zkinfocollectpro.viewholder.DataCollectRvHolder;
 import cc.zkteam.zkinfocollectpro.base.RvAdapter;
 import cc.zkteam.zkinfocollectpro.base.RvHolder;
 import cc.zkteam.zkinfocollectpro.base.RvListener;
-import cc.zkteam.zkinfocollectpro.bean.RentInfo;
+import cc.zkteam.zkinfocollectpro.bean.RentPersoner;
+import cc.zkteam.zkinfocollectpro.viewholder.DataCollectRvHolder;
 
 /**
  * Created by Administrator on 2017/12/15.
  */
 
-public class DateCollectRvAdapter extends RvAdapter<RentInfo> {
+public class DateCollectRvAdapter extends RvAdapter<RentPersoner.PersonlistBean> {
 
-    public DateCollectRvAdapter(Context context, List<RentInfo> list, RvListener listener) {
+    public DateCollectRvAdapter(Context context, List<RentPersoner.PersonlistBean> list, RvListener listener) {
         super(context, list, listener);
     }
 
@@ -32,6 +32,12 @@ public class DateCollectRvAdapter extends RvAdapter<RentInfo> {
         } else {
             return R.layout.data_collect_btn;
         }
+    }
+
+    @Override
+    public void addData(List<RentPersoner.PersonlistBean> data) {
+        this.list.addAll(data);
+        notifyItemRangeInserted(1,data.size());
     }
 
     @Override
@@ -64,11 +70,12 @@ public class DateCollectRvAdapter extends RvAdapter<RentInfo> {
         holder.bindHolder(list, position);
     }
 
+
     @Override
     public void onBindViewHolder(RvHolder holder, int position, List<Object> payloads) {
         if (payloads.size() == 0) {
             super.onBindViewHolder(holder, position, payloads);
-        }else {
+        } else {
 
         }
 
