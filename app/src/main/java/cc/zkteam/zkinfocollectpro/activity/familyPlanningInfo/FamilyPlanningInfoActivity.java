@@ -1,4 +1,4 @@
-package cc.zkteam.zkinfocollectpro.activity;
+package cc.zkteam.zkinfocollectpro.activity.familyPlanningInfo;
 
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 
