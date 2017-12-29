@@ -107,30 +107,31 @@ public interface ZHApi {
                           @Query("address") String address);
 
     /**
-     * 新增住户接口
-     */
-    @FormUrlEncoded
-    @POST("datamanage.php/Admin/AppInterface/addhouse")
-    Call<ZHBaseBean> addHouse(@Field("community") String community,
-                              @Field("cunjuid") String cunjuid,
-                              @Field("gridding") String gridding,
-                              @Field("hsid") String hsid,
-                              @Field("house_serial") String house_serial,
-                              @Field("louceng") String address,
-                              @Field("house_number") String house_number);
-
-    /**
      * 接收表单数据录入接口
      */
     @FormUrlEncoded
     @POST("datamanage.php/Admin/AppInterface/addpersonbaseinfo")
-    Call<ZHBaseBean> addPersonBaseInfo(@Field("community") String community,
-                                       @Field("cunjuid") String cunjuid,
-                                       @Field("gridding") String gridding,
-                                       @Field("hsid") String hsid,
-                                       @Field("house_serial") String house_serial,
-                                       @Field("louceng") String address,
-                                       @Field("house_number") String house_number);
+    Call<ZHBaseBean> addPersonBaseInfo(@Part("community") String community,
+                                       @Part("cunjuid") String cunjuid,
+                                       @Part("gridding") String gridding,
+                                       @Part("hsid") String hsid,
+                                       @Part("house_serial") String house_serial,
+                                       @Part("louceng") String address,
+                                       @Part("house_number") String house_number);
+
+
+    /**
+     * 新增住户接口
+     */
+    @Multipart
+    @POST("datamanage.php/Admin/AppInterface/addhouse")
+    Call<ZHBaseBean> addHouse(@Part MultipartBody.Part community,
+                              @Part MultipartBody.Part cunjuid,
+                              @Part MultipartBody.Part gridding,
+                              @Part MultipartBody.Part houseid,
+                              @Part MultipartBody.Part house_serial,
+                              @Part MultipartBody.Part louceng,
+                              @Part MultipartBody.Part house_number);
 
     /**
      * 问题上报接口已经提交

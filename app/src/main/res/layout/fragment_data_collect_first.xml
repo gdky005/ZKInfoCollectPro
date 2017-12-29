@@ -14,10 +14,18 @@
         <LinearLayout
             android:id="@+id/container_house"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <include layout="@layout/rent_house_infos" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="暂无住房信息"
+                android:textSize="18sp"
+                />
 
         </LinearLayout>
 

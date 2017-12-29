@@ -1,5 +1,6 @@
 package cc.zkteam.zkinfocollectpro.fragment.datacollectfirst;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import cc.zkteam.zkinfocollectpro.adapter.HouseUnitAdapter;
 import cc.zkteam.zkinfocollectpro.adapter.LDSpinnerAdapter;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.bean.HouseInfo;
+import cc.zkteam.zkinfocollectpro.bean.RentInfoParam;
 import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
 import cc.zkteam.zkinfocollectpro.fragment.datacollectfirst.mvp.DcPresenterImpl;
 import cc.zkteam.zkinfocollectpro.fragment.datacollectfirst.mvp.DcView;
@@ -73,6 +75,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
     private LDSpinnerAdapter unitAdapter;
     private HashMap<Integer, LDSpinnerAdapter> adapterMap;
     private HashMap<Integer, Spinner> spinnerMap;
+    private HashMap<Integer,String> tempIds;
 
 
     public static DataCollectFragment newInstance() {
@@ -98,6 +101,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
     public void initData(Bundle savedInstanceState) {
         initSpinner();
         initCache();
+        tempIds = new HashMap<>();
         mPresenter = new DcPresenterImpl(this);
         mPresenter.loadData();
     }
@@ -187,7 +191,6 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
     public void updateRecycle(List<HouseInfo> mData) {
         mHouseContainer.removeViews(1, mHouseContainer.getChildCount() - 1);
         for (int i = 0; i < mData.size(); i++) {
-
             LinearLayout linearLayout = new LinearLayout(mContext);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) mContext.getResources().getDimension(R.dimen.dp_40));
             params.leftMargin = (int) mContext.getResources().getDimension(R.dimen.dp_10);
@@ -256,21 +259,22 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         LDSpinnerAdapter adapter = adapterMap.get(index);
         if (index < 4) {
             clearSpinnerData(index);
-            index++;
-
             String id = ((ZHCommunityBean.DataBean) adapter.getItem(i)).getId();
+            tempIds.put(index,id);
+            Log.i("chris", "onItemSelected: "+"type: "+ index +"--id--:"+id);
+            index++;
             mPresenter.loadStreetCommunity(id, index + "");
 
         } else if (index == 4) {
             // TODO: 2017/12/25 调用更新住房信息接口
             LDSpinnerAdapter adapter1 = adapterMap.get(index);
+            tempIds.put(index,i+"");
             List<HouseInfo> houseInfos = new ArrayList<>();
             for (int j = 1; j <= adapter1.getmCeng(); j++) {
                 HouseInfo houseInfo = new HouseInfo(j, adapter1.getHome());
                 houseInfos.add(houseInfo);
             }
             updateRecycle(houseInfos);
-
         }
     }
 
@@ -279,6 +283,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         for (int i = startIndex + 1; i <= 4; i++) {
             adapterMap.get(i).reSetData();
         }
+        mHouseContainer.removeViews(1, mHouseContainer.getChildCount() - 1);
     }
 
     @Override
@@ -298,8 +303,14 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
 
         @Override
         public void onClick(View view) {
+            tempIds.put(5,mFloorNum+"");
+            tempIds.put(6,"0"+mRoomNum+"");
+
+            Intent intent = new Intent();
+            RentInfoParam param = new RentInfoParam(tempIds);
+            intent.putExtra("rent_params",param);
             ToastUtils.showShort(mFloorNum + "--" + mRoomNum);
-            PageCtrl.startActivity(getContext(), RentPersonInfoActivity.class);
+            PageCtrl.startActivity(getContext(), RentPersonInfoActivity.class,intent);
         }
     }
 

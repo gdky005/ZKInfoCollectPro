@@ -3,12 +3,8 @@ package cc.zkteam.zkinfocollectpro.fragment.datacollectfirst.mvp;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.mvp.BaseMVPPresenter;
-import cc.zkteam.zkinfocollectpro.bean.HouseInfo;
 import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import retrofit2.Call;
@@ -66,6 +62,9 @@ public class DcPresenterImpl extends BaseMVPPresenter<DcView, DcModel> implement
             }
         });
     }
+
+
+
 
     public void getUnitInfos(String id, String typ){
 

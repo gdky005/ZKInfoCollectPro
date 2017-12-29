@@ -1,6 +1,7 @@
 package cc.zkteam.zkinfocollectpro.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import com.blankj.utilcode.util.FragmentUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import cc.zkteam.zkinfocollectpro.R;
@@ -25,10 +27,12 @@ import cc.zkteam.zkinfocollectpro.adapter.DateCollectRvAdapter;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.base.RvListener;
 import cc.zkteam.zkinfocollectpro.bean.RentInfo;
+import cc.zkteam.zkinfocollectpro.bean.RentInfoParam;
 import cc.zkteam.zkinfocollectpro.fragment.PersonalInfoCollectFragment;
 import cc.zkteam.zkinfocollectpro.utils.CommonUtils;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.view.DividerItemDecoration;
+import okhttp3.MultipartBody;
 
 /**
  * Created by Administrator on 2017/12/15.
@@ -51,10 +55,24 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
     TextView mToolbarTitle;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    private RentInfoParam rent_params;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        rent_params = (RentInfoParam) intent.getSerializableExtra("rent_params");
+        Map<Integer, String> params = rent_params.getParams();
+        MultipartBody.Part community = MultipartBody.Part.createFormData("community", params.get(0));
+        MultipartBody.Part cunjuid = MultipartBody.Part.createFormData("cunjuid", params.get(1));
+        MultipartBody.Part gridding = MultipartBody.Part.createFormData("gridding", params.get(2));
+        MultipartBody.Part hsid = MultipartBody.Part.createFormData("buildid", params.get(3));
+        MultipartBody.Part houseSerial = MultipartBody.Part.createFormData("house_serial", params.get(4));
+        MultipartBody.Part address = MultipartBody.Part.createFormData("louceng", params.get(5));
+        MultipartBody.Part houseNumber = MultipartBody.Part.createFormData("house_number", params.get(6));
+        mPresent.loadRentInfo(community, cunjuid, gridding,
+                hsid, houseSerial, address, houseNumber);
+        initToolbar(mToolbar);
     }
 
     @Override
@@ -69,9 +87,8 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
         mRecycle.setLayoutManager(new LinearLayoutManager(this));
         mRecycle.addItemDecoration(new DividerItemDecoration(getResources().getColor(R.color.item_decor), CommonUtils.dip2px(this, 1)));
         mPresent = new RentPersonPresenterImpl(this);
-        mPresent.loadData();
+//        mPresent.loadData();
 
-        initToolbar(mToolbar);
         mToolbarTitle.setText("数据采集");
     }
 
@@ -82,6 +99,7 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
 
     @Override
     protected void initData() {
+
     }
 
     @Override

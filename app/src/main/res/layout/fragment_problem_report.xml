@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/include_toolbar"/>
+    <include layout="@layout/include_toolbar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -192,8 +192,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="24dp"
                         android:background="@drawable/bg_btn_commit"
-                        android:drawableLeft="@drawable/icon_edit"
-                        android:drawableStart="@drawable/icon_edit"
+                        android:drawableLeft="@drawable/ic_location"
+                        android:drawableStart="@drawable/ic_location"
+                        android:paddingLeft="10dp"
                         android:text="@string/select_location"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
@@ -225,9 +226,9 @@
                         android:layout_marginRight="6dp"
                         android:layout_weight="1"
                         android:background="@drawable/bg_problem_report"
+                        android:enabled="false"
                         android:hint="@string/select_problem_pic"
                         android:padding="5dp"
-                        android:enabled="false"
                         android:textColor="@color/text_main"
                         android:textColorHint="@color/text_hint"
                         android:textSize="12sp" />
@@ -239,8 +240,8 @@
                         android:background="@drawable/bg_btn_commit"
                         android:drawableLeft="@drawable/ic_upload"
                         android:drawableStart="@drawable/ic_upload"
-                        android:text="@string/select_attachment"
                         android:paddingLeft="10dp"
+                        android:text="@string/select_attachment"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
