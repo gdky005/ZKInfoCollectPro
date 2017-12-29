@@ -45,8 +45,8 @@ import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiled;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFormLayout;
-import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueLayout;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueLayout;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKindTitle;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -249,6 +249,18 @@ public class MainActivity extends BaseActivity {
 
             if (TextUtils.isEmpty(result)) {
                 result = zkTestTitleView.getResult();
+            }
+
+            if (TextUtils.isEmpty(result)) {
+                List<String>  list1 = zkTestFormLayout.getResult();
+
+                StringBuilder sb = new StringBuilder();
+                for (String s: list1) {
+                    sb.append(s);
+                    sb.append(",");
+                }
+
+                result = sb.toString();
             }
 
             ToastUtils.showShort(result);
