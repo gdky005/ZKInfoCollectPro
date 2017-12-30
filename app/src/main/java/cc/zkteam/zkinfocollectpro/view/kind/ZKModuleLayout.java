@@ -14,6 +14,7 @@ import java.util.Map;
 
 /**
  * ZKModuleLayout
+ * 将 ZKKindTitle 和 ZKFormView 统一封装起来，更方便添加数据。
  * Created by WangQing on 2017/12/29.
  */
 
