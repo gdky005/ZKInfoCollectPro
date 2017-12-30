@@ -13,10 +13,10 @@ import java.util.Calendar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.zkteam.zkinfocollectpro.R;
-import cc.zkteam.zkinfocollectpro.activity.familyPlanningInfo.ChildbearingAgeAndChildrenInfoActivity;
 import cc.zkteam.zkinfocollectpro.base.RvHolder;
 import cc.zkteam.zkinfocollectpro.base.RvListener;
 import cc.zkteam.zkinfocollectpro.bean.ChildInfoBean;
+import cc.zkteam.zkinfocollectpro.bean.GynecologicExaminationBean;
 import cn.qqtheme.framework.picker.DatePicker;
 import cn.qqtheme.framework.picker.OptionPicker;
 import cn.qqtheme.framework.util.ConvertUtils;
@@ -26,23 +26,15 @@ import cn.qqtheme.framework.widget.WheelView;
  * Created by Administrator on 2017/12/30.
  */
 
-public class ChildInfoHolder extends RvHolder<ChildInfoBean> {
-    @BindView(R.id.et_child_name)
-    EditText mChildName;
-    @BindView(R.id.tv_select_child_sex)
-    TextView mSelectChildSex;
-    @BindView(R.id.tv_select_child_birthday)
-    TextView mSelectChildBirthday;
-    @BindView(R.id.et_child_birth_id)
-    EditText mChildBirthId;
-    @BindView(R.id.et_child_birth_hospital)
-    EditText mChildBirthHospital;
-    @BindView(R.id.tv_select_policy)
-    TextView mSelectPolicy;
-    @BindView(R.id.et_child_health_condition)
-    EditText mChildHealthCondition;
-    @BindView(R.id.et_child_phone)
-    EditText mChildPhone;
+public class GynecologicExaminationHolder extends RvHolder<GynecologicExaminationBean> {
+    @BindView(R.id.tv_select_woman_birthday)
+    TextView mSelectWomanBirthday;
+    @BindView(R.id.et_rummager)
+    EditText mRummager;
+    @BindView(R.id.et_name_of_the_hospital)
+    EditText mNameOfTheHospital;
+    @BindView(R.id.et_check_the_result)
+    EditText mCheckTheResult;
     @BindView(R.id.btn_edit)
     Button mEditBtn;
     @BindView(R.id.btn_delete)
@@ -55,18 +47,19 @@ public class ChildInfoHolder extends RvHolder<ChildInfoBean> {
     private int mDay;
     private Context mContext;
 
-    public ChildInfoHolder(View itemView, int type, RvListener listener) {
+    public GynecologicExaminationHolder(View itemView, int type, RvListener listener) {
         super(itemView, type, listener);
         ButterKnife.bind(this, itemView);
         mContext = itemView.getContext();
         initDate();
-        mSelectChildBirthday.setOnClickListener(this::showTimeDialog);
+        mSelectWomanBirthday.setOnClickListener(this::showTimeDialog);
     }
 
-    public ChildInfoHolder(View itemView, int type, RvListener listener,
-                           View.OnClickListener deletelistener) {
+    public GynecologicExaminationHolder(View itemView, int type, RvListener listener,
+                                        View.OnClickListener deletelistener) {
         this(itemView, type, listener);
-        mDeleteBtn.setOnClickListener(deletelistener);
+        mSelectWomanBirthday.setText(String.format(mContext.getString(R.string.date_year_month_day),
+                mYearStr, mMonthStr, mDayStr));
     }
 
 
@@ -81,11 +74,7 @@ public class ChildInfoHolder extends RvHolder<ChildInfoBean> {
     }
 
     @Override
-    public void bindHolder(ChildInfoBean childInfoBean, int position) {
-        initSelector(mSelectChildSex, new String[]{"男", "女"});
-        initSelector(mSelectPolicy, new String[]{"内", "外"});
-        mSelectChildBirthday.setText(String.format(mContext.getString(R.string.date_year_month_day),
-                mYearStr, mMonthStr, mDayStr));
+    public void bindHolder(GynecologicExaminationBean bean, int position) {
     }
 
     private void initSelector(TextView view, String[] value) {
