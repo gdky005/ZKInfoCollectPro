@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingLeft="@dimen/dp_10"
-                android:src="@drawable/updated"/>
+                android:src="@drawable/ic_road"/>
 
             <Spinner
                 android:id="@+id/road_spinner"
@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingLeft="@dimen/dp_10"
-                android:src="@drawable/updated"/>
+                android:src="@drawable/ic_community"/>
 
             <Spinner
                 android:id="@+id/cummunity_spinner"
@@ -94,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingLeft="@dimen/dp_10"
-                android:src="@drawable/updated"/>
+                android:src="@drawable/ic_neighborhoods"/>
 
             <Spinner
                 android:id="@+id/neighborhood_spinner"
@@ -127,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingLeft="@dimen/dp_10"
-                android:src="@drawable/updated"/>
+                android:src="@drawable/ic_build"/>
 
             <Spinner
                 android:id="@+id/house_num_spinner"
@@ -160,7 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingLeft="@dimen/dp_10"
-                android:src="@drawable/updated"/>
+                android:src="@drawable/ic_unit"/>
 
             <Spinner
                 android:id="@+id/unit_spinner"
