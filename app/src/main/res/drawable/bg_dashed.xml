@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 这是一个 shape，它可以用于画各种形状，且指定这里画的是一条线 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="line">
+
+    <!-- dashWidth 表示一条线段的宽度 -->
+    <!-- dashGap 表示线段之间的的宽度 -->
+    <!-- color 表示线的颜色 -->
+    <!-- width 表示线的宽度 -->
+    <stroke
+        android:color="#999999"
+        android:dashGap="2dp"
+        android:dashWidth="1dp"
+        android:width="1dp"/>
+
+</shape>

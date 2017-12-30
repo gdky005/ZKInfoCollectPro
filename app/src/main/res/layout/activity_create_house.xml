@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="中枢街道 茅台社区 国酒新城小区 一组团 一栋 一单元 305 室"
+                android:textColor="@color/text_main"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/item_decor" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="房屋基本信息"
+                android:textColor="@color/text_main"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="125dp"
+                android:layout_height="0.5dp"
+                android:background="@color/item_decor" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="权属证书编号"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="房屋性质"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="规划用地"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="丘（地）号"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="建筑面积"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="室内面积"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="登记日期"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_select_child_birthday"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="5"
+                    android:background="@drawable/basicinfo_input_back"
+                    android:drawableEnd="@mipmap/data_icon"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:drawableRight="@mipmap/data_icon"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_10"
+                    android:textSize="12sp"
+                    android:visibility="visible"
+                    tools:text="2017年12月25日" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="户型"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="房屋状态"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp" />
+
+                <RadioGroup
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:orientation="horizontal">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="空置"
+                            android:textColor="@color/text_main"
+                            android:textSize="12sp"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="空置"
+                            android:textColor="@color/text_main"
+                            android:textSize="12sp"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="空置"
+                            android:textColor="@color/text_main"
+                            android:textSize="12sp"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="空置"
+                            android:textColor="@color/text_main"
+                            android:textSize="12sp"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="空置"
+                            android:textColor="@color/text_main"
+                            android:textSize="12sp"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="空置"
+                            android:textColor="@color/text_main"
+                            android:textSize="12sp"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/item_decor" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="房产信息"
+                android:textColor="@color/text_main"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="125dp"
+                android:layout_height="0.5dp"
+                android:background="@color/item_decor" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="产权人姓名"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

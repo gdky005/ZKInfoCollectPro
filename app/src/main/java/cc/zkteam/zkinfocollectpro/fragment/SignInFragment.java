@@ -20,6 +20,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.CommonFragmentActivity;
+import cc.zkteam.zkinfocollectpro.activity.CreateHouseActivity;
 import cc.zkteam.zkinfocollectpro.activity.LoginActivity;
 import cc.zkteam.zkinfocollectpro.activity.MyProblemListActivity;
 import cc.zkteam.zkinfocollectpro.activity.PersonalInfoCollectActivity;
@@ -212,7 +213,7 @@ public class SignInFragment extends BaseFragment {
                 }
                 break;
             case R.id.tv_question_upload:
-                PageCtrl.startActivity(getActivity(), MyProblemListActivity.class);
+                PageCtrl.startActivity(getActivity(), CreateHouseActivity.class);
                 break;
         }
     }
