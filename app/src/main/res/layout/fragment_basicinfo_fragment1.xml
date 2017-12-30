@@ -61,7 +61,6 @@
         android:id="@+id/sexlayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/basic_layout_hight"
-
         android:layout_below="@+id/namelayout">
 
         <TextView

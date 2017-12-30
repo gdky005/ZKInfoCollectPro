@@ -166,5 +166,34 @@ public interface ZHApi {
 
 
 
+    /**
+     * 接收表单数据录入接口
+     */
+    @Multipart
+    @POST("datamanage.php/Admin/AppInterface/addpersonbaseinfo")
+    Call<ZHBaseBean> addPersonBaseInfo_Company( /*法人信息字段开始,为了和网页的名字一样 前面大写就先保留了*/
+                                                @Part MultipartBody.Part Company1,
+                                                @Part MultipartBody.Part Company2,
+                                                @Part MultipartBody.Part Company3,
+                                                @Part MultipartBody.Part Company4,
+                                                @Part MultipartBody.Part Company5,
+                                                @Part MultipartBody.Part Company6,
+                                                @Part MultipartBody.Part Company7,
+                                                @Part MultipartBody.Part Company8,
+                                                @Part MultipartBody.Part Company9,
+                                                @Part MultipartBody.Part Company10,
+                                                @Part MultipartBody.Part Company11,
+                                                @Part MultipartBody.Part Company12,
+                                                @Part MultipartBody.Part Company13,
+                                                @Part MultipartBody.Part Company14,
+                                                @Part MultipartBody.Part Company15,
+                                                @Part MultipartBody.Part Company16,
+                                                @Part MultipartBody.Part Company17,
+                                                @Part MultipartBody.Part Company18,
+                                                @Part MultipartBody.Part Company19,
+                                                @Part MultipartBody.Part Company20,
+                                                @Part MultipartBody.Part Company21)
+    ;
+
 
 }

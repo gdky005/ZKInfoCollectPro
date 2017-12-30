@@ -9,56 +9,37 @@
     </string-array>
 
     <string-array name="basininfoitem">
-        <item>城市污染</item>
-        <item>市区摆摊 </item>
-        <item>井盖丢失</item>
-        <item>寻衅滋事</item>
-        <item>无法描述</item>
-        <item>城市污染</item>
-        <item>市区摆摊 </item>
-        <item>井盖丢失</item>
-        <item>寻衅滋事</item>
-        <item>无法描述</item>
-        <item>城市污染</item>
-        <item>市区摆摊 </item>
-        <item>井盖丢失</item>
-        <item>寻衅滋事</item>
-        <item>无法描述</item>
-        <item>城市污染</item>
-        <item>市区摆摊 </item>
-        <item>井盖丢失</item>
-        <item>寻衅滋事</item>
-        <item>无法描述</item>
-        <item>城市污染</item>
-        <item>市区摆摊 </item>
-        <item>井盖丢失</item>
-        <item>寻衅滋事</item>
-        <item>无法描述</item>
-        <item>城市污染</item>
-        <item>市区摆摊 </item>
-        <item>井盖丢失</item>
-        <item>寻衅滋事</item>
-        <item>无法描述</item>
-        <item>城市污染</item>
-        <item>市区摆摊 </item>
-        <item>井盖丢失</item>
-        <item>寻衅滋事</item>
-        <item>无法描述</item>
-        <item>城市污染</item>
-        <item>市区摆摊 </item>
-        <item>井盖丢失</item>
-        <item>寻衅滋事</item>
-        <item>无法描述</item>
-        <item>城市污染</item>
-        <item>市区摆摊 </item>
-        <item>井盖丢失</item>
-        <item>寻衅滋事</item>
-        <item>无法描述</item>
-        <item>城市污染</item>
-        <item>市区摆摊 </item>
-        <item>井盖丢失</item>
-        <item>寻衅滋事</item>
-        <item>无法描述</item>
+        <item>个人基本数据</item>
+        <item>证照信息 </item>
+        <item>户籍信息</item>
+        <item>婚姻信息</item>
+        <item>人缘关系信息</item>
+        <item>死亡信息</item>
+        <item>住址信息 </item>
+        <item>健康信息</item>
+        <item>网格信息</item>
+        <item>诚信信息</item>
+        <item>社保卡信息</item>
+        <item>工伤保险信息 </item>
+        <item>医疗保险信息</item>
+        <item>生育保险信息</item>
+        <item>养老保险信息</item>
+        <item>新农合信息</item>
+        <item>新农保信息</item>
+        <item>住房公积金信息 </item>
+        <item>出生证信息</item>
+        <item>避孕节育信息</item>
+        <item>育龄妇女信息</item>
+        <item>残疾人信息</item>
+        <item>低保信息 </item>
+        <item>重点人员信息</item>
+        <item>教育经历信息</item>
+        <item>党员信息</item>
+        <item>军人信息</item>
+        <item>行政事业单位人员信息</item>
+        <item>法人信息 </item>
+        <item>车辆信息</item>
+        <item>屋权信息</item>
     </string-array>
 
     <string-array name="street">

@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/rel1"
+            android:layout_width="match_parent"
+            android:layout_height="45dip"
+            android:layout_below="@id/cardlayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/basic_textview1_marleft"
+                android:text="车辆基本信息"
+                android:textColor="@color/black_333"
+                android:textSize="18dip" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:layout_alignParentBottom="true"
+                android:background="@color/gray2" />
+
+            <ImageView
+                android:id="@+id/rel1_image"
+                android:layout_width="40dip"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="10dip"
+                android:src="@drawable/hide" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/rel1_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/gray2" />
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rel2"
+            android:layout_width="match_parent"
+            android:layout_height="45dip"
+            android:layout_below="@id/cardlayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/basic_textview1_marleft"
+                android:text="车辆保险信息"
+                android:textColor="@color/black_333"
+                android:textSize="18dip" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:layout_alignParentBottom="true"
+                android:background="@color/gray2" />
+
+            <ImageView
+                android:id="@+id/rel2_image"
+                android:layout_width="40dip"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="10dip"
+                android:src="@drawable/hide" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/rel2_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id2_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id2_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id2_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id2_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id2_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id2_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id2_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id2_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/gray2" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel3"
+            android:layout_width="match_parent"
+            android:layout_height="45dip"
+            android:layout_below="@id/cardlayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/basic_textview1_marleft"
+                android:text="车辆年检信息"
+                android:textColor="@color/black_333"
+                android:textSize="18dip" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:layout_alignParentBottom="true"
+                android:background="@color/gray2" />
+
+            <ImageView
+                android:id="@+id/rel3_image"
+                android:layout_width="40dip"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="10dip"
+                android:src="@drawable/hide" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/rel3_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id3_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id3_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id3_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id3_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id3_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id3_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id3_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id3_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/gray2" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel4"
+            android:layout_width="match_parent"
+            android:layout_height="45dip"
+            android:layout_below="@id/cardlayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/basic_textview1_marleft"
+                android:text="车辆保养信息"
+                android:textColor="@color/black_333"
+                android:textSize="18dip" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:layout_alignParentBottom="true"
+                android:background="@color/gray2" />
+
+            <ImageView
+                android:id="@+id/rel4_image"
+                android:layout_width="40dip"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="10dip"
+                android:src="@drawable/hide" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/rel4_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id4_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id4_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id4_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id4_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id4_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id4_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id4_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id4_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id4_9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/gray2" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel5"
+            android:layout_width="match_parent"
+            android:layout_height="45dip"
+            android:layout_below="@id/cardlayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/basic_textview1_marleft"
+                android:text="车辆维修信息"
+                android:textColor="@color/black_333"
+                android:textSize="18dip" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:layout_alignParentBottom="true"
+                android:background="@color/gray2" />
+
+            <ImageView
+                android:id="@+id/rel5_image"
+                android:layout_width="40dip"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="10dip"
+                android:src="@drawable/hide" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/rel5_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id5_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id5_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id5_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id5_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id5_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id5_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id5_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id5_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id5_9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id5_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/gray2" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel6"
+            android:layout_width="match_parent"
+            android:layout_height="45dip"
+            android:layout_below="@id/cardlayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/basic_textview1_marleft"
+                android:text="车辆交通事故信息"
+                android:textColor="@color/black_333"
+                android:textSize="18dip" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:layout_alignParentBottom="true"
+                android:background="@color/gray2" />
+
+            <ImageView
+                android:id="@+id/rel6_image"
+
+                android:layout_width="40dip"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="10dip"
+                android:src="@drawable/hide" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/rel6_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id6_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id6_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id6_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id6_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id6_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id6_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id6_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id6_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
+                android:id="@+id/id6_9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/gray2" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/savecommit"
+            android:layout_width="250dip"
+            android:layout_height="40dip"
+            android:layout_below="@+id/layout26"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_marginTop="25dip"
+            android:background="@drawable/basicinfo_btn_commit"
+            android:text="保存并提交"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</ScrollView>

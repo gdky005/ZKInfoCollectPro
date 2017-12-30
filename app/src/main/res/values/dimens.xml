@@ -5,6 +5,7 @@
     <dimen name="dp_2">2dp</dimen>
     <dimen name="dp_4">4dp</dimen>
     <dimen name="dp_5">5dp</dimen>
+    <dimen name="dp_7">7dp</dimen>
     <dimen name="dp_10">10dp</dimen>
     <dimen name="dp_15">15dp</dimen>
     <dimen name="dp_20">20dp</dimen>
@@ -18,10 +19,15 @@
     <dimen name="sp_16">16sp</dimen>
     <dimen name="sp_18">18sp</dimen>
 
+
     <dimen name="basic_textview1_marleft">25dp</dimen>
     <dimen name="basic_textview2_marleft">30dp</dimen>
     <dimen name="basic_textview_size">15sp</dimen>
     <dimen name="basic_layout_hight">40dip</dimen>
     <dimen name="basic_texiview_width">130dip</dimen>
+    <dimen name="field_textview_width">100dip</dimen>
+    <dimen name="field_number_width">30dip</dimen>
+    <dimen name="field_marright">10dip</dimen>
+    <dimen name="field_itemhight">40dip</dimen>
     <dimen name="basic_item_hight">50dip</dimen>
 </resources>

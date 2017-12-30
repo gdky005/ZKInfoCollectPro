@@ -1,23 +1,38 @@
 package cc.zkteam.zkinfocollectpro.fragment;
 
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BasicinfoFragment2 extends LazyLoadFragment {
+public class BasicinfoFragment2 extends BaseFragment {
+
+
 
 
     @Override
-    protected int setContentView() {
+    public int getLayoutId() {
         return R.layout.fragment_basicinfo_fragment2;
     }
 
     @Override
-    protected void lazyLoad() {
+    public void initView(View rootView) {
+
+    }
+
+    @Override
+    public void initData(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void initListener() {
 
     }
 }

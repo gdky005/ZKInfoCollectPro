@@ -10,6 +10,7 @@
     android:layout_marginRight="@dimen/dp_10"
     android:hint="请输入"
     android:singleLine="true"
+    android:background="@null"
     android:textColor="@color/gray_6"
-    android:textSize="@dimen/sp_12"
+    android:textSize="@dimen/basic_textview_size"
     android:visibility="visible"/>

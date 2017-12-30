@@ -26,6 +26,9 @@ import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.eventbusbean.BasicItemClick;
 import cc.zkteam.zkinfocollectpro.fragment.BasicinfoFragment1;
 import cc.zkteam.zkinfocollectpro.fragment.BasicinfoFragment2;
+import cc.zkteam.zkinfocollectpro.fragment.BasicinfoFragment29;
+import cc.zkteam.zkinfocollectpro.fragment.BasicinfoFragment30;
+import cc.zkteam.zkinfocollectpro.fragment.BasicinfoFragment31;
 import cc.zkteam.zkinfocollectpro.view.ViewpagerSpeedScroller;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
 
@@ -86,8 +89,37 @@ public class BasicInfoActivity extends BaseActivity implements View.OnClickListe
         final List<Fragment> fragments = new ArrayList<>();
         fragments.add(new BasicinfoFragment1());
         fragments.add(new BasicinfoFragment2());
+        fragments.add(new BasicinfoFragment2());
+        fragments.add(new BasicinfoFragment2());
+        fragments.add(new BasicinfoFragment29());
+        fragments.add(new BasicinfoFragment30());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment31());
+        fragments.add(new BasicinfoFragment29());
+        fragments.add(new BasicinfoFragment30());
+        fragments.add(new BasicinfoFragment31());
 
-        viewpager.setOffscreenPageLimit(0);
+        viewpager.setOffscreenPageLimit(1);
         setViewPagerScrollSpeed();
         viewpager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -171,9 +203,9 @@ public class BasicInfoActivity extends BaseActivity implements View.OnClickListe
 //                picker2.setResetWhileWheel(false);
 //                picker2.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
 //                    @Override
-//                    public void onDatePicked(String year, String mMonth, String mDay) {
+//                    public void onDatePicked(String year, String month, String day) {
 //
-//                        bornedittext.setText(year + "年" + mMonth + "月" + mDay + "日");
+//                        bornedittext.setText(year + "年" + month + "月" + day + "日");
 //                    }
 //                });
 //                picker2.setOnWheelListener(new DatePicker.OnWheelListener() {
@@ -183,13 +215,13 @@ public class BasicInfoActivity extends BaseActivity implements View.OnClickListe
 //                    }
 //
 //                    @Override
-//                    public void onMonthWheeled(int index, String mMonth) {
-//                        picker2.setTitleText(picker2.getSelectedYear() + "-" + mMonth + "-" + picker2.getSelectedDay());
+//                    public void onMonthWheeled(int index, String month) {
+//                        picker2.setTitleText(picker2.getSelectedYear() + "-" + month + "-" + picker2.getSelectedDay());
 //                    }
 //
 //                    @Override
-//                    public void onDayWheeled(int index, String mDay) {
-//                        picker2.setTitleText(picker2.getSelectedYear() + "-" + picker2.getSelectedMonth() + "-" + mDay);
+//                    public void onDayWheeled(int index, String day) {
+//                        picker2.setTitleText(picker2.getSelectedYear() + "-" + picker2.getSelectedMonth() + "-" + day);
 //                    }
 //                });
 //                picker2.show();
@@ -225,9 +257,9 @@ public class BasicInfoActivity extends BaseActivity implements View.OnClickListe
 //                picker4.setContentPadding(15, 0);
 //                picker4.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
 //                    @Override
-//                    public void onDatePicked(String year, String mMonth, String mDay) {
+//                    public void onDatePicked(String year, String month, String day) {
 //
-//                        edittext26.setText(year + "年" + mMonth + "月" + mDay + "日");
+//                        edittext26.setText(year + "年" + month + "月" + day + "日");
 //                    }
 //                });
 //                picker4.setOnWheelListener(new DatePicker.OnWheelListener() {
@@ -237,13 +269,13 @@ public class BasicInfoActivity extends BaseActivity implements View.OnClickListe
 //                    }
 //
 //                    @Override
-//                    public void onMonthWheeled(int index, String mMonth) {
-//                        picker4.setTitleText(picker4.getSelectedYear() + "-" + mMonth + "-" + picker4.getSelectedDay());
+//                    public void onMonthWheeled(int index, String month) {
+//                        picker4.setTitleText(picker4.getSelectedYear() + "-" + month + "-" + picker4.getSelectedDay());
 //                    }
 //
 //                    @Override
-//                    public void onDayWheeled(int index, String mDay) {
-//                        picker4.setTitleText(picker4.getSelectedYear() + "-" + picker4.getSelectedMonth() + "-" + mDay);
+//                    public void onDayWheeled(int index, String day) {
+//                        picker4.setTitleText(picker4.getSelectedYear() + "-" + picker4.getSelectedMonth() + "-" + day);
 //                    }
 //                });
 //                picker4.show();
