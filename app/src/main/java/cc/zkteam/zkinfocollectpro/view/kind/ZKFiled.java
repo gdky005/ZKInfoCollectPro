@@ -32,7 +32,7 @@ import cn.qqtheme.framework.widget.WheelView;
  * ZKFiledView
  * Created by wangqing on 2017/12/26.
  */
-public class ZKFiled extends ZKBaseView {
+public class ZKFiled extends ZKBaseView implements IZKResult {
 
     private TextView keyFiled;
     private TextView numberFiled;
@@ -292,6 +292,7 @@ public class ZKFiled extends ZKBaseView {
 
 
     // ———————————获取当前结果———————————
+    @Override
     public String getResult() {
         switch (type) {
             case TYPE_FILED_FORM_EDIT_TEXT:
@@ -326,7 +327,6 @@ public class ZKFiled extends ZKBaseView {
 
         return "";
     }
-
 
     // ———————————内部使用方法———————————
     private void setCurrentTime(TextView rightLayoutTwoTimeLeftTv) {

@@ -13,13 +13,10 @@ import cc.zkteam.zkinfocollectpro.R;
  * Created by wangqing on 2017/12/26.
  */
 
-public class ZKKeyValueFiledView extends ZKBaseView {
+public class ZKKeyValueFiledView extends ZKBaseView implements IZKResult<String> {
 
-    TextView keyFiled;
-    TextView valueFiled;
-
-    String key;
-    String value;
+    private TextView keyFiled;
+    private TextView valueFiled;
 
     public ZKKeyValueFiledView(Context context) {
         super(context);
@@ -35,7 +32,7 @@ public class ZKKeyValueFiledView extends ZKBaseView {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.kind_layout_text_field;
+        return R.layout.kind_layout_key_value_field;
     }
 
     @Override
@@ -44,24 +41,25 @@ public class ZKKeyValueFiledView extends ZKBaseView {
         valueFiled = findView(R.id.right_layout_text_filed_value);
     }
 
-    public void setKey(String key) {
-        this.key = key;
-        updateView(key, null);
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-        updateView(null, value);
-    }
-
     public void setKeyValue(String key, String value) {
-        this.key = key;
-        this.value = value;
         updateView(key, value);
     }
 
     private void updateView(String k, String v){
         setViewText(keyFiled, k);
         setViewText(valueFiled, v);
+    }
+
+    @Override
+    public String getResult() {
+        if (valueFiled != null) {
+            return valueFiled.getText().toString();
+        }
+        return "";
+    }
+
+    @Override
+    public String toString() {
+        return getResult();
     }
 }

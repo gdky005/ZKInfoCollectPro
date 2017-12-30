@@ -54,6 +54,7 @@ public abstract class ZKBaseView extends LinearLayout {
 
     //获取资源ID
     protected abstract int getLayoutId();
+
     protected abstract void initViews(View rootView);
 
     @Nullable
@@ -61,7 +62,7 @@ public abstract class ZKBaseView extends LinearLayout {
         return rootView.findViewById(id);
     }
 
-    public void setViewText(TextView textView, String defaultText) {
+    protected void setViewText(TextView textView, String defaultText) {
         if (textView != null && defaultText != null
                 && textView.getVisibility() == VISIBLE
                 && !textView.getText().equals(defaultText)) {
@@ -69,13 +70,14 @@ public abstract class ZKBaseView extends LinearLayout {
         }
 
         if (defaultText == null) {
-            setVisibility(textView,false);
+            setVisibility(textView, false);
         }
     }
 
-    public void setVisibility(View view, boolean isShow) {
+    protected void setVisibility(View view, boolean isShow) {
         if (view != null) {
             view.setVisibility(isShow ? VISIBLE : GONE);
         }
     }
+
 }

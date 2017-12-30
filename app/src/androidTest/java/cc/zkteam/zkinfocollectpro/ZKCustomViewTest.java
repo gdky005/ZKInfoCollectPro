@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledLayoutView;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueLayout;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView;
 
 /**
@@ -62,7 +62,7 @@ public class ZKCustomViewTest {
      */
     @Test
     public void testZKFiledLayoutView() {
-        ZKFiledLayoutView layoutView = new ZKFiledLayoutView(context);
+        ZKKeyValueLayout layoutView = new ZKKeyValueLayout(context);
 
         try {
             JSONArray jsonArray = new JSONArray();

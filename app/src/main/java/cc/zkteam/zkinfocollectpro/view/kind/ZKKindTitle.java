@@ -6,6 +6,7 @@ import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -22,11 +23,14 @@ import cn.qqtheme.framework.widget.WheelView;
  * Created by wangqing on 2017/12/27.
  */
 
-public class ZKKindTitle extends ZKBaseView {
+public class ZKKindTitle extends ZKBaseView implements IZKResult {
+
+    private int type;
 
     private TextView titleNameTV;
-    private TextView rightSelectTV;
-    private TextView rightCheckTV;
+
+    private TextView zkTitleKindRightSelectBtn;
+    private TextView zkTitleKindRightCheckBtn;
 
     public ZKKindTitle(Context context) {
         super(context);
@@ -48,9 +52,8 @@ public class ZKKindTitle extends ZKBaseView {
     @Override
     protected void initViews(View rootView) {
         titleNameTV = findView(R.id.zk_title_kind_tv);
-        rightSelectTV = findView(R.id.zk_title_kind_right_select_btn);
-        rightCheckTV = findView(R.id.zk_title_kind_right_check_btn);
     }
+
 
     /**
      * 纯文本类型
@@ -63,85 +66,90 @@ public class ZKKindTitle extends ZKBaseView {
      * Button 类型
      */
     public void setButtonTitle(String name) {
-        setButtonTitle(name, "否");
+        setData(name, TYPE_BUTTON, null);
+    }
+
+    public void setSingleSelectTitle(String name, String[] defaultText) {
+        setData(name, TYPE_SINGLE_SELECT, defaultText);
     }
 
     /**
-     * Button 类型
+     * 请使用 setSingleSelectTitle(String name, String[] defaultText)
      */
-    public void setButtonTitle(String name, String defaultText) {
-        setData(name, TYPE_BUTTON, defaultText);
-    }
-
+    @Deprecated
     public void setSingleSelectTitle(String name, String defaultText) {
         setData(name, TYPE_SINGLE_SELECT, defaultText);
     }
 
-    public void setData(String name, @KindTitleType int kindTitleType, String defaultText) {
+    public void setData(String name, @KindTitleType int kindTitleType, Object defaultText) {
+
+        this.type = kindTitleType;
         updateView(name, kindTitleType, defaultText);
     }
 
-    private void updateView(String name, @KindTitleType int kindTitleType, String defaultText) {
+    private void updateView(String name, @KindTitleType int kindTitleType, Object defaultValue) {
+
+        setViewText(titleNameTV, name);
 
         switch (kindTitleType) {
             case TYPE_NONE:
-                rightCheckTV.setVisibility(GONE);
-                rightSelectTV.setVisibility(GONE);
                 break;
             case TYPE_BUTTON:
-                rightCheckTV.setVisibility(VISIBLE);
-                rightSelectTV.setVisibility(GONE);
+                View zkTitleKindRightCheckBtnLayout = ((ViewStub) findView(R.id.zk_title_kind_right_check_btn_layout)).inflate();
+                zkTitleKindRightCheckBtn = zkTitleKindRightCheckBtnLayout.findViewById(R.id.zk_title_kind_right_check_btn);
+                zkTitleKindRightCheckBtn.setOnClickListener(v ->
+                        ToastUtils.showShort("你点击了查询按钮，这里应该 去访问服务器接口哦，然后处理逻辑"));
+
                 break;
             case TYPE_SINGLE_SELECT:
-                rightCheckTV.setVisibility(GONE);
-                rightSelectTV.setVisibility(VISIBLE);
+                if (defaultValue instanceof String[]) {
+                    String[] value = (String[]) defaultValue;
+                    if (value.length > 0) {
+                        View zkTitleKindRightSelectBtnLayout = ((ViewStub) findView(R.id.zk_title_kind_right_select_btn_layout)).inflate();
+                        zkTitleKindRightSelectBtn = zkTitleKindRightSelectBtnLayout.findViewById(R.id.zk_title_kind_right_select_btn);
+                        zkTitleKindRightSelectBtn.setOnClickListener(view -> {
+                            TextView btn = (TextView) view;
+                            OptionPicker picker3 = new OptionPicker(activity, value);
+                            picker3.setCanceledOnTouchOutside(false);
+                            picker3.setDividerRatio(WheelView.DividerConfig.FILL);
+                            picker3.setShadowColor(Color.BLUE, 40);
+                            picker3.setSelectedIndex(0);
+                            picker3.setCycleDisable(true);
+                            picker3.setTextSize(20);
+                            picker3.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                                @Override
+                                public void onOptionPicked(int index1, String item) {
+                                    btn.setText(item);
+                                }
+                            });
+                            picker3.show();
+                        });
+                        zkTitleKindRightSelectBtn.setText(value[0]);
+                    }
+                }
                 break;
         }
+    }
 
-        setViewText(titleNameTV, name);
-        setViewText(rightCheckTV, defaultText);
-        setViewText(rightSelectTV, defaultText);
-
-        if (rightSelectTV != null) {
-            rightSelectTV.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    TextView btn = (TextView) view;
-                    OptionPicker picker3 = new OptionPicker(activity, new String[]{
-                            "第一单位", "第二单位", "第三单位"
-                    });
-                    picker3.setCanceledOnTouchOutside(false);
-                    picker3.setDividerRatio(WheelView.DividerConfig.FILL);
-                    picker3.setShadowColor(Color.BLUE, 40);
-                    picker3.setSelectedIndex(1);
-                    picker3.setCycleDisable(true);
-                    picker3.setTextSize(20);
-                    picker3.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
-                        @Override
-                        public void onOptionPicked(int index, String item) {
-                            btn.setText(item);
-                        }
-                    });
-                    picker3.show();
-                }
-            });
-
+    @Override
+    public String getResult() {
+        switch (type) {
+            case TYPE_NONE:
+                break;
+            case TYPE_SINGLE_SELECT:
+                CharSequence charSequence = zkTitleKindRightSelectBtn.getText();
+                return charSequence.toString();
+            case TYPE_BUTTON:
+                break;
         }
-
-        if (rightCheckTV != null) {
-            rightCheckTV.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ToastUtils.showShort("你点击了查询按钮，这里应该 去访问服务器接口哦，然后处理逻辑");
-                }
-            });
-        }
+        return "";
     }
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({TYPE_NONE, TYPE_SINGLE_SELECT, TYPE_BUTTON})
     public @interface KindTitleType {
         int key() default TYPE_NONE;
+
     }
 
     public static final int TYPE_NONE = 1;

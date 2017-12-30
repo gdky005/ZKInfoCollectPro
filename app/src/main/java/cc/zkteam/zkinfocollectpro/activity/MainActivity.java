@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -21,13 +22,16 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.ZKBase;
+import cc.zkteam.zkinfocollectpro.activity.familyPlanningInfo.ChildbearingAgeAndChildrenInfoActivity;
 import cc.zkteam.zkinfocollectpro.activity.home.HomeActivity;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.bd.ZKBDIDCardManager;
@@ -41,10 +45,11 @@ import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiled;
-import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledFormView;
-import cc.zkteam.zkinfocollectpro.view.kind.ZKFiledLayoutView;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKFormLayout;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueLayout;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKindTitle;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKModuleLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -115,10 +120,10 @@ public class MainActivity extends BaseActivity {
 
         // TODO: 2017/12/29 请先把 aessts 目录下面的文件都放到 SD 卡的根目录下测试。
         String sdPath = Environment.getExternalStorageDirectory().getPath() + "/pics";
-        copyFilesFassets(this, "pics",  sdPath);
+        copyFilesFassets(this, "pics", sdPath);
 
 
-        String[] list = new String[] {"哈哈哈", "第一单位", "第二单位", "第三单位"};
+        String[] list = new String[]{"哈哈哈", "第一单位", "第二单位", "第三单位"};
 
         // 用户图像测试数据
         String picPatch = sdPath + "/user_icon.jpeg";
@@ -127,9 +132,144 @@ public class MainActivity extends BaseActivity {
         String pics1 = sdPath + "/id_card_z.png";
         String pics2 = sdPath + "/id_card_f.png";
 
-        String[] pics = new String[] {pics1, pics2};
+        String[] pics = new String[]{pics1, pics2};
 
 
+
+        //——————————————————————————————————————————————
+        //———————————————ZKModuleLayout 模块控件———————————————————
+        //——————————————————————————————————————————————
+        ZKModuleLayout zkModuleLayout = findViewById(R.id.zk_test_module_layout);
+
+        JSONArray moduleArray = null;
+        try {
+            moduleArray = new JSONArray();
+
+            for (int i = 0; i < 8; i++) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("item" + i, "hello" + i);
+                moduleArray.put(jsonObject);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Map<Integer, Object> objectHashMap = new HashMap<>();
+
+        List datas1 = new ArrayList();
+        datas1.add(ZKFiled.TYPE_FILED_FORM_SELECT_DATA);
+        datas1.add(list);
+        objectHashMap.put(1, datas1);
+        objectHashMap.put(3, ZKFiled.TYPE_FILED_FORM_TIME);
+
+        List list2 = new ArrayList();
+        list2.add(ZKFiled.TYPE_FILED_FORM_IMAGE);
+        list2.add(picPatch);
+        objectHashMap.put(5, list2);
+        objectHashMap.put(7, ZKFiled.TYPE_FILED_FORM_TWO_TIME_BUTTON);
+
+//        Map<Integer, Object> kindHashMap = new HashMap<>();
+//        List titleList = new ArrayList();
+//        titleList.add(ZKKindTitle.TYPE_FILED_FORM_IMAGE);
+//        titleList.add(list);
+//        kindHashMap.put(ZKKindTitle.TYPE_SINGLE_SELECT, titleList);
+
+        List titleList = new ArrayList();
+        titleList.add("我是小标题");
+        titleList.add(ZKKindTitle.TYPE_BUTTON);
+        titleList.add(list);
+
+        zkModuleLayout.setJsonArray(moduleArray, objectHashMap, titleList);
+
+
+
+
+
+
+        //——————————————————————————————————————————————
+        //———————————————ZKFormLayout 自动填充列表控件———————————————————
+        //——————————————————————————————————————————————
+        JSONArray formArray = null;
+        try {
+            formArray = new JSONArray();
+
+            for (int i = 0; i < 15; i++) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("item" + i, "hello" + i);
+                formArray.put(jsonObject);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Map<Integer, Object> formMap = new HashMap<>();
+
+
+        formMap.put(1, ZKFiled.TYPE_FILED_FORM_EDIT_TEXT);
+
+        List datas = new ArrayList();
+        datas.add(ZKFiled.TYPE_FILED_FORM_SELECT_DATA);
+        datas.add(list);
+        formMap.put(10, datas);
+        formMap.put(3, ZKFiled.TYPE_FILED_FORM_TIME);
+
+        List imageData = new ArrayList();
+        imageData.add(ZKFiled.TYPE_FILED_FORM_IMAGE);
+        imageData.add(picPatch);
+        formMap.put(13, imageData);
+        formMap.put(5, ZKFiled.TYPE_FILED_FORM_DOUBLE_BUTTON);
+        formMap.put(11, ZKFiled.TYPE_FILED_FORM_TWO_TIME_BUTTON);
+
+        List idCardData = new ArrayList();
+        idCardData.add(ZKFiled.TYPE_FILED_FORM_ID_CARD);
+        idCardData.add(pics);
+        formMap.put(7, idCardData);
+        formMap.put(0, ZKFiled.TYPE_FILED_FORM_ID_CARD_NUMBER);
+
+        ZKFormLayout zkTestFormLayout = findViewById(R.id.zk_test_form_layout);
+        zkTestFormLayout.setJsonArray(formArray, formMap);
+
+
+        //——————————————————————————————————————————————
+        //———————————————KeyValueLayout 自动填充控件———————————————————
+        //——————————————————————————————————————————————
+        JSONArray keyValueArray = null;
+        try {
+            keyValueArray = new JSONArray();
+
+            for (int i = 0; i < 5; i++) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("姓名" + i, "小智" + i);
+                keyValueArray.put(jsonObject);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        ZKKeyValueLayout zkTestValueLayout = findViewById(R.id.zk_test_value_layout);
+        zkTestValueLayout.setJsonArray(keyValueArray);
+
+
+        //——————————————————————————————————————————————
+        //———————————————Key-Value 控件———————————————————
+        //——————————————————————————————————————————————
+        ZKKeyValueFiledView zkTestKeyValueView = findViewById(R.id.zk_test_key_value_view);
+        zkTestKeyValueView.setKeyValue("姓名", "小黑");
+
+
+        //——————————————————————————————————————————————
+        //———————————————大标题控件———————————————————
+        //——————————————————————————————————————————————
+        ZKKindTitle zkTestTitleView = findViewById(R.id.zk_test_title_view);
+
+        zkTestTitleView.setFocusableInTouchMode(true);
+//        zkTestTitleView.setTextTitle("我的大标题哦！");
+        zkTestTitleView.setSingleSelectTitle("选择框标题", list);
+        zkTestTitleView.setButtonTitle("按钮标题");
+
+
+        //——————————————————————————————————————————————
+        //———————————————数据收集控件———————————————————
+        //——————————————————————————————————————————————
         ZKFiled zkTestView = findViewById(R.id.zk_test_view);
         zkTestView.setFocusableInTouchMode(true);
 
@@ -149,24 +289,50 @@ public class MainActivity extends BaseActivity {
 //        zkTestView.setDoubleBtn("这是双按钮");
 //        zkTestView.setDoubleTime("双时间显示");
 //        zkTestView.setIdCard("身份证正反面", pics);
-        zkTestView.setIdCardNumber("8","身份证信息");
+        zkTestView.setIdCardNumber("8", "身份证信息");
 
 
-        findViewById(R.id.btn).setOnClickListener(view ->
-                ToastUtils.showShort(zkTestView.getResult()));
+        //——————————————————————————————————————————————
+        //———————————————获取以上结果的按钮———————————————————
+        //——————————————————————————————————————————————
+        Button btn = findViewById(R.id.btn);
+        btn.setFocusableInTouchMode(true);
+        btn.setOnClickListener(view -> {
+            String result = zkTestView.getResult();
+
+            if (TextUtils.isEmpty(result)) {
+                result = zkTestTitleView.getResult();
+            }
+
+            if (TextUtils.isEmpty(result)) {
+                List<String>  list1 = zkTestFormLayout.getResult();
+
+                StringBuilder sb = new StringBuilder();
+                for (String s: list1) {
+                    sb.append(s);
+                    sb.append(",");
+                }
+
+                result = sb.toString();
+            }
+
+            ToastUtils.showShort(result);
+        });
 
 
-
+        //——————————————————————————————————————————————
+        //———————————————通用数据基本测试———————————————————
+        //——————————————————————————————————————————————
         ZKKeyValueFiledView filedView = findViewById(R.id.filed_view);
-        ZKFiledLayoutView fileLayoutView = findViewById(R.id.filed_layout_view);
+        ZKKeyValueLayout fileLayoutView = findViewById(R.id.filed_layout_view);
         ZKFiled editFiledView = findViewById(R.id.eidt_filed_layout_view);
-        ZKFiledFormView zkFiledFormView = findViewById(R.id.edit_form_filed_view);
+        ZKFormLayout zkFiledFormView = findViewById(R.id.edit_form_filed_view);
         ZKKindTitle zkKindTitle = findViewById(R.id.zk_kind_title);
 
 //        zkKindTitle.setTextTitle("小小新的笔记");
 //        zkKindTitle.setButtonTitle("小小新的笔记");
 //        zkKindTitle.setButtonTitle("小小新的笔记", "SayHello");
-        zkKindTitle.setSingleSelectTitle("小小新的笔记", "否");
+//        zkKindTitle.setSingleSelectTitle("小小新的笔记", "否");
 //        zkKindTitle.setSingleSelectTitle("小小新的笔记", null);
 
         filedView.setKeyValue("姓名", "小Q");
@@ -189,7 +355,7 @@ public class MainActivity extends BaseActivity {
 
         editFiledView.setData("1", "姓名", "小小兔", 0, ZKFiled.TYPE_FILED_FORM_TIME);
 
-        Map<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Object> map = new HashMap<>();
 
         map.put(1, ZKFiled.TYPE_FILED_FORM_EDIT_TEXT);
         map.put(2, ZKFiled.TYPE_FILED_FORM_SELECT_DATA);
@@ -271,7 +437,7 @@ public class MainActivity extends BaseActivity {
 
                 break;
             case R.id.btn_problem_list:
-                PageCtrl.startActivity(MainActivity.this, MyProblemListActivity.class);
+                PageCtrl.startActivity(MainActivity.this, ChildbearingAgeAndChildrenInfoActivity.class);
                 break;
             case R.id.dialog:
 
@@ -392,12 +558,12 @@ public class MainActivity extends BaseActivity {
     }
 
 
-
     /**
-     *  从assets目录中复制整个文件夹内容
-     *  @param  context  Context 使用CopyFiles类的Activity
-     *  @param  oldPath  String  原文件路径  如：/aa
-     *  @param  newPath  String  复制后路径  如：xx:/bb/cc
+     * 从assets目录中复制整个文件夹内容
+     *
+     * @param context Context 使用CopyFiles类的Activity
+     * @param oldPath String  原文件路径  如：/aa
+     * @param newPath String  复制后路径  如：xx:/bb/cc
      */
     public void copyFilesFassets(Context context, String oldPath, String newPath) {
         try {
@@ -406,14 +572,14 @@ public class MainActivity extends BaseActivity {
                 File file = new File(newPath);
                 file.mkdirs();//如果文件夹不存在，则递归
                 for (String fileName : fileNames) {
-                    copyFilesFassets(context,oldPath + "/" + fileName,newPath+"/"+fileName);
+                    copyFilesFassets(context, oldPath + "/" + fileName, newPath + "/" + fileName);
                 }
             } else {//如果是文件
                 InputStream is = context.getAssets().open(oldPath);
                 FileOutputStream fos = new FileOutputStream(new File(newPath));
                 byte[] buffer = new byte[1024];
-                int byteCount=0;
-                while((byteCount=is.read(buffer))!=-1) {//循环从输入流读取 buffer字节
+                int byteCount = 0;
+                while ((byteCount = is.read(buffer)) != -1) {//循环从输入流读取 buffer字节
                     fos.write(buffer, 0, byteCount);//将读取的输入流写入到输出流
                 }
                 fos.flush();//刷新缓冲区

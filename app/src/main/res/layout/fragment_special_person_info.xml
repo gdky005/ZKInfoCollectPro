@@ -28,7 +28,7 @@
             android:layout_height="0.5dp"
             android:background="@color/divider_color" />
 
-        <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledLayoutView
+        <cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueLayout
             android:id="@+id/filed_special_info_name_sex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -59,7 +59,7 @@
             android:background="@color/divider_color" />
 
 
-        <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledFormView
+        <cc.zkteam.zkinfocollectpro.view.kind.ZKFormLayout
             android:id="@+id/edit_special_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

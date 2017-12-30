@@ -18,6 +18,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.BasicInfoActivity;
+import cc.zkteam.zkinfocollectpro.activity.CommonFragmentActivity;
 import cc.zkteam.zkinfocollectpro.activity.IDCardScanActivity;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
@@ -84,7 +85,7 @@ public class PersonalInfoCollectFragment extends BaseFragment {
     }
 
     @OnClick({R.id.img_personal_info_back, R.id.img_personal_info_scan, R.id.btn_modification_info,
-            R.id.btn_test_detail, R.id.img_change_left, R.id.img_change_right})
+            R.id.btn_test_detail, R.id.img_change_left, R.id.img_change_right, R.id.img_personal_info_item_edit_base, R.id.img_personal_info_item_edit_special})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_personal_info_back:
@@ -109,6 +110,12 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                 isRight = true;
 
                 break;
+            case R.id.img_personal_info_item_edit_base:
+                CommonFragmentActivity.startCommonFragmentActivity(getActivity(), PersonalBaseInfoFragment.class.getName());
+                break;
+            case R.id.img_personal_info_item_edit_special:
+                CommonFragmentActivity.startCommonFragmentActivity(getActivity(), SpecialPersonFragment.class.getName());
+                break;
         }
     }
 
@@ -132,19 +139,5 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                 }
                 break;
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 }

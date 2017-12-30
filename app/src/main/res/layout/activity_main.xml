@@ -47,8 +47,53 @@
 
 
 
+
+
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKModuleLayout
+                    android:id="@+id/zk_test_module_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+
+
+
+
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKFormLayout
+                    android:id="@+id/zk_test_form_layout"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"/>
+
+
+
+
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueLayout
+                    android:id="@+id/zk_test_value_layout"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"/>
+
+
+
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView
+                    android:id="@+id/zk_test_key_value_view"
+                    android:layout_width="wrap_content"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"/>
+
+
+
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKKindTitle
+                    android:id="@+id/zk_test_title_view"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
                 <cc.zkteam.zkinfocollectpro.view.kind.ZKFiled
                     android:id="@+id/zk_test_view"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -91,7 +136,7 @@
                     android:layout_height="1dp"
                     android:background="@color/colorAccent" />
 
-                <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledLayoutView
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueLayout
                     android:id="@+id/filed_layout_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -113,7 +158,7 @@
                     android:layout_height="1dp"
                     android:background="@color/colorAccent" />
 
-                <cc.zkteam.zkinfocollectpro.view.kind.ZKFiledFormView
+                <cc.zkteam.zkinfocollectpro.view.kind.ZKFormLayout
                     android:id="@+id/edit_form_filed_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
