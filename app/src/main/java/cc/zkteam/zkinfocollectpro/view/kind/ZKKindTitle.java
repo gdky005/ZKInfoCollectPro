@@ -20,6 +20,7 @@ import cn.qqtheme.framework.widget.WheelView;
 
 /**
  * ZKKindTitle
+ * 主要是各种大标题的几种类型
  * Created by wangqing on 2017/12/27.
  */
 
