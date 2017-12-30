@@ -10,13 +10,13 @@ import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHLoginBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHTongJiBean;
+import cc.zkteam.zkinfocollectpro.bean.ZKSettingBean;
 import cc.zkteam.zkinfocollectpro.bean.ZKTestBaseBean;
 import cc.zkteam.zkinfocollectpro.bean.ZKTestCategoryBean;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -154,7 +154,17 @@ public interface ZHApi {
      */
     @GET("Datamanage.php/Admin/AppInterface/qianchu")
     Call<ZHBaseBean> emigration(@Query("personid") String personid,
-                               @Query("houseid") String houseid,
-                               @Query("buildid") String buildid);
+                                @Query("houseid") String houseid,
+                                @Query("buildid") String buildid);
+
+    /**
+     * 获取服务器配置的接口
+     */
+    @GET("datamanage.php/Admin/AppshowInterface/setting")
+    Call<ZHBaseBean<ZKSettingBean>> setting(@Query("para") String para);
+
+
+
+
 
 }

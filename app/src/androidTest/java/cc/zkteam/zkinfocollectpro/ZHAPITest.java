@@ -20,6 +20,7 @@ import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHLoginBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHTongJiBean;
+import cc.zkteam.zkinfocollectpro.bean.ZKSettingBean;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.retrofit2.ZHCallback;
 import okhttp3.MediaType;
@@ -294,5 +295,30 @@ public class ZHAPITest {
         }
     }
 
+
+    @Test
+    public void testSetting() {
+        // 可以传入 "POORTYPE", "LOWHOMETYPE"
+        zhApi.setting(null).enqueue(new ZHCallback<ZKSettingBean>() {
+            @Override
+            public void onResponse(ZHBaseBean<ZKSettingBean> baseBean, ZKSettingBean result) {
+                if (result != null) {
+                    Log.d(TAG, "onResponse: " + result.toString());
+                }
+                countDownLatch.countDown();
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                countDownLatch.countDown();
+            }
+        });
+
+        try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
