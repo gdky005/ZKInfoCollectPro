@@ -30,6 +30,7 @@ import cc.zkteam.zkinfocollectpro.fragment.SignInFragment;
 import cc.zkteam.zkinfocollectpro.fragment.datacollectfirst.DataCollectFragment;
 import cc.zkteam.zkinfocollectpro.fragment.problem.ProblemReportFragment;
 import cc.zkteam.zkinfocollectpro.localserver.JMHttpServer;
+import cc.zkteam.zkinfocollectpro.managers.ZHConfigDataManager;
 import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.view.ZKViewPager;
 import dagger.android.AndroidInjection;
@@ -162,6 +163,8 @@ public class HomeActivity extends BaseActivity implements HasSupportFragmentInje
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
+
+        ZHConfigDataManager.getInstance().refreshConfigData();
     }
 
     @Override

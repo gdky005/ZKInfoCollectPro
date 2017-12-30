@@ -1,6 +1,5 @@
 package cc.zkteam.zkinfocollectpro.fragment.problem.mvp;
 
-import android.os.Environment;
 import android.util.Log;
 
 import com.baidu.location.BDAbstractLocationListener;

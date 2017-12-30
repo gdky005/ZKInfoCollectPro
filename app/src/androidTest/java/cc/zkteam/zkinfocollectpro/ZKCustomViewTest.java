@@ -43,8 +43,6 @@ public class ZKCustomViewTest {
     public void testZKFieldView() {
         ZKKeyValueFiledView zkFiledView = new ZKKeyValueFiledView(context);
         zkFiledView.setKeyValue("姓名", "小黄");
-        zkFiledView.setKey("年龄");
-        zkFiledView.setValue("54");
     }
 
     /**
