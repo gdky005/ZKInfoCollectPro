@@ -3,9 +3,7 @@ package cc.zkteam.zkinfocollectpro.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,9 +11,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.BasicInfoActivity;
 import cc.zkteam.zkinfocollectpro.activity.CommonFragmentActivity;
@@ -60,7 +56,6 @@ public class PersonalInfoCollectFragment extends BaseFragment {
     ImageView imgChangeLeft;
     @BindView(R.id.img_change_right)
     ImageView imgChangeRight;
-    Unbinder unbinder;
 
     private boolean isRight;
 

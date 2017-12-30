@@ -14,8 +14,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ToastUtils;
-
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
@@ -24,7 +22,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.adapter.BasicInfoItemAdapter;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
@@ -91,17 +88,10 @@ public class BaseinfoRightFragment extends BaseFragment implements RvListener {
         return rootView;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
 
     @OnClick(R.id.titleimage)
     public void onViewClicked() {
     }
-
-
 
     @Override
     public void onItemClick(int id, int position) {

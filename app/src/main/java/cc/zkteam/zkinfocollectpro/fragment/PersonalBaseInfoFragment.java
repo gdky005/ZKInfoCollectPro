@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
@@ -27,7 +26,6 @@ public class PersonalBaseInfoFragment extends BaseFragment {
     ZKTitleView titleSpecialPersonInfo;
     @BindView(R.id.edit_personal_base_avatar)
     ZKFormLayout editPersonalBaseInfo;
-    Unbinder unbinder;
     @BindView(R.id.kind_personal_edit_sex)
     ZKKindTitle kindPersonalEditSex;
     @BindView(R.id.edit_personal_date)
