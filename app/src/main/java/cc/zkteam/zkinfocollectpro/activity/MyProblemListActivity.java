@@ -58,6 +58,7 @@ public class MyProblemListActivity extends BaseActivity implements RvListener {
     @Override
     protected void initData() {
         getProblemList();
+        mAdapter.addData(mProblemList);
         mAdapter.notifyDataSetChanged();
     }
 

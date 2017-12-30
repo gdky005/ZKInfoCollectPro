@@ -190,6 +190,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         if (personlist != null && personlist.size() > 0){
             Intent intent = new Intent();
             intent.putExtra("rent_personers",data);
+            intent.putExtra("build_Id",tempIds.get(3));
             PageCtrl.startActivity(getContext(), RentPersonInfoActivity.class,intent);
         }else {
             View view = getLayoutInflater().inflate(R.layout.create_house_dialog, null, false);
@@ -346,5 +347,4 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         mPresenter.loadRentInfo(community, cunjuid, gridding,
                 hsid, houseSerial, address, houseNumber);
     }
-
 }

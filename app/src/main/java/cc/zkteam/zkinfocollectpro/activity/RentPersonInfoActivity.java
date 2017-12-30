@@ -3,6 +3,7 @@ package cc.zkteam.zkinfocollectpro.activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,13 +24,19 @@ import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.RentPersonPresenterImpl;
 import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.RentPersonView;
 import cc.zkteam.zkinfocollectpro.adapter.DateCollectRvAdapter;
+import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.base.RvListener;
 import cc.zkteam.zkinfocollectpro.bean.RentPersoner;
+import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.fragment.PersonalInfoCollectFragment;
+import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.utils.CommonUtils;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.view.DividerItemDecoration;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Administrator on 2017/12/15.
@@ -54,7 +61,10 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
     Toolbar mToolbar;
     private RentPersoner rentperson;
     private DateCollectRvAdapter adapter;
+    private String mBuildId;
     public static final String INVALID = "-1";
+    private ZHApi mZhApi;
+    private Dialog mEmigrationDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,10 +96,13 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
     protected void initData() {
         Intent intent = getIntent();
         rentperson = (RentPersoner) intent.getSerializableExtra("rent_personers");
+        mBuildId = intent.getStringExtra("build_Id");
         List<RentPersoner.PersonlistBean> personlist = rentperson.getPersonlist();
-        personlist.add(0,new RentPersoner.PersonlistBean(INVALID,INVALID,INVALID,INVALID));
+        personlist.add(0, new RentPersoner.PersonlistBean(INVALID, INVALID, INVALID, INVALID));
         adapter = new DateCollectRvAdapter(this, personlist, this);
         mRecycle.setAdapter(adapter);
+
+        mZhApi = ZHConnectionManager.getInstance().getZHApi();
     }
 
     @Override
@@ -130,23 +143,50 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
 
     private void showOutSetting(int position) {
         View view = getLayoutInflater().inflate(R.layout.data_collect_out_setting, null, false);
-        Dialog dialog = new Dialog(this);
-        dialog.setContentView(view);
+        mEmigrationDialog = new Dialog(this);
+        mEmigrationDialog.setContentView(view);
         view.findViewById(R.id.confirm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
+                emigration(position);
             }
         });
         view.findViewById(R.id.cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
+                mEmigrationDialog.dismiss();
             }
         });
 
-        dialog.show();
+        mEmigrationDialog.show();
+    }
 
+    /**
+     * 迁出
+     *
+     * @param position
+     */
+    private void emigration(int position) {
+        mZhApi.emigration(rentperson.getPersonlist().get(position).getP_id(),
+                rentperson.getPersonlist().get(position).getHouseid(), mBuildId).enqueue(new Callback<ZHBaseBean>() {
+            @Override
+            public void onResponse(@NonNull Call<ZHBaseBean> call, @NonNull Response<ZHBaseBean> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus() == 1) {
+                        ToastUtils.showShort("迁出成功");
+                    } else {
+                        ToastUtils.showShort("迁出失败");
+                    }
+                }
+                mEmigrationDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ZHBaseBean> call, @NonNull Throwable t) {
+                t.printStackTrace();
+                mEmigrationDialog.dismiss();
+            }
+        });
     }
 
     @Override
@@ -168,5 +208,6 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
     public void requestFinish() {
 
     }
+
 
 }

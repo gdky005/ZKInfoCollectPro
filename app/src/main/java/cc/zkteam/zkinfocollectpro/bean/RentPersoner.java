@@ -42,13 +42,14 @@ public class RentPersoner implements Serializable{
          * name : 李巧荣
          */
 
-        private String p_id;
+        private String personid;
         private String p_man_id;
         private String relation;
         private String name;
+        private String houseid;
 
         public PersonlistBean(String p_id, String p_man_id, String relation, String name) {
-            this.p_id = p_id;
+            this.personid = p_id;
             this.p_man_id = p_man_id;
             this.relation = relation;
             this.name = name;
@@ -58,11 +59,11 @@ public class RentPersoner implements Serializable{
         }
 
         public String getP_id() {
-            return p_id;
+            return personid;
         }
 
         public void setP_id(String p_id) {
-            this.p_id = p_id;
+            this.personid = p_id;
         }
 
         public String getP_man_id() {
@@ -92,11 +93,20 @@ public class RentPersoner implements Serializable{
         @Override
         public String toString() {
             return "PersonlistBean{" +
-                    "p_id='" + p_id + '\'' +
+                    "personid='" + personid + '\'' +
                     ", p_man_id='" + p_man_id + '\'' +
                     ", relation='" + relation + '\'' +
                     ", name='" + name + '\'' +
+                    ", houseid='" + houseid + '\'' +
                     '}';
+        }
+
+        public String getHouseid() {
+            return houseid;
+        }
+
+        public void setHouseid(String houseid) {
+            this.houseid = houseid;
         }
     }
 

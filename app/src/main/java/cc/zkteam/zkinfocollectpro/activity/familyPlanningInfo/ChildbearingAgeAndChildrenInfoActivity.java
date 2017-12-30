@@ -2,52 +2,55 @@ package cc.zkteam.zkinfocollectpro.activity.familyPlanningInfo;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.adapter.ChildInfoAdapter;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
-import cc.zkteam.zkinfocollectpro.view.kind.ZKFiled;
-import cc.zkteam.zkinfocollectpro.view.kind.ZKKindTitle;
-import cc.zkteam.zkinfocollectpro.view.kind.ZKModuleLayout;
+import cc.zkteam.zkinfocollectpro.bean.ChildInfoBean;
 
 /**
  * Created by gzw10 on 2017/12/29.
  */
 
-public class ChildbearingAgeAndChildrenInfoActivity extends BaseActivity {
+public class ChildbearingAgeAndChildrenInfoActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.tv_toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.tv_id_no)
-    TextView mIdNo;
-    @BindView(R.id.tv_name)
-    TextView mName;
-    @BindView(R.id.tv_sex)
-    TextView mSex;
-    @BindView(R.id.tv_birthday)
-    TextView mBirthday;
-    @BindView(R.id.tv_is_only_child)
-    TextView mIsOnlyChild;
-    @BindView(R.id.tv_time_to_get_married)
-    TextView mTimeToGetMarried;
-    @BindView(R.id.tv_number_of_children)
-    TextView mNumberOfChildren;
-    @BindView(R.id.zk_module_layout)
-    ZKModuleLayout mModuleLayout;
+    @BindView(R.id.tv_woman_id_no)
+    TextView mWomanIdNo;
+    @BindView(R.id.tv_woman_name)
+    TextView mWomanName;
+    @BindView(R.id.tv_woman_sex)
+    TextView mWomanSex;
+    @BindView(R.id.tv_woman_birthday)
+    TextView mWomanBirthday;
+    @BindView(R.id.tv_woman_is_only_child)
+    TextView mWomanIsOnlyChild;
+    @BindView(R.id.tv_woman_time_to_get_married)
+    TextView mWomanTimeToGetMarried;
+    @BindView(R.id.tv_woman_number_of_children)
+    TextView mWomanNumberOfChildren;
+    @BindView(R.id.btn_add_other)
+    Button mAddOtherBtn;
+    @BindView(R.id.btn_save_and_commit)
+    Button mSaveAndCommitBtn;
+    @BindView(R.id.rv_child_info_list)
+    RecyclerView mChildInfoList;
+    private ChildInfoAdapter mAdapter;
+    private ArrayList<ChildInfoBean> mData;
+
 
     @Override
     protected int getLayoutId() {
@@ -58,56 +61,38 @@ public class ChildbearingAgeAndChildrenInfoActivity extends BaseActivity {
     protected void initViews() {
         mToolbarTitle.setText("计生信息填写");
         initToolbar(mToolbar);
-
         initCA();
-        initZK();
+        initRecyclerView();
     }
 
-    private void initZK() {
-        JSONArray moduleArray = null;
-        try {
-            moduleArray = new JSONArray();
-
-            for (int i = 0; i < 8; i++) {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("item" + i, "hello" + i);
-                moduleArray.put(jsonObject);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        String[] list = new String[]{"哈哈哈", "第一单位", "第二单位", "第三单位"};
-
-        Map<Integer, Object> objectHashMap = new HashMap<>();
-
-        List datas1 = new ArrayList();
-        datas1.add(ZKFiled.TYPE_FILED_FORM_SELECT_DATA);
-        datas1.add(list);
-        objectHashMap.put(1, datas1);
-        objectHashMap.put(3, ZKFiled.TYPE_FILED_FORM_TIME);
-
-        List titleList = new ArrayList();
-        titleList.add("我是小标题");
-        titleList.add(ZKKindTitle.TYPE_BUTTON);
-        titleList.add(list);
-
-        mModuleLayout.setJsonArray(moduleArray, objectHashMap, titleList);
+    private void initRecyclerView() {
+        mChildInfoList.setLayoutManager(new LinearLayoutManager(this));
+        mData = new ArrayList<>();
+        mData.add(new ChildInfoBean());
+        mAdapter = new ChildInfoAdapter(this, mData, null, this);
+        mChildInfoList.setAdapter(mAdapter);
     }
 
     @SuppressLint("SetTextI18n")
     private void initCA() {
-        mIdNo.setText("110101199304050023");
-        mName.setText("落落");
-        mSex.setText("女");
-        mBirthday.setText("1989-09-06");
-        mIsOnlyChild.setText("否");
-        mTimeToGetMarried.setText("2009-09-06");
-        mNumberOfChildren.setText("0");
+        mWomanIdNo.setText("110101199304050023");
+        mWomanName.setText("落落");
+        mWomanSex.setText("女");
+        mWomanBirthday.setText("1989-09-06");
+        mWomanIsOnlyChild.setText("否");
+        mWomanTimeToGetMarried.setText("2009-09-06");
+        mWomanNumberOfChildren.setText("0");
     }
+
 
     @Override
     protected void initListener() {
-
+        mAddOtherBtn.setOnClickListener(v -> {
+//            mData.clear();
+//            mData.add(new ChildInfoBean());
+//            mAdapter.addData(mData);
+//            mAdapter.notifyDataSetChanged();
+        });
     }
 
     @Override
@@ -116,9 +101,6 @@ public class ChildbearingAgeAndChildrenInfoActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    public void onClick(View v) {
     }
 }

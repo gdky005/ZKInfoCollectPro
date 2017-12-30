@@ -36,7 +36,8 @@ public interface ZHApi {
      * 获取百度的 AccessToken
      */
     @POST(Constant.BD_ACCESS_TOKEN_URL)
-    Call<BDTokenBean> bdAccessToken(@Query("grant_type") String type, @Query("client_id") String client_id,
+    Call<BDTokenBean> bdAccessToken(@Query("grant_type") String type,
+                                    @Query("client_id") String client_id,
                                     @Query("client_secret") String client_secret);
 
     /**
@@ -147,4 +148,13 @@ public interface ZHApi {
                             @Part MultipartBody.Part type,
                             @Part MultipartBody.Part path,
                             @Part MultipartBody.Part filetype);
+
+    /**
+     * 用户迁出
+     */
+    @GET("Datamanage.php/Admin/AppInterface/qianchu")
+    Call<ZHBaseBean> emigration(@Query("personid") String personid,
+                               @Query("houseid") String houseid,
+                               @Query("buildid") String buildid);
+
 }

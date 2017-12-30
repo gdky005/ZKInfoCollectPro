@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/include_toolbar"/>
+    <include layout="@layout/include_toolbar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,13 +22,13 @@
                 android:padding="12dp"
                 android:text="@string/childbearing_age_info"
                 android:textColor="@color/text_main"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginBottom="12dp"
-                android:background="@color/item_decor"/>
+                android:background="@color/item_decor" />
 
 
             <LinearLayout
@@ -42,18 +41,18 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="身份证号"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp"
-                    android:text="身份证号"/>
+                    android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tv_id_no"
+                    android:id="@+id/tv_woman_id_no"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:textColor="@color/gray_6"
                     android:textSize="15sp"
-                    tools:text="110101199304050023"/>
+                    tools:text="110101199304050023" />
 
 
             </LinearLayout>
@@ -68,35 +67,35 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="姓名"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp"
-                    android:text="姓名"/>
+                    android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tv_name"
+                    android:id="@+id/tv_woman_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/gray_6"
                     android:textSize="15sp"
-                    tools:text="落落"/>
+                    tools:text="落落" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="性别"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp"
-                    android:text="性别"/>
+                    android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tv_sex"
+                    android:id="@+id/tv_woman_sex"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/gray_6"
                     android:textSize="15sp"
-                    tools:text="男"/>
+                    tools:text="男" />
 
             </LinearLayout>
 
@@ -110,35 +109,35 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="出生日期"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp"
-                    android:text="出生日期"/>
+                    android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tv_birthday"
+                    android:id="@+id/tv_woman_birthday"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/gray_6"
                     android:textSize="15sp"
-                    tools:text="1989-09-06"/>
+                    tools:text="1989-09-06" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="是否独生"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp"
-                    android:text="是否独生"/>
+                    android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tv_is_only_child"
+                    android:id="@+id/tv_woman_is_only_child"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/gray_6"
                     android:textSize="15sp"
-                    tools:text="否"/>
+                    tools:text="否" />
 
             </LinearLayout>
 
@@ -152,45 +151,43 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="结婚时间"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp"
-                    android:text="结婚时间"/>
+                    android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tv_time_to_get_married"
+                    android:id="@+id/tv_woman_time_to_get_married"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/gray_6"
                     android:textSize="15sp"
-                    tools:text="1989-09-06"/>
+                    tools:text="1989-09-06" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="子女数"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp"
-                    android:text="子女数"/>
+                    android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tv_number_of_children"
+                    android:id="@+id/tv_woman_number_of_children"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/gray_6"
                     android:textSize="15sp"
-                    tools:text="0"/>
+                    tools:text="0" />
 
             </LinearLayout>
-
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:layout_marginTop="12dp"
-                android:background="@color/item_decor"/>
-
+                android:background="@color/item_decor" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -198,19 +195,41 @@
                 android:padding="12dp"
                 android:text="@string/children_info"
                 android:textColor="@color/text_main"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginBottom="12dp"
-                android:background="@color/item_decor"/>
+                android:background="@color/item_decor" />
 
-            <cc.zkteam.zkinfocollectpro.view.kind.ZKModuleLayout
-                android:id="@+id/zk_module_layout"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_child_info_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
+            <Button
+                android:id="@+id/btn_add_other"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_btn_add_other"
+                android:text="添加其他成员"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btn_save_and_commit"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="27dp"
+                android:background="@drawable/bg_btn_commit"
+                android:text="保存并提交"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
