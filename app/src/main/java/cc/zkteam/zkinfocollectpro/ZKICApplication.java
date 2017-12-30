@@ -4,8 +4,14 @@ import android.content.Context;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.bugtags.library.Bugtags;
+import com.facebook.stetho.DumperPluginsProvider;
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.dumpapp.DumperPlugin;
+import com.facebook.stetho.dumpapp.plugins.HprofDumperPlugin;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import cc.zkteam.zkinfocollectpro.di.DaggerAppComponent;
+import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
 
@@ -29,6 +35,21 @@ public class ZKICApplication extends DaggerApplication {
 
         //在这里初始化Bugtags
         Bugtags.start("f1a4f3ae0071b52e8138b926f4763075", this, Bugtags.BTGInvocationEventBubble);
+
+        Stetho.initialize(Stetho.newInitializerBuilder(mContext)
+                .enableDumpapp(new DumperPluginsProvider() {
+                    @Override
+                    public Iterable<DumperPlugin> get() {
+                        return new Stetho.DefaultDumperPluginsBuilder(mContext)
+                                .provide(new HprofDumperPlugin(mContext))
+                                .finish();
+                    }
+                })
+                .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(mContext))
+                .build());
+
+        //添加 Stetho 的拦截器
+        ZHConnectionManager.getInstance().getBuilder().addNetworkInterceptor(new StethoInterceptor());
     }
 
     @Override

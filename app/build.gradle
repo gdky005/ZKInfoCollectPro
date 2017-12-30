@@ -88,6 +88,9 @@ dependencies {
     implementation deps.bugtags_lib
     implementation deps.nbs_newlens_agent
 
+    implementation deps.stetho
+    implementation deps.stetho_okhttp3
+
     implementation deps.dagger_support
     annotationProcessor deps.dagger_processor
 

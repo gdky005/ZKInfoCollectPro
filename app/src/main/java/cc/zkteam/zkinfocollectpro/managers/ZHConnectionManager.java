@@ -24,6 +24,11 @@ public class ZHConnectionManager {
 
     private static final String TAG = "ZKConnectionManager";
 
+
+    //http://blog.csdn.net/u014695188/article/details/52985514
+    private OkHttpClient.Builder builder = new OkHttpClient.Builder();
+
+
     private static ZHConnectionManager instance = null;
 
     private ZHConnectionManager() {
@@ -50,11 +55,11 @@ public class ZHConnectionManager {
                 .create();
     }
 
+    public OkHttpClient.Builder getBuilder() {
+        return builder;
+    }
+
     private Retrofit getRetrofit() {
-
-        //http://blog.csdn.net/u014695188/article/details/52985514
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-
         builder.connectTimeout(10, TimeUnit.SECONDS);
         builder.readTimeout(10, TimeUnit.SECONDS);
         builder.writeTimeout(10, TimeUnit.SECONDS);
