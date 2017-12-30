@@ -99,7 +99,11 @@
             android:name=".activity.RentPersonInfoActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTop"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
+            android:windowSoftInputMode="stateHidden|adjustPan" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.IDCardScanActivity"
             android:configChanges="orientation|screenSize"

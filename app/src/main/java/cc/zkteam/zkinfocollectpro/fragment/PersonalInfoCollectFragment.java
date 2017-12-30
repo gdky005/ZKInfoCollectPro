@@ -26,6 +26,7 @@ import cc.zkteam.zkinfocollectpro.view.ZKRecyclerView;
 import static android.app.Activity.RESULT_OK;
 
 /**
+ * 个人数据采集页面
  * Created by loong on 2017/12/16.
  */
 

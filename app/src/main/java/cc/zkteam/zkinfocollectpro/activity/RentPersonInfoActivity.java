@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.FragmentUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -39,6 +41,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
+ * 房屋 数据采集主页面
  * Created by Administrator on 2017/12/15.
  */
 
@@ -97,12 +100,34 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
         Intent intent = getIntent();
         rentperson = (RentPersoner) intent.getSerializableExtra("rent_personers");
         mBuildId = intent.getStringExtra("build_Id");
-        List<RentPersoner.PersonlistBean> personlist = rentperson.getPersonlist();
-        personlist.add(0, new RentPersoner.PersonlistBean(INVALID, INVALID, INVALID, INVALID));
-        adapter = new DateCollectRvAdapter(this, personlist, this);
-        mRecycle.setAdapter(adapter);
+
+        // TODO: 2017/12/31  测试数据
+        if (rentperson == null) {
+            rentperson = new RentPersoner();
+            ArrayList list = new ArrayList();
+            RentPersoner.PersonlistBean personlistBean = new RentPersoner.PersonlistBean();
+            personlistBean.setHouseid("7");
+            personlistBean.setName("魏伟");
+            personlistBean.setP_man_id("45");
+            personlistBean.setP_id("45");
+            list.add(personlistBean);
+            rentperson.setPersonlist(list);
+        }
+
+        // TODO: 2017/12/31  测试数据
+        if (TextUtils.isEmpty(mBuildId)) {
+            mBuildId = "1";
+        }
+
+        if (rentperson != null) {
+            List<RentPersoner.PersonlistBean> personlist = rentperson.getPersonlist();
+            personlist.add(0, new RentPersoner.PersonlistBean(INVALID, INVALID, INVALID, INVALID));
+            adapter = new DateCollectRvAdapter(this, personlist, this);
+            mRecycle.setAdapter(adapter);
+        }
 
         mZhApi = ZHConnectionManager.getInstance().getZHApi();
+
     }
 
     @Override
