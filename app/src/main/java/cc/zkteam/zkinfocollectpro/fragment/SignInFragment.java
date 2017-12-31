@@ -201,6 +201,7 @@ public class SignInFragment extends BaseFragment {
             case R.id.tv_about_message:
                 break;
             case R.id.tv_about_setting:
+                CommonFragmentActivity.startCommonFragmentActivity(getActivity(), ResetPwdFragment.class.getName());
                 break;
             case R.id.tv_about_quit:
                 if (getActivity() != null) {

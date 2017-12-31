@@ -23,7 +23,7 @@ import cc.zkteam.zkinfocollectpro.R;
 public class ZKTitleView extends LinearLayout {
 
     public Toolbar toolbar;
-    public TextView centerTextTV;
+    public TextView centerTextTV, rightTextTV;
     public ImageView leftIV;
     public ImageView rightIV;
 
@@ -50,6 +50,7 @@ public class ZKTitleView extends LinearLayout {
         centerTextTV = view.findViewById(R.id.common_title_tv_text);
         leftIV = view.findViewById(R.id.common_title_iv_left);
         rightIV = view.findViewById(R.id.common_title_iv_right);
+        rightTextTV = view.findViewById(R.id.common_right_tv_text);
 
         addView(view);
     }
@@ -82,4 +83,7 @@ public class ZKTitleView extends LinearLayout {
         rightIV.setImageResource(id);
     }
 
+    public void setRightTVText(String str) {
+        rightTextTV.setText(str);
+    }
 }

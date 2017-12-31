@@ -27,6 +27,8 @@ public abstract class BaseFragment extends Fragment {
     //context
     protected Context mContext = null;
 
+    public String[] chooseList = new String[]{"是", "否"};
+
     // 获取布局资源文件
     public abstract @LayoutRes
     int getLayoutId();

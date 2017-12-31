@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <cc.zkteam.zkinfocollectpro.view.ZKTitleView
+            android:id="@+id/title_relation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center"
+                android:text="本人信息"
+                android:textColorHint="#808080"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="成员身份证号"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/tv_relation_id_num_self"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="13011111111111111"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueLayout
+                android:id="@+id/filed_relation_self_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/theme_color"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/icon_search"
+                android:gravity="center"
+                android:text="对方信息"
+                android:textColor="@color/white"
+                android:textColorHint="#808080"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="成员身份证号"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="13011111111111111"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueLayout
+                android:id="@+id/filed_"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_relation_add"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="50dp"
+            android:background="@drawable/bg_btn_reset_pwd"
+            android:gravity="center"
+            android:text="+   添加人员关系"
+            android:textColor="@color/white" />
+
+
+        <Button
+            android:id="@+id/btn_relation_submit"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_btn_sign_success"
+            android:gravity="center"
+            android:text="保存并提交"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+</ScrollView>

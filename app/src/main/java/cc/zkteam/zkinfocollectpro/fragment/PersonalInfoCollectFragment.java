@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 
+import java.lang.reflect.Member;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
@@ -81,7 +83,9 @@ public class PersonalInfoCollectFragment extends BaseFragment {
     }
 
     @OnClick({R.id.img_personal_info_back, R.id.img_personal_info_scan, R.id.btn_modification_info,
-            R.id.btn_test_detail, R.id.img_change_left, R.id.img_change_right, R.id.img_personal_info_item_edit_base, R.id.img_personal_info_item_edit_special})
+            R.id.btn_test_detail, R.id.img_change_left, R.id.img_change_right, R.id.img_personal_info_item_edit_base,
+            R.id.img_personal_info_item_edit_special, R.id.img_personal_info_item_marriage,
+            R.id.img_personal_info_item_members, R.id.img_personal_info_item_relation})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_personal_info_back:
@@ -111,6 +115,15 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                 break;
             case R.id.img_personal_info_item_edit_special:
                 CommonFragmentActivity.startCommonFragmentActivity(getActivity(), SpecialPersonFragment.class.getName());
+                break;
+            case R.id.img_personal_info_item_marriage:
+                CommonFragmentActivity.startCommonFragmentActivity(getActivity(), MarriageInfoCollectionFragment.class.getName());
+                break;
+            case R.id.img_personal_info_item_members:
+                CommonFragmentActivity.startCommonFragmentActivity(getActivity(), CensusInfoCollectionFragment.class.getName());
+                break;
+            case R.id.img_personal_info_item_relation:
+                CommonFragmentActivity.startCommonFragmentActivity(getActivity(), MembersRelationshipFragment.class.getName());
                 break;
         }
     }

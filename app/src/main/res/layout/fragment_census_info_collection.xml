@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <cc.zkteam.zkinfocollectpro.view.ZKTitleView
+            android:id="@+id/title_census_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <cc.zkteam.zkinfocollectpro.view.kind.ZKModuleLayout
+            android:id="@+id/zk_census_num_type_date_reason_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <cc.zkteam.zkinfocollectpro.view.kind.ZKModuleLayout
+            android:id="@+id/zk_census_members_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_save_submit"
+            android:layout_width="155dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_btn_sign_success"
+            android:gravity="center"
+            android:text=" 保存并提交"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+    </LinearLayout>
+</ScrollView>

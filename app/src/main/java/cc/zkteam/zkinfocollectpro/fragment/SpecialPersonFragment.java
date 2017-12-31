@@ -7,7 +7,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -19,6 +21,7 @@ import cc.zkteam.zkinfocollectpro.view.kind.ZKFormLayout;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueFiledView;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKeyValueLayout;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKKindTitle;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKModuleLayout;
 
 /**
  * Created by loong on 2017/12/27.
@@ -32,10 +35,8 @@ public class SpecialPersonFragment extends BaseFragment {
     ZKKeyValueFiledView filedIdNum;
     @BindView(R.id.filed_id_add)
     ZKKeyValueFiledView filedIdAdd;
-    @BindView(R.id.kind_terror)
-    ZKKindTitle kindTerror;
     @BindView(R.id.edit_special_info)
-    ZKFormLayout editSpecialInfo;
+    ZKModuleLayout editSpecialInfo;
     @BindView(R.id.kind_criminal)
     ZKKindTitle kindCriminal;
     @BindView(R.id.kind_narcotics)
@@ -68,6 +69,9 @@ public class SpecialPersonFragment extends BaseFragment {
             jName.put("姓名", "小名");
             JSONObject jSex = new JSONObject();
             jSex.put("性别", "女");
+
+            jaNameSex.put(jName);
+            jaNameSex.put(jSex);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -75,7 +79,6 @@ public class SpecialPersonFragment extends BaseFragment {
 
         filedIdNum.setKeyValue("身份证号：", "110111111111111111");
         filedIdAdd.setKeyValue("身份证地址", "北京市东城区");
-        kindTerror.setSingleSelectTitle("涉恐涉稳人员", "否");
 
         JSONArray jaSpecialInfo = new JSONArray();
         try {
@@ -99,13 +102,27 @@ public class SpecialPersonFragment extends BaseFragment {
         }
 
         Map<Integer, Object> map = new HashMap<>();
-        map.put(2, ZKFiled.TYPE_FILED_FORM_TIME);
-        editSpecialInfo.setJsonArray(jaSpecialInfo, map);
 
-        kindCriminal.setSingleSelectTitle("是否重大刑事犯罪前科人员", "否");
-        kindNarcotics.setSingleSelectTitle("是否涉毒人员", "否");
-        kindEscape.setSingleSelectTitle("是否涉逃人员", "否");
-        kindIllness.setSingleSelectTitle("是否肇事肇祸精神病人", "否");
+        List dataTime = new ArrayList();
+        dataTime.add(ZKFiled.TYPE_FILED_FORM_TIME);
+        map.put(2, dataTime);
+
+        List title = new ArrayList();
+        title.add("涉恐涉稳人员");
+        title.add(ZKKindTitle.TYPE_SINGLE_SELECT);
+        title.add(chooseList);
+
+        editSpecialInfo.setJsonArray(jaSpecialInfo, map, title);
+
+        kindCriminal.setConstant(ZKKindTitle.TYPE_SINGLE_SELECT);
+        kindNarcotics.setConstant(ZKKindTitle.TYPE_SINGLE_SELECT);
+        kindEscape.setConstant(ZKKindTitle.TYPE_SINGLE_SELECT);
+        kindIllness.setConstant(ZKKindTitle.TYPE_SINGLE_SELECT);
+
+        kindCriminal.setSingleSelectTitle("是否重大刑事犯罪前科人员", chooseList);
+        kindNarcotics.setSingleSelectTitle("是否涉毒人员", chooseList);
+        kindEscape.setSingleSelectTitle("是否涉逃人员", chooseList);
+        kindIllness.setSingleSelectTitle("是否肇事肇祸精神病人", chooseList);
     }
 
     @Override

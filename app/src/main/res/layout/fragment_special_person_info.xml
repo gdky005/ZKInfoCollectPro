@@ -48,18 +48,8 @@
             android:layout_height="3dp"
             android:background="@color/divider_color" />
 
-        <cc.zkteam.zkinfocollectpro.view.kind.ZKKindTitle
-            android:id="@+id/kind_terror"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/divider_color" />
-
-
-        <cc.zkteam.zkinfocollectpro.view.kind.ZKFormLayout
+        <cc.zkteam.zkinfocollectpro.view.kind.ZKModuleLayout
             android:id="@+id/edit_special_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

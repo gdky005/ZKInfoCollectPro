@@ -90,10 +90,10 @@
         android:drawablePadding="10dp"
         android:drawableRight="@drawable/icon_more"
         android:gravity="center_vertical"
-        android:text="设置"
+        android:text="修改密码"
         android:textColor="#333333"
         android:textSize="15sp"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <View
         android:layout_width="match_parent"
