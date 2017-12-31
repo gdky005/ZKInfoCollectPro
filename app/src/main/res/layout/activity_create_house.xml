@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-    <include layout="@layout/include_toolbar" />
+    <include layout="@layout/include_toolbar"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,17 +17,18 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_person_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="12dp"
                 android:text="中枢街道 茅台社区 国酒新城小区 一组团 一栋 一单元 305 室"
                 android:textColor="@color/text_main"
-                android:textSize="18sp" />
+                android:textSize="18sp"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/item_decor" />
+                android:background="@color/item_decor"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -35,12 +36,12 @@
                 android:padding="12dp"
                 android:text="房屋基本信息"
                 android:textColor="@color/text_main"
-                android:textSize="18sp" />
+                android:textSize="18sp"/>
 
             <View
                 android:layout_width="125dp"
                 android:layout_height="0.5dp"
-                android:background="@color/item_decor" />
+                android:background="@color/item_decor"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -53,12 +54,13 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="2.5"
                     android:text="权属证书编号"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
 
                 <EditText
+                    android:id="@+id/et_ownership_certificate_no"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
@@ -66,7 +68,7 @@
                     android:hint="请输入"
                     android:textColor="@color/text_main"
                     android:textColorHint="@color/text_hint"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -74,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="6dp"
                 android:background="@drawable/bg_dashed"
-                android:layerType="software" />
+                android:layerType="software"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -87,12 +89,13 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="2.5"
                     android:text="房屋性质"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
 
                 <EditText
+                    android:id="@+id/et_housing_property"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
@@ -100,7 +103,7 @@
                     android:hint="请输入"
                     android:textColor="@color/text_main"
                     android:textColorHint="@color/text_hint"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -108,7 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="6dp"
                 android:background="@drawable/bg_dashed"
-                android:layerType="software" />
+                android:layerType="software"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -121,12 +124,13 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="2.5"
                     android:text="规划用地"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
 
                 <EditText
+                    android:id="@+id/et_land_use"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
@@ -134,7 +138,7 @@
                     android:hint="请输入"
                     android:textColor="@color/text_main"
                     android:textColorHint="@color/text_hint"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -142,7 +146,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="6dp"
                 android:background="@drawable/bg_dashed"
-                android:layerType="software" />
+                android:layerType="software"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -155,12 +159,13 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="2.5"
                     android:text="丘（地）号"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
 
                 <EditText
+                    android:id="@+id/et_land_no"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
@@ -168,7 +173,7 @@
                     android:hint="请输入"
                     android:textColor="@color/text_main"
                     android:textColorHint="@color/text_hint"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -176,7 +181,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="6dp"
                 android:background="@drawable/bg_dashed"
-                android:layerType="software" />
+                android:layerType="software"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -189,12 +194,13 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="2.5"
                     android:text="建筑面积"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
 
                 <EditText
+                    android:id="@+id/et_covered_area"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
@@ -202,7 +208,7 @@
                     android:hint="请输入"
                     android:textColor="@color/text_main"
                     android:textColorHint="@color/text_hint"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -210,7 +216,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="6dp"
                 android:background="@drawable/bg_dashed"
-                android:layerType="software" />
+                android:layerType="software"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -223,12 +229,13 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="2.5"
                     android:text="室内面积"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
 
                 <EditText
+                    android:id="@+id/et_indoor_area"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
@@ -236,7 +243,7 @@
                     android:hint="请输入"
                     android:textColor="@color/text_main"
                     android:textColorHint="@color/text_hint"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -244,7 +251,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="6dp"
                 android:background="@drawable/bg_dashed"
-                android:layerType="software" />
+                android:layerType="software"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -257,13 +264,13 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="2.5"
                     android:text="登记日期"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
 
                 <TextView
-                    android:id="@+id/tv_select_child_birthday"
+                    android:id="@+id/tv_select_register_date"
                     android:layout_width="0dp"
                     android:layout_height="36dp"
                     android:layout_weight="5"
@@ -275,14 +282,14 @@
                     android:padding="@dimen/dp_10"
                     android:textSize="12sp"
                     android:visibility="visible"
-                    tools:text="2017年12月25日" />
+                    tools:text="2017年12月25日"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="6dp"
                 android:background="@drawable/bg_dashed"
-                android:layerType="software" />
+                android:layerType="software"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -295,12 +302,13 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="2.5"
                     android:text="户型"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
 
                 <EditText
+                    android:id="@+id/et_house_type"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
@@ -308,7 +316,7 @@
                     android:hint="请输入"
                     android:textColor="@color/text_main"
                     android:textColorHint="@color/text_hint"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -316,69 +324,77 @@
                 android:layout_width="match_parent"
                 android:layout_height="6dp"
                 android:background="@drawable/bg_dashed"
-                android:layerType="software" />
+                android:layerType="software"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:minHeight="45dp"
+                android:orientation="vertical"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="房屋状态"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
 
                 <RadioGroup
-                    android:layout_width="0dp"
+                    android:id="@+id/rg_house_status"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
+                    android:gravity="right"
                     android:orientation="horizontal">
 
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="空置"
-                            android:textColor="@color/text_main"
-                            android:textSize="12sp"/>
+                    <RadioButton
+                        android:id="@+id/rb_house_vacancy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="空置"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
 
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="空置"
-                            android:textColor="@color/text_main"
-                            android:textSize="12sp"/>
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="空置"
-                            android:textColor="@color/text_main"
-                            android:textSize="12sp"/>
+                    <RadioButton
+                        android:id="@+id/rb_house_since"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="自住"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
 
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="空置"
-                            android:textColor="@color/text_main"
-                            android:textSize="12sp"/>
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="空置"
-                            android:textColor="@color/text_main"
-                            android:textSize="12sp"/>
+                    <RadioButton
+                        android:id="@+id/rb_house_for_rent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="出租"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
 
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="空置"
-                            android:textColor="@color/text_main"
-                            android:textSize="12sp"/>
+                    <RadioButton
+                        android:id="@+id/rb_house_commercial"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="商用"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_house_for_other"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="其他"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
 
                 </RadioGroup>
 
@@ -387,7 +403,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
-                android:background="@color/item_decor" />
+                android:background="@color/item_decor"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -395,12 +411,12 @@
                 android:padding="12dp"
                 android:text="房产信息"
                 android:textColor="@color/text_main"
-                android:textSize="18sp" />
+                android:textSize="18sp"/>
 
             <View
                 android:layout_width="125dp"
                 android:layout_height="0.5dp"
-                android:background="@color/item_decor" />
+                android:background="@color/item_decor"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -413,12 +429,13 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="2.5"
                     android:text="产权人姓名"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
 
                 <EditText
+                    android:id="@+id/et_property_owner_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
@@ -426,16 +443,769 @@
                     android:hint="请输入"
                     android:textColor="@color/text_main"
                     android:textColorHint="@color/text_hint"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
             </LinearLayout>
-
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="6dp"
                 android:background="@drawable/bg_dashed"
-                android:layerType="software" />
+                android:layerType="software"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:text="产权人性别"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp"/>
+
+                <RadioGroup
+                    android:id="@+id/rg_property_owner_sex"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_property_owner_man"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="男"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_property_owner_female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="女"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:orientation="vertical"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:text="产权人证件类型"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp"/>
+
+                <RadioGroup
+                    android:id="@+id/rg_property_owner_type_of_certificate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_identity_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="身份证"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_driving_license"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="驾照"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_business_license"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="工商营业执照"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_other_type_of_certificate_for_property_owner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="其他"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:text="产权人证件号"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/et_property_owner_certificate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:text="产权人是否房主"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp"/>
+
+                <RadioGroup
+                    android:id="@+id/rg_property_owner_is_house_owner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_is_house_owner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="是"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_is_not_house_owner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="否"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:text="产权人户籍地"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/et_property_owner_registered_residence"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:text="产权人现居地"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/et_property_owner_present_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:text="产权人工作单位"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/et_property_owner_work_unit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:text="产权人联系电话"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/et_property_owner_phone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/item_decor"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="共有人信息"
+                android:textColor="@color/text_main"
+                android:textSize="18sp"/>
+
+            <View
+                android:layout_width="125dp"
+                android:layout_height="0.5dp"
+                android:background="@color/item_decor"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:text="共有人姓名"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/et_co_owner_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:text="共有人性别"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp"/>
+
+                <RadioGroup
+                    android:id="@+id/rg_co_owner_sex"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_co_owner_man"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="男"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_co_owner_female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="女"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:orientation="vertical"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:text="共有人证件类型"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp"/>
+
+                <RadioGroup
+                    android:id="@+id/rg_co_owner_type_of_certificate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_co_owner_identity_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="身份证"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_co_owner_driving_license"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="驾照"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_co_owner_business_license"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="工商营业执照"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_other_type_of_certificate_for_co_owner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="其他"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:text="共有人证件号"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/et_co_owner_certificate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:text="共有人是否房主"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp"/>
+
+                <RadioGroup
+                    android:id="@+id/rg_co_owner_is_house_owner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_co_is_house_owner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="是"
+                        android:checked="false"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_co_is_not_house_owner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="否"
+                        android:checked="false"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:text="共有人户籍地"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/et_co_owner_registered_residence"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:text="共有人现居地"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/et_co_owner_present_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:text="共有人工作单位"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/et_co_owner_work_unit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dashed"
+                android:layerType="software"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:text="共有人联系电话"
+                    android:textColor="@color/text_main"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/et_co_owner_phone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@null"
+                    android:hint="请输入"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/item_decor"/>
+
+            <Button
+                android:id="@+id/btn_save_and_commit"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="27dp"
+                android:background="@drawable/bg_btn_commit"
+                android:text="保存并提交"
+                android:textColor="@color/white"
+                android:textSize="12sp"/>
 
         </LinearLayout>
 

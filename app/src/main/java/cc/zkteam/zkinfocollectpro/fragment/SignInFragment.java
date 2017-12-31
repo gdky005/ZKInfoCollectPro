@@ -210,7 +210,7 @@ public class SignInFragment extends BaseFragment {
                 }
                 break;
             case R.id.tv_question_upload:
-                PageCtrl.startActivity(getActivity(), CreateHouseActivity.class);
+                PageCtrl.startActivity(getActivity(), MyProblemListActivity.class);
                 break;
         }
     }
