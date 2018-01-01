@@ -5,6 +5,7 @@ import java.util.List;
 import cc.zkteam.zkinfocollectpro.Constant;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
 import cc.zkteam.zkinfocollectpro.bean.BDTokenBean;
+import cc.zkteam.zkinfocollectpro.bean.MarriageBean;
 import cc.zkteam.zkinfocollectpro.bean.RentPersoner;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
@@ -70,6 +71,13 @@ public interface ZHApi {
     @GET("datamanage.php/Admin/AppInterface/login")
     Call<ZHBaseBean<ZHLoginBean>> login(@Query("username") String username,
                                         @Query("password") String password);
+
+    /**
+     * 修改密码
+     */
+    @POST("datamanage.php/Admin/AppInterface/editpassword")
+    Call<ZHBaseBean> resetPwd(@Query("username") String username, @Query("oldpassword") String oldpassword, @Query("newpassword") String newpassword);
+
 
     @GET("datamanage.php/Admin/AppInterface/get_sign")
     Call<ZHBaseBean> getSignStatus(@Query("userid") String userId);
@@ -164,6 +172,11 @@ public interface ZHApi {
     Call<ZHBaseBean<ZKSettingBean>> setting(@Query("para") String para);
 
 
+    /**
+     * 获取婚姻信息接口
+     */
+    @GET("datamanage.php/Admin/AppshowInterface/marriage")
+    Call<MarriageBean> getMarriageInfo(@Query("id") String id);
 
 
     /**

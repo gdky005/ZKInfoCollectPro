@@ -15,6 +15,8 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.api.ZHApi;
+import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 
 /**
  * BaseFragment
@@ -42,6 +44,8 @@ public abstract class BaseFragment extends Fragment {
     // 初始化相关 View 的 listener
     public abstract void initListener();
 
+    protected ZHApi zhApiInstance;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -67,6 +71,7 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
+        zhApiInstance = ZHConnectionManager.getInstance().getZHApi();
     }
 
     @Override
