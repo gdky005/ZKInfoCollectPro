@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_10"
             android:text="@string/common_default_title"
             android:textColor="@color/gray_3"
             android:textSize="@dimen/sp_18"

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/right_layout_id_card"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_150"
+    android:layout_height="130dp"
+    android:layout_marginBottom="6dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="6dp"
     android:background="@drawable/basicinfo_input_back"
     android:orientation="horizontal"
     android:visibility="visible"
-    android:weightSum="2"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:weightSum="2">
 
     <ImageView
         android:id="@+id/right_layout_id_card_left"
@@ -16,7 +19,7 @@
         android:layout_weight="1"
         android:padding="@dimen/dp_5"
         android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher" />
 
     <ImageView
         android:id="@+id/right_layout_id_card_right"
@@ -25,5 +28,5 @@
         android:layout_weight="1"
         android:padding="@dimen/dp_5"
         android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher" />
 </LinearLayout>

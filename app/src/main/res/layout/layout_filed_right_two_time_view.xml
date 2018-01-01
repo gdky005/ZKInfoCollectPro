@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/right_layout_two_time_ll"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="6dp">
 
     <TextView
         android:id="@+id/right_layout_two_time_left_tv"
@@ -14,9 +17,12 @@
         android:layout_toLeftOf="@+id/right_layout_two_time_center_text"
         android:background="@drawable/basicinfo_input_back"
         android:drawableRight="@mipmap/data_icon"
-        android:gravity="center|left"
-        android:padding="@dimen/dp_5"
-        android:text="时间1"/>
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="时间1"
+        android:textColor="@color/gray_3"
+        android:textSize="@dimen/sp_15" />
 
     <TextView
         android:id="@+id/right_layout_two_time_center_text"
@@ -24,7 +30,9 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="@dimen/dp_10"
-        android:text="至"/>
+        android:textColor="@color/gray_3"
+        android:textSize="@dimen/sp_15"
+        android:text="至" />
 
     <TextView
         android:id="@+id/right_layout_two_time_right_tv"
@@ -35,8 +43,11 @@
         android:layout_toRightOf="@+id/right_layout_two_time_center_text"
         android:background="@drawable/basicinfo_input_back"
         android:drawableRight="@mipmap/data_icon"
-        android:gravity="center|left"
-        android:padding="@dimen/dp_5"
-        android:text="时间2"/>
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="时间2"
+        android:textColor="@color/gray_3"
+        android:textSize="@dimen/sp_15" />
 
 </RelativeLayout>

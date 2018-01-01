@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="@dimen/dp_5">
 
@@ -12,19 +13,20 @@
         android:layout_marginLeft="@dimen/dp_20"
         android:text="姓名"
         android:textColor="@color/gray_3"
-        android:textSize="@dimen/sp_12" />
+        android:textSize="@dimen/sp_15" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/kind_default_key_suffix"
         android:textColor="@color/gray_3"
-        android:textSize="@dimen/sp_12"/>
+        android:textSize="@dimen/sp_15" />
 
     <TextView
         android:id="@+id/right_layout_text_filed_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
         android:text="王卿"
         android:textColor="@color/gray_6"
         android:textSize="@dimen/sp_12" />

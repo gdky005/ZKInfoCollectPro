@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/zk_title_kind_right_check_btn"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
+    android:layout_centerVertical="true"
+    android:layout_gravity="center_vertical"
+    android:layout_marginLeft="5dp"
     android:background="@drawable/bg_btn_blue_drawable"
     android:paddingBottom="@dimen/dp_10"
     android:paddingLeft="@dimen/dp_20"
@@ -11,5 +14,4 @@
     android:paddingTop="@dimen/dp_10"
     android:text="查询"
     android:textColor="@color/white"
-    android:visibility="visible"
-    xmlns:android="http://schemas.android.com/apk/res/android"/>
+    android:visibility="visible" />
