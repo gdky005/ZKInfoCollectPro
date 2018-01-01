@@ -31,9 +31,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.ZKBase;
-import cc.zkteam.zkinfocollectpro.activity.familyPlanningInfo.ChildbearingAgeAndChildrenInfoActivity;
 import cc.zkteam.zkinfocollectpro.activity.familyPlanningInfo.ConceptionControlActivity;
 import cc.zkteam.zkinfocollectpro.activity.home.HomeActivity;
+import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.bd.ZKBDIDCardManager;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
@@ -42,6 +42,7 @@ import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragment;
 import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragmentHelper;
 import cc.zkteam.zkinfocollectpro.dialog.ZKDialogResultListener;
 import cc.zkteam.zkinfocollectpro.exception.ZKIdCardException;
+import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
@@ -87,6 +88,11 @@ public class MainActivity extends BaseActivity {
     ZKTitleView zkTitleView;
 
 
+    String picPatch;
+    String pics1;
+    String pics2;
+
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -127,14 +133,22 @@ public class MainActivity extends BaseActivity {
         String[] list = new String[]{"哈哈哈", "第一单位", "第二单位", "第三单位"};
 
         // 用户图像测试数据
-        String picPatch = sdPath + "/user_icon.jpeg";
+        picPatch = "file://" + sdPath + "/user_icon.jpeg";
 
         // 身份证测试数据
-        String pics1 = sdPath + "/id_card_z.png";
-        String pics2 = sdPath + "/id_card_f.png";
+
+        pics1 = sdPath + "/id_card_z.png";
+        pics2 = sdPath + "/id_card_f.png";
 
         String[] pics = new String[]{pics1, pics2};
 
+
+        //——————————————————————————————————————————————
+        //———————————————接口生成 ZKModuleLayout 模块控件———————————————————
+        //——————————————————————————————————————————————
+        LinearLayout linearLayout = findViewById(R.id.zk_root_view);
+
+        showZKModuleInterface(linearLayout);
 
 
         //——————————————————————————————————————————————
@@ -364,6 +378,288 @@ public class MainActivity extends BaseActivity {
 
         zkFiledFormView.setJsonArray(jsonArray, map);
 
+    }
+
+    private void showZKModuleInterface(LinearLayout linearLayout) {
+
+        Context context = this;
+        ZHConnectionManager.getInstance().getZHApi().get31Data("zhengzhaoxinxi_type").enqueue(new Callback<ZK31Bean>() {
+
+            @Override
+            public void onResponse(Call<ZK31Bean> call, Response<ZK31Bean> result) {
+
+                ZK31Bean zk31Bean = result.body();
+
+                if (zk31Bean == null) {
+                    L.e("zk31Bean is null!");
+                    return;
+                }
+
+                List<ZK31Bean.DataBeanX> dataBeanList = zk31Bean.getData();
+
+
+
+
+                for (ZK31Bean.DataBeanX dataBeanX :
+                        dataBeanList) {
+
+                    JSONArray moduleArray = new JSONArray();
+                    Map<Integer, Object> objectHashMap = new HashMap<>();
+                    ZKModuleLayout zkModuleLayout = new ZKModuleLayout(context);
+
+                    for (ZK31Bean.DataBeanX.DataBean dataBean :
+                            dataBeanX.getData()) {
+
+
+                        ArrayList list = new ArrayList();
+                        JSONObject jsonObject = new JSONObject();
+                        try {
+                            jsonObject.put(dataBean.getNumber(), dataBean.getName());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        moduleArray.put(jsonObject);
+
+                        int type = Integer.parseInt(dataBean.getType());
+
+//                    二级子数据，每一个 item。map 表示 右边需要的数据：
+//     *                  ----1. 直接是数字，表示 右边的控件类型的 type.
+//     *                  ----2. ArrayList 表示右边的控件类型需要默认数据：
+//     *                  --------第0项表示 当前右边的类型 的 type;
+//     *                  --------第1项表示 当前右边的类型 需要的默认数据，是一组数据列表。
+
+
+                        list.add(type);
+                        list.add(dataBean.getName());
+                        // TODO: 2018/1/2 test
+                        list.add(new String[] {pics1, pics2, "file://" + picPatch});
+
+                        objectHashMap.put(0, list);
+
+
+                    }
+
+
+                    List titleList = new ArrayList();
+
+                    titleList.add(dataBeanX.getName());
+                    titleList.add(dataBeanX.getType());
+//                    titleList.add(dataBean.getList()); // 这里如果有值的话，就是列表 String[]
+                    //                zkModuleLayout.setJsonArray(moduleArray, null, titleList);
+                    zkModuleLayout.setJsonArray(moduleArray, objectHashMap, titleList);
+
+
+//                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                    linearLayout.addView(zkModuleLayout);
+                }
+
+
+//                add1View(result);
+//                add2View(result);
+//                add3View(result);
+            }
+
+//            private void add2View(ZK31Bean result) {
+//                JSONArray moduleArray = new JSONArray();
+//                ZK31Bean._$2Bean bean = result.get_$2();
+//                ZKModuleLayout zkModuleLayout = new ZKModuleLayout(context);
+//
+//                Map<Integer, Object> objectHashMap = new HashMap<>();
+//                for (int i = 0; i < bean.getData().size(); i++) {
+//                    ArrayList list = new ArrayList();
+//
+//                    ZK31Bean._$2Bean.DataBeanX dataBeans = bean.getData().get(i);
+//
+//                    JSONObject jsonObject = new JSONObject();
+//                    try {
+//                        jsonObject.put(dataBeans.getNumber(), dataBeans.getName());
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                    moduleArray.put(jsonObject);
+//
+//                    int type = 0;
+//
+//                    List datas1 = new ArrayList();
+//
+//                    if (dataBeans.getType().equals("TYPE_FILED_FORM_EDIT_TEXT")) {
+//                        type = ZKFiled.TYPE_FILED_FORM_SELECT_DATA;
+//                    }
+//
+//                    switch (dataBeans.getType()) {
+//                        case "TYPE_FILED_FORM_EDIT_TEXT":
+//                            type = ZKFiled.TYPE_FILED_FORM_EDIT_TEXT;
+//                            break;
+//                        case "TYPE_FILED_FORM_SELECT_DATA":
+//                            type = ZKFiled.TYPE_FILED_FORM_SELECT_DATA;
+//                            break;
+//                        case "TYPE_FILED_FORM_TIME":
+//                            type = ZKFiled.TYPE_FILED_FORM_TIME;
+//                            break;
+//                        case "TYPE_FILED_FORM_IMAGE":
+//                            type = ZKFiled.TYPE_FILED_FORM_IMAGE;
+//                            break;
+//                        case "TYPE_FILED_FORM_DOUBLE_BUTTON":
+//                            type = ZKFiled.TYPE_FILED_FORM_DOUBLE_BUTTON;
+//                            break;
+//                        case "TYPE_FILED_FORM_TWO_TIME_BUTTON":
+//                            type = ZKFiled.TYPE_FILED_FORM_TWO_TIME_BUTTON;
+//                            break;
+//                        case "TYPE_FILED_FORM_ID_CARD":
+//                            type = ZKFiled.TYPE_FILED_FORM_ID_CARD;
+//                            String sdPath = Environment.getExternalStorageDirectory().getPath() + "/pics";
+//                            String picPatch = sdPath + "/user_icon.jpeg";
+//                            String pics1 = sdPath + "/id_card_z.png";
+//                            String pics2 = sdPath + "/id_card_f.png";
+//
+//                            list.add(type);
+//                            list.add(dataBeans.getName());
+//                            list.add(new String[]{pics1, pics2});
+//                            break;
+//                        case "TYPE_FILED_FORM_ID_CARD_NUMBER":
+//                            type = ZKFiled.TYPE_FILED_FORM_ID_CARD_NUMBER;
+//                            break;
+//                    }
+////                    二级子数据，每一个 item。map 表示 右边需要的数据：
+////     *                  ----1. 直接是数字，表示 右边的控件类型的 type.
+////     *                  ----2. ArrayList 表示右边的控件类型需要默认数据：
+////     *                  --------第0项表示 当前右边的类型 的 type;
+////     *                  --------第1项表示 当前右边的类型 需要的默认数据，是一组数据列表。
+//
+//
+//                    list.add(type);
+//                    list.add(dataBeans.getName());
+//
+//                    objectHashMap.put(i, list);
+//                }
+//
+//
+////                datas1.add(ZKFiled.TYPE_FILED_FORM_SELECT_DATA);
+//////                datas1.add(list);
+////                objectHashMap.put(1, datas1);
+////                objectHashMap.put(3, ZKFiled.TYPE_FILED_FORM_TIME);
+//
+//                List titleList = new ArrayList();
+//
+//                titleList.add(bean.getName());
+//                if (bean.getType().equals("text")) {
+//                    titleList.add("1");
+//                }
+////                titleList.add(bean.getList()); // 这里如果有值的话，就是列表 String[]
+//
+//
+////                zkModuleLayout.setJsonArray(moduleArray, null, titleList);
+//                zkModuleLayout.setJsonArray(moduleArray, objectHashMap, titleList);
+//
+//                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//                linearLayout.setOrientation(LinearLayout.VERTICAL);
+//                linearLayout.addView(zkModuleLayout, params);
+//            }
+//
+//            private void add3View(ZK31Bean result) {
+//                JSONArray moduleArray = new JSONArray();
+//                ZK31Bean._$3Bean bean = result.get_$3();
+//                ZKModuleLayout zkModuleLayout = new ZKModuleLayout(context);
+//
+//                Map<Integer, Object> objectHashMap = new HashMap<>();
+//                for (int i = 0; i < bean.getData().size(); i++) {
+//                    ArrayList list = new ArrayList();
+//
+//                    ZK31Bean._$3Bean.DataBeanXX dataBeans = bean.getData().get(i);
+//
+//                    JSONObject jsonObject = new JSONObject();
+//                    try {
+//                        jsonObject.put(dataBeans.getNumber(), dataBeans.getName());
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                    moduleArray.put(jsonObject);
+//
+//                    int type = 0;
+//
+//                    List datas1 = new ArrayList();
+//
+//                    if (dataBeans.getType().equals("TYPE_FILED_FORM_EDIT_TEXT")) {
+//                        type = ZKFiled.TYPE_FILED_FORM_SELECT_DATA;
+//                    }
+//
+//                    switch (dataBeans.getType()) {
+//                        case "TYPE_FILED_FORM_EDIT_TEXT":
+//                            type = ZKFiled.TYPE_FILED_FORM_EDIT_TEXT;
+//                            break;
+//                        case "TYPE_FILED_FORM_SELECT_DATA":
+//                            type = ZKFiled.TYPE_FILED_FORM_SELECT_DATA;
+//                            break;
+//                        case "TYPE_FILED_FORM_TIME":
+//                            type = ZKFiled.TYPE_FILED_FORM_TIME;
+//                            break;
+//                        case "TYPE_FILED_FORM_IMAGE":
+//                            type = ZKFiled.TYPE_FILED_FORM_IMAGE;
+//                            break;
+//                        case "TYPE_FILED_FORM_DOUBLE_BUTTON":
+//                            type = ZKFiled.TYPE_FILED_FORM_DOUBLE_BUTTON;
+//                            break;
+//                        case "TYPE_FILED_FORM_TWO_TIME_BUTTON":
+//                            type = ZKFiled.TYPE_FILED_FORM_TWO_TIME_BUTTON;
+//                            break;
+//                        case "TYPE_FILED_FORM_ID_CARD":
+//                            type = ZKFiled.TYPE_FILED_FORM_ID_CARD;
+//                            String sdPath = Environment.getExternalStorageDirectory().getPath() + "/pics";
+//                            String picPatch = sdPath + "/user_icon.jpeg";
+//                            String pics1 = sdPath + "/id_card_z.png";
+//                            String pics2 = sdPath + "/id_card_f.png";
+//
+//                            list.add(type);
+//                            list.add(dataBeans.getName());
+//                            list.add(new String[]{pics1, pics2});
+//                            break;
+//                        case "TYPE_FILED_FORM_ID_CARD_NUMBER":
+//                            type = ZKFiled.TYPE_FILED_FORM_ID_CARD_NUMBER;
+//                            break;
+//                    }
+////                    二级子数据，每一个 item。map 表示 右边需要的数据：
+////     *                  ----1. 直接是数字，表示 右边的控件类型的 type.
+////     *                  ----2. ArrayList 表示右边的控件类型需要默认数据：
+////     *                  --------第0项表示 当前右边的类型 的 type;
+////     *                  --------第1项表示 当前右边的类型 需要的默认数据，是一组数据列表。
+//
+//
+//                    list.add(type);
+//                    list.add(dataBeans.getName());
+//
+//                    objectHashMap.put(i, list);
+//                }
+//
+//
+////                datas1.add(ZKFiled.TYPE_FILED_FORM_SELECT_DATA);
+//////                datas1.add(list);
+////                objectHashMap.put(1, datas1);
+////                objectHashMap.put(3, ZKFiled.TYPE_FILED_FORM_TIME);
+//
+//                List titleList = new ArrayList();
+//
+//                titleList.add(bean.getName());
+//                if (bean.getType().equals("text")) {
+//                    titleList.add("1");
+//                }
+////                titleList.add(bean.getList()); // 这里如果有值的话，就是列表 String[]
+//
+//
+////                zkModuleLayout.setJsonArray(moduleArray, null, titleList);
+//                zkModuleLayout.setJsonArray(moduleArray, objectHashMap, titleList);
+//
+//                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//                linearLayout.setOrientation(LinearLayout.VERTICAL);
+//                linearLayout.addView(zkModuleLayout, params);
+//            }
+
+            @Override
+            public void onFailure(Call<ZK31Bean> call, Throwable throwable) {
+
+                L.e("onFailure: ", throwable);
+            }
+        });
     }
 
     @Override

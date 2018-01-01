@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/right_layout_id_card"
     android:layout_width="match_parent"
-    android:layout_height="130dp"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="6dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
@@ -14,8 +14,8 @@
 
     <ImageView
         android:id="@+id/right_layout_id_card_left"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="243dp"
+        android:layout_height="153dp"
         android:layout_weight="1"
         android:padding="@dimen/dp_5"
         android:scaleType="fitXY"
@@ -23,8 +23,8 @@
 
     <ImageView
         android:id="@+id/right_layout_id_card_right"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="243dp"
+        android:layout_height="153dp"
         android:layout_weight="1"
         android:padding="@dimen/dp_5"
         android:scaleType="fitXY"

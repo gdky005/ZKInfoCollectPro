@@ -35,6 +35,44 @@
                     android:layout_height="wrap_content"
                     android:text=" 获取 ZKFiled 结果的按钮"/>
 
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorAccent"
+                    android:layout_marginTop="20dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="下面是通过接口生成的界面哦"/>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/zk_root_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="vertical"/>
+                </ScrollView>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorAccent"
+                    android:layout_marginTop="150dp"/>
+
+
+
+
+
+
+
+
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"

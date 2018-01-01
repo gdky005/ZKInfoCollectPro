@@ -3,6 +3,7 @@ package cc.zkteam.zkinfocollectpro.api;
 import java.util.List;
 
 import cc.zkteam.zkinfocollectpro.Constant;
+import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
 import cc.zkteam.zkinfocollectpro.bean.BDTokenBean;
 import cc.zkteam.zkinfocollectpro.bean.MarriageBean;
@@ -207,6 +208,22 @@ public interface ZHApi {
                                                 @Part MultipartBody.Part Company20,
                                                 @Part MultipartBody.Part Company21)
     ;
+
+
+
+
+
+
+    /**
+     * 获取 31 项目数据 接口
+     */
+    @GET("datamanage.php/Admin/AppInterface/getfieldlist")
+    Call<ZK31Bean> get31Data(@Query("pagename") String pagename);
+
+
+
+
+
 
 
 }

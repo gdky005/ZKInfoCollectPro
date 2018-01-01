@@ -265,16 +265,17 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
             case TYPE_FILED_FORM_ID_CARD:
                 if (defaultValue instanceof String[]) {
                     String[] value = (String[]) defaultValue;
-                    if (value.length > 0) {
-                        View rightLayoutIdCardLayout = ((ViewStub) findViewById(R.id.right_layout_id_card_layout)).inflate();
-                        LinearLayout rightLayoutIdCard = rightLayoutIdCardLayout.findViewById(R.id.right_layout_id_card);
+                    View rightLayoutIdCardLayout = ((ViewStub) findViewById(R.id.right_layout_id_card_layout)).inflate();
+                    LinearLayout rightLayoutIdCard = rightLayoutIdCardLayout.findViewById(R.id.right_layout_id_card);
 
+                    if (value.length > 0) {
                         ImageView rightLayoutIdCardLeft = rightLayoutIdCard.findViewById(R.id.right_layout_id_card_left);
                         ImageView rightLayoutIdCardRight = rightLayoutIdCard.findViewById(R.id.right_layout_id_card_right);
 
-
                         rightLayoutIdCardLeft.setImageURI(Uri.parse(value[0]));
                         rightLayoutIdCardRight.setImageURI(Uri.parse(value[1]));
+                    } else {
+                        // TODO: 2018/1/2  默认值图片设置
                     }
                 }
 

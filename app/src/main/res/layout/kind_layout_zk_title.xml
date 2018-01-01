@@ -5,6 +5,12 @@
               android:layout_height="wrap_content"
               android:orientation="vertical">
 
+    <!--这个是测试-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/gray_9"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
