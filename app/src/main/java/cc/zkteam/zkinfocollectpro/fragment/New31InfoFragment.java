@@ -2,6 +2,7 @@ package cc.zkteam.zkinfocollectpro.fragment;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -23,9 +24,14 @@ import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.BasicInfoActivity;
 import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
+import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
+import cc.zkteam.zkinfocollectpro.managers.ZHMemoryCacheManager;
 import cc.zkteam.zkinfocollectpro.utils.L;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKFiled;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKModuleLayout;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -100,7 +106,37 @@ public class New31InfoFragment extends BaseFragment {
 
     @OnClick(R.id.new_31_commit)
     public void onViewClicked() {
-        ToastUtils.showShort("提交接口数据信息：" + zkModuleLayout.getResult());
+        JSONObject resultObj = zkModuleLayout.getResult();
+
+        ToastUtils.showShort("提交接口数据信息：" + resultObj);
+
+        try {
+            String userID = ZHMemoryCacheManager.getInstance().getUserId();
+
+            if (TextUtils.isEmpty(userID)) {
+                userID = "2";
+            }
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("user", userID);
+            jsonObject.put("data", resultObj);
+
+            RequestBody body = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
+            ZHConnectionManager.getInstance().getZHApi().update31Data(body).enqueue(new Callback<ZHBaseBean>() {
+                @Override
+                public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
+                    Log.d(TAG, "onResponse: " + response);
+                }
+
+                @Override
+                public void onFailure(Call<ZHBaseBean> call, Throwable t) {
+                    Log.e(TAG, "onFailure: ", t);
+                }
+            });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void showZKModuleAPI(LinearLayout linearLayout, String pageType) {
@@ -136,6 +172,7 @@ public class New31InfoFragment extends BaseFragment {
                         JSONObject jsonObject = new JSONObject();
                         try {
                             jsonObject.put(dataBean.getNumber(), dataBean.getName());
+                            jsonObject.put(ZKFiled.ZK_FILED_DATA_BEAN, dataBean);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

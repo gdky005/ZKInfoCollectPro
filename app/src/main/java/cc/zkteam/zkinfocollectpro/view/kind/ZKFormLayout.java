@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by wangqing on 2017/12/26.
  */
 
-public class ZKFormLayout extends ZKBaseView implements IZKResult<List<String>> {
+public class ZKFormLayout extends ZKBaseView implements IZKResult<List<Map>> {
 
     private List<ZKFiled> zkFiledList = new ArrayList<>();
 
@@ -84,8 +84,8 @@ public class ZKFormLayout extends ZKBaseView implements IZKResult<List<String>> 
     }
 
     @Override
-    public List<String> getResult() {
-        List<String> resultList = new ArrayList<>();
+    public List<Map> getResult() {
+        List<Map> resultList = new ArrayList<>();
 
         for (ZKFiled zkFiled :
                 zkFiledList) {

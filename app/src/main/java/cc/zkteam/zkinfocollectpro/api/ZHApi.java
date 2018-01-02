@@ -121,6 +121,7 @@ public interface ZHApi {
     /**
      * 接收表单数据录入接口
      */
+    @Deprecated
     @FormUrlEncoded
     @POST("datamanage.php/Admin/AppInterface/addpersonbaseinfo")
     Call<ZHBaseBean> addPersonBaseInfo(@Part("community") String community,
@@ -130,6 +131,18 @@ public interface ZHApi {
                                        @Part("house_serial") String house_serial,
                                        @Part("louceng") String address,
                                        @Part("house_number") String house_number);
+
+
+
+//    @Headers({"Content-Type: application/x-www-form-urlencoded"})
+//    @POST(Constant.BD_ID_CARD_URL)
+//    Call<BDIdCardBean> bdIDCard(@Body RequestBody requestBody, @Query("access_token") String access_token);
+    /**
+     * 接收表单数据录入接口
+     */
+    @Headers({"Content-Type: application/json"})
+    @POST("datamanage.php/Admin/AppInterface/addpersonbaseinfo")
+    Call<ZHBaseBean> update31Data(@Body RequestBody requestBody);
 
 
     /**

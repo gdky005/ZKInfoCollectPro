@@ -20,12 +20,12 @@ import com.blankj.utilcode.util.ToastUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
 import cn.qqtheme.framework.picker.DatePicker;
 import cn.qqtheme.framework.picker.OptionPicker;
 import cn.qqtheme.framework.util.ConvertUtils;
@@ -36,6 +36,10 @@ import cn.qqtheme.framework.widget.WheelView;
  * Created by wangqing on 2017/12/26.
  */
 public class ZKFiled extends ZKBaseView implements IZKResult {
+
+    public static final String ZK_FILED_DATA_BEAN = "zk_filed_data_bean";
+    public static final String ZK_FILED_TABLE_NAME = "zk_filed_table_name";
+    public static final String ZK_FILED_NEW_VALUE = "zk_filed_new_value";
 
     private TextView keyFiled;
     private TextView numberFiled;
@@ -60,6 +64,7 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
     protected String yearStr;
     protected String monthStr;
     protected String dayStr;
+    private ZK31Bean.DataBeanX.DataBean dataBean;
 
     /**
      * 选择项 的数据 map 数据
@@ -179,8 +184,12 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
         updateView(number, key, defaultValue, index, type);
     }
 
-    public void setKeyFiledTextLength(int length){
+    public void setKeyFiledTextLength(int length) {
         keyFiled.setEms(length);
+    }
+
+    public void setZkFiledDataBean(ZK31Bean.DataBeanX.DataBean dataBean) {
+        this.dataBean = dataBean;
     }
 
 
@@ -328,43 +337,51 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
 
     // ———————————获取当前结果———————————
     @Override
-    public String getResult() {
+    public Map getResult() {
         switch (type) {
             case TYPE_FILED_FORM_EDIT_TEXT:
                 Editable editable = rightLayoutLeftEt.getText();
-                return editable.toString();
+                return getMapResult(editable.toString());
             case TYPE_FILED_FORM_TIME:
                 CharSequence timeFiled = rightLayoutTimeFiledValue.getText();
-                return timeFiled.toString();
+                return getMapResult(timeFiled.toString());
             case TYPE_FILED_FORM_SELECT_DATA:
                 // 2018/1/2 这里获取到 map，去后面的数据提交到服务器。 别问我为什么，问了也不想说
                 if (rightLayoutSelectDataFiledValue != null) {
                     CharSequence selectFiled = rightLayoutSelectDataFiledValue.getText();
-                    return selectMap.get(selectFiled.toString());
+                    return getMapResult(selectMap.get(selectFiled.toString()));
                 }
                 return null;
             case TYPE_FILED_FORM_IMAGE:
                 if (defaultValue instanceof String) {
-                    return (String) defaultValue;
+                    return getMapResult((String) defaultValue);
                 }
             case TYPE_FILED_FORM_DOUBLE_BUTTON:
                 return null;
             case TYPE_FILED_FORM_TWO_TIME_BUTTON:
-                return rightLayoutTwoTimeLeftTv.getText().toString() +
-                        ":" +
-                        rightLayoutTwoTimeRightTv.getText().toString();
+                // TODO: 2018/1/2  这里请使用 逗号 区分
+                return getMapResult(rightLayoutTwoTimeLeftTv.getText().toString() + "," + rightLayoutTwoTimeRightTv.getText().toString());
             case TYPE_FILED_FORM_ID_CARD:
                 if (defaultValue instanceof String[]) {
                     String[] value = (String[]) defaultValue;
-                    return Arrays.toString(value);
+
+                    String stringBuilder = value[0] +
+                            "," +
+                            value[1];
+                    return getMapResult(stringBuilder);
                 }
             case TYPE_FILED_FORM_ID_CARD_NUMBER:
-                return rightLayoutLeftIdCardNumberEt.getText().toString();
-
-
+                return getMapResult(rightLayoutLeftIdCardNumberEt.getText().toString());
         }
 
-        return "";
+        return null;
+    }
+
+    private Map getMapResult(String value) {
+        Map map = new HashMap();
+        map.put(ZK_FILED_TABLE_NAME, dataBean.getTable_name());
+        map.put(ZK_FILED_NEW_VALUE, value);
+        return map;
     }
 
     // ———————————内部使用方法———————————

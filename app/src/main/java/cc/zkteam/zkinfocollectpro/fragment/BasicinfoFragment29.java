@@ -3,32 +3,20 @@ package cc.zkteam.zkinfocollectpro.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-
-import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.concurrent.CountDownLatch;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
-import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
-import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiled;
-import okhttp3.MultipartBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -135,45 +123,45 @@ public class BasicinfoFragment29 extends BaseFragment {
     public void onViewClicked() {
 
 
-        zhApi.addPersonBaseInfo_Company(
-           MultipartBody.Part.createFormData("id_card",  id1.getResult()),
-           MultipartBody.Part.createFormData("name",  id2.getResult()),
-           MultipartBody.Part.createFormData("sex",  id3.getResult()),
-           MultipartBody.Part.createFormData("company_name",  id4.getResult()),
-           MultipartBody.Part.createFormData("company_number",  id5.getResult()),
-           MultipartBody.Part.createFormData("company_address",  id6.getResult()),
-           MultipartBody.Part.createFormData("company_type",  id7.getResult()),
-           MultipartBody.Part.createFormData("company_regmoney",  id8.getResult()),
-           MultipartBody.Part.createFormData("company_money",  id9.getResult()),
-           MultipartBody.Part.createFormData("company_business_scope",  id10.getResult()),
-           MultipartBody.Part.createFormData("company_unit",  id11.getResult()),
-           MultipartBody.Part.createFormData("company_duty",  id12.getResult()),
-           MultipartBody.Part.createFormData("company_telphone",  id13.getResult()),
-           MultipartBody.Part.createFormData("company_website",  id14.getResult()),
-           MultipartBody.Part.createFormData("company_staff",  id15.getResult()),
-           MultipartBody.Part.createFormData("company_annual_value",  id16.getResult()),
-           MultipartBody.Part.createFormData("company_product",  id17.getResult()),
-           MultipartBody.Part.createFormData("company_date",  id18.getResult()),
-           MultipartBody.Part.createFormData("company_time_business",  id19.getResult()),
-           MultipartBody.Part.createFormData("company_number",  id20.getResult()),
-           MultipartBody.Part.createFormData("company_license_number",  id21.getResult())
-
-                ).enqueue(new Callback<ZHBaseBean>() {
-            @Override
-            public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
-                ZHBaseBean zhBaseBean = response.body();
-                if (zhBaseBean != null) {
-                    Log.d("Company", "onResponse: " + zhBaseBean.toString());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ZHBaseBean> call, Throwable t) {
-
-            }
-        });
-         //接口都不能用  暂时弹个信息吧
-        ToastUtils.showShort("保存成功");
+//        zhApi.addPersonBaseInfo_Company(
+//           MultipartBody.Part.createFormData("id_card",  id1.getResult()),
+//           MultipartBody.Part.createFormData("name",  id2.getResult()),
+//           MultipartBody.Part.createFormData("sex",  id3.getResult()),
+//           MultipartBody.Part.createFormData("company_name",  id4.getResult()),
+//           MultipartBody.Part.createFormData("company_number",  id5.getResult()),
+//           MultipartBody.Part.createFormData("company_address",  id6.getResult()),
+//           MultipartBody.Part.createFormData("company_type",  id7.getResult()),
+//           MultipartBody.Part.createFormData("company_regmoney",  id8.getResult()),
+//           MultipartBody.Part.createFormData("company_money",  id9.getResult()),
+//           MultipartBody.Part.createFormData("company_business_scope",  id10.getResult()),
+//           MultipartBody.Part.createFormData("company_unit",  id11.getResult()),
+//           MultipartBody.Part.createFormData("company_duty",  id12.getResult()),
+//           MultipartBody.Part.createFormData("company_telphone",  id13.getResult()),
+//           MultipartBody.Part.createFormData("company_website",  id14.getResult()),
+//           MultipartBody.Part.createFormData("company_staff",  id15.getResult()),
+//           MultipartBody.Part.createFormData("company_annual_value",  id16.getResult()),
+//           MultipartBody.Part.createFormData("company_product",  id17.getResult()),
+//           MultipartBody.Part.createFormData("company_date",  id18.getResult()),
+//           MultipartBody.Part.createFormData("company_time_business",  id19.getResult()),
+//           MultipartBody.Part.createFormData("company_number",  id20.getResult()),
+//           MultipartBody.Part.createFormData("company_license_number",  id21.getResult())
+//
+//                ).enqueue(new Callback<ZHBaseBean>() {
+//            @Override
+//            public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
+//                ZHBaseBean zhBaseBean = response.body();
+//                if (zhBaseBean != null) {
+//                    Log.d("Company", "onResponse: " + zhBaseBean.toString());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ZHBaseBean> call, Throwable t) {
+//
+//            }
+//        });
+//         //接口都不能用  暂时弹个信息吧
+//        ToastUtils.showShort("保存成功");
 
     }
 

@@ -313,18 +313,20 @@ public class MainActivity extends BaseActivity {
         Button btn = findViewById(R.id.btn);
         btn.setFocusableInTouchMode(true);
         btn.setOnClickListener(view -> {
-            String result = zkTestView.getResult();
+            Map map = zkTestView.getResult();
+
+            String result = (String) map.get(ZKFiled.ZK_FILED_NEW_VALUE);
 
             if (TextUtils.isEmpty(result)) {
                 result = zkTestTitleView.getResult();
             }
 
             if (TextUtils.isEmpty(result)) {
-                List<String>  list1 = zkTestFormLayout.getResult();
+                List<Map>  list1 = zkTestFormLayout.getResult();
 
                 StringBuilder sb = new StringBuilder();
-                for (String s: list1) {
-                    sb.append(s);
+                for (Map map1: list1) {
+                    sb.append((String) map.get(ZKFiled.ZK_FILED_NEW_VALUE));
                     sb.append(",");
                 }
 
