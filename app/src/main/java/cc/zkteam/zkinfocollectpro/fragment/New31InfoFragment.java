@@ -96,10 +96,11 @@ public class New31InfoFragment extends BaseFragment {
 
     }
 
+    ZKModuleLayout zkModuleLayout;
 
     @OnClick(R.id.new_31_commit)
     public void onViewClicked() {
-        ToastUtils.showShort("提交接口数据信息");
+        ToastUtils.showShort("提交接口数据信息：" + zkModuleLayout.getResult());
     }
 
     private void showZKModuleAPI(LinearLayout linearLayout, String pageType) {
@@ -115,6 +116,9 @@ public class New31InfoFragment extends BaseFragment {
                     return;
                 }
 
+
+
+
                 List<ZK31Bean.DataBeanX> dataBeanList = zk31Bean.getData();
 
                 for (ZK31Bean.DataBeanX dataBeanX :
@@ -122,12 +126,12 @@ public class New31InfoFragment extends BaseFragment {
 
                     JSONArray moduleArray = new JSONArray();
                     Map<Integer, Object> objectHashMap = new HashMap<>();
-                    ZKModuleLayout zkModuleLayout = new ZKModuleLayout(mContext);
 
+                    zkModuleLayout = new ZKModuleLayout(mContext);
+
+                    int index = 0;
                     for (ZK31Bean.DataBeanX.DataBean dataBean :
                             dataBeanX.getData()) {
-
-
                         ArrayList list = new ArrayList();
                         JSONObject jsonObject = new JSONObject();
                         try {
@@ -149,11 +153,19 @@ public class New31InfoFragment extends BaseFragment {
                         list.add(type);
                         list.add(dataBean.getName());
                         // TODO: 2018/1/2 test
-                        list.add(new String[]{});
+                        try {
+                            String str = dataBean.getDefault_list_data();
+                            if (!TextUtils.isEmpty(str)) {
+                                String[] strList = str.split(",");
+                                list.add(strList);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
-                        objectHashMap.put(0, list);
+                        objectHashMap.put(index, list);
 
-
+                        index++;
                     }
 
 

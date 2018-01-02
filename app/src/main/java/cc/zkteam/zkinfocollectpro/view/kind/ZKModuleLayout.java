@@ -2,6 +2,7 @@ package cc.zkteam.zkinfocollectpro.view.kind;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -82,6 +83,23 @@ public class ZKModuleLayout extends ZKBaseView implements IZKResult {
         }
 
         try {
+
+            // 2018/1/2  提前遍历这个的数据，找出字数最多的，设置为所有的 text 的 ems属性
+            int longestTextSize = 0;
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject object = jsonArray.optJSONObject(i);
+                if (object != null) {
+                    String key = object.names().optString(0);
+                    String value = object.optString(key);
+
+                    if (!TextUtils.isEmpty(value)) {
+                        if (longestTextSize < value.length()) {
+                            longestTextSize = value.length();
+                        }
+                    }
+                }
+            }
+
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject object = jsonArray.optJSONObject(i);
                 if (object != null) {
@@ -89,6 +107,8 @@ public class ZKModuleLayout extends ZKBaseView implements IZKResult {
                     Object value = object.optString(key);
 
                     ZKFiled zkFiled = new ZKFiled(getContext());
+                    zkFiled.setKeyFiledTextLength(longestTextSize);
+
                     int type = ZKFiled.TYPE_FILED_FORM_EDIT_TEXT;
 
                     Object defaultValue = null;
@@ -113,6 +133,8 @@ public class ZKModuleLayout extends ZKBaseView implements IZKResult {
                             type = (Integer) obj;
                         }
                     }
+
+
 
                     zkFiled.setData(key, (String) value, defaultValue, i, type);
 
