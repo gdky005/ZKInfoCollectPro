@@ -58,5 +58,6 @@
 
     <string name="childbearing_age_info">育龄妇女信息</string>
     <string name="children_info">子女信息</string>
+    <string name="new_31_commit_text">保存并提交</string>
 
 </resources>
