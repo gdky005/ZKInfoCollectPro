@@ -1,5 +1,8 @@
 package cc.zkteam.zkinfocollectpro.activity;
 
+import android.accounts.AccountManager;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +18,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.ZKICApplication;
 import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
 import cc.zkteam.zkinfocollectpro.adapter.ProblemPreviewAdapter;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
@@ -66,7 +70,7 @@ public class MyProblemListActivity extends BaseActivity implements RvListener {
     @Override
     protected void initData() {
         mLoading.setVisibility(View.VISIBLE);
-        ZHConnectionManager.getInstance().getZHApi().getProblemList("3").enqueue(new Callback<ProblemPreview>() {
+        ZHConnectionManager.getInstance().getZHApi().getProblemList(ZKICApplication.zhLoginBean.getId()).enqueue(new Callback<ProblemPreview>() {
             @Override
             public void onResponse(Call<ProblemPreview> call, Response<ProblemPreview> response) {
                 Log.e("TAG", response.body().toString());

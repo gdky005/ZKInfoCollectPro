@@ -27,7 +27,7 @@ import retrofit2.Response;
  * Created by Administrator on 2017/12/15.
  */
 
-public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implements PRPresenter {
+    public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implements PRPresenter {
     public LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
     private ZHApi zhApi;
