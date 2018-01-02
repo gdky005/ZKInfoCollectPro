@@ -1,6 +1,8 @@
 package cc.zkteam.zkinfocollectpro.managers;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
@@ -339,6 +341,46 @@ public class ZHConfigDataManager {
      */
     public List<String> getKeyPerson() {
         return getZKSettingBean().getKeyPerson();
+    }
+
+    /**
+     * "市容环境": 1,
+     * "道路交通": 2,
+     * "公路设施": 3,
+     * "园林绿化": 4,
+     * "施工管理": 5,
+     * "其他": 6
+     *
+     * @return set 集合
+     */
+    public Set<String> getWtsbData() {
+        ZKSettingBean zkSettingBean = getZKSettingBean();
+        if (zkSettingBean != null) {
+            Map<String, Integer> map = zkSettingBean.getWtsbType();
+            return map.keySet();
+        }
+        return null;
+    }
+
+    /**
+     * "市容环境": 1,
+     * "道路交通": 2,
+     * "公路设施": 3,
+     * "园林绿化": 4,
+     * "施工管理": 5,
+     * "其他": 6
+     *
+     * @param wtsbName  例如：市容环境
+     * @return  例如：1
+     */
+    public int getWtsbType(String wtsbName) {
+        ZKSettingBean zkSettingBean = getZKSettingBean();
+        if (zkSettingBean != null) {
+            Map<String, Integer> map = zkSettingBean.getWtsbType();
+            return map.get(wtsbName);
+        }
+
+        return 0;
     }
 
 }

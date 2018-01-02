@@ -3,6 +3,7 @@ package cc.zkteam.zkinfocollectpro.bean;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * ZKSettingBean
@@ -250,6 +251,11 @@ public class ZKSettingBean {
     @SerializedName("KEYPERSON")
     private List<String> keyPerson;
 
+    @SerializedName("WTSB_TYPE")
+    private Map<String, Integer> wtsbType;
+
+
+
     public List<String> getPoorType() {
         return poorType;
     }
@@ -368,5 +374,13 @@ public class ZKSettingBean {
 
     public void setKeyPerson(List<String> keyPerson) {
         this.keyPerson = keyPerson;
+    }
+
+    public Map<String, Integer> getWtsbType() {
+        return wtsbType;
+    }
+
+    public void setWtsbType(Map<String, Integer> wtsbType) {
+        this.wtsbType = wtsbType;
     }
 }
