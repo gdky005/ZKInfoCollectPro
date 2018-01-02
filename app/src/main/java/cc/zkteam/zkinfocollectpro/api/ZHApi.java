@@ -232,7 +232,7 @@ public interface ZHApi {
      * 获取 31 项目数据 接口
      */
     @GET("datamanage.php/Admin/AppInterface/getfieldlist")
-    Call<ZK31Bean> get31Data(@Query("pagename") String pagename);
+    Call<ZK31Bean> get31Data(@Query("pagename") String pagename, @Query("id") String id);
 
     /**
      * 问题上报列表

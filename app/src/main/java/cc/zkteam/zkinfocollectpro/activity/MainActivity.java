@@ -385,7 +385,7 @@ public class MainActivity extends BaseActivity {
     private void showZKModuleInterface(LinearLayout linearLayout) {
 
         Context context = this;
-        ZHConnectionManager.getInstance().getZHApi().get31Data("zhengzhaoxinxi_type").enqueue(new Callback<ZK31Bean>() {
+        ZHConnectionManager.getInstance().getZHApi().get31Data("zhengzhaoxinxi_type", "2").enqueue(new Callback<ZK31Bean>() {
 
             @Override
             public void onResponse(Call<ZK31Bean> call, Response<ZK31Bean> result) {

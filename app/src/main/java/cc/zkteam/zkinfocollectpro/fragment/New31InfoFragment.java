@@ -55,6 +55,9 @@ public class New31InfoFragment extends BaseFragment {
     private String titleName;
     private String pageType;
 
+    private String userID;
+    private ZKModuleLayout zkModuleLayout;
+
     public static New31InfoFragment newInstance(String name, String pageType) {
         Bundle args = new Bundle();
         New31InfoFragment fragment = new New31InfoFragment();
@@ -94,6 +97,13 @@ public class New31InfoFragment extends BaseFragment {
 
         ((BasicInfoActivity) getActivity()).setTitle(titleName);
 
+        userID = ZHMemoryCacheManager.getInstance().getUserId();
+
+        // TODO: 2018/1/2 test 数据
+        if (TextUtils.isEmpty(userID)) {
+            userID = "2";
+        }
+
         showZKModuleAPI(new31RootViewLl, pageType);
     }
 
@@ -102,8 +112,6 @@ public class New31InfoFragment extends BaseFragment {
 
     }
 
-    ZKModuleLayout zkModuleLayout;
-
     @OnClick(R.id.new_31_commit)
     public void onViewClicked() {
         JSONObject resultObj = zkModuleLayout.getResult();
@@ -111,12 +119,7 @@ public class New31InfoFragment extends BaseFragment {
         ToastUtils.showShort("提交接口数据信息：" + resultObj);
 
         try {
-            String userID = ZHMemoryCacheManager.getInstance().getUserId();
 
-            // TODO: 2018/1/2 test 数据
-            if (TextUtils.isEmpty(userID)) {
-                userID = "2";
-            }
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("user", userID);
@@ -144,7 +147,7 @@ public class New31InfoFragment extends BaseFragment {
     }
 
     private void showZKModuleAPI(LinearLayout linearLayout, String pageType) {
-        ZHConnectionManager.getInstance().getZHApi().get31Data(pageType).enqueue(new Callback<ZK31Bean>() {
+        ZHConnectionManager.getInstance().getZHApi().get31Data(pageType, userID).enqueue(new Callback<ZK31Bean>() {
 
             @Override
             public void onResponse(Call<ZK31Bean> call, Response<ZK31Bean> result) {
@@ -155,9 +158,6 @@ public class New31InfoFragment extends BaseFragment {
                     L.e("zk31Bean is null!");
                     return;
                 }
-
-
-
 
                 List<ZK31Bean.DataBeanX> dataBeanList = zk31Bean.getData();
 
