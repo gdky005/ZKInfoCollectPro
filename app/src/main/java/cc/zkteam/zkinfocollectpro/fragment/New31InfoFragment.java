@@ -113,6 +113,7 @@ public class New31InfoFragment extends BaseFragment {
         try {
             String userID = ZHMemoryCacheManager.getInstance().getUserId();
 
+            // TODO: 2018/1/2 test 数据
             if (TextUtils.isEmpty(userID)) {
                 userID = "2";
             }
@@ -126,6 +127,9 @@ public class New31InfoFragment extends BaseFragment {
                 @Override
                 public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
                     Log.d(TAG, "onResponse: " + response);
+                    if (response.body().getStatus() == 1) {
+                        ToastUtils.showShort("数据提交成功");
+                    }
                 }
 
                 @Override
