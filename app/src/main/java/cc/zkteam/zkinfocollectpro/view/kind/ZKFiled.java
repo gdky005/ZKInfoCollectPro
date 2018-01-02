@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewStub;
@@ -21,6 +22,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import cc.zkteam.zkinfocollectpro.R;
 import cn.qqtheme.framework.picker.DatePicker;
@@ -57,6 +60,11 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
     protected String yearStr;
     protected String monthStr;
     protected String dayStr;
+
+    /**
+     * 选择项 的数据 map 数据
+     */
+    private Map<String, String> selectMap = new HashMap<>();
 
     public ZKFiled(Context context) {
         super(context);
@@ -171,6 +179,10 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
         updateView(number, key, defaultValue, index, type);
     }
 
+    public void setKeyFiledTextLength(int length){
+        keyFiled.setEms(length);
+    }
+
 
     // ———————————更新 View———————————
     private void updateView(String number, String key, Object defaultValue, int index, @FiledFormType int filedFormType) {
@@ -195,12 +207,34 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
             case TYPE_FILED_FORM_SELECT_DATA:
                 if (defaultValue instanceof String[]) {
                     String[] value = (String[]) defaultValue;
+
                     if (value.length > 0) {
+                        String[] newValue = new String[value.length];
+
+                        // TODO: 2018/1/2  不是我想要写这么多，服务器说很麻烦，非要这么弄，那行吧，就是费事一点的啦
+                        for (int i = 0; i < value.length; i++) {
+
+                            String str = value[i];
+
+                            if (!TextUtils.isEmpty(str)) {
+                                String[] singleItem = str.split("\\|");
+                                if (singleItem.length > 0) {
+                                    try {
+                                        String item = singleItem[0];
+                                        selectMap.put(item, singleItem[1]);
+                                        newValue[i] = item;
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+
                         View rightLayoutSelectDataFiledValueLayout = ((ViewStub) findViewById(R.id.right_layout_select_data_filed_value_layout)).inflate();
                         rightLayoutSelectDataFiledValue = rightLayoutSelectDataFiledValueLayout.findViewById(R.id.right_layout_select_data_filed_value);
                         rightLayoutSelectDataFiledValue.setOnClickListener(v1 -> {
                             TextView btn = (TextView) v1;
-                            OptionPicker picker3 = new OptionPicker(activity, value);
+                            OptionPicker picker3 = new OptionPicker(activity, newValue);
                             picker3.setCanceledOnTouchOutside(false);
                             picker3.setDividerRatio(WheelView.DividerConfig.FILL);
                             picker3.setShadowColor(Color.BLUE, 40);
@@ -215,7 +249,7 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
                             });
                             picker3.show();
                         });
-                        rightLayoutSelectDataFiledValue.setText(value[0]);
+                        rightLayoutSelectDataFiledValue.setText(newValue[0]);
                     }
                 }
                 break;
@@ -303,8 +337,12 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
                 CharSequence timeFiled = rightLayoutTimeFiledValue.getText();
                 return timeFiled.toString();
             case TYPE_FILED_FORM_SELECT_DATA:
-                CharSequence selectFiled = rightLayoutSelectDataFiledValue.getText();
-                return selectFiled.toString();
+                // 2018/1/2 这里获取到 map，去后面的数据提交到服务器。 别问我为什么，问了也不想说
+                if (rightLayoutSelectDataFiledValue != null) {
+                    CharSequence selectFiled = rightLayoutSelectDataFiledValue.getText();
+                    return selectMap.get(selectFiled.toString());
+                }
+                return null;
             case TYPE_FILED_FORM_IMAGE:
                 if (defaultValue instanceof String) {
                     return (String) defaultValue;
