@@ -81,13 +81,16 @@ public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implemen
                         Log.d("TAG", "onResponse: " + zhBaseBean.toString());
                         if (zhBaseBean.getStatus() == 1) {
                             ToastUtils.showShort("上报成功");
+                            mView.cleanInput();
                         }
                     }
+                    mView.hideLoading();
                 }
 
                 @Override
                 public void onFailure(Call<ZHBaseBean> call, Throwable t) {
                     t.printStackTrace();
+                    mView.hideLoading();
                 }
             });
         });

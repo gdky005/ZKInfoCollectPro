@@ -15,18 +15,19 @@
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10">
 
-        <EditText
+        <TextView
+            android:id="@+id/tv_address"
             android:layout_width="@dimen/dp_0"
             android:layout_height="60dp"
             android:layout_gravity="left"
             android:layout_weight="7"
             android:background="@drawable/bg_table_shape"
             android:padding="@dimen/dp_5"
-            android:text="@string/addressinfo"
+            android:lineSpacingExtra="9dp"
             android:textColor="#444444"
             android:textSize="15dp"
-            android:gravity="start"
-            />
+            android:text="@string/addressinfo"
+            android:gravity="start|center_vertical" />
 
         <TextView
             android:id="@+id/create_new"

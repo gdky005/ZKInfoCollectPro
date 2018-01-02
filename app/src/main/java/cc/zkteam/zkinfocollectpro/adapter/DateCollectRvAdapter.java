@@ -6,6 +6,7 @@ import android.view.View;
 import java.util.List;
 
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.activity.RentPersonInfoActivity;
 import cc.zkteam.zkinfocollectpro.base.RvAdapter;
 import cc.zkteam.zkinfocollectpro.base.RvHolder;
 import cc.zkteam.zkinfocollectpro.base.RvListener;
@@ -17,9 +18,15 @@ import cc.zkteam.zkinfocollectpro.viewholder.DataCollectRvHolder;
  */
 
 public class DateCollectRvAdapter extends RvAdapter<RentPersoner.PersonlistBean> {
+    private String mAddress = "";
 
     public DateCollectRvAdapter(Context context, List<RentPersoner.PersonlistBean> list, RvListener listener) {
+        this(context, list, listener, "");
+    }
+
+    public DateCollectRvAdapter(Context context, List<RentPersoner.PersonlistBean> list, RvListener listener, String address) {
         super(context, list, listener);
+        mAddress = address;
     }
 
 
@@ -37,7 +44,7 @@ public class DateCollectRvAdapter extends RvAdapter<RentPersoner.PersonlistBean>
     @Override
     public void addData(List<RentPersoner.PersonlistBean> data) {
         this.list.addAll(data);
-        notifyItemRangeInserted(1,data.size());
+        notifyItemRangeInserted(1, data.size());
     }
 
     @Override
@@ -57,6 +64,7 @@ public class DateCollectRvAdapter extends RvAdapter<RentPersoner.PersonlistBean>
 
         DataCollectRvHolder holder = new DataCollectRvHolder(view, viewType, listener);
         holder.setAdapter(this);
+        if (viewType == 0) holder.setAddress(mAddress);
         return holder;
     }
 

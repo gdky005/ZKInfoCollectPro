@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -69,6 +70,8 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
     TextView mToolbarTitle;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.pb_loading)
+    ProgressBar mLoading;
     private LDSpinnerAdapter roadAdapter;
     private LDSpinnerAdapter communityAdapter;
     private LDSpinnerAdapter houseAdapter;
@@ -77,6 +80,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
     private HashMap<Integer, LDSpinnerAdapter> adapterMap;
     private HashMap<Integer, Spinner> spinnerMap;
     private HashMap<Integer,String> tempIds;
+    private StringBuffer mAddress = new StringBuffer();
 
 
     public static DataCollectFragment newInstance() {
@@ -192,7 +196,9 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
             Intent intent = new Intent();
             intent.putExtra("rent_personers",data);
             intent.putExtra("build_Id",tempIds.get(3));
+            intent.putExtra("address",mAddress.toString());
             PageCtrl.startActivity(getContext(), RentPersonInfoActivity.class,intent);
+            mAddress.delete(0, mAddress.length());
         }else {
             View view = getLayoutInflater().inflate(R.layout.create_house_dialog, null, false);
             Dialog dialog = new Dialog(mContext);
@@ -202,6 +208,16 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
 
             dialog.show();
         }
+    }
+
+    @Override
+    public void showLoading() {
+        mLoading.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        mLoading.setVisibility(View.GONE);
     }
 
 
@@ -231,7 +247,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
             int roomNum = mData.get(i).roomNum;
             for (int j = 1; j <= roomNum; j++) {
                 TextView room = new TextView(mContext);
-                room.setText(relFloor + "A0" + j);
+                room.setText(relFloor + "0" + j);
                 room.setGravity(Gravity.CENTER);
                 room.setOnClickListener(new RoomClickListener(i + 1, j));
                 room.setBackground(mBg);
@@ -281,9 +297,10 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
             tempIds.put(index,id);
             Log.i("chris", "onItemSelected: "+"type: "+ index +"--id--:"+id);
             index++;
+            showLoading();
             mPresenter.loadStreetCommunity(id, index + "");
 
-        } else if (index == 4) {
+        } else {
             // TODO: 2017/12/25 调用更新住房信息接口
             LDSpinnerAdapter adapter1 = adapterMap.get(index);
             tempIds.put(index,i+"");
@@ -321,10 +338,34 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
 
         @Override
         public void onClick(View view) {
+            showLoading();
+            getAddress(mFloorNum, mRoomNum);
             tempIds.put(5,mFloorNum+"");
             tempIds.put(6,"0"+mRoomNum+"");
             getRentPersoner(tempIds);
         }
+    }
+
+    private void getAddress(int floorNum, int roomNum) {
+        mAddress.append(getAddressName(mRoadSpinner));
+        mAddress.append(" ");
+        mAddress.append(getAddressName(mCommunitySpinner));
+        mAddress.append(" ");
+        mAddress.append(getAddressName(mNeighborSpinner));
+        mAddress.append(" ");
+        mAddress.append(getAddressName(mHouseSpinner));
+        mAddress.append(" ");
+        mAddress.append(mUnitSpinner.getSelectedItem().toString());
+        mAddress.append(" ");
+        mAddress.append(floorNum);
+        if (String.valueOf(roomNum).length() <= 1) mAddress.append("0");
+        mAddress.append(roomNum);
+        mAddress.append("室");
+    }
+
+    private String  getAddressName(Spinner spinner) {
+        ZHCommunityBean.DataBean dataBean = (ZHCommunityBean.DataBean) spinner.getSelectedItem();
+        return dataBean.getName();
     }
 
     private void getRentPersoner(HashMap<Integer, String> params) {

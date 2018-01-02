@@ -100,6 +100,7 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
         Intent intent = getIntent();
         rentperson = (RentPersoner) intent.getSerializableExtra("rent_personers");
         mBuildId = intent.getStringExtra("build_Id");
+        String address = intent.getStringExtra("address");
 
         // TODO: 2017/12/31  测试数据
         if (rentperson == null) {
@@ -122,7 +123,7 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
         if (rentperson != null) {
             List<RentPersoner.PersonlistBean> personlist = rentperson.getPersonlist();
             personlist.add(0, new RentPersoner.PersonlistBean(INVALID, INVALID, INVALID, INVALID));
-            adapter = new DateCollectRvAdapter(this, personlist, this);
+            adapter = new DateCollectRvAdapter(this, personlist, this, address);
             mRecycle.setAdapter(adapter);
         }
 
@@ -145,7 +146,7 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
     public void onItemClick(int id, int position) {
         switch (id) {
             case R.id.caiji:
-                ToastUtils.showShort("采集信息");
+//                ToastUtils.showShort("采集信息");
                 FragmentUtils.add(fragmentManager, new PersonalInfoCollectFragment(), R.id.container_layout);
                 break;
 
@@ -163,7 +164,7 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
                 PageCtrl.startActivity(this, NewResidentsInfoActivity.class);
                 return;
         }
-        Toast.makeText(mContext, "hello" + position, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mContext, "hello" + position, Toast.LENGTH_SHORT).show();
     }
 
     private void showOutSetting(int position) {
@@ -199,6 +200,8 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
                 if (response.isSuccessful()) {
                     if (response.body().getStatus() == 1) {
                         ToastUtils.showShort("迁出成功");
+                        rentperson.getPersonlist().remove(position);
+                        adapter.cleanAndAddAll(rentperson.getPersonlist());
                     } else {
                         ToastUtils.showShort("迁出失败");
                     }

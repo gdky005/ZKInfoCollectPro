@@ -371,16 +371,16 @@ public class ZHConfigDataManager {
      * "其他": 6
      *
      * @param wtsbName  例如：市容环境
-     * @return  例如：1
+     * @return  例如："1"
      */
-    public int getWtsbType(String wtsbName) {
+    public String getWtsbType(String wtsbName) {
         ZKSettingBean zkSettingBean = getZKSettingBean();
         if (zkSettingBean != null) {
             Map<String, Integer> map = zkSettingBean.getWtsbType();
-            return map.get(wtsbName);
+            return String.valueOf(map.get(wtsbName));
         }
 
-        return 0;
+        return "0";
     }
 
 }

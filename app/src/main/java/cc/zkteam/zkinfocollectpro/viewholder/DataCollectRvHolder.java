@@ -26,6 +26,7 @@ import cc.zkteam.zkinfocollectpro.bean.RentPersoner;
 public class DataCollectRvHolder extends RvHolder<RentPersoner.PersonlistBean> {
     private RvAdapter adapter;
     private Context mContext;
+    private String mAddress = "";
 
     public DataCollectRvHolder(View itemView, int type, RvListener listener) {
         super(itemView, type, listener);
@@ -51,9 +52,12 @@ public class DataCollectRvHolder extends RvHolder<RentPersoner.PersonlistBean> {
     }
 
 
+
     @Override
     public void bindHolder(List<RentPersoner.PersonlistBean> data, final int position) {
         if (mType == 0) {
+            TextView address = findTv(R.id.tv_address);
+            address.setText(mAddress);
             TextView btn = findTv(R.id.create_new);
             btn.setOnClickListener(view -> mListener.onItemClick(view.getId(), position));
         } else if (mType == 1) {
@@ -71,19 +75,9 @@ public class DataCollectRvHolder extends RvHolder<RentPersoner.PersonlistBean> {
             View imageContainer = itemView.findViewById(R.id.image_container);
             TextView updateTitle = findTv(R.id.update_title);
 
-            caiji.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mListener.onItemClick(view.getId(), rePosiont);
-                }
-            });
+            caiji.setOnClickListener(view -> mListener.onItemClick(view.getId(), rePosiont));
 
-            out.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mListener.onItemClick(view.getId(), rePosiont);
-                }
-            });
+            out.setOnClickListener(view -> mListener.onItemClick(view.getId(), rePosiont));
 
             View operate = itemView.findViewById(R.id.operate);
 
@@ -96,12 +90,12 @@ public class DataCollectRvHolder extends RvHolder<RentPersoner.PersonlistBean> {
             } else if (rePosiont % 2 == 0) {      //偶数行
                 initTextColor(Color.parseColor("#333333"), num, name, relation, caiji, out);
                 showContent(operate, operate_title);
-                showContent(imageContainer, updateTitle);
+//                showContent(imageContainer, updateTitle);
                 initViewColor(Color.parseColor("#ebf6fa"), num, name, relation, imageContainer, operate);
             } else {     //奇数行
                 initTextColor(Color.parseColor("#333333"), num, name, relation, caiji, out);
                 showContent(operate, operate_title);
-                showContent(imageContainer, updateTitle);
+//                showContent(imageContainer, updateTitle);
                 initViewColor(Color.parseColor("#dff0f7"), num, name, relation, imageContainer, operate);
             }
 
@@ -116,10 +110,10 @@ public class DataCollectRvHolder extends RvHolder<RentPersoner.PersonlistBean> {
             } else {
                 num.setText(rePosiont + "");
                 name.setText(rentInfo.getName());
-                relation.setText(rentInfo.getRelation());
-                Drawable updated = mContext.getResources().getDrawable(R.drawable.updated);
-                updated.setBounds(0, 0, 32, 32);
-                update.setImageDrawable(updated);
+//                relation.setText(rentInfo.getRelation());
+//                Drawable updated = mContext.getResources().getDrawable(R.drawable.updated);
+//                updated.setBounds(0, 0, 32, 32);
+//                update.setImageDrawable(updated);
             }
 
         } else if (mType == 2) {
@@ -159,5 +153,9 @@ public class DataCollectRvHolder extends RvHolder<RentPersoner.PersonlistBean> {
         for (int i = 0; i < a.length; i++) {
             a[i].setBackgroundColor(color);
         }
+    }
+
+    public void setAddress(String address) {
+        mAddress = address;
     }
 }

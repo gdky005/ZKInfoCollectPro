@@ -30,8 +30,13 @@ public abstract class RvAdapter<T> extends RecyclerView.Adapter<RvHolder> {
         this.listener = listener;
     }
 
-
     public void addData(List<T> data){
+        this.list.addAll(data);
+        notifyDataSetChanged();
+    }
+
+    public void cleanAndAddAll(List<T> data){
+        list.clear();
         this.list.addAll(data);
         notifyDataSetChanged();
     }

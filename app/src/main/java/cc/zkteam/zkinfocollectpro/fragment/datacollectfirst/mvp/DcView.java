@@ -18,4 +18,8 @@ public interface DcView extends BaseMVPView {
     void loadSpinner(ZHCommunityBean zhCommunity, String type);
 
     void updata(RentPersoner data);
+
+    void showLoading();
+
+    void hideLoading();
 }

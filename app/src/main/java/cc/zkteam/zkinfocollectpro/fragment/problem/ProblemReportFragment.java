@@ -13,12 +13,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.blankj.utilcode.util.ToastUtils;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,6 +32,7 @@ import cc.zkteam.zkinfocollectpro.activity.MapActivity;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.fragment.problem.mvp.PRPresenterImpl;
 import cc.zkteam.zkinfocollectpro.fragment.problem.mvp.PRView;
+import cc.zkteam.zkinfocollectpro.managers.ZHConfigDataManager;
 import cc.zkteam.zkinfocollectpro.utils.L;
 import me.nereo.multi_image_selector.MultiImageSelector;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
@@ -65,6 +69,8 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     EditText mProblemAttachment;
     @BindView(R.id.btn_select_pic)
     Button mSelectPicBtn;
+    @BindView(R.id.pb_loading)
+    ProgressBar mLoading;
     private PRPresenterImpl mPresenter;
     private boolean mIsEditPage = false;
     private String mCurrPicPath = "";
@@ -138,9 +144,10 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
 
     private void initSpinner() {
         //  建立数据源
-        String[] mItems = getResources().getStringArray(R.array.problem_type);
+        String[] items = new String[ZHConfigDataManager.getInstance().getWtsbData().size()];
+        ZHConfigDataManager.getInstance().getWtsbData().toArray(items);
         //  建立Adapter并且绑定数据源
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.item_problem_type, mItems);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.item_problem_type, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //  绑定 Adapter到控件
         mProblemType.setAdapter(adapter);
@@ -207,9 +214,9 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
                 || inputIsEmpty(mProblemSuggestion, R.string.input_problem_suggestion)) {
             return;
         }
-
+        showLoading();
         mPresenter.report(mProblemSource.getText().toString(),
-                mProblemType.getSelectedItem().toString(),
+                ZHConfigDataManager.getInstance().getWtsbType(mProblemType.getSelectedItem().toString()),
                 mProblemDesc.getText().toString(),
                 mProblemLocation.getText().toString(),
                 mProblemAttachment.getText().toString(),
@@ -262,5 +269,23 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     @Override
     public void setLocationInfo(String location) {
         mProblemLocation.setText(location);
+    }
+
+    @Override
+    public void cleanInput() {
+        mProblemSource.setText("");
+        mProblemDesc.setText("");
+        mProblemAttachment.setText("");
+        mProblemSuggestion.setText("");
+    }
+
+    @Override
+    public void showLoading() {
+        mLoading.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        mLoading.setVisibility(View.GONE);
     }
 }

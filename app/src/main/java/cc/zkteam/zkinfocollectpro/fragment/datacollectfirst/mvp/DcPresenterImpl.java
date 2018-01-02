@@ -56,11 +56,12 @@ public class DcPresenterImpl extends BaseMVPPresenter<DcView, DcModel> implement
                         mView.loadSpinner(zhCommunityBean, type);
                     }
                 }
+                mView.hideLoading();
             }
 
             @Override
             public void onFailure(@NonNull Call<ZHCommunityBean> call, @NonNull Throwable t) {
-
+                mView.hideLoading();
             }
         });
     }
@@ -84,11 +85,12 @@ public class DcPresenterImpl extends BaseMVPPresenter<DcView, DcModel> implement
 //                    List<RentPersoner.PersonlistBean> personlist = data.getPersonlist();
                     mView.updata(data);
                 }
+                mView.hideLoading();
             }
 
             @Override
             public void onFailure(Call<RentPersoner> call, Throwable t) {
-
+                mView.hideLoading();
             }
         });
     }
