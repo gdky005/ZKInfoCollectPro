@@ -133,7 +133,7 @@ public class MainActivity extends BaseActivity {
         String[] list = new String[]{"哈哈哈", "第一单位", "第二单位", "第三单位"};
 
         // 用户图像测试数据
-        picPatch = "file://" + sdPath + "/user_icon.jpeg";
+        picPatch = sdPath + "/user_icon.jpeg";
 
         // 身份证测试数据
 
