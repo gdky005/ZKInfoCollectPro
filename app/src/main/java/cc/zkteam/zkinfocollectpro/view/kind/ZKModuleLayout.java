@@ -7,11 +7,14 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
 
 /**
  * ZKModuleLayout
@@ -19,7 +22,7 @@ import java.util.Map;
  * Created by WangQing on 2017/12/29.
  */
 
-public class ZKModuleLayout extends ZKBaseView implements IZKResult {
+public class ZKModuleLayout extends ZKBaseView {
 
     private List<ZKFiled> zkFiledList = new ArrayList<>();
 
@@ -60,7 +63,6 @@ public class ZKModuleLayout extends ZKBaseView implements IZKResult {
      *                  --------第0项表示 当前标题 的 名字;
      *                  --------第1项表示 当前标题 的 type；
      *                  --------第2项表示 当前标题 需要的默认数据，是一组 String[] 数据列表。
-     *
      */
     public void setJsonArray(JSONArray jsonArray, Map<Integer, Object> map, List tileList) {
         setOrientation(VERTICAL);
@@ -106,8 +108,11 @@ public class ZKModuleLayout extends ZKBaseView implements IZKResult {
                     String key = object.names().optString(0);
                     Object value = object.optString(key);
 
+                    ZK31Bean.DataBeanX.DataBean dataBean = (ZK31Bean.DataBeanX.DataBean) object.get(ZKFiled.ZK_FILED_DATA_BEAN);
+
                     ZKFiled zkFiled = new ZKFiled(getContext());
                     zkFiled.setKeyFiledTextLength(longestTextSize);
+                    zkFiled.setZkFiledDataBean(dataBean);
 
                     int type = ZKFiled.TYPE_FILED_FORM_EDIT_TEXT;
 
@@ -135,7 +140,6 @@ public class ZKModuleLayout extends ZKBaseView implements IZKResult {
                     }
 
 
-
                     zkFiled.setData(key, (String) value, defaultValue, i, type);
 
                     zkFiledList.add(zkFiled);
@@ -147,15 +151,26 @@ public class ZKModuleLayout extends ZKBaseView implements IZKResult {
         }
     }
 
-    @Override
-    public List<String> getResult() {
-        List<String> resultList = new ArrayList<>();
+    public JSONObject getResult() {
+        JSONObject jsonObject = new JSONObject();
 
-        for (ZKFiled zkFiled :
-                zkFiledList) {
-            resultList.add(zkFiled.getResult());
+
+        try {
+            for (ZKFiled zkFiled :
+                    zkFiledList) {
+                Map map = zkFiled.getResult();
+                if (map != null) {
+                    String tableName = (String) map.get(ZKFiled.ZK_FILED_TABLE_NAME);
+                    String newValue = (String) map.get(ZKFiled.ZK_FILED_NEW_VALUE);
+                    jsonObject.put(tableName, newValue);
+                }
+            }
+
+            return jsonObject;
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
-        return resultList;
+        return null;
     }
 }

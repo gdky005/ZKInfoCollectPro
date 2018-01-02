@@ -21,6 +21,7 @@ import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHLoginBean;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
+import cc.zkteam.zkinfocollectpro.managers.ZHMemoryCacheManager;
 import cc.zkteam.zkinfocollectpro.retrofit2.ZHCallback;
 import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
@@ -102,8 +103,11 @@ public class LoginActivity extends BaseActivity {
                 if (result != null) {
                     L.d("onResponse: " + result.toString());
 
+
                     if (1 == baseBean.getStatus()) {
                         ZKICApplication.zhLoginBean = result;
+                        ZHMemoryCacheManager.getInstance().setUserInfo(result);
+
                         PageCtrl.startActivity(LoginActivity.this, HomeActivity.class);
                         finish();
                         return;
