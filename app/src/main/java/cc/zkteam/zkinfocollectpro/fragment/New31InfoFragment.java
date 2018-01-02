@@ -1,6 +1,7 @@
 package cc.zkteam.zkinfocollectpro.fragment;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -19,6 +20,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.activity.BasicInfoActivity;
 import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
@@ -34,11 +36,27 @@ import retrofit2.Response;
  */
 
 public class New31InfoFragment extends BaseFragment {
+    private static final String TAG = "New31InfoFragment";
+
+    public static final String NEW_31_INFO_NAME_KEY = "name";
+    public static final String NEW_31_INFO_PAGE_TYPE_KEY = "pageType";
 
     @BindView(R.id.new_31_root_view_ll)
     LinearLayout new31RootViewLl;
     @BindView(R.id.new_31_commit)
     Button new31Commit;
+
+    private String titleName;
+    private String pageType;
+
+    public static New31InfoFragment newInstance(String name, String pageType) {
+        Bundle args = new Bundle();
+        New31InfoFragment fragment = new New31InfoFragment();
+        args.putString(NEW_31_INFO_NAME_KEY, name);
+        args.putString(NEW_31_INFO_PAGE_TYPE_KEY, pageType);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public int getLayoutId() {
@@ -49,13 +67,28 @@ public class New31InfoFragment extends BaseFragment {
     public void initView(View rootView) {
 
 
-
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            titleName = bundle.getString(NEW_31_INFO_NAME_KEY);
+            pageType = bundle.getString(NEW_31_INFO_PAGE_TYPE_KEY);
+        }
 
-        showZKModuleAPI(new31RootViewLl);
+        if (TextUtils.isEmpty(pageType)) {
+//            pageType = "zhengzhaoxinxi_type";
+            pageType = "renyuanxinxi_type";
+        }
+
+        if (TextUtils.isEmpty(titleName)) {
+            titleName = "人员信息";
+        }
+
+        ((BasicInfoActivity) getActivity()).setTitle(titleName);
+
+        showZKModuleAPI(new31RootViewLl, pageType);
     }
 
     @Override
@@ -69,11 +102,8 @@ public class New31InfoFragment extends BaseFragment {
         ToastUtils.showShort("提交接口数据信息");
     }
 
-    private void showZKModuleAPI(LinearLayout linearLayout) {
-//        String type = "zhengzhaoxinxi_type";
-        String type = "renyuanxinxi_type";
-
-        ZHConnectionManager.getInstance().getZHApi().get31Data(type).enqueue(new Callback<ZK31Bean>() {
+    private void showZKModuleAPI(LinearLayout linearLayout, String pageType) {
+        ZHConnectionManager.getInstance().getZHApi().get31Data(pageType).enqueue(new Callback<ZK31Bean>() {
 
             @Override
             public void onResponse(Call<ZK31Bean> call, Response<ZK31Bean> result) {
@@ -119,7 +149,7 @@ public class New31InfoFragment extends BaseFragment {
                         list.add(type);
                         list.add(dataBean.getName());
                         // TODO: 2018/1/2 test
-                        list.add(new String[] {});
+                        list.add(new String[]{});
 
                         objectHashMap.put(0, list);
 

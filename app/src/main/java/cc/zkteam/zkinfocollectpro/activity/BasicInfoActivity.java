@@ -79,6 +79,10 @@ public class BasicInfoActivity extends BaseActivity implements View.OnClickListe
 
     }
 
+    public void setTitle(String titleName) {
+        title.setCenterTVText(titleName);
+    }
+
     @Override
     protected void initData() {
 
