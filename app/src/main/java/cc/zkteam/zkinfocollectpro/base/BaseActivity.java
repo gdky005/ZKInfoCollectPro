@@ -1,6 +1,7 @@
 package cc.zkteam.zkinfocollectpro.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,8 @@ import com.networkbench.agent.impl.NBSAppAgent;
 
 import butterknife.ButterKnife;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.ZKICApplication;
+import cc.zkteam.zkinfocollectpro.activity.LoginActivity;
 
 /**
  * BaseActivity
@@ -32,6 +35,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+
+        if (!(this instanceof LoginActivity)) {
+            if (ZKICApplication.zhLoginBean == null) {
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+                return;
+            }
+        }
 
 
         // TODO: 2018/1/2  防商用标识

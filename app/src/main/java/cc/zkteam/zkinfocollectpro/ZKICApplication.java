@@ -10,6 +10,7 @@ import com.facebook.stetho.dumpapp.DumperPlugin;
 import com.facebook.stetho.dumpapp.plugins.HprofDumperPlugin;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
+import cc.zkteam.zkinfocollectpro.bean.ZHLoginBean;
 import cc.zkteam.zkinfocollectpro.di.DaggerAppComponent;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import dagger.android.AndroidInjector;
@@ -23,7 +24,7 @@ import dagger.android.support.DaggerApplication;
 public class ZKICApplication extends DaggerApplication {
 
     Context mContext;
-    public static String userName;
+    public static ZHLoginBean zhLoginBean;
 
     @Override
     public void onCreate() {

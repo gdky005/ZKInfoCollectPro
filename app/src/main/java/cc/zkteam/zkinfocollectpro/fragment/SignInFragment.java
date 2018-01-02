@@ -1,5 +1,6 @@
 package cc.zkteam.zkinfocollectpro.fragment;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -120,12 +121,12 @@ public class SignInFragment extends BaseFragment {
     @Override
     public void initView(View rootView) {
         zhApi = ZHConnectionManager.getInstance().getZHApi();
-        tvAboutName.setText(TextUtils.isEmpty(ZKICApplication.userName) ? "" : ZKICApplication.userName);
+        tvAboutName.setText(TextUtils.isEmpty(ZKICApplication.zhLoginBean.getName()) ? "" : ZKICApplication.zhLoginBean.getName());
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        zhApi.getSignStatus("3").enqueue(new Callback<ZHBaseBean>() {
+        zhApi.getSignStatus(ZKICApplication.zhLoginBean.getId()).enqueue(new Callback<ZHBaseBean>() {
             @Override
             public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
                 ZHBaseBean zhBaseBean = response.body();
@@ -142,7 +143,7 @@ public class SignInFragment extends BaseFragment {
             }
         });
 
-        zhApi.tongji("3").enqueue(new Callback<ZHTongJiBean>() {
+        zhApi.tongji(ZKICApplication.zhLoginBean.getId()).enqueue(new Callback<ZHTongJiBean>() {
             @Override
             public void onResponse(Call<ZHTongJiBean> call, Response<ZHTongJiBean> response) {
                 ZHTongJiBean tongJiBean = response.body();
@@ -218,7 +219,7 @@ public class SignInFragment extends BaseFragment {
     }
 
     private void doSign() {
-        zhApi.sign("22", "23", "66233.32432", "3322.004324", "kskss").enqueue(new Callback<ZHBaseBean>() {
+        zhApi.sign(ZKICApplication.zhLoginBean.getName(), ZKICApplication.zhLoginBean.getId(), "66233.32432", "3322.004324", "kskss").enqueue(new Callback<ZHBaseBean>() {
             @Override
             public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
 //                layoutSignSuccess.setVisibility(View.VISIBLE);

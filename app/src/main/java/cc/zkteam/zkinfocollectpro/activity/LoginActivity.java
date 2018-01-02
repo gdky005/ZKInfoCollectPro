@@ -103,7 +103,7 @@ public class LoginActivity extends BaseActivity {
                     L.d("onResponse: " + result.toString());
 
                     if (1 == baseBean.getStatus()) {
-                        ZKICApplication.userName = userNum;
+                        ZKICApplication.zhLoginBean = result;
                         PageCtrl.startActivity(LoginActivity.this, HomeActivity.class);
                         finish();
                         return;
