@@ -14,6 +14,7 @@ import com.networkbench.agent.impl.NBSAppAgent;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.ZKICApplication;
 import cc.zkteam.zkinfocollectpro.activity.home.HomeActivity;
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
@@ -102,6 +103,7 @@ public class LoginActivity extends BaseActivity {
                     L.d("onResponse: " + result.toString());
 
                     if (1 == baseBean.getStatus()) {
+                        ZKICApplication.userName = userNum;
                         PageCtrl.startActivity(LoginActivity.this, HomeActivity.class);
                         finish();
                         return;

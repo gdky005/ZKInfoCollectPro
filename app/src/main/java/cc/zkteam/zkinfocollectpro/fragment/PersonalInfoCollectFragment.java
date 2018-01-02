@@ -1,16 +1,17 @@
 package cc.zkteam.zkinfocollectpro.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
-
-import java.lang.reflect.Member;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -22,8 +23,10 @@ import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
 import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
-import cc.zkteam.zkinfocollectpro.view.ZKImageView;
 import cc.zkteam.zkinfocollectpro.view.ZKRecyclerView;
+import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
+import cn.qqtheme.framework.picker.OptionPicker;
+import cn.qqtheme.framework.widget.WheelView;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -33,10 +36,6 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class PersonalInfoCollectFragment extends BaseFragment {
-    @BindView(R.id.toolbar_personal_info_collection)
-    Toolbar toolbarPersonalInfoCollection;
-    @BindView(R.id.img_personal_avatar)
-    ZKImageView imgPersonalAvatar;
     @BindView(R.id.tv_personal_info_collect_name)
     TextView tvPersonalInfoCollectName;
     @BindView(R.id.tv_personal_info_collect_id)
@@ -49,16 +48,16 @@ public class PersonalInfoCollectFragment extends BaseFragment {
     TextView tvPersonalInfoCollectCompletion;
     @BindView(R.id.list_personal_info)
     ZKRecyclerView listPersonalInfo;
-    @BindView(R.id.img_personal_info_back)
-    ImageView imgPersonalInfoBack;
-    @BindView(R.id.img_personal_info_scan)
-    ImageView imgPersonalInfoScan;
     @BindView(R.id.btn_test_detail)
     Button btnTestDetail;
     @BindView(R.id.img_change_left)
     ImageView imgChangeLeft;
     @BindView(R.id.img_change_right)
     ImageView imgChangeRight;
+    @BindView(R.id.title_personal_info_collect)
+    ZKTitleView titlePersonalInfoCollect;
+    @BindView(R.id.btn_modification_info)
+    TextView tvModificationInfo;
 
     private boolean isRight;
 
@@ -69,7 +68,21 @@ public class PersonalInfoCollectFragment extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
-        tvPersonalInfoCollectName.setText("姓名");
+        titlePersonalInfoCollect.setCenterTVText("数据采集");
+        titlePersonalInfoCollect.leftIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getActivity() != null)
+                    getActivity().finish();
+            }
+        });
+        titlePersonalInfoCollect.rightIV.setImageResource(R.drawable.icon_scan);
+        titlePersonalInfoCollect.rightIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "扫一扫", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -82,21 +95,27 @@ public class PersonalInfoCollectFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.img_personal_info_back, R.id.img_personal_info_scan, R.id.btn_modification_info,
+    @OnClick({R.id.layout_change_collection_state,
             R.id.btn_test_detail, R.id.img_change_left, R.id.img_change_right, R.id.img_personal_info_item_edit_base,
             R.id.img_personal_info_item_edit_special, R.id.img_personal_info_item_marriage,
             R.id.img_personal_info_item_members, R.id.img_personal_info_item_relation})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.img_personal_info_back:
-                getActivity().finish();
-                break;
-            case R.id.img_personal_info_scan:
-                Intent intent = new Intent(getActivity(), IDCardScanActivity.class);
-                startActivityForResult(intent, 100);
-                break;
-            case R.id.btn_modification_info:
-
+            case R.id.layout_change_collection_state:
+                OptionPicker picker3 = new OptionPicker(getActivity(), new String[]{"采集完成", "重新激活"});
+                picker3.setCanceledOnTouchOutside(false);
+                picker3.setDividerRatio(WheelView.DividerConfig.FILL);
+                picker3.setShadowColor(Color.BLUE, 40);
+                picker3.setSelectedIndex(0);
+                picker3.setCycleDisable(true);
+                picker3.setTextSize(20);
+                picker3.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                    @Override
+                    public void onOptionPicked(int index1, String item) {
+                        tvModificationInfo.setText(item);
+                    }
+                });
+                picker3.show();
                 break;
             case R.id.btn_test_detail:
                 PageCtrl.startActivity(getActivity(), BasicInfoActivity.class);

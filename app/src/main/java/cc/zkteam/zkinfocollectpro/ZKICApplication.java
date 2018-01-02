@@ -23,6 +23,7 @@ import dagger.android.support.DaggerApplication;
 public class ZKICApplication extends DaggerApplication {
 
     Context mContext;
+    public static String userName;
 
     @Override
     public void onCreate() {

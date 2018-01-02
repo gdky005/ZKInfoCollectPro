@@ -19,12 +19,14 @@
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
+            android:padding="10dp"
             android:background="@drawable/bg_avatar">
 
             <cc.zkteam.zkinfocollectpro.view.ZKImageView
                 android:id="@+id/img_about_avatar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                fresco:backgroundImage="@mipmap/avatar"
                 fresco:roundAsCircle="true" />
         </LinearLayout>
 

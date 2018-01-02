@@ -15,6 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.ZKICApplication;
 import cc.zkteam.zkinfocollectpro.activity.CommonFragmentActivity;
 import cc.zkteam.zkinfocollectpro.activity.CreateHouseActivity;
 import cc.zkteam.zkinfocollectpro.activity.LoginActivity;
@@ -119,6 +120,7 @@ public class SignInFragment extends BaseFragment {
     @Override
     public void initView(View rootView) {
         zhApi = ZHConnectionManager.getInstance().getZHApi();
+        tvAboutName.setText(TextUtils.isEmpty(ZKICApplication.userName) ? "" : ZKICApplication.userName);
     }
 
     @Override
