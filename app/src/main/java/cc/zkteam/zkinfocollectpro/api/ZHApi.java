@@ -7,6 +7,7 @@ import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
 import cc.zkteam.zkinfocollectpro.bean.BDTokenBean;
 import cc.zkteam.zkinfocollectpro.bean.MarriageBean;
+import cc.zkteam.zkinfocollectpro.bean.ProblemPreview;
 import cc.zkteam.zkinfocollectpro.bean.RentPersoner;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
@@ -220,10 +221,9 @@ public interface ZHApi {
     @GET("datamanage.php/Admin/AppInterface/getfieldlist")
     Call<ZK31Bean> get31Data(@Query("pagename") String pagename);
 
-
-
-
-
-
-
+    /**
+     * 问题上报列表
+     */
+    @GET("datamanage.php/Admin/AppInterface/wentishangbao_list")
+    Call<ProblemPreview> getProblemList(@Query("personid") String personid);
 }

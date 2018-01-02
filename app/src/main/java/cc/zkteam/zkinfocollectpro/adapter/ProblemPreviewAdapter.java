@@ -19,9 +19,9 @@ import cc.zkteam.zkinfocollectpro.viewholder.ProblemPreviewHolder;
  * Created by Administrator on 2017/12/22.
  */
 
-public class ProblemPreviewAdapter extends RvAdapter<ProblemPreview> {
+public class ProblemPreviewAdapter extends RvAdapter<ProblemPreview.DataBean> {
 
-    public ProblemPreviewAdapter(Context context, List<ProblemPreview> list, RvListener listener) {
+    public ProblemPreviewAdapter(Context context, List<ProblemPreview.DataBean> list, RvListener listener) {
         super(context, list, listener);
     }
 

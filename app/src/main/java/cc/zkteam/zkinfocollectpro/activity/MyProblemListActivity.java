@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -12,10 +15,15 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
 import cc.zkteam.zkinfocollectpro.adapter.ProblemPreviewAdapter;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.base.RvListener;
 import cc.zkteam.zkinfocollectpro.bean.ProblemPreview;
+import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Administrator on 2017/12/22.
@@ -28,6 +36,8 @@ public class MyProblemListActivity extends BaseActivity implements RvListener {
     RecyclerView mMyProblem;
     @BindView(R.id.tv_toolbar_title)
     TextView mToolbarTitle;
+    @BindView(R.id.pb_loading)
+    ProgressBar mLoading;
     private List<ProblemPreview> mProblemList = new ArrayList<>();
     private ProblemPreviewAdapter mAdapter;
 
@@ -46,8 +56,6 @@ public class MyProblemListActivity extends BaseActivity implements RvListener {
 
     private void initRecyclerView() {
         mMyProblem.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new ProblemPreviewAdapter(this, mProblemList, this);
-        mMyProblem.setAdapter(mAdapter);
     }
 
     @Override
@@ -57,27 +65,25 @@ public class MyProblemListActivity extends BaseActivity implements RvListener {
 
     @Override
     protected void initData() {
-        getProblemList();
-        mAdapter.addData(mProblemList);
-        mAdapter.notifyDataSetChanged();
-    }
+        mLoading.setVisibility(View.VISIBLE);
+        ZHConnectionManager.getInstance().getZHApi().getProblemList("3").enqueue(new Callback<ProblemPreview>() {
+            @Override
+            public void onResponse(Call<ProblemPreview> call, Response<ProblemPreview> response) {
+                Log.e("TAG", response.body().toString());
+                mLoading.setVisibility(View.GONE);
+                if (response.isSuccessful()) {
+                    mAdapter = new ProblemPreviewAdapter(MyProblemListActivity.this,
+                            response.body().getData(), MyProblemListActivity.this);
+                    mMyProblem.setAdapter(mAdapter);
+                }
+            }
 
-    private void getProblemList() {
-        mProblemList.add(new ProblemPreview("12345665222",
-                "这是一个不太清晰的描述",
-                "2017-12-01  10:13:45"));
-        mProblemList.add(new ProblemPreview("12345665222",
-                "这是一个不太清晰的描述",
-                "2017-12-01  10:13:45"));
-        mProblemList.add(new ProblemPreview("12345665222",
-                "这是一个不太清晰的描述",
-                "2017-12-01  10:13:45"));
-        mProblemList.add(new ProblemPreview("12345665222",
-                "这是一个不太清晰的描述",
-                "2017-12-01  10:13:45"));
-        mProblemList.add(new ProblemPreview("12345665222",
-                "这是一个不太清晰的描述",
-                "2017-12-01  10:13:45"));
+            @Override
+            public void onFailure(Call<ProblemPreview> call, Throwable t) {
+                mLoading.setVisibility(View.GONE);
+                t.printStackTrace();
+            }
+        });
     }
 
     @Override
