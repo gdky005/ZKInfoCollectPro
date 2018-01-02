@@ -45,6 +45,14 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
 
     public static final String KEY_ID_CARD_INFO_BEAN = "key_id_card_info_bean";
     public static final int REQUEST_IMAGE = 1000;
+    /**
+     * 图片质量 默认 70%
+     */
+    public static final int PIC_QUALITY = 70;
+    /**
+     * 如果图片过大，图片宽度 600， 高度 自适应
+     */
+    public static final int PIC_WIDTH = 600;
 
     /**
      * 默认图片生成的名称
@@ -205,6 +213,13 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
             int width = bitmap2.getWidth();
             int scanWidth = width * 15 / 16;
             int scanHeight = (int) (scanWidth * 0.63f);
+
+            if (scanWidth > PIC_WIDTH) {
+                // 对图片尺寸进行处理下 宽度 600， 高度自适应，图片质量 70%
+                scanHeight = scanHeight / scanWidth * 600;
+                scanWidth = PIC_WIDTH;
+            }
+
             final Bitmap bitmap1 = Bitmap.createBitmap(bitmap2,
                     (width - scanWidth) / 2,
                     (height - scanHeight - PreviewBorderView.heightOffset) / 2,
@@ -221,7 +236,7 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
                 outStream = new FileOutputStream(file);
                 // 把位图输出到指定文件中
                 bitmap1.compress(Bitmap.CompressFormat.JPEG,
-                        100, outStream);
+                        PIC_QUALITY, outStream);
                 outStream.close();
             } catch (Exception e) {
                 e.printStackTrace();

@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.Window;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bugtags.library.Bugtags;
 import com.networkbench.agent.impl.NBSAppAgent;
 
 import butterknife.ButterKnife;
+import cc.zkteam.zkinfocollectpro.R;
 
 /**
  * BaseActivity
@@ -30,6 +32,18 @@ public abstract class BaseActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+
+
+        // TODO: 2018/1/2  防商用标识
+        TextView tv = new TextView(this);
+        tv.setText("临时预览版本");
+        tv.setTextSize(15);
+        tv.setTextColor(getResources().getColor(R.color.red));
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        addContentView(tv, params);
+
+
         ButterKnife.bind(this);
         NBSAppAgent.leaveBreadcrumb(getClass().getSimpleName() + " onCreate");
         mContext = this;
