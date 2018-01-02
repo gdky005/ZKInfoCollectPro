@@ -130,7 +130,7 @@ public class New31InfoFragment extends BaseFragment {
                 @Override
                 public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
                     Log.d(TAG, "onResponse: " + response);
-                    if (response.body().getStatus() == 1) {
+                    if (response.body() != null && response.body().getStatus() == 1) {
                         ToastUtils.showShort("数据提交成功");
                     }
                 }
