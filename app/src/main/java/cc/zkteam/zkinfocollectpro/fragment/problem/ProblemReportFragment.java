@@ -144,7 +144,12 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     }
 
     private void judgeAndShowProblemDetail() {
-        mProblemSource.setText(TextUtils.isEmpty(mProblem.getType()) ? "无数据" : mProblem.getType());
+        mProblemSource.setText(TextUtils.isEmpty(mProblem.getLaiyuan()) ? "无数据" : mProblem.getLaiyuan());
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.item_problem_type, new String[]{TextUtils.isEmpty(mProblem.getType()) ? "无数据" :
+                ZHConfigDataManager.getInstance().getWtsbValue(mProblem.getType())});
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //  绑定 Adapter到控件
+        mProblemType.setAdapter(adapter);
         mProblemDesc.setText(TextUtils.isEmpty(mProblem.getProblemcontent()) ? "无数据" : mProblem.getProblemcontent());
         mProblemAttachment.setText(TextUtils.isEmpty(mProblem.getPath()) ? "无数据" : mProblem.getPath());
         mProblemLocation.setText(TextUtils.isEmpty(mProblem.getProblemposition()) ? "无数据" : mProblem.getProblemposition());

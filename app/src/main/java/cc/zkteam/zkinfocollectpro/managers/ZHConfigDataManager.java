@@ -382,4 +382,29 @@ public class ZHConfigDataManager {
 
         return "0";
     }
+
+    /**
+     * "市容环境": 1,
+     * "道路交通": 2,
+     * "公路设施": 3,
+     * "园林绿化": 4,
+     * "施工管理": 5,
+     * "其他": 6
+     *
+     * @param wtsbKey  例如：1
+     * @return  例如：市容环境
+     */
+    public String getWtsbValue(String wtsbKey) {
+        ZKSettingBean zkSettingBean = getZKSettingBean();
+        if (zkSettingBean != null) {
+            Map<String, Integer> map = zkSettingBean.getWtsbType();
+            for (String key : map.keySet()) {
+                if (Integer.valueOf(wtsbKey) == map.get(key)) {
+                    return String.valueOf(key);
+                }
+            }
+        }
+
+        return "其他";
+    }
 }
