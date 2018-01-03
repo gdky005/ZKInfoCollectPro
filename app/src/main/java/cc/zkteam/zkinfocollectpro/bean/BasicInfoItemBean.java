@@ -9,4 +9,5 @@ import android.support.annotation.DrawableRes;
 public class BasicInfoItemBean {
     public @DrawableRes int image;
     public String itemname;
+    public String itemtype;
 }

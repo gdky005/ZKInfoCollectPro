@@ -23,7 +23,6 @@ import cc.zkteam.zkinfocollectpro.adapter.BasicInfoItemAdapter;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.base.RvListener;
 import cc.zkteam.zkinfocollectpro.bean.BasicInfoItemBean;
-import cc.zkteam.zkinfocollectpro.eventbusbean.BasicItemClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,19 +55,22 @@ public class BaseinfoRightFragment extends BaseFragment implements RvListener {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        Resources res=getResources();//统一命名规则 批量设置图片\
+        Resources res = getResources();//统一命名规则 批量设置图片\
         list.clear();
         for (int i = 0; i <= 30; i++) {
-            int id=res.getIdentifier("basininfoitem"+(i),"drawable",getActivity().getPackageName());
-            String[] mItems = getResources().getStringArray(R.array.basininfoitem);
+            int id = res.getIdentifier("basininfoitem" + (i), "drawable", getActivity().getPackageName());
+            String[] mItems_name = getResources().getStringArray(R.array.base_info_item_name);
+            String[] mItems_type = getResources().getStringArray(R.array.base_info_item_type);
+
             BasicInfoItemBean bean = new BasicInfoItemBean();
-            bean.image=id;
-            bean.itemname=mItems[i];
+            bean.image = id;
+            bean.itemname = mItems_name[i].trim();
+            bean.itemtype = mItems_type[i].trim();
             list.add(bean);
 
         }
 
-        adapter = new BasicInfoItemAdapter(getActivity(), list,this);
+        adapter = new BasicInfoItemAdapter(getActivity(), list, this);
         recycleview.setAdapter(adapter);
     }
 
@@ -78,18 +80,13 @@ public class BaseinfoRightFragment extends BaseFragment implements RvListener {
     }
 
 
-
-
-
-
     @OnClick(R.id.titleimage)
     public void onViewClicked() {
     }
 
 
-
     @Override
     public void onItemClick(int id, int position) {
-        EventBus.getDefault().post(new  BasicItemClick(position));
+        EventBus.getDefault().post(list.get(position));
     }
 }

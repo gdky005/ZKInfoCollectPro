@@ -10,8 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
 
-import com.blankj.utilcode.util.ToastUtils;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -23,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
-import cc.zkteam.zkinfocollectpro.eventbusbean.BasicItemClick;
+import cc.zkteam.zkinfocollectpro.bean.BasicInfoItemBean;
 import cc.zkteam.zkinfocollectpro.fragment.New31InfoFragment;
 import cc.zkteam.zkinfocollectpro.view.ViewpagerSpeedScroller;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
@@ -39,10 +37,12 @@ public class BasicInfoActivity extends BaseActivity implements View.OnClickListe
     DrawerLayout drawerLayout;
 
     @Subscribe
-    public void OnitemClick(BasicItemClick basicItemClick) {
+    public void OnitemClick(BasicInfoItemBean basicItemClick) {
         drawerLayout.closeDrawer(Gravity.END);
-        viewpager.setCurrentItem(basicItemClick.getI());
-        ToastUtils.showShort("-"+basicItemClick.getI());
+        String itemType = basicItemClick.itemtype;
+        String itemName = basicItemClick.itemname;
+//        viewpager.setCurrentItem(basicItemClick.getI());
+//        ToastUtils.showShort("-"+basicItemClick.getI());
 
     }
 

@@ -8,38 +8,73 @@
         <item>无法描述</item>
     </string-array>
 
-    <string-array name="basininfoitem">
-        <item>个人基本数据</item>
-        <item>证照信息 </item>
+    <string-array name="base_info_item_name">
+        <item>人员信息</item>
+        <item>证照信息</item>
         <item>户籍信息</item>
         <item>婚姻信息</item>
-        <item>人缘关系信息</item>
+        <item>人员关系信息</item>
         <item>死亡信息</item>
-        <item>住址信息 </item>
+        <item>住址信息</item>
         <item>健康信息</item>
         <item>网格信息</item>
         <item>诚信信息</item>
         <item>社保卡信息</item>
-        <item>工伤保险信息 </item>
+        <item>工商保险信息 </item>
         <item>医疗保险信息</item>
         <item>生育保险信息</item>
         <item>养老保险信息</item>
         <item>新农合信息</item>
         <item>新农保信息</item>
-        <item>住房公积金信息 </item>
+        <item>住房公积金信息</item>
         <item>出生证信息</item>
         <item>避孕节育信息</item>
         <item>育龄妇女信息</item>
         <item>残疾人信息</item>
-        <item>低保信息 </item>
+        <item>低保信息</item>
         <item>重点人员信息</item>
         <item>教育经历信息</item>
         <item>党员信息</item>
         <item>军人信息</item>
         <item>行政事业单位人员信息</item>
-        <item>法人信息 </item>
+        <item>法人信息</item>
         <item>车辆信息</item>
         <item>屋权信息</item>
+    </string-array>
+
+
+    <string-array name="base_info_item_type">
+        <item>renyuanxinxi_type</item>
+        <item>zhengzhaoxinxi_type </item>
+        <item>hujixinxi_type</item>
+        <item>hunyinxinxi_type</item>
+        <item>renyuanguanxixinxi_type</item>
+        <item>siwangxinxi_type</item>
+        <item>zhuzhixinxi_type</item>
+        <item>jiankangxinxi_type</item>
+        <item>wanggexinxi_type</item>
+        <item>chengxinxinxi_type</item>
+        <item>shebaokaxinxi_type</item>
+        <item>gongshangbaoxianxinxi_type </item>
+        <item>yiliaobaoxianxinxi_type</item>
+        <item>shengyubaoxianxinxi_type</item>
+        <item>yanglaobaoxianxinxi_type</item>
+        <item>xinnonghexinxi_type</item>
+        <item>xinnongbaoxinxi_type</item>
+        <item>zhufanggongjijinxinxi_type </item>
+        <item>chushengzhengxinxi_type</item>
+        <item>biyunjieyuxinxi_type</item>
+        <item>yulingfunvxinxi_type</item>
+        <item>canjirenxinxi_type</item>
+        <item>dibaoxinxi_type</item>
+        <item>zhongdianrenyuanxinxi_type</item>
+        <item>jiaoyujinglixinxi_type</item>
+        <item>dangyuanxinxi_type</item>
+        <item>junrenxinxi_type</item>
+        <item>xingzhengshiyedanweixinxi_type</item>
+        <item>farenxinxi_type</item>
+        <item>cheliangxinxi_type</item>
+        <item>wuquanxinxi_type</item>
     </string-array>
 
     <string-array name="street">

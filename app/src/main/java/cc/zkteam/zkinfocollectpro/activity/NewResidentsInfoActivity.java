@@ -290,12 +290,12 @@ public class NewResidentsInfoActivity extends BaseActivity {
                             sexedittext.setVisibility(View.GONE);
                             bornedittext.setVisibility(View.GONE);
                             cardButton.setVisibility(View.GONE);
-                            edittext23.setVisibility(View.GONE);
+//                            edittext23.setVisibility(View.GONE);
 
                             sexedittext2.setVisibility(View.VISIBLE);
                             bornedittext2.setVisibility(View.VISIBLE);
                             cardButton2.setVisibility(View.VISIBLE);
-                            edittext232.setVisibility(View.VISIBLE);
+//                            edittext232.setVisibility(View.VISIBLE);
 
                             cardButton2.setText("身份证");
                             edittext232.setText("房东与租客");
