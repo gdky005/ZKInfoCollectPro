@@ -214,11 +214,11 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
             int scanWidth = width * 15 / 16;
             int scanHeight = (int) (scanWidth * 0.63f);
 
-            if (scanWidth > PIC_WIDTH) {
-                // 对图片尺寸进行处理下 宽度 600， 高度自适应，图片质量 70%
-                scanHeight = scanHeight / scanWidth * 600;
-                scanWidth = PIC_WIDTH;
-            }
+//            if (scanWidth > PIC_WIDTH) {
+//                // 对图片尺寸进行处理下 宽度 600， 高度自适应，图片质量 70%
+//                scanHeight = scanHeight / scanWidth * 600;
+//                scanWidth = PIC_WIDTH;
+//            }
 
             final Bitmap bitmap1 = Bitmap.createBitmap(bitmap2,
                     (width - scanWidth) / 2,

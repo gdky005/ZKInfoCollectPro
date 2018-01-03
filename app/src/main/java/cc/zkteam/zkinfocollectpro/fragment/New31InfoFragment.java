@@ -169,9 +169,13 @@ public class New31InfoFragment extends BaseFragment {
 
                     zkModuleLayout = new ZKModuleLayout(mContext);
 
+                    List<ZK31Bean.DataBeanX.DataBean> dataBeanXDataList = dataBeanX.getData();
+                    if (dataBeanXDataList == null) {
+                        return;
+                    }
+
                     int index = 0;
-                    for (ZK31Bean.DataBeanX.DataBean dataBean :
-                            dataBeanX.getData()) {
+                    for (ZK31Bean.DataBeanX.DataBean dataBean : dataBeanXDataList) {
                         ArrayList list = new ArrayList();
                         JSONObject jsonObject = new JSONObject();
                         try {
