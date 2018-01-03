@@ -44,6 +44,10 @@ public class BasicInfoActivity extends BaseActivity implements View.OnClickListe
 //        viewpager.setCurrentItem(basicItemClick.getI());
 //        ToastUtils.showShort("-"+basicItemClick.getI());
 
+        // TODO: 2018/1/3  启动 Fragment
+//        FragmentUtils.add(getSupportFragmentManager(), New31InfoFragment.newInstance(itemName, itemType));
+
+
     }
 
     @Override
