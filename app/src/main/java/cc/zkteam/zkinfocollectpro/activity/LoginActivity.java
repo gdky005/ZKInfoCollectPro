@@ -1,5 +1,10 @@
 package cc.zkteam.zkinfocollectpro.activity;
 
+import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.blankj.utilcode.util.EncodeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.networkbench.agent.impl.NBSAppAgent;
 
@@ -39,7 +45,7 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.Ll_userNum)
     LinearLayout LlUserNum;
     @BindView(R.id.et_userPwd)
-    EditText etUserPwd;
+    EditText et_pwd;
     @BindView(R.id.Ll_userPwd)
     LinearLayout LlUserPwd;
     @BindView(R.id.textviewlayout)
@@ -50,18 +56,53 @@ public class LoginActivity extends BaseActivity {
     ProgressBar progressBar;
 
     private ZHApi zhApi;
+    private boolean isHidePwd = true;// 输入框密码是否是隐藏的，默认为true
+
 
     @Override
     protected int getLayoutId() {
         return R.layout.activity_login;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void initViews() {
         progressBar.setVisibility(View.GONE);
 //        SystemBarTintManager systemBarTintManager = new SystemBarTintManager(this);
 //        systemBarTintManager.setStatusBarTintEnabled(false);
 //        systemBarTintManager.setNavigationBarTintEnabled(false);
+
+
+        final Drawable drawableEyeOpen = getResources().getDrawable(R.mipmap.login_eyes);
+        drawableEyeOpen.setBounds(0,0,60,60);//这一步不能省略
+        et_pwd.setCompoundDrawables(null,null,drawableEyeOpen,null);
+        final Drawable[] drawables = et_pwd.getCompoundDrawables();
+        final int eyeWidth = drawables[2].getBounds().width();// 眼睛图标的宽度
+        et_pwd.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    // getWidth,getHeight必须在这里处理
+                    float et_pwdMinX = v.getWidth() - eyeWidth - et_pwd.getPaddingRight();
+                    float et_pwdMaxX = v.getWidth();
+                    float et_pwdMinY = 0;
+                    float et_pwdMaxY = v.getHeight();
+                    float x = event.getX();
+                    float y = event.getY();
+                    if (x < et_pwdMaxX && x > et_pwdMinX && y > et_pwdMinY && y < et_pwdMaxY) {
+                        // 点击了眼睛图标的位置
+                        isHidePwd = !isHidePwd;
+                        if (isHidePwd) {
+
+                            et_pwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        } else {
+                            et_pwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        }
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -93,8 +134,8 @@ public class LoginActivity extends BaseActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         String userNum = etUserNum.getText().toString();
-//        String userPwd = EncodeUtils.urlEncode(etUserPwd.getText().toString());
-        String userPwd = etUserPwd.getText().toString();
+        String userPwd = EncodeUtils.urlEncode(et_pwd.getText().toString());
+//        String userPwd = et_pwd.getText().toString();
 
         zhApi.login(userNum, userPwd).enqueue(new ZHCallback<ZHLoginBean>() {
             @Override
