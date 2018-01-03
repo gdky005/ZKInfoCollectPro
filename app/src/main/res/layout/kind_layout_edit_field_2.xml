@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/field_itemhight"
+   >
+
+    <LinearLayout
+        android:id="@+id/zk_form_filed_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/field_itemhight"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_20">
+
+        <TextView
+            android:id="@+id/text_filed_number"
+            android:layout_width="@dimen/field_number_width"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:textColor="@color/gray_6"
+            android:textSize="@dimen/basic_textview_size"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/text_filed_key"
+            android:layout_width="@dimen/basic_texiview_width"
+            android:layout_height="wrap_content"
+            android:text="hello"
+            android:textColor="@color/gray_6"
+            android:textSize="@dimen/basic_textview_size" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/right_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/field_itemhight"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/field_marright"
+        android:layout_toRightOf="@+id/zk_form_filed_ll"
+        android:visibility="visible">
+
+        <!--输入框-->
+        <ViewStub
+            android:id="@+id/right_layout_left_et_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:inflatedId="@+id/right_layout_left_et"
+            android:layout="@layout/layout_filed_right_edit_text_view" />
+
+        <!--时间选择器-->
+        <ViewStub
+            android:id="@+id/right_layout_time_filed_value_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:inflatedId="@+id/right_layout_time_filed_value"
+            android:layout="@layout/layout_filed_right_time_text_view" />
+
+        <!--单项选择器-->
+        <ViewStub
+            android:id="@+id/right_layout_select_data_filed_value_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:inflatedId="@+id/right_layout_select_data_filed_value"
+            android:layout="@layout/layout_filed_right_select_data_filed_view" />
+
+        <!--图片展示-->
+        <ViewStub
+            android:id="@+id/right_layout_image_view_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:inflatedId="@+id/right_layout_image_view"
+            android:layout="@layout/layout_filed_right_image_filed_view" />
+
+        <!--双按钮-->
+        <ViewStub
+            android:id="@+id/right_layout_btn_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:inflatedId="@+id/right_layout_btn_ll"
+            android:layout="@layout/layout_filed_right_double_btn_view" />
+
+        <!--双时间选择器-->
+        <ViewStub
+            android:id="@+id/right_layout_two_time_ll_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:inflatedId="@+id/right_layout_two_time_ll"
+            android:layout="@layout/layout_filed_right_two_time_view" />
+
+        <!--身份证正反面-->
+        <ViewStub
+            android:id="@+id/right_layout_id_card_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_150"
+            android:layout_centerInParent="true"
+            android:inflatedId="@+id/right_layout_id_card"
+            android:layout="@layout/layout_filed_right_id_card_image_view" />
+
+
+        <!--输入框+按钮-->
+        <ViewStub
+            android:id="@+id/right_layout_id_card_number_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:inflatedId="@+id/right_layout_id_card_number"
+            android:layout="@layout/layout_filed_right_id_card_number_view" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
