@@ -86,7 +86,7 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.kind_layout_edit_field;
+        return R.layout.kind_layout_edit_field_2;
     }
 
     @Override
