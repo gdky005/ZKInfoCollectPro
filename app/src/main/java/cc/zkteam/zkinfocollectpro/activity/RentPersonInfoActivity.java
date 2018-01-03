@@ -13,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.FragmentUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -68,6 +67,7 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
     public static final String INVALID = "-1";
     private ZHApi mZhApi;
     private Dialog mEmigrationDialog;
+    private String address;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -100,7 +100,7 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
         Intent intent = getIntent();
         rentperson = (RentPersoner) intent.getSerializableExtra("rent_personers");
         mBuildId = intent.getStringExtra("build_Id");
-        String address = intent.getStringExtra("address");
+        address = intent.getStringExtra("address");
 
         // TODO: 2017/12/31  测试数据
         if (rentperson == null) {
@@ -160,8 +160,9 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
                 break;
 
             case R.id.create_new:
-
-                PageCtrl.startActivity(this, NewResidentsInfoActivity.class);
+                Intent intent = new Intent();
+                intent.putExtra("address", address);
+                PageCtrl.startActivity(this, NewResidentsInfoActivity.class, intent);
                 return;
         }
 //        Toast.makeText(mContext, "hello" + position, Toast.LENGTH_SHORT).show();

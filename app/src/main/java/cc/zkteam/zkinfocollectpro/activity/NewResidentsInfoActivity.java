@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 
@@ -68,6 +69,9 @@ public class NewResidentsInfoActivity extends BaseActivity {
     EditText cardButton2;
     @BindView(R.id.edittext23_2)
     EditText edittext232;
+    @BindView(R.id.address_name)
+    TextView addressName;
+    private String address;
 
     @Override
     protected int getLayoutId() {
@@ -76,9 +80,10 @@ public class NewResidentsInfoActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+        Intent intent = getIntent();
+        address = intent.getStringExtra("address");
 
-
-
+        addressName.setText(address);
         sexedittext.setVisibility(View.VISIBLE);
         bornedittext.setVisibility(View.VISIBLE);
         cardButton.setVisibility(View.VISIBLE);
