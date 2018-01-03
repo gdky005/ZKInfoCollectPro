@@ -1,12 +1,17 @@
 package cc.zkteam.zkinfocollectpro.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/12/22.
  */
 
-public class ProblemPreview {
+public class ProblemPreview implements Parcelable {
     private String problemNo;
     private String problemDesc;
     private String problemReportTime;
@@ -59,26 +64,49 @@ public class ProblemPreview {
         this.status = status;
     }
 
-    public List<DataBean> getData() {
-        return data;
-    }
 
     public void setData(List<DataBean> data) {
         this.data = data;
     }
 
-    public static class DataBean {
+    public List<DataBean> getData() {
+        return data;
+    }
+
+    public static class DataBean implements Parcelable {
         /**
          * id : 1
-         * number : 10086
+         * laiyuan : 0
+         * type : 1
          * problemcontent : 污染严重
+         * problemposition : 河道
+         * path : /Uploads/pic/111.jpg
+         * filetype : jpg
+         * number : 10086
          * time : 1514515823
+         * chuliyijian : null
          */
 
         private String id;
-        private String number;
+        private String laiyuan;
+        private String type;
         private String problemcontent;
+        private String problemposition;
+        private String path;
+        private String filetype;
+        private String number;
         private String time;
+        private String chuliyijian;
+
+        public String getRemarks() {
+            return remarks;
+        }
+
+        public void setRemarks(String remarks) {
+            this.remarks = remarks;
+        }
+
+        private String remarks;
 
         public String getId() {
             return id;
@@ -88,12 +116,20 @@ public class ProblemPreview {
             this.id = id;
         }
 
-        public String getNumber() {
-            return number;
+        public String getLaiyuan() {
+            return laiyuan;
         }
 
-        public void setNumber(String number) {
-            this.number = number;
+        public void setLaiyuan(String laiyuan) {
+            this.laiyuan = laiyuan;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
         }
 
         public String getProblemcontent() {
@@ -104,6 +140,38 @@ public class ProblemPreview {
             this.problemcontent = problemcontent;
         }
 
+        public String getProblemposition() {
+            return problemposition;
+        }
+
+        public void setProblemposition(String problemposition) {
+            this.problemposition = problemposition;
+        }
+
+        public String getPath() {
+            return path;
+        }
+
+        public void setPath(String path) {
+            this.path = path;
+        }
+
+        public String getFiletype() {
+            return filetype;
+        }
+
+        public void setFiletype(String filetype) {
+            this.filetype = filetype;
+        }
+
+        public String getNumber() {
+            return number;
+        }
+
+        public void setNumber(String number) {
+            this.number = number;
+        }
+
         public String getTime() {
             return time;
         }
@@ -111,5 +179,96 @@ public class ProblemPreview {
         public void setTime(String time) {
             this.time = time;
         }
+
+        public String getChuliyijian() {
+            return chuliyijian;
+        }
+
+        public void setChuliyijian(String chuliyijian) {
+            this.chuliyijian = chuliyijian;
+        }
+
+        public DataBean() {
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.id);
+            dest.writeString(this.laiyuan);
+            dest.writeString(this.type);
+            dest.writeString(this.problemcontent);
+            dest.writeString(this.problemposition);
+            dest.writeString(this.path);
+            dest.writeString(this.filetype);
+            dest.writeString(this.number);
+            dest.writeString(this.time);
+            dest.writeString(this.chuliyijian);
+            dest.writeString(this.remarks);
+        }
+
+        protected DataBean(Parcel in) {
+            this.id = in.readString();
+            this.laiyuan = in.readString();
+            this.type = in.readString();
+            this.problemcontent = in.readString();
+            this.problemposition = in.readString();
+            this.path = in.readString();
+            this.filetype = in.readString();
+            this.number = in.readString();
+            this.time = in.readString();
+            this.chuliyijian = in.readString();
+            this.remarks = in.readString();
+        }
+
+        public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
+            @Override
+            public DataBean createFromParcel(Parcel source) {
+                return new DataBean(source);
+            }
+
+            @Override
+            public DataBean[] newArray(int size) {
+                return new DataBean[size];
+            }
+        };
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.problemNo);
+        dest.writeString(this.problemDesc);
+        dest.writeString(this.problemReportTime);
+        dest.writeInt(this.status);
+        dest.writeTypedList(this.data);
+    }
+
+    protected ProblemPreview(Parcel in) {
+        this.problemNo = in.readString();
+        this.problemDesc = in.readString();
+        this.problemReportTime = in.readString();
+        this.status = in.readInt();
+        this.data = in.createTypedArrayList(DataBean.CREATOR);
+    }
+
+    public static final Parcelable.Creator<ProblemPreview> CREATOR = new Parcelable.Creator<ProblemPreview>() {
+        @Override
+        public ProblemPreview createFromParcel(Parcel source) {
+            return new ProblemPreview(source);
+        }
+
+        @Override
+        public ProblemPreview[] newArray(int size) {
+            return new ProblemPreview[size];
+        }
+    };
 }

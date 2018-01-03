@@ -1,5 +1,6 @@
 package cc.zkteam.zkinfocollectpro.viewholder;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -27,6 +28,7 @@ import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
  */
 
 public class ProblemPreviewHolder extends RvHolder<ProblemPreview.DataBean> {
+    public static final String PROBLEM_DETAIL_FLAG = "problem_detail_flag";
     @BindView(R.id.tv_problem_no)
     TextView mProblemNo;
     @BindView(R.id.tv_problem_desc)
@@ -37,6 +39,7 @@ public class ProblemPreviewHolder extends RvHolder<ProblemPreview.DataBean> {
     Button mCheckProblemDetailBtn;
     @BindView(R.id.ll_check_problem_detail)
     LinearLayout mCheckProblemDetailLayout;
+    private ProblemPreview.DataBean mData;
 
     public ProblemPreviewHolder(View itemView, int type) {
         this(itemView, type, null);
@@ -48,13 +51,16 @@ public class ProblemPreviewHolder extends RvHolder<ProblemPreview.DataBean> {
         mCheckProblemDetailLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PageCtrl.startActivity(v.getContext(), ProblemDetailActivity.class);
+                Intent intent = new Intent();
+                intent.putExtra(PROBLEM_DETAIL_FLAG, mData);
+                PageCtrl.startActivity(v.getContext(), ProblemDetailActivity.class, intent);
             }
         });
     }
 
     @Override
     public void bindHolder(ProblemPreview.DataBean problem, int position) {
+        mData = problem;
         textColor("编号：", TextUtils.isEmpty(problem.getNumber()) ? "暂无数据" : problem.getNumber(), mProblemNo);
         textColor("描述：", TextUtils.isEmpty(problem.getProblemcontent()) ? "暂无数据" : problem.getProblemcontent(), mProblemDesc);
         String time = formatTime(problem.getTime());

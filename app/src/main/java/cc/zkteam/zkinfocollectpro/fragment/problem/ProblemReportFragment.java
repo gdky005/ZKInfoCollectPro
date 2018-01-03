@@ -3,6 +3,7 @@ package cc.zkteam.zkinfocollectpro.fragment.problem;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -30,10 +31,12 @@ import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.MapActivity;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
+import cc.zkteam.zkinfocollectpro.bean.ProblemPreview;
 import cc.zkteam.zkinfocollectpro.fragment.problem.mvp.PRPresenterImpl;
 import cc.zkteam.zkinfocollectpro.fragment.problem.mvp.PRView;
 import cc.zkteam.zkinfocollectpro.managers.ZHConfigDataManager;
 import cc.zkteam.zkinfocollectpro.utils.L;
+import cc.zkteam.zkinfocollectpro.viewholder.ProblemPreviewHolder;
 import me.nereo.multi_image_selector.MultiImageSelector;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
@@ -74,6 +77,7 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     private PRPresenterImpl mPresenter;
     private boolean mIsEditPage = false;
     private String mCurrPicPath = "";
+    private ProblemPreview.DataBean mProblem;
 
     public static ProblemReportFragment newInstance(boolean isEdit) {
         Bundle args = new Bundle();
@@ -83,10 +87,20 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         return fragment;
     }
 
+    public static Fragment newInstance(boolean isEdit, ProblemPreview.DataBean problem) {
+        Bundle args = new Bundle();
+        args.putBoolean(PROBLEM_EDIT_FLAG, isEdit);
+        args.putParcelable(ProblemPreviewHolder.PROBLEM_DETAIL_FLAG, problem);
+        ProblemReportFragment fragment = new ProblemReportFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mIsEditPage = getArguments().getBoolean(PROBLEM_EDIT_FLAG);
+        mProblem = getArguments().getParcelable(ProblemPreviewHolder.PROBLEM_DETAIL_FLAG);
         Log.e("TAG", "" + mIsEditPage);
     }
 
@@ -116,6 +130,8 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         judgeAndShowProblemDetail();
         mSelectLocationBtn.setVisibility(View.GONE);
         mCommitBtn.setVisibility(View.GONE);
+        mSelectPicBtn.setVisibility(View.GONE);
+        mProblemType.setBackground(null);
     }
 
     protected void initToolbar(Toolbar toolbar) {
@@ -128,10 +144,11 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     }
 
     private void judgeAndShowProblemDetail() {
-        mProblemSource.setText("无数据");
-        mProblemDesc.setText("无数据");
-        mProblemLocation.setText("无数据");
-        mProblemSuggestion.setText("无数据");
+        mProblemSource.setText(TextUtils.isEmpty(mProblem.getType()) ? "无数据" : mProblem.getType());
+        mProblemDesc.setText(TextUtils.isEmpty(mProblem.getProblemcontent()) ? "无数据" : mProblem.getProblemcontent());
+        mProblemAttachment.setText(TextUtils.isEmpty(mProblem.getPath()) ? "无数据" : mProblem.getPath());
+        mProblemLocation.setText(TextUtils.isEmpty(mProblem.getProblemposition()) ? "无数据" : mProblem.getProblemposition());
+        mProblemSuggestion.setText(TextUtils.isEmpty(mProblem.getRemarks()) ? "无数据" : mProblem.getRemarks());
     }
 
     private void forbidClick() {

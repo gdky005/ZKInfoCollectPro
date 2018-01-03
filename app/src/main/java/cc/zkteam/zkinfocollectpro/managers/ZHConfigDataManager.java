@@ -382,5 +382,4 @@ public class ZHConfigDataManager {
 
         return "0";
     }
-
 }

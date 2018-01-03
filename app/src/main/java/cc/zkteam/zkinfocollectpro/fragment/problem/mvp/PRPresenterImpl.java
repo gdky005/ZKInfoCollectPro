@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.concurrent.Executors;
 
 import cc.zkteam.zkinfocollectpro.ZKBase;
+import cc.zkteam.zkinfocollectpro.ZKICApplication;
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.mvp.BaseMVPPresenter;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
@@ -49,7 +50,7 @@ import retrofit2.Response;
     public void report(String source, String typeStr, String desc, String location, String attachmentName, String suggestion, String picPath) {
         Executors.newSingleThreadExecutor().execute(() -> {
             MultipartBody.Part number = MultipartBody.Part.createFormData("number", "wenti" + System.currentTimeMillis());
-            MultipartBody.Part reporter = MultipartBody.Part.createFormData("reporter", "小王");
+            MultipartBody.Part reporter = MultipartBody.Part.createFormData("reporter", ZKICApplication.zhLoginBean.getName());
             MultipartBody.Part problemposition = MultipartBody.Part.createFormData("problemposition", location);
             MultipartBody.Part problemcontent = MultipartBody.Part.createFormData("problemcontent", desc);
             MultipartBody.Part type = MultipartBody.Part.createFormData("type", typeStr);
