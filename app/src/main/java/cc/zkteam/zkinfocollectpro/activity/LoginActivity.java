@@ -73,6 +73,13 @@ public class LoginActivity extends BaseActivity {
 //        systemBarTintManager.setNavigationBarTintEnabled(false);
 
 
+        hideOrShowPwd();
+    }
+
+    /**
+     * 点击眼睛控制密码显示或隐藏
+     */
+    private void hideOrShowPwd() {
         final Drawable drawableEyeOpen = getResources().getDrawable(R.mipmap.login_eyes);
         drawableEyeOpen.setBounds(0,0,60,60);//这一步不能省略
         et_pwd.setCompoundDrawables(null,null,drawableEyeOpen,null);
