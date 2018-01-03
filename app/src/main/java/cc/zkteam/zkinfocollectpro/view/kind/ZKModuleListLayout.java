@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
-import cc.zkteam.zkinfocollectpro.utils.L;
 
 /**
  * Created by WangQing on 2018/1/3.
@@ -59,24 +58,20 @@ public class ZKModuleListLayout extends ZKBaseView implements IZKResult<JSONObje
             ZKModuleLayout zkModuleLayout = new ZKModuleLayout(context);
 
             List<ZK31Bean.DataBeanX.DataBean> dataBeanXDataList = dataBeanX.getData();
-            if (dataBeanXDataList == null) {
-                L.e("dataBeanXDataList is null!");
-                return;
-            }
+            if (dataBeanXDataList != null) {
+                int index = 0;
+                for (ZK31Bean.DataBeanX.DataBean dataBean : dataBeanXDataList) {
+                    ArrayList list = new ArrayList();
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put(dataBean.getNumber(), dataBean.getName());
+                        jsonObject.put(ZKFiled.ZK_FILED_DATA_BEAN, dataBean);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    moduleArray.put(jsonObject);
 
-            int index = 0;
-            for (ZK31Bean.DataBeanX.DataBean dataBean : dataBeanXDataList) {
-                ArrayList list = new ArrayList();
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put(dataBean.getNumber(), dataBean.getName());
-                    jsonObject.put(ZKFiled.ZK_FILED_DATA_BEAN, dataBean);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                moduleArray.put(jsonObject);
-
-                int type = Integer.parseInt(dataBean.getType());
+                    int type = Integer.parseInt(dataBean.getType());
 
 //                    二级子数据，每一个 item。map 表示 右边需要的数据：
 //     *                  ----1. 直接是数字，表示 右边的控件类型的 type.
@@ -84,24 +79,24 @@ public class ZKModuleListLayout extends ZKBaseView implements IZKResult<JSONObje
 //     *                  --------第0项表示 当前右边的类型 的 type;
 //     *                  --------第1项表示 当前右边的类型 需要的默认数据，是一组数据列表。
 
-                list.add(type);
-                list.add(dataBean.getName());
-                // TODO: 2018/1/2 test
-                try {
-                    String str = dataBean.getDefault_list_data();
-                    if (!TextUtils.isEmpty(str)) {
-                        String[] strList = str.split(",");
-                        list.add(strList);
+                    list.add(type);
+                    list.add(dataBean.getName());
+                    // TODO: 2018/1/2 test
+                    try {
+                        String str = dataBean.getDefault_list_data();
+                        if (!TextUtils.isEmpty(str)) {
+                            String[] strList = str.split(",");
+                            list.add(strList);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+
+                    objectHashMap.put(index, list);
+
+                    index++;
                 }
-
-                objectHashMap.put(index, list);
-
-                index++;
             }
-
 
             List titleList = new ArrayList();
 
@@ -130,15 +125,15 @@ public class ZKModuleListLayout extends ZKBaseView implements IZKResult<JSONObje
 
                     if (zkModuleLayoutResult != null) {
                         JSONArray jsonArray = zkModuleLayoutResult.names();
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            String key = jsonArray.optString(i);
-                            String value = zkModuleLayoutResult.optString(key);
-                            jsonObject.put(key, value);
+                        if (jsonArray != null) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                String key = jsonArray.optString(i);
+                                String value = zkModuleLayoutResult.optString(key);
+                                jsonObject.put(key, value);
+                            }
                         }
                     }
                 }
-
-
             }
         } catch (JSONException e) {
             e.printStackTrace();

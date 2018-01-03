@@ -9,8 +9,8 @@
         android:orientation="vertical"
         android:paddingBottom="@dimen/dp_30">
 
-        <LinearLayout
-            android:id="@+id/new_31_root_view_ll"
+        <cc.zkteam.zkinfocollectpro.view.kind.ZKModuleListLayout
+            android:id="@+id/new_31_zk_module_list_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"/>

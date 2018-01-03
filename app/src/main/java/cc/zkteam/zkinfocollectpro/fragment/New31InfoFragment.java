@@ -5,18 +5,13 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.ToastUtils;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -28,8 +23,7 @@ import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.managers.ZHMemoryCacheManager;
 import cc.zkteam.zkinfocollectpro.utils.L;
-import cc.zkteam.zkinfocollectpro.view.kind.ZKFiled;
-import cc.zkteam.zkinfocollectpro.view.kind.ZKModuleLayout;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKModuleListLayout;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -47,8 +41,8 @@ public class New31InfoFragment extends BaseFragment {
     public static final String NEW_31_INFO_NAME_KEY = "name";
     public static final String NEW_31_INFO_PAGE_TYPE_KEY = "pageType";
 
-    @BindView(R.id.new_31_root_view_ll)
-    LinearLayout new31RootViewLl;
+    @BindView(R.id.new_31_zk_module_list_layout)
+    ZKModuleListLayout new31ZkModuleListLayout;
     @BindView(R.id.new_31_commit)
     Button new31Commit;
 
@@ -56,7 +50,6 @@ public class New31InfoFragment extends BaseFragment {
     private String pageType;
 
     private String userID;
-    private ZKModuleLayout zkModuleLayout;
 
     public static New31InfoFragment newInstance(String name, String pageType) {
         Bundle args = new Bundle();
@@ -74,7 +67,7 @@ public class New31InfoFragment extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
-
+        new31Commit.setVisibility(View.GONE);
 
     }
 
@@ -86,11 +79,12 @@ public class New31InfoFragment extends BaseFragment {
             pageType = bundle.getString(NEW_31_INFO_PAGE_TYPE_KEY);
         }
 
+        // TODO: 2018/1/4 test
         if (TextUtils.isEmpty(pageType)) {
-//            pageType = "zhengzhaoxinxi_type";
             pageType = "renyuanxinxi_type";
         }
 
+        // TODO: 2018/1/4 test
         if (TextUtils.isEmpty(titleName)) {
             titleName = "人员信息";
         }
@@ -104,7 +98,7 @@ public class New31InfoFragment extends BaseFragment {
             userID = "2";
         }
 
-        showZKModuleAPI(new31RootViewLl, pageType);
+        showZKModuleAPI(new31ZkModuleListLayout, pageType);
     }
 
     @Override
@@ -114,13 +108,11 @@ public class New31InfoFragment extends BaseFragment {
 
     @OnClick(R.id.new_31_commit)
     public void onViewClicked() {
-        JSONObject resultObj = zkModuleLayout.getResult();
+        JSONObject resultObj = new31ZkModuleListLayout.getResult();
 
         ToastUtils.showShort("提交接口数据信息：" + resultObj);
 
         try {
-
-
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("user", userID);
             jsonObject.put("data", resultObj);
@@ -146,12 +138,11 @@ public class New31InfoFragment extends BaseFragment {
 
     }
 
-    private void showZKModuleAPI(LinearLayout linearLayout, String pageType) {
+    private void showZKModuleAPI(ZKModuleListLayout zkModuleListLayout, String pageType) {
         ZHConnectionManager.getInstance().getZHApi().get31Data(pageType, userID).enqueue(new Callback<ZK31Bean>() {
 
             @Override
             public void onResponse(Call<ZK31Bean> call, Response<ZK31Bean> result) {
-
                 ZK31Bean zk31Bean = result.body();
 
                 if (zk31Bean == null) {
@@ -161,76 +152,18 @@ public class New31InfoFragment extends BaseFragment {
 
                 List<ZK31Bean.DataBeanX> dataBeanList = zk31Bean.getData();
 
-                for (ZK31Bean.DataBeanX dataBeanX :
-                        dataBeanList) {
-
-                    JSONArray moduleArray = new JSONArray();
-                    Map<Integer, Object> objectHashMap = new HashMap<>();
-
-                    zkModuleLayout = new ZKModuleLayout(mContext);
-
-                    List<ZK31Bean.DataBeanX.DataBean> dataBeanXDataList = dataBeanX.getData();
-                    if (dataBeanXDataList == null) {
-                        return;
-                    }
-
-                    int index = 0;
-                    for (ZK31Bean.DataBeanX.DataBean dataBean : dataBeanXDataList) {
-                        ArrayList list = new ArrayList();
-                        JSONObject jsonObject = new JSONObject();
-                        try {
-                            jsonObject.put(dataBean.getNumber(), dataBean.getName());
-                            jsonObject.put(ZKFiled.ZK_FILED_DATA_BEAN, dataBean);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        moduleArray.put(jsonObject);
-
-                        int type = Integer.parseInt(dataBean.getType());
-
-//                    二级子数据，每一个 item。map 表示 右边需要的数据：
-//     *                  ----1. 直接是数字，表示 右边的控件类型的 type.
-//     *                  ----2. ArrayList 表示右边的控件类型需要默认数据：
-//     *                  --------第0项表示 当前右边的类型 的 type;
-//     *                  --------第1项表示 当前右边的类型 需要的默认数据，是一组数据列表。
-
-
-                        list.add(type);
-                        list.add(dataBean.getName());
-                        // TODO: 2018/1/2 test
-                        try {
-                            String str = dataBean.getDefault_list_data();
-                            if (!TextUtils.isEmpty(str)) {
-                                String[] strList = str.split(",");
-                                list.add(strList);
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                        objectHashMap.put(index, list);
-
-                        index++;
-                    }
-
-
-                    List titleList = new ArrayList();
-
-                    titleList.add(dataBeanX.getName());
-                    titleList.add(dataBeanX.getType());
-//                    titleList.add(dataBean.getList()); // 这里如果有值的话，就是列表 String[]
-                    //                zkModuleLayout.setJsonArray(moduleArray, null, titleList);
-                    zkModuleLayout.setJsonArray(moduleArray, objectHashMap, titleList);
-                    linearLayout.addView(zkModuleLayout);
+                if (zkModuleListLayout != null) {
+                    new31Commit.setVisibility(View.VISIBLE);
+                    zkModuleListLayout.setDataBeanList(dataBeanList);
+                } else {
+                    ToastUtils.showShort("new31ZkModuleListLayout is null!");
                 }
-
             }
-
 
             @Override
             public void onFailure(Call<ZK31Bean> call, Throwable throwable) {
-
                 L.e("onFailure: ", throwable);
+                ToastUtils.showShort("onFailure: " + throwable.getMessage());
             }
         });
     }

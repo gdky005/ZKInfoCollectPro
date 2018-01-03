@@ -243,20 +243,32 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
                         rightLayoutSelectDataFiledValue = rightLayoutSelectDataFiledValueLayout.findViewById(R.id.right_layout_select_data_filed_value);
                         rightLayoutSelectDataFiledValue.setOnClickListener(v1 -> {
                             TextView btn = (TextView) v1;
-                            OptionPicker picker3 = new OptionPicker(activity, newValue);
-                            picker3.setCanceledOnTouchOutside(false);
-                            picker3.setDividerRatio(WheelView.DividerConfig.FILL);
-                            picker3.setShadowColor(Color.BLUE, 40);
-                            picker3.setSelectedIndex(0);
-                            picker3.setCycleDisable(true);
-                            picker3.setTextSize(20);
-                            picker3.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
-                                @Override
-                                public void onOptionPicked(int index1, String item) {
-                                    btn.setText(item);
+                            if (newValue.length > 0) {
+
+//                                修复bug
+                                for (int i = 0; i < newValue.length; i++) {
+                                    String v = newValue[i];
+
+                                    if (TextUtils.isEmpty(v)) {
+                                        newValue[i] = "";
+                                    }
                                 }
-                            });
-                            picker3.show();
+                                OptionPicker picker3 = new OptionPicker(activity, newValue);
+                                picker3.setCanceledOnTouchOutside(false);
+                                picker3.setDividerRatio(WheelView.DividerConfig.FILL);
+                                picker3.setShadowColor(Color.BLUE, 40);
+                                picker3.setSelectedIndex(0);
+                                picker3.setCycleDisable(true);
+                                picker3.setTextSize(20);
+                                picker3.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                                    @Override
+                                    public void onOptionPicked(int index1, String item) {
+                                        btn.setText(item);
+                                    }
+                                });
+                                picker3.show();
+                            }
+
                         });
                         rightLayoutSelectDataFiledValue.setText(newValue[0]);
                     }
