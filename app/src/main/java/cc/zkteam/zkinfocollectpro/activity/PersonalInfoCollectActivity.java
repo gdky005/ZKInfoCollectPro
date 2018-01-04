@@ -1,13 +1,12 @@
 package cc.zkteam.zkinfocollectpro.activity;
 
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-import com.blankj.utilcode.util.FragmentUtils;
-
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
-import cc.zkteam.zkinfocollectpro.fragment.New31InfoFragment;
 import cc.zkteam.zkinfocollectpro.fragment.PersonalInfoCollectFragment;
 
 public class PersonalInfoCollectActivity extends BaseActivity {
@@ -21,12 +20,12 @@ public class PersonalInfoCollectActivity extends BaseActivity {
     protected void initViews() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.content_personal_info_collect, new PersonalInfoCollectFragment());
+        Fragment fragment = new PersonalInfoCollectFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(PersonalInfoCollectFragment.PERSON_ID, null == getIntent() ? "" : getIntent().getStringExtra(PersonalInfoCollectFragment.PERSON_ID));
+        fragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.content_personal_info_collect, fragment);
         fragmentTransaction.commit();
-    }
-
-    public void showFragment(String name, String type) {
-        FragmentUtils.add(getSupportFragmentManager(), New31InfoFragment.newInstance(name, type), R.id.content_personal_info_collect);
     }
 
     @Override
