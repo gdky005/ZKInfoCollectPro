@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import com.blankj.utilcode.util.ToastUtils;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,7 +17,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
-import cc.zkteam.zkinfocollectpro.activity.BasicInfoActivity;
 import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
@@ -89,7 +89,9 @@ public class New31InfoFragment extends BaseFragment {
             titleName = "人员信息";
         }
 
-        ((BasicInfoActivity) getActivity()).setTitle(titleName);
+        TitleEvent titleEvent = new TitleEvent();
+        titleEvent.title = titleName;
+        EventBus.getDefault().post(titleEvent);
 
         userID = ZHMemoryCacheManager.getInstance().getUserId();
 

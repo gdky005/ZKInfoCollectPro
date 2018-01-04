@@ -2,6 +2,8 @@ package cc.zkteam.zkinfocollectpro.activity;
 
 
 import android.graphics.Color;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 
@@ -15,9 +17,10 @@ import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.bean.BasicInfoItemBean;
 import cc.zkteam.zkinfocollectpro.fragment.New31InfoFragment;
+import cc.zkteam.zkinfocollectpro.fragment.TitleEvent;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
 
-public class BasicInfoActivity extends BaseActivity  {
+public class BasicInfoActivity extends BaseActivity {
 
     @BindView(R.id.title)
     ZKTitleView title;
@@ -36,13 +39,19 @@ public class BasicInfoActivity extends BaseActivity  {
         showFragment(itemType, itemName);
     }
 
-
+    @Subscribe
+    public void onTitleEvent(TitleEvent event) {
+        if (event != null) {
+            setTitle(event.title);
+        }
+    }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
+        super.onCreate(savedInstanceState);
     }
+
     @Override
     public void onStop() {
         EventBus.getDefault().unregister(this);

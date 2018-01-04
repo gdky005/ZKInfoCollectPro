@@ -5,9 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cc.zkteam.zkinfocollectpro.R;
 
 /**
  * Created by wustor
@@ -30,12 +33,12 @@ public abstract class RvAdapter<T> extends RecyclerView.Adapter<RvHolder> {
         this.listener = listener;
     }
 
-    public void addData(List<T> data){
+    public void addData(List<T> data) {
         this.list.addAll(data);
         notifyDataSetChanged();
     }
 
-    public void cleanAndAddAll(List<T> data){
+    public void cleanAndAddAll(List<T> data) {
         list.clear();
         this.list.addAll(data);
         notifyDataSetChanged();
@@ -43,7 +46,7 @@ public abstract class RvAdapter<T> extends RecyclerView.Adapter<RvHolder> {
 
     @Override
     public RvHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(getLayoutId(viewType), parent, false);
+        View view = mInflater.inflate(getLayoutId(R.layout.item_personal_info), null);
         return getHolder(view, viewType);
     }
 
@@ -62,6 +65,12 @@ public abstract class RvAdapter<T> extends RecyclerView.Adapter<RvHolder> {
     @Override
     public int getItemViewType(int position) {
         return 0;
+    }
+
+    public void setText(TextView textView, String str) {
+        if (textView != null && null != str) {
+            textView.setText(str);
+        }
     }
 
     protected abstract RvHolder getHolder(View view, int viewType);
