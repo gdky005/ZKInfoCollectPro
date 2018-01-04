@@ -157,7 +157,7 @@
                     android:layout_toRightOf="@id/born"
                     android:drawableRight="@mipmap/data_icon"
                     android:paddingHorizontal="8dp"
-                    android:text="2017年12月25日" />
+                    android:text="1900年1月1日" />
 
                 <EditText
                     android:id="@+id/bornedittext2"
@@ -321,7 +321,7 @@
                     android:drawableLeft="@mipmap/left_arrow"
                     android:drawableRight="@mipmap/right_arrow"
                     android:paddingHorizontal="8dp"
-                    android:text="房东与租客" />
+                    android:text="邻居" />
 
                 <EditText
                     android:id="@+id/edittext23_2"

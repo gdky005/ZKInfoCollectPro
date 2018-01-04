@@ -11,6 +11,7 @@ import cc.zkteam.zkinfocollectpro.bean.MarriageBean;
 import cc.zkteam.zkinfocollectpro.bean.PersonalSimpleInfoBean;
 import cc.zkteam.zkinfocollectpro.bean.ProblemPreview;
 import cc.zkteam.zkinfocollectpro.bean.RentPersoner;
+import cc.zkteam.zkinfocollectpro.bean.ZHAddhosePersonBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHLoginBean;
@@ -263,4 +264,39 @@ public interface ZHApi {
     @FormUrlEncoded
     @POST("datamanage.php/Admin/AppInterface/gatherstatus")
     Call<ZHBaseBean> changeCollectionStatus(@Field("personid") String personid, @Field("act") String act, @Field("memo") String memo);
+
+    /**
+     * 新增住户接口
+     */
+    @Multipart
+    @POST("datamanage.php/Admin/AppInterface/addhouseperson")
+    Call<ZHAddhosePersonBean> addhouseperson(
+            @Part MultipartBody.Part Company1,
+            @Part MultipartBody.Part Company2,
+            @Part MultipartBody.Part Company3,
+            @Part MultipartBody.Part Company4,
+            @Part MultipartBody.Part Company5,
+            @Part MultipartBody.Part Company6,
+            @Part MultipartBody.Part Company7,
+            @Part MultipartBody.Part Company8,
+            @Part MultipartBody.Part Company9,
+            @Part MultipartBody.Part Company10,
+            @Part MultipartBody.Part Company11
+    )
+    ;
+
+    /**
+     * 更新住户绑定房屋接口
+     */
+    @Multipart
+    @POST("datamanage.php/Admin/AppInterface/addhousepersonconfirm")
+    Call<ZHAddhosePersonBean> addhousepersonconfirm(
+            @Part MultipartBody.Part Company1,
+            @Part MultipartBody.Part Company2,
+            @Part MultipartBody.Part Company3,
+            @Part MultipartBody.Part Company4,
+            @Part MultipartBody.Part Company5
+    )
+    ;
+
 }

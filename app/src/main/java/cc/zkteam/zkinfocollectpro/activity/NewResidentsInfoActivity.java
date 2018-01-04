@@ -1,11 +1,14 @@
 package cc.zkteam.zkinfocollectpro.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -21,8 +24,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
+import cc.zkteam.zkinfocollectpro.bean.ZHAddhosePersonBean;
+import cc.zkteam.zkinfocollectpro.dialog.OnZKDialogCancelListener;
+import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragment;
+import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragmentHelper;
+import cc.zkteam.zkinfocollectpro.dialog.ZKDialogResultListener;
+import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.utils.List2StringArrayUtils;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
@@ -31,8 +41,13 @@ import cn.qqtheme.framework.picker.LinkagePicker;
 import cn.qqtheme.framework.picker.OptionPicker;
 import cn.qqtheme.framework.util.ConvertUtils;
 import cn.qqtheme.framework.widget.WheelView;
+import okhttp3.MultipartBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewResidentsInfoActivity extends BaseActivity {
+    private static final String TAG = "NewResidentsInfoActivit";
 
     private static final int SCAN_REQUEST_CODE = 100;
 
@@ -76,6 +91,8 @@ public class NewResidentsInfoActivity extends BaseActivity {
     private String address = "";
     private String b_id = "";
     private String h_id = "";
+    private ZHApi zkApi;
+    private String r_type = "";
 
     @Override
     protected int getLayoutId() {
@@ -225,23 +242,6 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 break;
 
             case R.id.edittext23:
-//                OptionPicker picker3 = new OptionPicker(this, new String[]{
-//                        "房东与租客", "房东与租客", "房东与租客"
-//                });
-//                picker3.setCanceledOnTouchOutside(false);
-//                picker3.setDividerRatio(WheelView.DividerConfig.FILL);
-//                picker3.setShadowColor(Color.BLUE, 40);
-//                picker3.setSelectedIndex(1);
-//                picker3.setCycleDisable(true);
-//                picker3.setTextSize(20);
-//                picker3.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
-//                    @Override
-//                    public void onOptionPicked(int index, String item) {
-//                        edittext23.setText(item);
-//                    }
-//                });
-//                picker3.show();
-                //联动选择器的更多用法，可参见AddressPicker和CarNumberPicker
                 LinkagePicker.DataProvider provider = new LinkagePicker.DataProvider() {
 
                     @Override
@@ -308,35 +308,135 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 picker3.setOnStringPickListener(new LinkagePicker.OnStringPickListener() {
                     @Override
                     public void onPicked(String first, String second, String third) {
-                        edittext23.setText(first+"关系-"+second+"关系");
+                        r_type = first;
+                        edittext23.setText(second);
                     }
                 });
                 picker3.show();
                 break;
 
             case R.id.savecommit:
-//                ZKDialogFragment dialogFragment = ZKDialogFragmentHelper.showDialog(getSupportFragmentManager(),
-//                        "提交成功",
-//                        "根据后台返回数据显示",
-//                        new ZKDialogResultListener<Integer>() {
-//                            @Override
-//                            public void onDataResult(Integer result) {
-//
-//                                switch (result) {
-//                                    case DialogInterface.BUTTON_POSITIVE: //确定
-//                                        ToastUtils.showShort("确定");
-//                                        break;
-//                                    case DialogInterface.BUTTON_NEGATIVE: // 取消
-//                                        ToastUtils.showShort("取消");
-//                                        break;
-//                                }
-//                            }
-//                        }, new OnZKDialogCancelListener() {
-//                            @Override
-//                            public void onCancel() {
-//                                ToastUtils.showShort("取消了本次操作");
-//                            }
-//                        });
+                //判断是扫码返回的页面还是手动填写的页面
+                int flag = sexedittext.getVisibility();
+                if (View.VISIBLE == flag) {
+                    if (!TextUtils.isEmpty(nameedittext.getText()) && !TextUtils.isEmpty(nationaledittext.getText()) && !TextUtils.isEmpty(edittext21.getText()) && !TextUtils.isEmpty(edittext22.getText())) {
+                        String name = nameedittext.getText().toString().trim();
+                        String sex = sexedittext.getText().toString().trim();
+                        String data = bornedittext.getText().toString().trim();
+                        String nation = nationaledittext.getText().toString().trim();
+                        String cardtype = cardButton.getText().toString().trim();
+                        String cardid = edittext21.getText().toString().trim();
+                        String address = edittext22.getText().toString().trim();
+                        String relation = edittext23.getText().toString().trim();
+
+                        zkApi = ZHConnectionManager.getInstance().getZHApi();
+
+                        zkApi.addhouseperson(
+                                MultipartBody.Part.createFormData("b_id", b_id),
+                                MultipartBody.Part.createFormData("h_id", h_id),
+                                MultipartBody.Part.createFormData("r_type", r_type),
+                                MultipartBody.Part.createFormData("relation", relation),
+                                MultipartBody.Part.createFormData("name", name),
+                                MultipartBody.Part.createFormData("id_card", cardid),
+                                MultipartBody.Part.createFormData("sex", sex),
+                                MultipartBody.Part.createFormData("birthday", data),
+                                MultipartBody.Part.createFormData("nation", nation),
+                                MultipartBody.Part.createFormData("id_card_type", cardtype),
+                                MultipartBody.Part.createFormData("place_of_domicile", address)
+
+                        ).enqueue(new Callback<ZHAddhosePersonBean>() {
+                            @Override
+                            public void onResponse(Call<ZHAddhosePersonBean> call, Response<ZHAddhosePersonBean> response) {
+                                Log.d(TAG, "onResponse: " + response.body().toString());
+                                int status = response.body().status;
+                                String msg = response.body().msg;
+
+                                if (status == 2) {
+                                    ZKDialogFragment dialogFragment = ZKDialogFragmentHelper.showDialog(getSupportFragmentManager(),
+                                            "提交失败",
+                                            msg,
+                                            new ZKDialogResultListener<Integer>() {
+                                                @Override
+                                                public void onDataResult(Integer result) {
+
+                                                    switch (result) {
+                                                        case DialogInterface.BUTTON_POSITIVE: //确定
+                                                            ToastUtils.showShort("确定");
+                                                            break;
+                                                        case DialogInterface.BUTTON_NEGATIVE: // 取消
+                                                            ToastUtils.showShort("取消");
+                                                            break;
+                                                    }
+                                                }
+                                            }, new OnZKDialogCancelListener() {
+                                                @Override
+                                                public void onCancel() {
+                                                    ToastUtils.showShort("取消了本次操作");
+                                                }
+                                            });
+
+                                } else if (status == 1) {
+                                    ZKDialogFragment dialogFragment = ZKDialogFragmentHelper.showSingleBtnDialog(getSupportFragmentManager(),
+                                            "提交失败",
+                                            msg,
+                                            new ZKDialogResultListener<Integer>() {
+                                                @Override
+                                                public void onDataResult(Integer result) {
+
+                                                    switch (result) {
+                                                        case DialogInterface.BUTTON_POSITIVE: //确定
+                                                            ToastUtils.showShort("确定");
+                                                            break;
+                                                        case DialogInterface.BUTTON_NEGATIVE: // 取消
+                                                            ToastUtils.showShort("取消");
+                                                            break;
+                                                    }
+                                                }
+                                            }, new OnZKDialogCancelListener() {
+                                                @Override
+                                                public void onCancel() {
+                                                    ToastUtils.showShort("取消了本次操作");
+                                                }
+                                            });
+                                } else {
+                                    //其他失败情况
+                                    ZKDialogFragment dialogFragment = ZKDialogFragmentHelper.showSingleBtnDialog(getSupportFragmentManager(),
+                                            "提交失败",
+                                            msg,
+                                            new ZKDialogResultListener<Integer>() {
+                                                @Override
+                                                public void onDataResult(Integer result) {
+
+                                                    switch (result) {
+                                                        case DialogInterface.BUTTON_POSITIVE: //确定
+                                                            break;
+                                                        case DialogInterface.BUTTON_NEGATIVE: // 取消
+                                                            break;
+                                                    }
+                                                }
+                                            }, new OnZKDialogCancelListener() {
+                                                @Override
+                                                public void onCancel() {
+                                                }
+                                            });
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ZHAddhosePersonBean> call, Throwable throwable) {
+                                Log.d(TAG, "onResponse:失败 ");
+
+                            }
+                        });
+
+                    } else {
+                        ToastUtils.showLong("以上都是必填项，请全部填写在提交");
+                    }
+                } else {
+
+
+                }
+
                 break;
 
         }
