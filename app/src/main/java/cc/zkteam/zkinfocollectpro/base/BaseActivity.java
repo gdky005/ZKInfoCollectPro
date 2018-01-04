@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.ZKICApplication;
 import cc.zkteam.zkinfocollectpro.activity.LoginActivity;
+import cc.zkteam.zkinfocollectpro.managers.ZKManager;
 
 /**
  * BaseActivity
@@ -44,6 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
 
+        ZKManager.getInstance().refresh();
 
         // TODO: 2018/1/2  防商用标识
         TextView tv = new TextView(this);
