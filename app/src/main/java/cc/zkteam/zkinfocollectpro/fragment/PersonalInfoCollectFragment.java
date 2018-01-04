@@ -3,6 +3,7 @@ package cc.zkteam.zkinfocollectpro.fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -56,6 +57,8 @@ import static android.app.Activity.RESULT_OK;
 
 public class PersonalInfoCollectFragment extends BaseFragment {
 
+    public static String PERSON_ID = "personid";
+
     @BindView(R.id.title_personal_info_collect)
     ZKTitleView titlePersonalInfoCollect;
     @BindView(R.id.img_personal_avatar)
@@ -82,7 +85,17 @@ public class PersonalInfoCollectFragment extends BaseFragment {
     ZKRecyclerView listPersonalInfo;
 
     private boolean callEdit;
-    private String mPersonid = "19";
+    private String mPersonid = "2";
+
+    @Override
+    public void setArguments(@Nullable Bundle args) {
+        super.setArguments(args);
+        if (args != null)
+            mPersonid = args.getString(PERSON_ID);
+
+        if (TextUtils.isEmpty(mPersonid))
+            mPersonid = "2";
+    }
 
     @Override
     public int getLayoutId() {
@@ -151,7 +164,7 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                         }
                         if (null == response.body().getData() || response.body().getData().size() < position)
                             return;
-                        ((PersonalInfoCollectActivity) getActivity()).showFragment(response.body().getData().get(position).getName(), response.body().getData().get(position).getType());
+                        PageCtrl.startNew31InfoActivity(getActivity(), response.body().getData().get(position).getName(), response.body().getData().get(position).getType());
                     }
                 });
 
@@ -174,8 +187,8 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                 if (null == PersonalInfoCollectFragment.this || null == response.body()) return;
                 if (1 == (response.body().getStatus())) {
                     setText(tvPersonalInfoCollectCompletion, "采集状态：" + response.body().getMsg());
-                    if (response.body().getType() == 3 || response.body().getType() == 4 || response.body().getType() == 5) {
-                        callEdit = false;
+                    if (response.body().getType() == 3 || response.body().getType() == 4 || response.body().getType() == 2) {
+                        callEdit = true;
                     } else {
                         callEdit = true;
                     }
@@ -237,28 +250,6 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                     }
                 });
                 picker3.show();
-                break;
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (resultCode) {
-            case RESULT_OK:
-                if (data != null && requestCode == 100) {
-                    Bundle bundle = data.getExtras();
-                    if (bundle != null) {
-                        BDIdCardBean.WordsResultBean wordsResultBean = (BDIdCardBean.WordsResultBean) bundle.getSerializable(IDCardScanActivity.KEY_ID_CARD_INFO_BEAN);
-
-                        if (wordsResultBean != null) {
-                            String name = wordsResultBean.getName().getWords();
-                            L.i("扫描的姓名是；" + name);
-                            ToastUtils.showShort("扫描的姓名是：" + name);
-                        }
-                    }
-                }
                 break;
         }
     }

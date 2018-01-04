@@ -1,10 +1,12 @@
 package cc.zkteam.zkinfocollectpro.activity;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
 import android.view.Gravity;
 
 import com.blankj.utilcode.util.FragmentUtils;
@@ -21,6 +23,9 @@ import cc.zkteam.zkinfocollectpro.fragment.TitleEvent;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
 
 public class BasicInfoActivity extends BaseActivity {
+
+    private String titleName;
+    private String pageType;
 
     @BindView(R.id.title)
     ZKTitleView title;
@@ -86,7 +91,20 @@ public class BasicInfoActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        showFragment("renyuanxinxi_type", "人员信息");
+        Intent intent = getIntent();
+        titleName = intent.getStringExtra(New31InfoFragment.NEW_31_INFO_NAME_KEY);
+        pageType = intent.getStringExtra(New31InfoFragment.NEW_31_INFO_PAGE_TYPE_KEY);
+
+        // TODO: 2018/1/4 test
+        if (TextUtils.isEmpty(titleName))
+            titleName = "人员信息";
+
+        // TODO: 2018/1/4 test
+        if (TextUtils.isEmpty(pageType)) {
+            pageType = "renyuanxinxi_type";
+        }
+
+        showFragment(pageType, titleName);
     }
 
     private void showFragment(String itemType, String itemName) {
