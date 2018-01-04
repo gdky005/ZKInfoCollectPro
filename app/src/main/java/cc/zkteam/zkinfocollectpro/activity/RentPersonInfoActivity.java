@@ -138,8 +138,11 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
     public void onItemClick(int id, int position) {
         switch (id) {
             case R.id.caiji:
-//                ToastUtils.showShort("采集信息");
-                FragmentUtils.add(fragmentManager, new PersonalInfoCollectFragment(), R.id.container_layout);
+                PersonalInfoCollectFragment personalInfoCollectFragment = new PersonalInfoCollectFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString(PersonalInfoCollectFragment.PERSON_ID, rentperson.getPersonlist().get(position).getP_id());
+                personalInfoCollectFragment.setArguments(bundle);
+                FragmentUtils.add(fragmentManager, personalInfoCollectFragment, R.id.container_layout);
                 break;
 
             case R.id.out:

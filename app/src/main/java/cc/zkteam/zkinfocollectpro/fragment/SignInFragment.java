@@ -26,10 +26,8 @@ import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.ZKBase;
 import cc.zkteam.zkinfocollectpro.ZKICApplication;
 import cc.zkteam.zkinfocollectpro.activity.CommonFragmentActivity;
-import cc.zkteam.zkinfocollectpro.activity.CreateHouseActivity;
 import cc.zkteam.zkinfocollectpro.activity.LoginActivity;
 import cc.zkteam.zkinfocollectpro.activity.MyProblemListActivity;
-import cc.zkteam.zkinfocollectpro.activity.PersonalInfoCollectActivity;
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
@@ -192,16 +190,13 @@ public class SignInFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.img_sign_about, R.id.img_sign_search, R.id.tv_sign, R.id.tv_sign_success_submit,
+    @OnClick({R.id.img_sign_about, R.id.tv_sign, R.id.tv_sign_success_submit,
             R.id.tv_about_message, R.id.tv_about_setting, R.id.tv_about_quit, R.id.tv_question_upload})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_sign_about:
                 layoutSlideMenu.setVisibility(View.VISIBLE);
                 setIsShow = true;
-                break;
-            case R.id.img_sign_search:
-                startActivity(new Intent(getActivity(), PersonalInfoCollectActivity.class));
                 break;
             case R.id.tv_sign:
                 requestLocation();

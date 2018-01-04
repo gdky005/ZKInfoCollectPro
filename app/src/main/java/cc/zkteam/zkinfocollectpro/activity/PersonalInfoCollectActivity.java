@@ -9,6 +9,7 @@ import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.fragment.PersonalInfoCollectFragment;
 
+
 public class PersonalInfoCollectActivity extends BaseActivity {
 
     @Override
