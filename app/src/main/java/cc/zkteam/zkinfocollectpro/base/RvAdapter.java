@@ -46,7 +46,7 @@ public abstract class RvAdapter<T> extends RecyclerView.Adapter<RvHolder> {
 
     @Override
     public RvHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(getLayoutId(R.layout.item_personal_info), null);
+        View view = mInflater.inflate(getLayoutId(viewType), parent, false);
         return getHolder(view, viewType);
     }
 
