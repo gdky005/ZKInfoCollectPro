@@ -110,7 +110,7 @@ public class DataCollectRvHolder extends RvHolder<RentPersoner.PersonlistBean> {
             } else {
                 num.setText(rePosiont + "");
                 name.setText(rentInfo.getName());
-//                relation.setText(rentInfo.getRelation());
+                relation.setText(rentInfo.getRelation());
 //                Drawable updated = mContext.getResources().getDrawable(R.drawable.updated);
 //                updated.setBounds(0, 0, 32, 32);
 //                update.setImageDrawable(updated);

@@ -116,6 +116,8 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     }
 
     private void isPageCanEdit() {
+        mProblemSource.setFocusable(false);
+        mProblemSource.setText("采集端");
         if (mIsEditPage) {
             mToolbarTitle.setText("问题信息填写");
         } else {
@@ -144,7 +146,6 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     }
 
     private void judgeAndShowProblemDetail() {
-        mProblemSource.setText(TextUtils.isEmpty(mProblem.getLaiyuan()) ? "无数据" : mProblem.getLaiyuan());
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.item_problem_type, new String[]{TextUtils.isEmpty(mProblem.getType()) ? "无数据" :
                 ZHConfigDataManager.getInstance().getWtsbValue(mProblem.getType())});
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -157,7 +158,6 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     }
 
     private void forbidClick() {
-        mProblemSource.setFocusable(false);
         mProblemDesc.setFocusable(false);
         mProblemLocation.setFocusable(false);
         mProblemSuggestion.setFocusable(false);

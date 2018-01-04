@@ -30,6 +30,7 @@ import cc.zkteam.zkinfocollectpro.activity.RentPersonInfoActivity;
 import cc.zkteam.zkinfocollectpro.adapter.HouseUnitAdapter;
 import cc.zkteam.zkinfocollectpro.adapter.LDSpinnerAdapter;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
+import cc.zkteam.zkinfocollectpro.bean.AddHouseParams;
 import cc.zkteam.zkinfocollectpro.bean.HouseInfo;
 import cc.zkteam.zkinfocollectpro.bean.RentPersoner;
 import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
@@ -194,7 +195,8 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         List<RentPersoner.PersonlistBean> personlist = data.getPersonlist();
         if (data.getStatus() == 2) {
             Intent intent = new Intent();
-            intent.putExtra("rent_personers", data);
+            AddHouseParams params = new AddHouseParams(tempIds);
+            intent.putExtra("params", params);
             intent.putExtra("build_Id", tempIds.get(3));
             intent.putExtra("address", mAddress.toString());
             PageCtrl.startActivity(getContext(), RentPersonInfoActivity.class, intent);

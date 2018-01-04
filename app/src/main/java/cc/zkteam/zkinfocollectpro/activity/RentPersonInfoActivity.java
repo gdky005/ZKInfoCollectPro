@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.FragmentUtils;
@@ -29,6 +30,7 @@ import cc.zkteam.zkinfocollectpro.adapter.DateCollectRvAdapter;
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.base.RvListener;
+import cc.zkteam.zkinfocollectpro.bean.AddHouseParams;
 import cc.zkteam.zkinfocollectpro.bean.RentPersoner;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.fragment.PersonalInfoCollectFragment;
@@ -36,6 +38,7 @@ import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.utils.CommonUtils;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.view.DividerItemDecoration;
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,6 +65,8 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
     TextView mToolbarTitle;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.pb_loading)
+    ProgressBar mLoading;
     private RentPersoner rentperson;
     private DateCollectRvAdapter adapter;
     private String mBuildId;
@@ -69,6 +74,7 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
     private ZHApi mZhApi;
     private Dialog mEmigrationDialog;
     private String address;
+    private AddHouseParams mAddHouseParams;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,28 +105,12 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
     @Override
     protected void initData() {
         Intent intent = getIntent();
-        rentperson = (RentPersoner) intent.getSerializableExtra("rent_personers");
+        rentperson = new RentPersoner();
+        rentperson.setPersonlist(new ArrayList<>());
+        mAddHouseParams = (AddHouseParams) intent.getSerializableExtra("params");
         Log.e("TaG", rentperson.getStatus() + "");
         mBuildId = intent.getStringExtra("build_Id");
         address = intent.getStringExtra("address");
-
-        // TODO: 2017/12/31  测试数据
-        if (rentperson == null) {
-            rentperson = new RentPersoner();
-            ArrayList list = new ArrayList();
-            RentPersoner.PersonlistBean personlistBean = new RentPersoner.PersonlistBean();
-            personlistBean.setHouseid("7");
-            personlistBean.setName("魏伟");
-            personlistBean.setP_man_id("45");
-            personlistBean.setP_id("45");
-            list.add(personlistBean);
-            rentperson.setPersonlist(list);
-        }
-
-        // TODO: 2017/12/31  测试数据
-        if (TextUtils.isEmpty(mBuildId)) {
-            mBuildId = "1";
-        }
 
         if (rentperson != null) {
             List<RentPersoner.PersonlistBean> personlist = rentperson.getPersonlist();
@@ -240,5 +230,38 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mLoading.setVisibility(View.VISIBLE);
+        requestPersonList();
+    }
 
+    private void requestPersonList() {
+        MultipartBody.Part community = MultipartBody.Part.createFormData("community", mAddHouseParams.getParams().get(0));
+        MultipartBody.Part cunjuid = MultipartBody.Part.createFormData("cunjuid", mAddHouseParams.getParams().get(1));
+        MultipartBody.Part gridding = MultipartBody.Part.createFormData("gridding", mAddHouseParams.getParams().get(2));
+        MultipartBody.Part hsid = MultipartBody.Part.createFormData("buildid", mAddHouseParams.getParams().get(3));
+        MultipartBody.Part houseSerial = MultipartBody.Part.createFormData("house_serial", mAddHouseParams.getParams().get(4));
+        MultipartBody.Part address = MultipartBody.Part.createFormData("louceng", mAddHouseParams.getParams().get(5));
+        MultipartBody.Part houseNumber = MultipartBody.Part.createFormData("house_number", mAddHouseParams.getParams().get(6));
+        ZHConnectionManager.getInstance().getZHApi().addHouse(community, cunjuid, gridding, hsid,
+                houseSerial, address, houseNumber).enqueue(new Callback<RentPersoner>() {
+            @Override
+            public void onResponse(Call<RentPersoner> call, Response<RentPersoner> response) {
+                rentperson = response.body();
+                if (rentperson != null) {
+                    rentperson.getPersonlist().add(0, new RentPersoner.PersonlistBean(INVALID, INVALID, INVALID, INVALID));
+                    adapter.cleanAndAddAll(rentperson.getPersonlist());
+                }
+                mLoading.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<RentPersoner> call, Throwable t) {
+                mLoading.setVisibility(View.GONE);
+            }
+        });
+
+    }
 }
