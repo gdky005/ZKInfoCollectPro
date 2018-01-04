@@ -219,6 +219,9 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
 
     @Override
     public void hideLoading() {
+        if (mLoading == null) {
+            return;
+        }
         mLoading.setVisibility(View.GONE);
     }
 
