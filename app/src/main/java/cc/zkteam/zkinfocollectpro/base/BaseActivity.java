@@ -3,13 +3,16 @@ package cc.zkteam.zkinfocollectpro.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bugtags.library.Bugtags;
 import com.networkbench.agent.impl.NBSAppAgent;
@@ -29,6 +32,7 @@ import cc.zkteam.zkinfocollectpro.managers.ZKManager;
 public abstract class BaseActivity extends AppCompatActivity {
     protected Toolbar mToolbar;
     protected TextView mTitle;
+    private CountDownTimer timer;
     protected Context mContext;
 
     @Override
@@ -36,7 +40,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-
+        ZKManager.getInstance().refresh();
+        mContext = this;
         if (!(this instanceof LoginActivity)) {
             if (ZKICApplication.zhLoginBean == null) {
                 startActivity(new Intent(this, LoginActivity.class));
@@ -45,24 +50,52 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
 
-        ZKManager.getInstance().refresh();
-
-        // TODO: 2018/1/2  防商用标识
-        TextView tv = new TextView(this);
-        tv.setText("临时预览版本");
-        tv.setTextSize(15);
-        tv.setTextColor(getResources().getColor(R.color.red));
-
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        addContentView(tv, params);
-
+        initStatus();
 
         ButterKnife.bind(this);
         NBSAppAgent.leaveBreadcrumb(getClass().getSimpleName() + " onCreate");
-        mContext = this;
         initViews();
         initListener();
         initData();
+    }
+
+    private void initStatus() {
+        if (!TextUtils.isEmpty(ZKManager.getInstance().getWatermarkText())) {
+            TextView tv = new TextView(this);
+            tv.setText(ZKManager.getInstance().getWatermarkText());
+            tv.setTextSize(25);
+            tv.setTextColor(getResources().getColor(R.color.red));
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            addContentView(tv, params);
+        }
+
+        if (!TextUtils.isEmpty(ZKManager.getInstance().getWarningText())) {
+            Toast.makeText(mContext, ZKManager.getInstance().getWarningText(), Toast.LENGTH_SHORT).show();
+        }
+
+        if (ZKManager.getInstance().isAppState()) {
+            timer = new CountDownTimer(1000 * 60, 1000) {
+
+                @Override
+                public void onTick(long millisUntilFinished) {
+
+                }
+
+                @Override
+                public void onFinish() {
+                    Toast.makeText(mContext, "应用马上退出，付费完成可以享受完整功能 ！！！", Toast.LENGTH_SHORT).show();
+                    getCurrentFocus().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            System.exit(0);
+                        }
+                    }, 2000);
+                    timer = null;
+                }
+            };
+            timer.start();
+        }
     }
 
     //获取资源ID
@@ -104,5 +137,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         //注：回调 3
         Bugtags.onDispatchTouchEvent(this, event);
         return super.dispatchTouchEvent(event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer.cancel();
+        }
     }
 }
