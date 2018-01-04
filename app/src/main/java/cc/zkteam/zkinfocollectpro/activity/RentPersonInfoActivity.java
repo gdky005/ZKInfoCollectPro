@@ -154,6 +154,9 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
             case R.id.create_new:
                 Intent intent = new Intent();
                 intent.putExtra("address", address);
+                intent.putExtra("h_id", rentperson.getHouseid());
+                intent.putExtra("b_id", mBuildId);
+
                 PageCtrl.startActivity(this, NewResidentsInfoActivity.class, intent);
                 return;
         }

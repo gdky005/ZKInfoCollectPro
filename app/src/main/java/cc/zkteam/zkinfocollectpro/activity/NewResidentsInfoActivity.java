@@ -1,9 +1,10 @@
 package cc.zkteam.zkinfocollectpro.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
@@ -13,19 +14,20 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
-import cc.zkteam.zkinfocollectpro.dialog.OnZKDialogCancelListener;
-import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragment;
-import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragmentHelper;
-import cc.zkteam.zkinfocollectpro.dialog.ZKDialogResultListener;
 import cc.zkteam.zkinfocollectpro.utils.L;
+import cc.zkteam.zkinfocollectpro.utils.List2StringArrayUtils;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
 import cn.qqtheme.framework.picker.DatePicker;
+import cn.qqtheme.framework.picker.LinkagePicker;
 import cn.qqtheme.framework.picker.OptionPicker;
 import cn.qqtheme.framework.util.ConvertUtils;
 import cn.qqtheme.framework.widget.WheelView;
@@ -71,7 +73,9 @@ public class NewResidentsInfoActivity extends BaseActivity {
     EditText edittext232;
     @BindView(R.id.address_name)
     TextView addressName;
-    private String address;
+    private String address = "";
+    private String b_id = "";
+    private String h_id = "";
 
     @Override
     protected int getLayoutId() {
@@ -82,6 +86,8 @@ public class NewResidentsInfoActivity extends BaseActivity {
     protected void initViews() {
         Intent intent = getIntent();
         address = intent.getStringExtra("address");
+        b_id = intent.getStringExtra("b_id");
+        h_id = intent.getStringExtra("h_id");
 
         addressName.setText(address);
         sexedittext.setVisibility(View.VISIBLE);
@@ -168,9 +174,9 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 picker2.setCanceledOnTouchOutside(true);
                 picker2.setUseWeight(true);
                 picker2.setTopPadding(ConvertUtils.toPx(this, 10));
-                picker2.setRangeEnd(2111, 1, 11);
-                picker2.setRangeStart(2016, 8, 29);
-                picker2.setSelectedItem(2050, 10, 14);
+                picker2.setRangeEnd(2050, 12, 31);
+                picker2.setRangeStart(1900, 1, 1);
+                picker2.setSelectedItem(1900, 1, 1);
                 picker2.setContentPadding(15, 0);
 
                 picker2.setResetWhileWheel(false);
@@ -201,7 +207,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 break;
             case R.id.card_button:
                 OptionPicker picker4 = new OptionPicker(this, new String[]{
-                        "身份证", "居住证", "护照", "港澳通行证", "台湾通行证"
+                        "身份证", "居住证", "护照", "港澳通行证", "台湾通行证", "残疾证", "军官证"
                 });
                 picker4.setCanceledOnTouchOutside(false);
                 picker4.setDividerRatio(WheelView.DividerConfig.FILL);
@@ -212,54 +218,125 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 picker4.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
                     @Override
                     public void onOptionPicked(int index, String item) {
-                        edittext23.setText(item);
+                        cardButton.setText(item);
                     }
                 });
                 picker4.show();
                 break;
 
             case R.id.edittext23:
-                OptionPicker picker3 = new OptionPicker(this, new String[]{
-                        "房东与租客", "房东与租客", "房东与租客"
-                });
-                picker3.setCanceledOnTouchOutside(false);
-                picker3.setDividerRatio(WheelView.DividerConfig.FILL);
-                picker3.setShadowColor(Color.BLUE, 40);
-                picker3.setSelectedIndex(1);
-                picker3.setCycleDisable(true);
-                picker3.setTextSize(20);
-                picker3.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+//                OptionPicker picker3 = new OptionPicker(this, new String[]{
+//                        "房东与租客", "房东与租客", "房东与租客"
+//                });
+//                picker3.setCanceledOnTouchOutside(false);
+//                picker3.setDividerRatio(WheelView.DividerConfig.FILL);
+//                picker3.setShadowColor(Color.BLUE, 40);
+//                picker3.setSelectedIndex(1);
+//                picker3.setCycleDisable(true);
+//                picker3.setTextSize(20);
+//                picker3.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+//                    @Override
+//                    public void onOptionPicked(int index, String item) {
+//                        edittext23.setText(item);
+//                    }
+//                });
+//                picker3.show();
+                //联动选择器的更多用法，可参见AddressPicker和CarNumberPicker
+                LinkagePicker.DataProvider provider = new LinkagePicker.DataProvider() {
+
                     @Override
-                    public void onOptionPicked(int index, String item) {
-                        edittext23.setText(item);
+                    public boolean isOnlyTwo() {
+                        return true;
+                    }
+
+                    @NonNull
+                    @Override
+                    public List<String> provideFirstData() {
+                        ArrayList<String> firstList = new ArrayList<>();
+                        firstList.add("邻居");
+                        firstList.add("同事");
+                        firstList.add("亲属");
+                        firstList.add("家属");
+                        firstList.add("房主");
+                        return firstList;
+                    }
+
+                    @NonNull
+                    @Override
+                    public List<String> provideSecondData(int firstIndex) {
+                        ArrayList<String> secondList = new ArrayList<>();
+
+                        String[] relation_0 = getResources().getStringArray(R.array.relation_0);
+                        String[] relation_1 = getResources().getStringArray(R.array.relation_1);
+                        String[] relation_2 = getResources().getStringArray(R.array.relation_2);
+                        String[] relation_3 = getResources().getStringArray(R.array.relation_3);
+                        String[] relation_4 = getResources().getStringArray(R.array.relation_4);
+
+                        List<String> relation0 = List2StringArrayUtils.string2List(relation_0);
+                        List<String> relation1 = List2StringArrayUtils.string2List(relation_1);
+                        List<String> relation2 = List2StringArrayUtils.string2List(relation_2);
+                        List<String> relation3 = List2StringArrayUtils.string2List(relation_3);
+                        List<String> relation4 = List2StringArrayUtils.string2List(relation_4);
+
+                        if (firstIndex == 0) {
+                            return relation0;
+                        } else if (firstIndex == 1) {
+                            return relation1;
+                        } else if (firstIndex == 2) {
+                            return relation2;
+                        } else if (firstIndex == 3) {
+                            return relation3;
+                        } else {
+                            return relation4;
+                        }
+                    }
+
+                    @Nullable
+                    @Override
+                    public List<String> provideThirdData(int firstIndex, int secondIndex) {
+                        return null;
+                    }
+
+                };
+                LinkagePicker picker3 = new LinkagePicker(this, provider);
+                picker3.setCycleDisable(true);
+                picker3.setUseWeight(true);
+                picker3.setLabel("关系", "关系");
+                picker3.setSelectedIndex(0, 8);
+                //picker.setSelectedItem("12", "9");
+                picker3.setContentPadding(10, 0);
+                picker3.setOnStringPickListener(new LinkagePicker.OnStringPickListener() {
+                    @Override
+                    public void onPicked(String first, String second, String third) {
+                        edittext23.setText(first+"关系-"+second+"关系");
                     }
                 });
                 picker3.show();
                 break;
 
             case R.id.savecommit:
-                ZKDialogFragment dialogFragment = ZKDialogFragmentHelper.showDialog(getSupportFragmentManager(),
-                        "提交成功",
-                        "根据后台返回数据显示",
-                        new ZKDialogResultListener<Integer>() {
-                            @Override
-                            public void onDataResult(Integer result) {
-
-                                switch (result) {
-                                    case DialogInterface.BUTTON_POSITIVE: //确定
-                                        ToastUtils.showShort("确定");
-                                        break;
-                                    case DialogInterface.BUTTON_NEGATIVE: // 取消
-                                        ToastUtils.showShort("取消");
-                                        break;
-                                }
-                            }
-                        }, new OnZKDialogCancelListener() {
-                            @Override
-                            public void onCancel() {
-                                ToastUtils.showShort("取消了本次操作");
-                            }
-                        });
+//                ZKDialogFragment dialogFragment = ZKDialogFragmentHelper.showDialog(getSupportFragmentManager(),
+//                        "提交成功",
+//                        "根据后台返回数据显示",
+//                        new ZKDialogResultListener<Integer>() {
+//                            @Override
+//                            public void onDataResult(Integer result) {
+//
+//                                switch (result) {
+//                                    case DialogInterface.BUTTON_POSITIVE: //确定
+//                                        ToastUtils.showShort("确定");
+//                                        break;
+//                                    case DialogInterface.BUTTON_NEGATIVE: // 取消
+//                                        ToastUtils.showShort("取消");
+//                                        break;
+//                                }
+//                            }
+//                        }, new OnZKDialogCancelListener() {
+//                            @Override
+//                            public void onCancel() {
+//                                ToastUtils.showShort("取消了本次操作");
+//                            }
+//                        });
                 break;
 
         }
@@ -298,7 +375,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
 //                            edittext232.setVisibility(View.VISIBLE);
 
                             cardButton2.setText("身份证");
-                            edittext232.setText("房东与租客");
+//                            edittext232.setText("房东与租客");
                             nameedittext.setText(name);
                             sexedittext2.setText(sex);
                             bornedittext2.setText(birthday);

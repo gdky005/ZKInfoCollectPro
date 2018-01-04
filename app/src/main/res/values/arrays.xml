@@ -76,7 +76,123 @@
         <item>cheliangxinxi_type</item>
         <item>wuquanxinxi_type</item>
     </string-array>
+    <string-array name="relation_0">
+        <item>邻居</item>
+    </string-array>
+    <string-array name="relation_1">
+        <item>同事</item>
+    </string-array>
 
+    <string-array name="relation_2">
+        <item>之曾孙子</item>
+        <item>之曾孙女</item>
+        <item>之曾祖父</item>
+        <item>之曾祖母</item>
+        <item>之曾外祖父</item>
+        <item>之外曾孙子</item>
+        <item>之外曾孙女</item>
+        <item>之曾外祖母</item>
+        <item>之伯祖父</item>
+        <item>之侄孙子[对应伯祖辈]</item>
+        <item>之侄孙女[对应伯祖辈]</item>
+        <item>之伯祖母</item>
+        <item>之姑祖父</item>
+        <item>之侄孙子[对应姑祖辈]</item>
+        <item>之侄孙女[对应姑祖辈]</item>
+        <item>之姑祖母</item>
+        <item>之叔祖父</item>
+        <item>之侄孙子[对应叔祖辈]</item>
+        <item>之侄孙女[对应叔祖辈]</item>
+        <item>之叔祖母</item>
+        <item>之舅祖父</item>
+        <item>之甥孙子[对应舅祖辈]</item>
+        <item>之甥孙女[对应舅祖辈]</item>
+        <item>之舅祖母</item>
+        <item>之姨祖父</item>
+        <item>之甥孙子[对应姨祖辈]</item>
+        <item>之甥孙女[对应姨祖辈]</item>
+        <item>之姨祖母</item>
+        <item>之伯父</item>
+        <item>之侄子[对应伯辈]</item>
+        <item>之侄女[对应伯辈]</item>
+        <item>之伯母</item>
+        <item>之姑父</item>
+        <item>之侄子[对应姑辈]</item>
+        <item>之侄女[对应姑辈]</item>
+        <item>之姑母</item>
+        <item>之叔父</item>
+        <item>之侄子[对应叔辈]</item>
+        <item>之侄女[对应叔辈]</item>
+        <item>之叔母</item>
+        <item>之舅父</item>
+        <item>之甥子[对应舅辈]</item>
+        <item>之甥女[对应舅辈]</item>
+        <item>之舅母</item>
+        <item>之姨父</item>
+        <item>之甥子[对应姨辈]</item>
+        <item>之甥女[对应姨辈]</item>
+        <item>之姨母</item>
+        <item>之兄</item>
+        <item>之弟[对应]</item>
+        <item>之妹</item>
+        <item>之兄嫂</item>
+        <item>之弟</item>
+        <item>之姐</item>
+        <item>之弟媳</item>
+        <item>之姐夫</item>
+        <item>之妹夫</item>
+        <item>之堂姐</item>
+        <item>之堂弟</item>
+        <item>之堂妹</item>
+        <item>之堂姐夫</item>
+        <item>之堂弟[对应堂姐夫]</item>
+        <item>之堂妹[对应堂姐夫]</item>
+        <item>之堂兄</item>
+        <item>之堂弟媳</item>
+        <item>之堂兄[对应堂弟媳]</item>
+        <item>之堂姐[对应堂弟媳]</item>
+        <item>之堂兄嫂</item>
+        <item>之堂弟[对应堂兄嫂]</item>
+        <item>之堂妹[对应堂兄嫂]</item>
+        <item>之堂妹夫</item>
+        <item>之堂兄[对应堂妹夫]</item>
+        <item>之堂姐[对应堂妹夫]</item>
+        <item>之表兄</item>
+        <item>之表弟</item>
+        <item>之表妹</item>
+        <item>之表兄嫂</item>
+        <item>之表弟[对应兄嫂]</item>
+        <item>之表妹[对应兄嫂]</item>
+        <item>之表姐</item>
+        <item>之表弟媳</item>
+        <item>之表兄[对应弟媳]</item>
+        <item>之表姐[对应弟媳]</item>
+        <item>之表姐夫</item>
+        <item>之表弟[对应姐夫]</item>
+        <item>之表妹[对应姐夫]</item>
+        <item>之表妹夫</item>
+        <item>之表兄[对应妹夫]</item>
+        <item>之表姐[对应妹夫]</item>
+    </string-array>
+
+
+    <string-array name="relation_3">
+        <item>之父</item>
+        <item>之子 </item>
+        <item>之女</item>
+        <item>之母</item>
+        <item>之儿媳</item>
+        <item>之公公 </item>
+        <item>之婆婆</item>
+        <item>之女婿</item>
+        <item>之丈人 </item>
+        <item>之丈母娘</item>
+        <item>之妻</item>
+        <item>之夫</item>
+    </string-array>
+    <string-array name="relation_4">
+        <item>房主</item>
+    </string-array>
     <string-array name="street">
         <item>请选择</item>
     </string-array>
