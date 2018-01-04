@@ -17,6 +17,12 @@ public class RentPersoner implements Serializable{
 
     private int status;
     private List<PersonlistBean> personlist;
+    /**
+     * houseid : 7
+     * personlist : []
+     */
+
+    private String houseid;
 
     public int getStatus() {
         return status;
@@ -32,6 +38,14 @@ public class RentPersoner implements Serializable{
 
     public void setPersonlist(List<PersonlistBean> personlist) {
         this.personlist = personlist;
+    }
+
+    public String getHouseid() {
+        return houseid;
+    }
+
+    public void setHouseid(String houseid) {
+        this.houseid = houseid;
     }
 
     public static class PersonlistBean implements Serializable{

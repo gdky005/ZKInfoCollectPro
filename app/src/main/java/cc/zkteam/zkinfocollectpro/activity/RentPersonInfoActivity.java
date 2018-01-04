@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -99,6 +100,7 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
     protected void initData() {
         Intent intent = getIntent();
         rentperson = (RentPersoner) intent.getSerializableExtra("rent_personers");
+        Log.e("TaG", rentperson.getStatus() + "");
         mBuildId = intent.getStringExtra("build_Id");
         address = intent.getStringExtra("address");
 

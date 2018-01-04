@@ -79,7 +79,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
     private LDSpinnerAdapter unitAdapter;
     private HashMap<Integer, LDSpinnerAdapter> adapterMap;
     private HashMap<Integer, Spinner> spinnerMap;
-    private HashMap<Integer,String> tempIds;
+    private HashMap<Integer, String> tempIds;
     private StringBuffer mAddress = new StringBuffer();
 
 
@@ -192,14 +192,14 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
     @Override
     public void updata(RentPersoner data) {
         List<RentPersoner.PersonlistBean> personlist = data.getPersonlist();
-        if (personlist != null && personlist.size() > 0){
+        if (data.getStatus() == 2) {
             Intent intent = new Intent();
-            intent.putExtra("rent_personers",data);
-            intent.putExtra("build_Id",tempIds.get(3));
-            intent.putExtra("address",mAddress.toString());
-            PageCtrl.startActivity(getContext(), RentPersonInfoActivity.class,intent);
+            intent.putExtra("rent_personers", data);
+            intent.putExtra("build_Id", tempIds.get(3));
+            intent.putExtra("address", mAddress.toString());
+            PageCtrl.startActivity(getContext(), RentPersonInfoActivity.class, intent);
             mAddress.delete(0, mAddress.length());
-        }else {
+        } else if (data.getStatus() == 1) {
             View view = getLayoutInflater().inflate(R.layout.create_house_dialog, null, false);
             Dialog dialog = new Dialog(mContext);
             dialog.setContentView(view);
@@ -294,8 +294,8 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         if (index < 4) {
             clearSpinnerData(index);
             String id = ((ZHCommunityBean.DataBean) adapter.getItem(i)).getId();
-            tempIds.put(index,id);
-            Log.i("chris", "onItemSelected: "+"type: "+ index +"--id--:"+id);
+            tempIds.put(index, id);
+            Log.i("chris", "onItemSelected: " + "type: " + index + "--id--:" + id);
             index++;
             showLoading();
             mPresenter.loadStreetCommunity(id, index + "");
@@ -303,7 +303,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         } else {
             // TODO: 2017/12/25 调用更新住房信息接口
             LDSpinnerAdapter adapter1 = adapterMap.get(index);
-            tempIds.put(index,i+"");
+            tempIds.put(index, i + "");
             List<HouseInfo> houseInfos = new ArrayList<>();
             for (int j = 1; j <= adapter1.getmCeng(); j++) {
                 HouseInfo houseInfo = new HouseInfo(j, adapter1.getHome());
@@ -340,8 +340,8 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         public void onClick(View view) {
             showLoading();
             getAddress(mFloorNum, mRoomNum);
-            tempIds.put(5,mFloorNum+"");
-            tempIds.put(6,"0"+mRoomNum+"");
+            tempIds.put(5, mFloorNum + "");
+            tempIds.put(6, "0" + mRoomNum + "");
             getRentPersoner(tempIds);
         }
     }
@@ -363,7 +363,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         mAddress.append("室");
     }
 
-    private String  getAddressName(Spinner spinner) {
+    private String getAddressName(Spinner spinner) {
         ZHCommunityBean.DataBean dataBean = (ZHCommunityBean.DataBean) spinner.getSelectedItem();
         return dataBean.getName();
     }
