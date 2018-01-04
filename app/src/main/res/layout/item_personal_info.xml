@@ -13,13 +13,12 @@
         android:gravity="center_vertical">
 
 
-        <ImageView
+        <cc.zkteam.zkinfocollectpro.view.ZKImageView
             android:id="@+id/img_personal_info_icon"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="14dp"
-            android:src="@drawable/icon_personal" />
+            android:layout_marginLeft="14dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -41,8 +40,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="#cc333333"
                 android:textSize="10sp"
-                tools:text="已完成 80% 8项"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                tools:text="已完成 80% 8项" />
         </LinearLayout>
 
         <RelativeLayout
@@ -57,8 +56,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="17dp"
-                android:scaleType="fitXY"
                 android:padding="5dp"
+                android:scaleType="fitXY"
                 android:src="@drawable/icon_edit" />
 
             <cc.zkteam.zkinfocollectpro.view.SimpleCircleProgressBar

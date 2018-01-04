@@ -2,8 +2,10 @@ package cc.zkteam.zkinfocollectpro.fragment;
 
 import android.app.Application;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Config;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,11 +13,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.location.BDAbstractLocationListener;
+import com.baidu.location.BDLocation;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.ZKBase;
 import cc.zkteam.zkinfocollectpro.ZKICApplication;
 import cc.zkteam.zkinfocollectpro.activity.CommonFragmentActivity;
 import cc.zkteam.zkinfocollectpro.activity.CreateHouseActivity;
@@ -196,7 +204,7 @@ public class SignInFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), PersonalInfoCollectActivity.class));
                 break;
             case R.id.tv_sign:
-                doSign();
+                requestLocation();
                 break;
             case R.id.tv_sign_success_submit:
                 layoutSignSuccess.setVisibility(View.GONE);
@@ -218,8 +226,25 @@ public class SignInFragment extends BaseFragment {
         }
     }
 
-    private void doSign() {
-        zhApi.sign(ZKICApplication.zhLoginBean.getName(), ZKICApplication.zhLoginBean.getId(), "66233.32432", "3322.004324", "kskss").enqueue(new Callback<ZHBaseBean>() {
+    private void requestLocation() {
+        LocationClient mLocationClient = new LocationClient(ZKBase.getContext());
+        mLocationClient.registerLocationListener(new BDAbstractLocationListener() {
+            @Override
+            public void onReceiveLocation(BDLocation bdLocation) {
+                double lon = bdLocation.getLongitude();
+                double lat = bdLocation.getLatitude();
+                String location = bdLocation.getLocationDescribe();
+                doSign(lon, lat, location);
+            }
+        });
+        LocationClientOption option = new LocationClientOption();
+        option.setIsNeedAddress(true);
+        mLocationClient.setLocOption(option);
+        mLocationClient.start();
+    }
+
+    private void doSign(double lon, double lat, String location) {
+        zhApi.sign(ZKICApplication.zhLoginBean.getName(), ZKICApplication.zhLoginBean.getId(), "" + lon, "" + lat, "" + location).enqueue(new Callback<ZHBaseBean>() {
             @Override
             public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
 //                layoutSignSuccess.setVisibility(View.VISIBLE);

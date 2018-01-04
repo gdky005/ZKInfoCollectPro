@@ -15,8 +15,16 @@ public class ZHBaseBean<T> {
 
     private int status;
     private String msg;
+    private int type;
     private T data;
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     public int getStatus() {
         return status;

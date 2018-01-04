@@ -6,7 +6,9 @@ import cc.zkteam.zkinfocollectpro.Constant;
 import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
 import cc.zkteam.zkinfocollectpro.bean.BDTokenBean;
+import cc.zkteam.zkinfocollectpro.bean.CollectItemBean;
 import cc.zkteam.zkinfocollectpro.bean.MarriageBean;
+import cc.zkteam.zkinfocollectpro.bean.PersonalSimpleInfoBean;
 import cc.zkteam.zkinfocollectpro.bean.ProblemPreview;
 import cc.zkteam.zkinfocollectpro.bean.RentPersoner;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
@@ -133,10 +135,10 @@ public interface ZHApi {
                                        @Part("house_number") String house_number);
 
 
-
 //    @Headers({"Content-Type: application/x-www-form-urlencoded"})
 //    @POST(Constant.BD_ID_CARD_URL)
 //    Call<BDIdCardBean> bdIDCard(@Body RequestBody requestBody, @Query("access_token") String access_token);
+
     /**
      * 接收表单数据录入接口
      */
@@ -224,10 +226,6 @@ public interface ZHApi {
     ;
 
 
-
-
-
-
     /**
      * 获取 31 项目数据 接口
      */
@@ -239,4 +237,29 @@ public interface ZHApi {
      */
     @GET("datamanage.php/Admin/AppInterface/wentishangbao_list")
     Call<ProblemPreview> getProblemList(@Query("personid") String personid);
+
+    /**
+     * 数据采集界面人员基本信息获取
+     */
+    @GET("datamanage.php/Admin/AppInterface/persondetail")
+    Call<PersonalSimpleInfoBean> getPersonalSimpleInfo(@Query("personid") String personid);
+
+    /**
+     * 数据采集界面信息列表
+     */
+    @GET("datamanage.php/Admin/AppInterface/getformnamelist")
+    Call<CollectItemBean> getPersonalInfoList();
+
+    /**
+     * 获取或者修改采集状态
+     * 0.未采集 1.采集中 2.审核中 3.采集完成 4.申请激活
+     * 3  4  5 时不允许修改
+     *
+     * @param personid
+     * @param act
+     * @param memo
+     * @return
+     */
+    @POST("datamanage.php/Admin/AppInterface/gatherstatus")
+    Call<ZHBaseBean> changeCollectionStatus(@Body RequestBody requestBody);
 }
