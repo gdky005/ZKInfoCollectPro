@@ -76,11 +76,11 @@
 
                 <RelativeLayout
                     android:id="@+id/layout_change_collection_state"
-                    android:layout_width="100dp"
+                    android:layout_width="80dp"
                     android:layout_height="21dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_10"
                     android:background="@drawable/bg_change_collect_state"
                     android:padding="3dp">
 
@@ -90,7 +90,6 @@
                         android:layout_height="10dp"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="3dp"
                         android:src="@drawable/icon_left" />
 
                     <TextView
@@ -112,7 +111,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="3dp"
                         android:src="@drawable/icon_right" />
 
                 </RelativeLayout>

@@ -22,6 +22,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -253,13 +254,13 @@ public interface ZHApi {
     /**
      * 获取或者修改采集状态
      * 0.未采集 1.采集中 2.审核中 3.采集完成 4.申请激活
-     * 3  4  5 时不允许修改
      *
      * @param personid
      * @param act
      * @param memo
      * @return
      */
+    @FormUrlEncoded
     @POST("datamanage.php/Admin/AppInterface/gatherstatus")
-    Call<ZHBaseBean> changeCollectionStatus(@Body RequestBody requestBody);
+    Call<ZHBaseBean> changeCollectionStatus(@Field("personid") String personid, @Field("act") String act, @Field("memo") String memo);
 }

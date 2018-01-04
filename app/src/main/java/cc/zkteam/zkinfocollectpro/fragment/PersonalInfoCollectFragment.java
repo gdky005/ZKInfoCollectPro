@@ -122,7 +122,7 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                 setText(tvPersonalInfoCollectName, "姓名：" + infoBean.getName());
                 setText(tvPersonalInfoCollectId, "身份证号：" + infoBean.getId_card());
                 setText(tvPersonalInfoCollectProject, "性别：" + infoBean.getSex() + "    民族：" + infoBean.getNation());
-                setText(tvPersonalInfoCollectCompleted, "采集项：" + infoBean.getCaijixiang_lei() + "  " + infoBean.getCaijixiang_lei());
+                setText(tvPersonalInfoCollectCompleted, "采集项：" + infoBean.getCaijixiang_lei() + "  " + infoBean.getCaijixiang_xiang());
             }
 
             @Override
@@ -168,17 +168,7 @@ public class PersonalInfoCollectFragment extends BaseFragment {
     }
 
     private void requestCollectionStatus() {
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("personid", mPersonid);
-            jsonObject.put("act", "getstatus");
-            jsonObject.put("memo", "memo");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        RequestBody body = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
-
-        zhApiInstance.changeCollectionStatus(body).enqueue(new Callback<ZHBaseBean>() {
+        zhApiInstance.changeCollectionStatus(mPersonid, "getstatus", "memo").enqueue(new Callback<ZHBaseBean>() {
             @Override
             public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
                 if (null == PersonalInfoCollectFragment.this || null == response.body()) return;
@@ -223,17 +213,7 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                     public void onOptionPicked(int index1, String item) {
                         String act = index1 == 0 ? "finish" : "edit";
 
-                        JSONObject jsonObject = new JSONObject();
-                        try {
-                            jsonObject.put("personid", mPersonid);
-                            jsonObject.put("act", act);
-                            jsonObject.put("memo", "memo");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        RequestBody body = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
-
-                        zhApiInstance.changeCollectionStatus(body).enqueue(new Callback<ZHBaseBean>() {
+                        zhApiInstance.changeCollectionStatus(mPersonid, act, "memo").enqueue(new Callback<ZHBaseBean>() {
                             @Override
                             public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
                                 if (null == PersonalInfoCollectFragment.this || null == response.body()) {

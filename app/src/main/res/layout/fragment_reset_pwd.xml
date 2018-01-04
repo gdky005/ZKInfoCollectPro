@@ -19,7 +19,7 @@
         android:drawableLeft="@drawable/icon_user"
         android:drawablePadding="20dp"
         android:gravity="center_vertical"
-        android:hint="某某人的账号"
+        android:hint="请输入账号"
         android:textColorHint="#666666"
         android:textSize="12sp" />
 
