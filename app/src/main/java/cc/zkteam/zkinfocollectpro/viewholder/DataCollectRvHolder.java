@@ -86,7 +86,7 @@ public class DataCollectRvHolder extends RvHolder<RentPersoner.PersonlistBean> {
             View operate = itemView.findViewById(R.id.operate);
 
             if (rePosiont == 0 && "-1".equals(rentInfo.getName())) {   //标题头
-                //  showTitle(operate, operate_title);
+                  showTitle(operate, operate_title);
 
                 initTextColor(Color.parseColor("#ffffff"), num, name, updateTitle, relation, operate_title);
                 initViewColor(Color.parseColor("#3ba3d0"), num, name, relation, imageContainer, updateTitle, operate, operate_title);
