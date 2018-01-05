@@ -57,9 +57,13 @@ public class DataCollectRvHolder extends RvHolder<RentPersoner.PersonlistBean> {
     public void bindHolder(List<RentPersoner.PersonlistBean> data, final int position) {
         if (mType == 0) {
             TextView address = findTv(R.id.tv_address);
-            address.setText(mAddress);
+            if (address != null) {
+                address.setText(mAddress);
+            }
             TextView btn = findTv(R.id.create_new);
-            btn.setOnClickListener(view -> mListener.onItemClick(view.getId(), position));
+            if (btn != null) {
+                btn.setOnClickListener(view -> mListener.onItemClick(view.getId(), position));
+            }
         } else if (mType == 1) {
             final int rePosiont = position - 1;
             RentPersoner.PersonlistBean rentInfo = data.get(rePosiont);

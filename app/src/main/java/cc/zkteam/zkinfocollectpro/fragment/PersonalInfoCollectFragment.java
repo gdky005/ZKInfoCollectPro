@@ -1,54 +1,34 @@
 package cc.zkteam.zkinfocollectpro.fragment;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.blankj.utilcode.util.FragmentUtils;
-import com.blankj.utilcode.util.ToastUtils;
-
-import org.json.JSONObject;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
-import cc.zkteam.zkinfocollectpro.activity.BasicInfoActivity;
-import cc.zkteam.zkinfocollectpro.activity.CommonFragmentActivity;
-import cc.zkteam.zkinfocollectpro.activity.IDCardScanActivity;
-import cc.zkteam.zkinfocollectpro.activity.PersonalInfoCollectActivity;
 import cc.zkteam.zkinfocollectpro.adapter.PersonalInfoListAdapter;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.base.RvListener;
-import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
 import cc.zkteam.zkinfocollectpro.bean.CollectItemBean;
 import cc.zkteam.zkinfocollectpro.bean.PersonalSimpleInfoBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
-import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import cc.zkteam.zkinfocollectpro.view.ZKImageView;
 import cc.zkteam.zkinfocollectpro.view.ZKRecyclerView;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
 import cn.qqtheme.framework.picker.OptionPicker;
 import cn.qqtheme.framework.widget.WheelView;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.app.Activity.RESULT_OK;
 
 /**
  * 个人数据采集页面

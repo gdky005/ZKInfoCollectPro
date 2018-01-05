@@ -132,16 +132,20 @@ public class MapActivity extends BaseActivity implements TextWatcher, SensorEven
 
     @Override
     protected void initData() {
-        initLocation();
+        try {
+            initLocation();
 
-        mPoiSearch = PoiSearch.newInstance();
-        mPoiSearch.setOnGetPoiSearchResultListener(poiListener);
+            mPoiSearch = PoiSearch.newInstance();
+            mPoiSearch.setOnGetPoiSearchResultListener(poiListener);
 
-        mSearch = GeoCoder.newInstance();
-        mSearch.setOnGetGeoCodeResultListener(listener);
+            mSearch = GeoCoder.newInstance();
+            mSearch.setOnGetGeoCodeResultListener(listener);
 
-        mBDMap = mMapView.getMap();
-        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+            mBDMap = mMapView.getMap();
+            mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void initLocation() {
