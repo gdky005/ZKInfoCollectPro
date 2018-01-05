@@ -73,7 +73,7 @@ public class BasicInfoActivity extends BaseActivity {
     @Override
     protected void initViews() {
         if (ZKManager.getInstance().isNew31State()) {
-            Toast.makeText(mContext, "应用马上退出，付费完成可以享受完整功能 ！！！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "" + ZKManager.getInstance().getWarningText(), Toast.LENGTH_SHORT).show();
             drawerLayout.postDelayed(new Runnable() {
                 @Override
                 public void run() {
