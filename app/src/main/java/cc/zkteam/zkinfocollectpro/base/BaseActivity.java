@@ -85,7 +85,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 @Override
                 public void onFinish() {
                     Toast.makeText(mContext, "应用马上退出，付费完成可以享受完整功能 ！！！", Toast.LENGTH_SHORT).show();
-                    getCurrentFocus().postDelayed(new Runnable() {
+                    getWindow().getDecorView().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             System.exit(0);
