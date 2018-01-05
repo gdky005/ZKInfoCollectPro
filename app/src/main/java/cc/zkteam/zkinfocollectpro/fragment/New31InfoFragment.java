@@ -1,17 +1,22 @@
 package cc.zkteam.zkinfocollectpro.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,12 +33,17 @@ import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.managers.ZHMemoryCacheManager;
 import cc.zkteam.zkinfocollectpro.utils.L;
+import cc.zkteam.zkinfocollectpro.view.kind.ZKFiled;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKModuleListLayout;
+import me.nereo.multi_image_selector.MultiImageSelector;
+import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * NewBasicInfoFragment
@@ -45,6 +55,7 @@ public class New31InfoFragment extends BaseFragment {
 
     public static final String NEW_31_INFO_NAME_KEY = "name";
     public static final String NEW_31_INFO_PAGE_TYPE_KEY = "pageType";
+    public static final int REQUEST_CODE = 300;
 
     @BindView(R.id.new_31_zk_module_list_layout)
     ZKModuleListLayout new31ZkModuleListLayout;
@@ -59,6 +70,7 @@ public class New31InfoFragment extends BaseFragment {
     private String pageType;
 
     private String userID;
+    private New31ImageEvent imageEvent;
 
     public static New31InfoFragment newInstance(String name, String pageType) {
         Bundle args = new Bundle();
@@ -74,11 +86,64 @@ public class New31InfoFragment extends BaseFragment {
         return R.layout.fragment_new_31_basicinfo_fragment;
     }
 
+
+    @Subscribe
+    public void imageClickListener(New31ImageEvent imageEvent) {
+        this.imageEvent = imageEvent;
+
+        MultiImageSelector.create()
+                .showCamera(false)
+                .single() // single mode
+                .start(this, REQUEST_CODE);
+    }
+
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // TODO: 2018/1/5  处理事件
+
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            // 获取返回的图片
+            List<String> pics = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+
+            if (pics != null && pics.size() > 0) {
+                String galleyPicPath = pics.get(0);
+                L.d("当前图片地址是：" + galleyPicPath);
+
+                if (imageEvent != null) {
+                    ZKFiled zkFiled = imageEvent.zkFiled;
+                    zkFiled.defaultValue = galleyPicPath;
+
+                    ImageView rightLayoutImageView = zkFiled.findViewById(R.id.right_layout_image_view);
+                    rightLayoutImageView.setImageURI(Uri.parse(galleyPicPath));
+                }
+            }
+        } else {
+            ToastUtils.showShort("取消操作");
+        }
+
+        this.imageEvent = null;
+    }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
     @Override
     public void initView(View rootView) {
         new31Ll.setVisibility(View.GONE);
         new31Commit.setVisibility(View.GONE);
-
     }
 
     @Override

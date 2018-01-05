@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Calendar;
@@ -26,6 +28,7 @@ import java.util.Map;
 
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
+import cc.zkteam.zkinfocollectpro.fragment.New31ImageEvent;
 import cn.qqtheme.framework.picker.DatePicker;
 import cn.qqtheme.framework.picker.OptionPicker;
 import cn.qqtheme.framework.util.ConvertUtils;
@@ -56,7 +59,7 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
     protected int index;
     protected String number;
     protected String key;
-    protected Object defaultValue;
+    public Object defaultValue;
 
     protected int year;
     protected int month;
@@ -278,6 +281,17 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
             case TYPE_FILED_FORM_IMAGE:
                 View rightLayoutImageViewLayout = ((ViewStub) findViewById(R.id.right_layout_image_view_layout)).inflate();
                 ImageView rightLayoutImageView = rightLayoutImageViewLayout.findViewById(R.id.right_layout_image_view);
+
+                ZKFiled zkFiled = this;
+                rightLayoutImageView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        New31ImageEvent imageEvent = new New31ImageEvent();
+                        imageEvent.zkFiled = zkFiled;
+
+                        EventBus.getDefault().post(imageEvent);
+                    }
+                });
                 if (defaultValue instanceof String) {
                     String path = (String) defaultValue;
                     rightLayoutImageView.setImageURI(Uri.parse(path));

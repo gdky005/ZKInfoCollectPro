@@ -179,7 +179,9 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                     return;
                 if (1 == (response.body().getStatus())) {
                     setText(tvPersonalInfoCollectCompletion, "采集状态：" + response.body().getMsg());
-                    layoutChangeCollectionState.setVisibility(View.VISIBLE);
+                    if (layoutChangeCollectionState != null) {
+                        layoutChangeCollectionState.setVisibility(View.VISIBLE);
+                    }
                     if (response.body().getType() == 3 || response.body().getType() == 4 || response.body().getType() == 2) {
                         callEdit = false;
                     } else {
