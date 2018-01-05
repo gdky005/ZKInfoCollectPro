@@ -78,14 +78,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
     Button cardButton;
     @BindView(R.id.zk_title_view)
     ZKTitleView zkTitleView;
-    @BindView(R.id.sexedittext2)
-    EditText sexedittext2;
-    @BindView(R.id.bornedittext2)
-    EditText bornedittext2;
-    @BindView(R.id.card_button2)
-    EditText cardButton2;
-    @BindView(R.id.edittext23_2)
-    EditText edittext232;
+
     @BindView(R.id.address_name)
     TextView addressName;
     @BindView(R.id.pb_loading)
@@ -113,15 +106,6 @@ public class NewResidentsInfoActivity extends BaseActivity {
             ToastUtils.showLong("没有识别到地址，请返回重试");
         }
         addressName.setText(address);
-        sexedittext.setVisibility(View.VISIBLE);
-        bornedittext.setVisibility(View.VISIBLE);
-        cardButton.setVisibility(View.VISIBLE);
-        edittext23.setVisibility(View.VISIBLE);
-
-        sexedittext2.setVisibility(View.GONE);
-        bornedittext2.setVisibility(View.GONE);
-        cardButton2.setVisibility(View.GONE);
-        edittext232.setVisibility(View.GONE);
 
         drawerLayout.setScrimColor(Color.TRANSPARENT);
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED,
@@ -207,7 +191,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
                     @Override
                     public void onDatePicked(String year, String month, String day) {
 
-                        bornedittext.setText(year + "年" + month + "月" + day + "日");
+                        bornedittext.setText(year + month +  day );
                     }
                 });
                 picker2.setOnWheelListener(new DatePicker.OnWheelListener() {
@@ -259,6 +243,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
                     @Override
                     public List<String> provideFirstData() {
                         ArrayList<String> firstList = new ArrayList<>();
+                        firstList.clear();
                         firstList.add("邻居");
                         firstList.add("同事");
                         firstList.add("亲属");
@@ -270,7 +255,6 @@ public class NewResidentsInfoActivity extends BaseActivity {
                     @NonNull
                     @Override
                     public List<String> provideSecondData(int firstIndex) {
-                        ArrayList<String> secondList = new ArrayList<>();
 
                         String[] relation_0 = getResources().getStringArray(R.array.relation_0);
                         String[] relation_1 = getResources().getStringArray(R.array.relation_1);
@@ -308,7 +292,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 picker3.setCycleDisable(true);
                 picker3.setUseWeight(true);
                 picker3.setLabel("关系", "关系");
-                picker3.setSelectedIndex(0, 8);
+//                picker3.setSelectedIndex(0, 8);
                 //picker.setSelectedItem("12", "9");
                 picker3.setContentPadding(10, 0);
                 picker3.setOnStringPickListener(new LinkagePicker.OnStringPickListener() {
@@ -334,12 +318,11 @@ public class NewResidentsInfoActivity extends BaseActivity {
             case R.id.savecommit:
                 pbLoading.setVisibility(View.VISIBLE);
                 //判断是扫码返回的页面还是手动填写的页面
-                int flag = sexedittext.getVisibility();
                 String name = nameedittext.getText().toString().trim();
-                String sex = View.VISIBLE == flag ? (sexedittext.getText().toString().trim()) : (sexedittext.getText().toString().trim());
-                String data = View.VISIBLE == flag ? (bornedittext.getText().toString().trim()) : (bornedittext2.getText().toString().trim());
+                String sex = sexedittext.getText().toString().trim();
+                String data = bornedittext.getText().toString().trim();
                 String nation = nationaledittext.getText().toString().trim();
-                String cardtype = View.VISIBLE == flag ? (cardButton.getText().toString().trim()) : (cardButton2.getText().toString().trim());
+                String cardtype = cardButton.getText().toString().trim();
                 String cardid = edittext21.getText().toString().trim();
                 String address = edittext22.getText().toString().trim();
                 String relation = edittext23.getText().toString().trim();
@@ -507,32 +490,14 @@ public class NewResidentsInfoActivity extends BaseActivity {
 
                             L.i("扫描的姓名是；" + name);
 
-
-                            sexedittext.setVisibility(View.GONE);
-                            bornedittext.setVisibility(View.GONE);
-                            cardButton.setVisibility(View.GONE);
-
-                            sexedittext2.setVisibility(View.VISIBLE);
-                            bornedittext2.setVisibility(View.VISIBLE);
-                            cardButton2.setVisibility(View.VISIBLE);
-
-                            cardButton2.setText("身份证");
+                            cardButton.setText("身份证");
                             nameedittext.setText(name);
-                            sexedittext2.setText(sex);
-                            bornedittext2.setText(birthday);
+                            sexedittext.setText(sex);
+                            bornedittext.setText(birthday);
                             nationaledittext.setText(nation);
                             edittext21.setText(idCardNumber);
                             edittext22.setText(address);
 
-                            nameedittext.setFocusable(false);
-                            nationaledittext.setFocusable(false);
-                            edittext21.setFocusable(false);
-                            edittext22.setFocusable(false);
-
-                            nameedittext.setFocusableInTouchMode(false);
-                            nationaledittext.setFocusableInTouchMode(false);
-                            edittext21.setFocusableInTouchMode(false);
-                            edittext22.setFocusableInTouchMode(false);
                         }
                     }
                 }

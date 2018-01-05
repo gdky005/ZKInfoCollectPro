@@ -130,17 +130,6 @@
                     android:paddingHorizontal="8dp"
                     android:text="男" />
 
-                <EditText
-                    android:id="@+id/sexedittext2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="25dip"
-                    android:layout_marginRight="25dip"
-                    android:layout_toRightOf="@+id/sex"
-                    android:background="@null"
-                    android:focusable="false"
-                    android:textSize="@dimen/basic_textview_size"
-                    android:visibility="gone" />
 
 
             </RelativeLayout>
@@ -170,17 +159,7 @@
                     android:paddingHorizontal="8dp"
                     android:text="1900年1月1日" />
 
-                <EditText
-                    android:id="@+id/bornedittext2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="25dip"
-                    android:layout_marginRight="25dip"
-                    android:layout_toRightOf="@+id/born"
-                    android:background="@null"
-                    android:focusable="false"
-                    android:textSize="@dimen/basic_textview_size"
-                    android:visibility="gone" />
+
 
             </RelativeLayout>
 
@@ -239,18 +218,6 @@
                     android:drawableRight="@mipmap/right_arrow"
                     android:paddingHorizontal="8dp"
                     android:text="身份证" />
-
-                <EditText
-                    android:id="@+id/card_button2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="25dip"
-                    android:layout_marginRight="25dip"
-                    android:layout_toRightOf="@+id/card"
-                    android:background="@null"
-                    android:focusable="false"
-                    android:textSize="@dimen/basic_textview_size"
-                    android:visibility="gone" />
 
 
             </RelativeLayout>
@@ -340,17 +307,6 @@
                     android:paddingHorizontal="8dp"
                     android:text="邻居" />
 
-                <EditText
-                    android:id="@+id/edittext23_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="25dip"
-                    android:layout_marginRight="25dip"
-                    android:layout_toRightOf="@+id/textview23"
-                    android:background="@null"
-                    android:focusable="false"
-                    android:textSize="@dimen/basic_textview_size"
-                    android:visibility="gone" />
 
 
                 <TextView
