@@ -69,6 +69,7 @@ public class PersonalInfoCollectFragment extends BaseFragment {
 
     private boolean callEdit;
     private String mPersonid = "";
+    private int mStatus;
 
     @Override
     public void setArguments(@Nullable Bundle args) {
@@ -187,6 +188,7 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                     } else {
                         callEdit = true;
                     }
+                    mStatus = response.body().getType();
                 } else {
                     Toast.makeText(mContext, response.body().getMsg(), Toast.LENGTH_SHORT).show();
                 }
@@ -209,44 +211,66 @@ public class PersonalInfoCollectFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.layout_change_collection_state:
-                OptionPicker picker3 = new OptionPicker(getActivity(), new String[]{"采集完成", "重新激活"});
-                picker3.setCanceledOnTouchOutside(false);
-                picker3.setDividerRatio(WheelView.DividerConfig.FILL);
-                picker3.setShadowColor(Color.BLUE, 40);
-                picker3.setSelectedIndex(0);
-                picker3.setCycleDisable(true);
-                picker3.setTextSize(20);
-                picker3.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
-                    @Override
-                    public void onOptionPicked(int index1, String item) {
-                        String act = index1 == 0 ? "finish" : "edit";
-
-                        zhApiInstance.changeCollectionStatus(mPersonid, act, "memo").enqueue(new Callback<ZHBaseBean>() {
-                            @Override
-                            public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
-                                if (null == PersonalInfoCollectFragment.this || null == response.body() || null == mContext) {
-                                    Toast.makeText(mContext, "请求失败，请稍后重试", Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
-                                if (1 == (response.body().getStatus())) {
-                                    Toast.makeText(mContext, response.body().getMsg(), Toast.LENGTH_SHORT).show();
-                                    requestCollectionStatus();
-                                } else {
-                                    Toast.makeText(mContext, response.body().getMsg(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<ZHBaseBean> call, Throwable t) {
-                                if (null == PersonalInfoCollectFragment.this) return;
-                                Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                });
-                picker3.show();
+                showStatusChange();
                 break;
         }
+    }
+
+    private void showStatusChange() {
+        String[] titles = getStatus();
+        if (null == titles || titles.length == 0) {
+            Toast.makeText(mContext, "当前状态不允许修改", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        OptionPicker picker3 = new OptionPicker(getActivity(), titles);
+        picker3.setCanceledOnTouchOutside(false);
+        picker3.setDividerRatio(WheelView.DividerConfig.FILL);
+        picker3.setShadowColor(Color.BLUE, 40);
+        picker3.setSelectedIndex(0);
+        picker3.setCycleDisable(true);
+        picker3.setTextSize(20);
+        picker3.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+            @Override
+            public void onOptionPicked(int index1, String item) {
+                String act = mStatus == 1 ? "finish" : "edit";
+
+                zhApiInstance.changeCollectionStatus(mPersonid, act, "memo").enqueue(new Callback<ZHBaseBean>() {
+                    @Override
+                    public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
+                        if (null == PersonalInfoCollectFragment.this || null == response.body() || null == mContext) {
+                            Toast.makeText(mContext, "请求失败，请稍后重试", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        if (1 == (response.body().getStatus())) {
+                            Toast.makeText(mContext, response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                            requestCollectionStatus();
+                        } else {
+                            Toast.makeText(mContext, response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ZHBaseBean> call, Throwable t) {
+                        if (null == PersonalInfoCollectFragment.this) return;
+                        Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+        picker3.show();
+    }
+
+    private String[] getStatus() {
+        String[] result = null;
+        switch (mStatus) {
+            case 1:
+                result = new String[]{"采集完成"};
+                break;
+            case 3:
+                result = new String[]{"重新激活"};
+                break;
+        }
+        return result;
     }
 
     public void showLoading() {
