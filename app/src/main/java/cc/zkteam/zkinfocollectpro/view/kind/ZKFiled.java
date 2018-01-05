@@ -288,6 +288,7 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
                     public void onClick(View v) {
                         New31ImageEvent imageEvent = new New31ImageEvent();
                         imageEvent.zkFiled = zkFiled;
+                        imageEvent.type = TYPE_FILED_FORM_IMAGE;
 
                         EventBus.getDefault().post(imageEvent);
                     }
@@ -332,15 +333,42 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
 
                 break;
             case TYPE_FILED_FORM_ID_CARD:
+                View rightLayoutIdCardLayout = ((ViewStub) findViewById(R.id.right_layout_id_card_layout)).inflate();
+                LinearLayout rightLayoutIdCard = rightLayoutIdCardLayout.findViewById(R.id.right_layout_id_card);
+                ImageView rightLayoutIdCardLeft = rightLayoutIdCard.findViewById(R.id.right_layout_id_card_left);
+                ImageView rightLayoutIdCardRight = rightLayoutIdCard.findViewById(R.id.right_layout_id_card_right);
+
+                ZKFiled zkFiledIdCard = this;
+
+                rightLayoutIdCardLeft.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        New31ImageEvent imageEvent = new New31ImageEvent();
+                        imageEvent.zkFiled = zkFiledIdCard;
+                        imageEvent.type = TYPE_FILED_FORM_ID_CARD;
+
+                        imageEvent.isIdcardLeft = true;
+
+                        EventBus.getDefault().post(imageEvent);
+                    }
+                });
+
+                rightLayoutIdCardRight.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        New31ImageEvent imageEvent = new New31ImageEvent();
+                        imageEvent.zkFiled = zkFiledIdCard;
+                        imageEvent.type = TYPE_FILED_FORM_ID_CARD;
+
+                        imageEvent.isIdcardLeft = false;
+
+                        EventBus.getDefault().post(imageEvent);
+                    }
+                });
+
                 if (defaultValue instanceof String[]) {
                     String[] value = (String[]) defaultValue;
-                    View rightLayoutIdCardLayout = ((ViewStub) findViewById(R.id.right_layout_id_card_layout)).inflate();
-                    LinearLayout rightLayoutIdCard = rightLayoutIdCardLayout.findViewById(R.id.right_layout_id_card);
-
                     if (value.length > 0) {
-                        ImageView rightLayoutIdCardLeft = rightLayoutIdCard.findViewById(R.id.right_layout_id_card_left);
-                        ImageView rightLayoutIdCardRight = rightLayoutIdCard.findViewById(R.id.right_layout_id_card_right);
-
                         rightLayoutIdCardLeft.setImageURI(Uri.parse(value[0]));
                         rightLayoutIdCardRight.setImageURI(Uri.parse(value[1]));
                     } else {
@@ -397,7 +425,8 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
                     return getMapResult(stringBuilder);
                 }
             case TYPE_FILED_FORM_ID_CARD_NUMBER:
-                return getMapResult(rightLayoutLeftIdCardNumberEt.getText().toString());
+                if (rightLayoutLeftIdCardNumberEt != null)
+                    return getMapResult(rightLayoutLeftIdCardNumberEt.getText().toString());
         }
 
         return null;

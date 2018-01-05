@@ -13,13 +13,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 import butterknife.BindView;
@@ -33,6 +36,8 @@ import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.managers.ZHMemoryCacheManager;
 import cc.zkteam.zkinfocollectpro.utils.L;
+import cc.zkteam.zkinfocollectpro.utils.baidu.Base64Util;
+import cc.zkteam.zkinfocollectpro.utils.baidu.FileUtil;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKFiled;
 import cc.zkteam.zkinfocollectpro.view.kind.ZKModuleListLayout;
 import me.nereo.multi_image_selector.MultiImageSelector;
@@ -98,7 +103,6 @@ public class New31InfoFragment extends BaseFragment {
     }
 
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -114,10 +118,35 @@ public class New31InfoFragment extends BaseFragment {
 
                 if (imageEvent != null) {
                     ZKFiled zkFiled = imageEvent.zkFiled;
-                    zkFiled.defaultValue = galleyPicPath;
 
-                    ImageView rightLayoutImageView = zkFiled.findViewById(R.id.right_layout_image_view);
-                    rightLayoutImageView.setImageURI(Uri.parse(galleyPicPath));
+                    if (zkFiled != null) {
+                        int type = imageEvent.type;
+
+                        if (ZKFiled.TYPE_FILED_FORM_IMAGE == type) {
+                            zkFiled.defaultValue = galleyPicPath;
+
+                            ImageView rightLayoutImageView = zkFiled.findViewById(R.id.right_layout_image_view);
+                            rightLayoutImageView.setImageURI(Uri.parse(galleyPicPath));
+                        } else if (ZKFiled.TYPE_FILED_FORM_ID_CARD == type) {
+                            ImageView rightLayoutIdCardLeft = zkFiled.findViewById(R.id.right_layout_id_card_left);
+                            ImageView rightLayoutIdCardRight = zkFiled.findViewById(R.id.right_layout_id_card_right);
+
+                            String[] strings = (String[]) zkFiled.defaultValue;
+                            if (strings == null) {
+                                strings = new String[2];
+                            }
+
+                            if (imageEvent.isIdcardLeft) {
+                                strings[0] = galleyPicPath;
+                                rightLayoutIdCardLeft.setImageURI(Uri.parse(galleyPicPath));
+                            } else {
+                                strings[1] = galleyPicPath;
+                                rightLayoutIdCardRight.setImageURI(Uri.parse(galleyPicPath));
+                            }
+
+                            zkFiled.defaultValue = strings;
+                        }
+                    }
                 }
             }
         } else {
@@ -187,7 +216,7 @@ public class New31InfoFragment extends BaseFragment {
     public void onViewClicked() {
         JSONObject resultObj = new31ZkModuleListLayout.getResult();
 
-        ToastUtils.showShort("提交接口数据信息：" + resultObj);
+        setImageData(resultObj);
 
         try {
             JSONObject jsonObject = new JSONObject();
@@ -213,6 +242,64 @@ public class New31InfoFragment extends BaseFragment {
             e.printStackTrace();
         }
 
+    }
+
+    private void setImageData(JSONObject resultObj) {
+        JSONArray jsonArray = resultObj.names();
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            String key = jsonArray.optString(i);
+            String value = resultObj.optString(key);
+
+            if (!TextUtils.isEmpty(value)) {
+                if (value.contains("/")) {
+
+                    if (value.contains(",")) {
+                        String[] filePaths = value.split(",");
+
+                        String twoBase64EncodeImage = "";
+                        for (String path :
+                                filePaths) {
+                            if (FileUtils.isFile(path)) {
+                                try {
+                                    byte[] imgData = FileUtil.readFileByBytes(path);
+                                    String imgStr = Base64Util.encode(imgData);
+                                    String base64EncodeImage = URLEncoder.encode(imgStr, "UTF-8");
+
+
+                                    if (TextUtils.isEmpty(twoBase64EncodeImage)) {
+                                        twoBase64EncodeImage = base64EncodeImage;
+                                    } else {
+                                        twoBase64EncodeImage = "," + base64EncodeImage;
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        try {
+                            if (!TextUtils.isEmpty(twoBase64EncodeImage))
+                                resultObj.put(key, twoBase64EncodeImage);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    } else {
+                        if (FileUtils.isFile(value)) {
+                            try {
+                                byte[] imgData = FileUtil.readFileByBytes(value);
+                                String imgStr = Base64Util.encode(imgData);
+                                String base64EncodeImage = URLEncoder.encode(imgStr, "UTF-8");
+                                resultObj.put(key, base64EncodeImage);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private void showZKModuleAPI(ZKModuleListLayout zkModuleListLayout, String pageType) {
