@@ -73,6 +73,7 @@ public class New31InfoFragment extends BaseFragment {
 
     private String titleName;
     private String pageType;
+    private Call<ZHBaseBean> zhBaseBeanCall;
 
     private String userID;
     private New31ImageEvent imageEvent;
@@ -167,6 +168,10 @@ public class New31InfoFragment extends BaseFragment {
     public void onDestroy() {
         EventBus.getDefault().unregister(this);
         super.onDestroy();
+
+        if (!zhBaseBeanCall.isCanceled()) {
+            zhBaseBeanCall.cancel();
+        }
     }
 
     @Override
@@ -224,7 +229,8 @@ public class New31InfoFragment extends BaseFragment {
             jsonObject.put("data", resultObj);
 
             RequestBody body = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
-            ZHConnectionManager.getInstance().getZHApi().update31Data(body).enqueue(new Callback<ZHBaseBean>() {
+            zhBaseBeanCall = ZHConnectionManager.getInstance().getZHApi().update31Data(body);
+            zhBaseBeanCall.enqueue(new Callback<ZHBaseBean>() {
                 @Override
                 public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
                     Log.d(TAG, "onResponse: " + response);

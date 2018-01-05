@@ -60,9 +60,9 @@ public class BasicInfoActivity extends BaseActivity {
     }
 
     @Override
-    public void onStop() {
+    protected void onDestroy() {
         EventBus.getDefault().unregister(this);
-        super.onStop();
+        super.onDestroy();
     }
 
     @Override

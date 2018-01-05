@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/field_itemhight"
+    android:layout_height="wrap_content"
    >
 
     <LinearLayout
@@ -37,7 +37,7 @@
     <RelativeLayout
         android:id="@+id/right_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/field_itemhight"
+        android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/field_marright"
         android:layout_toRightOf="@+id/zk_form_filed_ll"
@@ -73,9 +73,10 @@
         <!--图片展示-->
         <ViewStub
             android:id="@+id/right_layout_image_view_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="68dp"
+            android:layout_height="85dp"
             android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/dp_5"
             android:inflatedId="@+id/right_layout_image_view"
             android:layout="@layout/layout_filed_right_image_filed_view" />
 
@@ -101,8 +102,9 @@
         <ViewStub
             android:id="@+id/right_layout_id_card_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_150"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_margin="@dimen/dp_5"
             android:inflatedId="@+id/right_layout_id_card"
             android:layout="@layout/layout_filed_right_id_card_image_view" />
 
