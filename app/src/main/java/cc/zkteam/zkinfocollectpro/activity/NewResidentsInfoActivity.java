@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -109,7 +108,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
         address = intent.getStringExtra("address");
         b_id = intent.getStringExtra("b_id");
         h_id = intent.getStringExtra("h_id");
-
+        L.i("h_id；" + h_id + "b_id；" + b_id);
         if (TextUtils.isEmpty(address)) {
             ToastUtils.showLong("没有识别到地址，请返回重试");
         }
@@ -364,7 +363,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
                             @Override
                             public void onResponse(Call<ZHAddhosePersonBean> call, Response<ZHAddhosePersonBean> response) {
                                 pbLoading.setVisibility(View.GONE);
-                                Log.d(TAG, "onResponse: " + response.body().toString());
+                                L.d(TAG, "onResponse: " + response.body().toString());
                                 int status = response.body().status;
                                 String msg = response.body().msg;
                                 ZHAddhosePersonBean.DataEntity data = response.body().data;
@@ -391,7 +390,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
                                                                 @Override
                                                                 public void onResponse(Call<ZHAddhosePersonBean> call, Response<ZHAddhosePersonBean> response) {
                                                                     pbLoading.setVisibility(View.GONE);
-                                                                    Log.d(TAG, "onResponse: " + response.body().toString());
+                                                                    L.d(TAG, "onResponse: " + response.body().toString());
                                                                     int status = response.body().status;
                                                                     String msg = response.body().msg;
                                                                     if (status == 1) {
@@ -406,7 +405,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
                                                                 @Override
                                                                 public void onFailure(Call<ZHAddhosePersonBean> call, Throwable throwable) {
                                                                     pbLoading.setVisibility(View.GONE);
-                                                                    Log.d(TAG, "onResponse:失败 ");
+                                                                    L.d(TAG, "onResponse:失败 ");
                                                                 }
                                                             });
 
@@ -468,11 +467,13 @@ public class NewResidentsInfoActivity extends BaseActivity {
                             @Override
                             public void onFailure(Call<ZHAddhosePersonBean> call, Throwable throwable) {
                                 pbLoading.setVisibility(View.GONE);
-                                Log.d(TAG, "onResponse:失败 ");
+                                L.d(TAG, "onResponse:失败 ");
 
                             }
                         });
                     } catch (Exception e) {
+                        pbLoading.setVisibility(View.GONE);
+                        ToastUtils.showLong("提交参数异常，请重试");
                         e.printStackTrace();
                         return;
                     }
