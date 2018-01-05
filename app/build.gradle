@@ -83,7 +83,7 @@ dependencies {
     implementation deps.rvh
     implementation deps.okhttp_interceptor
 
-    implementation deps.multi_image_selector
+//    implementation deps.multi_image_selector
 
     implementation deps.bugtags_lib
     implementation deps.nbs_newlens_agent
@@ -100,9 +100,13 @@ dependencies {
     androidTestImplementation espresso.core
     androidTestImplementation deps.runner
 
-
     compile('cn.qqtheme.framework:WheelPicker:1.5.5') {
         exclude group: 'com.android.support'
+    }
+
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    compile(deps.multi_image_selector) {
+        exclude group: 'com.squareup.picasso'
     }
 
     implementation 'org.greenrobot:eventbus:3.1.1'
