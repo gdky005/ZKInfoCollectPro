@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.EncryptUtils;
@@ -38,6 +39,8 @@ public class ResetPwdFragment extends BaseFragment {
     EditText etPwdNewAgin;
     @BindView(R.id.btn_reset_pwd)
     Button btnResetPwd;
+    @BindView(R.id.pb_collect_loading)
+    ProgressBar mLoading;
 
     @Override
     public int getLayoutId() {
@@ -101,14 +104,21 @@ public class ResetPwdFragment extends BaseFragment {
             return;
         }
 
+        showLoading();
         zhApiInstance.resetPwd(user, EncryptUtils.encryptMD5ToString(pwdOld), EncryptUtils.encryptMD5ToString(pwdNew)).enqueue(new Callback<ZHBaseBean>() {
             @Override
             public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
+                hideLoading();
+                if (getActivity() == null) return;
                 if (response.body() == null) return;
                 if (response.body().getStatus() == 0) {
                     Toast.makeText(mContext, response.body().getMsg() + "", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
+                    etCount.setText("");
+                    etPwdOld.setText("");
+                    etPwdNew.setText("");
+                    etPwdNewAgin.setText("");
                     Toast.makeText(mContext, response.body().getMsg(), Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -116,8 +126,19 @@ public class ResetPwdFragment extends BaseFragment {
 
             @Override
             public void onFailure(Call<ZHBaseBean> call, Throwable t) {
+                hideLoading();
                 Toast.makeText(mContext, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void showLoading() {
+        if (null != mLoading)
+            mLoading.setVisibility(View.VISIBLE);
+    }
+
+    public void hideLoading() {
+        if (null != mLoading)
+            mLoading.setVisibility(View.GONE);
     }
 }
