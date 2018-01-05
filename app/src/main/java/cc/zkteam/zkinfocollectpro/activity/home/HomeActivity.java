@@ -181,7 +181,7 @@ public class HomeActivity extends BaseActivity implements HasSupportFragmentInje
     @Override
     protected void initData() {
 //        testDI();
-//        verifyStoragePermissions(this);
+        verifyStoragePermissions(this);
 //
 //        JMHttpServer.getInstance().startServer(this, 8888, new File(SDCardUtils.getSDCardPaths(false).get(0)));
 //
