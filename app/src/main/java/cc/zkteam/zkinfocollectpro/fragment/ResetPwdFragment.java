@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.EncryptUtils;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
@@ -99,7 +101,7 @@ public class ResetPwdFragment extends BaseFragment {
             return;
         }
 
-        zhApiInstance.resetPwd(user, pwdOld, pwdNew).enqueue(new Callback<ZHBaseBean>() {
+        zhApiInstance.resetPwd(user, EncryptUtils.encryptMD5ToString(pwdOld), EncryptUtils.encryptMD5ToString(pwdNew)).enqueue(new Callback<ZHBaseBean>() {
             @Override
             public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
                 if (response.body() == null) return;
