@@ -68,7 +68,7 @@ public class PersonalInfoCollectFragment extends BaseFragment {
     ProgressBar mLoading;
 
     private boolean callEdit;
-    private String mPersonid = "2";
+    private String mPersonid = "";
 
     @Override
     public void setArguments(@Nullable Bundle args) {
@@ -76,8 +76,7 @@ public class PersonalInfoCollectFragment extends BaseFragment {
         if (args != null)
             mPersonid = args.getString(PERSON_ID);
 
-        if (TextUtils.isEmpty(mPersonid))
-            mPersonid = "2";
+        if (TextUtils.isEmpty(mPersonid)) mPersonid = "";
     }
 
     @Override
@@ -175,7 +174,7 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                     setText(tvPersonalInfoCollectCompletion, "采集状态：" + response.body().getMsg());
                     layoutChangeCollectionState.setVisibility(View.VISIBLE);
                     if (response.body().getType() == 3 || response.body().getType() == 4 || response.body().getType() == 2) {
-                        callEdit = true;
+                        callEdit = false;
                     } else {
                         callEdit = true;
                     }
