@@ -25,11 +25,11 @@ public class ZHAddhosePersonBean implements Serializable {
     public DataEntity data;
 
     public static class DataEntity {
-        public String p_id;
-        public String b_id;
-        public String h_id;
-        public String r_type;
-        public Object relation;
+        public String p_id = "";
+        public String b_id = "";
+        public String h_id = "";
+        public String r_type = "";
+        public String relation = "";
     }
 
     @Override

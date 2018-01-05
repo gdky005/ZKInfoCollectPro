@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -88,6 +89,8 @@ public class NewResidentsInfoActivity extends BaseActivity {
     EditText edittext232;
     @BindView(R.id.address_name)
     TextView addressName;
+    @BindView(R.id.pb_loading)
+    ProgressBar pbLoading;
     private String address = "";
     private String b_id = "";
     private String h_id = "";
@@ -101,11 +104,15 @@ public class NewResidentsInfoActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+        pbLoading.setVisibility(View.GONE);
         Intent intent = getIntent();
         address = intent.getStringExtra("address");
         b_id = intent.getStringExtra("b_id");
         h_id = intent.getStringExtra("h_id");
 
+        if (TextUtils.isEmpty(address)) {
+            ToastUtils.showLong("没有识别到地址，请返回重试");
+        }
         addressName.setText(address);
         sexedittext.setVisibility(View.VISIBLE);
         bornedittext.setVisibility(View.VISIBLE);
@@ -308,7 +315,17 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 picker3.setOnStringPickListener(new LinkagePicker.OnStringPickListener() {
                     @Override
                     public void onPicked(String first, String second, String third) {
-                        r_type = first;
+                        if ("邻居".equals(first)) {
+                            r_type = "1";
+                        } else if ("同事".equals(first)) {
+                            r_type = "2";
+                        } else if ("亲属".equals(first)) {
+                            r_type = "3";
+                        } else if ("家属".equals(first)) {
+                            r_type = "4";
+                        } else if ("房主".equals(first)) {
+                            r_type = "5";
+                        }
                         edittext23.setText(second);
                     }
                 });
@@ -316,21 +333,20 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 break;
 
             case R.id.savecommit:
+                pbLoading.setVisibility(View.VISIBLE);
                 //判断是扫码返回的页面还是手动填写的页面
                 int flag = sexedittext.getVisibility();
-                if (View.VISIBLE == flag) {
-                    if (!TextUtils.isEmpty(nameedittext.getText()) && !TextUtils.isEmpty(nationaledittext.getText()) && !TextUtils.isEmpty(edittext21.getText()) && !TextUtils.isEmpty(edittext22.getText())) {
-                        String name = nameedittext.getText().toString().trim();
-                        String sex = sexedittext.getText().toString().trim();
-                        String data = bornedittext.getText().toString().trim();
-                        String nation = nationaledittext.getText().toString().trim();
-                        String cardtype = cardButton.getText().toString().trim();
-                        String cardid = edittext21.getText().toString().trim();
-                        String address = edittext22.getText().toString().trim();
-                        String relation = edittext23.getText().toString().trim();
-
+                String name = nameedittext.getText().toString().trim();
+                String sex = View.VISIBLE == flag ? (sexedittext.getText().toString().trim()) : (sexedittext.getText().toString().trim());
+                String data = View.VISIBLE == flag ? (bornedittext.getText().toString().trim()) : (bornedittext2.getText().toString().trim());
+                String nation = nationaledittext.getText().toString().trim();
+                String cardtype = View.VISIBLE == flag ? (cardButton.getText().toString().trim()) : (cardButton2.getText().toString().trim());
+                String cardid = edittext21.getText().toString().trim();
+                String address = edittext22.getText().toString().trim();
+                String relation = edittext23.getText().toString().trim();
+                if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(sex) && !TextUtils.isEmpty(data) && !TextUtils.isEmpty(nation) && !TextUtils.isEmpty(cardtype) && !TextUtils.isEmpty(cardid) && !TextUtils.isEmpty(address) && !TextUtils.isEmpty(relation)) {
+                    try {
                         zkApi = ZHConnectionManager.getInstance().getZHApi();
-
                         zkApi.addhouseperson(
                                 MultipartBody.Part.createFormData("b_id", b_id),
                                 MultipartBody.Part.createFormData("h_id", h_id),
@@ -347,9 +363,11 @@ public class NewResidentsInfoActivity extends BaseActivity {
                         ).enqueue(new Callback<ZHAddhosePersonBean>() {
                             @Override
                             public void onResponse(Call<ZHAddhosePersonBean> call, Response<ZHAddhosePersonBean> response) {
+                                pbLoading.setVisibility(View.GONE);
                                 Log.d(TAG, "onResponse: " + response.body().toString());
                                 int status = response.body().status;
                                 String msg = response.body().msg;
+                                ZHAddhosePersonBean.DataEntity data = response.body().data;
 
                                 if (status == 2) {
                                     ZKDialogFragment dialogFragment = ZKDialogFragmentHelper.showDialog(getSupportFragmentManager(),
@@ -361,23 +379,51 @@ public class NewResidentsInfoActivity extends BaseActivity {
 
                                                     switch (result) {
                                                         case DialogInterface.BUTTON_POSITIVE: //确定
-                                                            ToastUtils.showShort("确定");
+                                                            pbLoading.setVisibility(View.VISIBLE);
+                                                            zkApi.addhousepersonconfirm(
+                                                                    MultipartBody.Part.createFormData("p_id", data.p_id),
+                                                                    MultipartBody.Part.createFormData("b_id", data.b_id),
+                                                                    MultipartBody.Part.createFormData("h_id", data.h_id),
+                                                                    MultipartBody.Part.createFormData("r_type", data.r_type),
+                                                                    MultipartBody.Part.createFormData("relation", data.relation)
+
+                                                            ).enqueue(new Callback<ZHAddhosePersonBean>() {
+                                                                @Override
+                                                                public void onResponse(Call<ZHAddhosePersonBean> call, Response<ZHAddhosePersonBean> response) {
+                                                                    pbLoading.setVisibility(View.GONE);
+                                                                    Log.d(TAG, "onResponse: " + response.body().toString());
+                                                                    int status = response.body().status;
+                                                                    int msg = response.body().status;
+                                                                    if (status == 1) {
+                                                                        ToastUtils.showLong(msg);
+                                                                    } else {
+                                                                        ToastUtils.showLong("数据提交失败，请重试");
+                                                                    }
+
+
+                                                                }
+
+                                                                @Override
+                                                                public void onFailure(Call<ZHAddhosePersonBean> call, Throwable throwable) {
+                                                                    pbLoading.setVisibility(View.GONE);
+                                                                    Log.d(TAG, "onResponse:失败 ");
+                                                                }
+                                                            });
+
                                                             break;
                                                         case DialogInterface.BUTTON_NEGATIVE: // 取消
-                                                            ToastUtils.showShort("取消");
                                                             break;
                                                     }
                                                 }
                                             }, new OnZKDialogCancelListener() {
                                                 @Override
                                                 public void onCancel() {
-                                                    ToastUtils.showShort("取消了本次操作");
                                                 }
                                             });
 
                                 } else if (status == 1) {
                                     ZKDialogFragment dialogFragment = ZKDialogFragmentHelper.showSingleBtnDialog(getSupportFragmentManager(),
-                                            "提交失败",
+                                            "提交成功",
                                             msg,
                                             new ZKDialogResultListener<Integer>() {
                                                 @Override
@@ -385,17 +431,14 @@ public class NewResidentsInfoActivity extends BaseActivity {
 
                                                     switch (result) {
                                                         case DialogInterface.BUTTON_POSITIVE: //确定
-                                                            ToastUtils.showShort("确定");
                                                             break;
                                                         case DialogInterface.BUTTON_NEGATIVE: // 取消
-                                                            ToastUtils.showShort("取消");
                                                             break;
                                                     }
                                                 }
                                             }, new OnZKDialogCancelListener() {
                                                 @Override
                                                 public void onCancel() {
-                                                    ToastUtils.showShort("取消了本次操作");
                                                 }
                                             });
                                 } else {
@@ -424,19 +467,20 @@ public class NewResidentsInfoActivity extends BaseActivity {
 
                             @Override
                             public void onFailure(Call<ZHAddhosePersonBean> call, Throwable throwable) {
+                                pbLoading.setVisibility(View.GONE);
                                 Log.d(TAG, "onResponse:失败 ");
 
                             }
                         });
-
-                    } else {
-                        ToastUtils.showLong("以上都是必填项，请全部填写在提交");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return;
                     }
+
                 } else {
-
-
+                    pbLoading.setVisibility(View.GONE);
+                    ToastUtils.showLong("以上都是必填项，请全部填写在提交");
                 }
-
                 break;
 
         }
@@ -461,21 +505,17 @@ public class NewResidentsInfoActivity extends BaseActivity {
                             String nation = wordsResultBean.getNation().getWords();
 
                             L.i("扫描的姓名是；" + name);
-                            // TODO: 2017/12/24 请处理这里的数据 ，并修改 UI
 
 
                             sexedittext.setVisibility(View.GONE);
                             bornedittext.setVisibility(View.GONE);
                             cardButton.setVisibility(View.GONE);
-//                            edittext23.setVisibility(View.GONE);
 
                             sexedittext2.setVisibility(View.VISIBLE);
                             bornedittext2.setVisibility(View.VISIBLE);
                             cardButton2.setVisibility(View.VISIBLE);
-//                            edittext232.setVisibility(View.VISIBLE);
 
                             cardButton2.setText("身份证");
-//                            edittext232.setText("房东与租客");
                             nameedittext.setText(name);
                             sexedittext2.setText(sex);
                             bornedittext2.setText(birthday);

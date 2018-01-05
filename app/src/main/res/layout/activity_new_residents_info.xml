@@ -17,10 +17,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <cc.zkteam.zkinfocollectpro.view.ZKTitleView
                 android:id="@+id/zk_title_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true" />
 
 
             <TextView
@@ -28,13 +30,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="45dip"
                 android:layout_below="@+id/zk_title_view"
-                android:layout_centerVertical="true"
                 android:layout_margin="8dp"
                 android:focusable="true"
                 android:text="XX街道  XX社区  XX小区  XX团  XX栋  XX单元  XX室 "
                 android:textColor="@color/black_333"
                 android:textSize="17dip" />
 
+            <ProgressBar
+                android:id="@+id/pb_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:indeterminateDrawable="@drawable/progressbar"
+                android:indeterminateTint="@color/colorPrimary"
+                android:visibility="visible" />
 
             <RelativeLayout
                 android:id="@+id/rel1"
@@ -87,9 +96,10 @@
                     android:layout_marginLeft="25dip"
                     android:layout_marginRight="25dip"
                     android:layout_toRightOf="@+id/name"
-                    android:maxLines="1"
                     android:background="@null"
                     android:hint="请输入"
+                    android:inputType="text"
+                    android:maxLines="1"
                     android:textSize="@dimen/basic_textview_size" />
 
 
@@ -128,8 +138,8 @@
                     android:layout_marginRight="25dip"
                     android:layout_toRightOf="@+id/sex"
                     android:background="@null"
-                    android:textSize="@dimen/basic_textview_size"
                     android:focusable="false"
+                    android:textSize="@dimen/basic_textview_size"
                     android:visibility="gone" />
 
 
@@ -168,8 +178,8 @@
                     android:layout_marginRight="25dip"
                     android:layout_toRightOf="@+id/born"
                     android:background="@null"
-                    android:textSize="@dimen/basic_textview_size"
                     android:focusable="false"
+                    android:textSize="@dimen/basic_textview_size"
                     android:visibility="gone" />
 
             </RelativeLayout>
@@ -198,6 +208,8 @@
                     android:layout_toRightOf="@+id/national"
                     android:background="@null"
                     android:hint="请输入"
+                    android:inputType="text"
+
                     android:maxLines="1"
                     android:textSize="@dimen/basic_textview_size" />
 
@@ -236,8 +248,8 @@
                     android:layout_marginRight="25dip"
                     android:layout_toRightOf="@+id/card"
                     android:background="@null"
-                    android:textSize="@dimen/basic_textview_size"
                     android:focusable="false"
+                    android:textSize="@dimen/basic_textview_size"
                     android:visibility="gone" />
 
 
@@ -269,6 +281,7 @@
                     android:background="@null"
                     android:hint="请输入"
                     android:maxLines="1"
+                    android:inputType="text"
                     android:textSize="@dimen/basic_textview_size" />
 
             </RelativeLayout>
