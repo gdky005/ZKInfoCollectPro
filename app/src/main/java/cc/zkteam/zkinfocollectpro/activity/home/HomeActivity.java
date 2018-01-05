@@ -163,8 +163,6 @@ public class HomeActivity extends BaseActivity implements HasSupportFragmentInje
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-
-        ZHConfigDataManager.getInstance().refreshConfigData();
     }
 
     @Override
@@ -180,6 +178,7 @@ public class HomeActivity extends BaseActivity implements HasSupportFragmentInje
     @Override
     protected void initListener() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        mViewPager.setOffscreenPageLimit(2);
         mViewPager.setViewPager(onPageChangeListener, new SectionsPagerAdapter(getSupportFragmentManager()));
     }
 
