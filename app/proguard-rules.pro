@@ -43,3 +43,6 @@
 -dontwarn com.networkbench.**
 -keepattributes Exceptions, Signature, InnerClasses
 # End NetworkBench Lens
+
+#picasso
+-dontwarn com.squareup.okhttp.**

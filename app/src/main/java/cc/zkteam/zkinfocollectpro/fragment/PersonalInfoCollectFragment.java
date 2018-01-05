@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +64,8 @@ public class PersonalInfoCollectFragment extends BaseFragment {
     RelativeLayout layoutChangeCollectionState;
     @BindView(R.id.list_personal_info)
     ZKRecyclerView listPersonalInfo;
+    @BindView(R.id.pb_collect_loading)
+    ProgressBar mLoading;
 
     private boolean callEdit;
     private String mPersonid = "2";
@@ -98,9 +101,11 @@ public class PersonalInfoCollectFragment extends BaseFragment {
     @Override
     public void initData(Bundle savedInstanceState) {
         requestCollectionStatus();
+        showLoading();
         zhApiInstance.getPersonalSimpleInfo(mPersonid).enqueue(new Callback<PersonalSimpleInfoBean>() {
             @Override
             public void onResponse(Call<PersonalSimpleInfoBean> call, Response<PersonalSimpleInfoBean> response) {
+                hideLoading();
                 if (null == PersonalInfoCollectFragment.this || null == response.body() || 1 != (response.body().getStatus()) || null == response.body().getData()) {
                     Toast.makeText(mContext, "信息请求失败，请稍后重试", Toast.LENGTH_SHORT).show();
                     return;
@@ -120,6 +125,7 @@ public class PersonalInfoCollectFragment extends BaseFragment {
 
             @Override
             public void onFailure(Call<PersonalSimpleInfoBean> call, Throwable t) {
+                hideLoading();
                 if (null == PersonalInfoCollectFragment.this) return;
                 Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -167,6 +173,7 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                 if (null == PersonalInfoCollectFragment.this || null == response.body()) return;
                 if (1 == (response.body().getStatus())) {
                     setText(tvPersonalInfoCollectCompletion, "采集状态：" + response.body().getMsg());
+                    layoutChangeCollectionState.setVisibility(View.VISIBLE);
                     if (response.body().getType() == 3 || response.body().getType() == 4 || response.body().getType() == 2) {
                         callEdit = true;
                     } else {
@@ -232,5 +239,15 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                 picker3.show();
                 break;
         }
+    }
+
+    public void showLoading() {
+        if (null != mLoading)
+            mLoading.setVisibility(View.VISIBLE);
+    }
+
+    public void hideLoading() {
+        if (null != mLoading)
+            mLoading.setVisibility(View.GONE);
     }
 }

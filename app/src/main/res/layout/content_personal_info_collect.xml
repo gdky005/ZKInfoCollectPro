@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,126 +7,144 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <cc.zkteam.zkinfocollectpro.view.ZKImageView
-            android:id="@+id/img_personal_avatar"
-            android:layout_width="79dp"
-            android:layout_height="118dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:background="@mipmap/ic_launcher" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="11dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tv_personal_info_collect_name"
-                style="@style/TvPersonalInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="姓名："
-                android:textStyle="bold" />
+            <cc.zkteam.zkinfocollectpro.view.ZKImageView
+                android:id="@+id/img_personal_avatar"
+                android:layout_width="79dp"
+                android:layout_height="118dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:scaleType="fitXY" />
 
-            <TextView
-                android:id="@+id/tv_personal_info_collect_id"
-                style="@style/TvPersonalInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:text="身份证号：" />
-
-            <TextView
-                android:id="@+id/tv_personal_info_collect_project"
-                style="@style/TvPersonalInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:text="性别：  民族：" />
-
-            <TextView
-                android:id="@+id/tv_personal_info_collect_completed"
-                style="@style/TvPersonalInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:text="采集项：  " />
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="11dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_personal_info_collect_completion"
+                    android:id="@+id/tv_personal_info_collect_name"
                     style="@style/TvPersonalInfo"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="采集状态：" />
+                    android:text=""
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_personal_info_collect_id"
+                    style="@style/TvPersonalInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/tv_personal_info_collect_project"
+                    style="@style/TvPersonalInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/tv_personal_info_collect_completed"
+                    style="@style/TvPersonalInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:text="" />
 
                 <RelativeLayout
-                    android:id="@+id/layout_change_collection_state"
-                    android:layout_width="80dp"
-                    android:layout_height="21dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:background="@drawable/bg_change_collect_state"
-                    android:padding="3dp">
-
-                    <ImageView
-                        android:id="@+id/img_change_left"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center_vertical"
-                        android:src="@drawable/icon_left" />
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/btn_modification_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:gravity="center"
-                        android:text="状态修改"
-                        android:textColor="#666666"
-                        android:textSize="12sp" />
-
-                    <ImageView
-                        android:id="@+id/img_change_right"
+                        android:id="@+id/tv_personal_info_collect_completion"
+                        style="@style/TvPersonalInfo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="" />
+
+                    <RelativeLayout
+                        android:id="@+id/layout_change_collection_state"
+                        android:layout_width="80dp"
+                        android:layout_height="21dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/icon_right" />
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:background="@drawable/bg_change_collect_state"
+                        android:padding="3dp"
+                        android:visibility="gone">
 
+                        <ImageView
+                            android:id="@+id/img_change_left"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/icon_left" />
+
+                        <TextView
+                            android:id="@+id/btn_modification_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:gravity="center"
+                            android:text="状态修改"
+                            android:textColor="#666666"
+                            android:textSize="12sp" />
+
+                        <ImageView
+                            android:id="@+id/img_change_right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/icon_right" />
+
+                    </RelativeLayout>
                 </RelativeLayout>
-            </RelativeLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
+        <cc.zkteam.zkinfocollectpro.view.ZKRecyclerView
+            android:id="@+id/list_personal_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="17dp"
+            android:background="#ffffff"
+            android:visibility="visible" />
+
     </LinearLayout>
 
-    <cc.zkteam.zkinfocollectpro.view.ZKRecyclerView
-        android:id="@+id/list_personal_info"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="17dp"
-        android:background="#ffffff"
-        android:visibility="visible" />
-</LinearLayout>
+    <ProgressBar
+        android:id="@+id/pb_collect_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateDrawable="@drawable/progressbar"
+        android:indeterminateTint="@color/colorPrimary"
+        android:visibility="gone" />
+
+</RelativeLayout>

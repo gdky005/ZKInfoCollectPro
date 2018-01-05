@@ -113,6 +113,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void initToolbar(Toolbar toolbar) {
         setSupportActionBar(toolbar);
         //  设置了左上角的返回按钮
+        if (getSupportActionBar() == null) {
+            return;
+        }
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);

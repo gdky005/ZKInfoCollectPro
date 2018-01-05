@@ -2,6 +2,8 @@ package cc.zkteam.zkinfocollectpro.activity;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.MotionEvent;
@@ -26,6 +28,7 @@ import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHLoginBean;
+import cc.zkteam.zkinfocollectpro.managers.ZHConfigDataManager;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.managers.ZHMemoryCacheManager;
 import cc.zkteam.zkinfocollectpro.retrofit2.ZHCallback;
@@ -58,6 +61,11 @@ public class LoginActivity extends BaseActivity {
     private ZHApi zhApi;
     private boolean isHidePwd = true;// 输入框密码是否是隐藏的，默认为true
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ZHConfigDataManager.getInstance().refreshConfigData();
+    }
 
     @Override
     protected int getLayoutId() {
@@ -155,7 +163,9 @@ public class LoginActivity extends BaseActivity {
                     if (1 == baseBean.getStatus()) {
                         ZKICApplication.zhLoginBean = result;
                         ZHMemoryCacheManager.getInstance().setUserInfo(result);
-
+                        if (ZKICApplication.homeActivity != null) {
+                            ZKICApplication.homeActivity.finish();
+                        }
                         PageCtrl.startActivity(LoginActivity.this, HomeActivity.class);
                         finish();
                         return;

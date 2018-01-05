@@ -105,8 +105,10 @@ public class SignInFragment extends BaseFragment {
     }
 
     public void hideSetPage() {
-        layoutSlideMenu.setVisibility(View.GONE);
-        setIsShow = false;
+        if (layoutSlideMenu != null) {
+            layoutSlideMenu.setVisibility(View.GONE);
+            setIsShow = false;
+        }
     }
 
     private boolean setIsShow;

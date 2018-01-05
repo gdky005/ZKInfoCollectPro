@@ -52,6 +52,7 @@ public class ResetPwdFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), LoginActivity.class));
+                getActivity().finish();
             }
         });
         titleResetPwd.leftIV.setOnClickListener(new View.OnClickListener() {
