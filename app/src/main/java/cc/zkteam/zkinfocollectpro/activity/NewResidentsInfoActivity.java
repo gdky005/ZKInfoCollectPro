@@ -191,7 +191,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
                     @Override
                     public void onDatePicked(String year, String month, String day) {
 
-                        bornedittext.setText(year + month +  day );
+                        bornedittext.setText(year + month + day);
                     }
                 });
                 picker2.setOnWheelListener(new DatePicker.OnWheelListener() {
@@ -481,12 +481,43 @@ public class NewResidentsInfoActivity extends BaseActivity {
                         BDIdCardBean.WordsResultBean wordsResultBean = (BDIdCardBean.WordsResultBean) bundle.getSerializable(IDCardScanActivity.KEY_ID_CARD_INFO_BEAN);
 
                         if (wordsResultBean != null) {
-                            String name = wordsResultBean.getName().getWords();
-                            String sex = wordsResultBean.getSex().getWords();
-                            String birthday = wordsResultBean.getBirthday().getWords();
-                            String idCardNumber = wordsResultBean.getIdCardNumber().getWords();
-                            String address = wordsResultBean.getAddress().getWords();
-                            String nation = wordsResultBean.getNation().getWords();
+                            BDIdCardBean.NameBean nameBean = wordsResultBean.getName();
+                            BDIdCardBean.SexBean sexBean = wordsResultBean.getSex();
+                            BDIdCardBean.BirthdayBean birthdayBean = wordsResultBean.getBirthday();
+                            BDIdCardBean.IdCardNumberBean idCardNumberBean = wordsResultBean.getIdCardNumber();
+                            BDIdCardBean.AddressBean addressBean = wordsResultBean.getAddress();
+                            BDIdCardBean.NationBean nationBean = wordsResultBean.getNation();
+
+                            String name = null;
+                            String sex = null;
+                            String birthday = null;
+                            String idCardNumber = null;
+                            String address = null;
+                            String nation = null;
+
+                            if (nameBean != null) {
+                                name = nameBean.getWords();
+                            }
+
+                            if (sexBean != null) {
+                                sex = sexBean.getWords();
+                            }
+
+                            if (birthdayBean != null) {
+                                birthday = birthdayBean.getWords();
+                            }
+
+                            if (idCardNumberBean != null) {
+                                idCardNumber = idCardNumberBean.getWords();
+                            }
+
+                            if (addressBean != null) {
+                                address = addressBean.getWords();
+                            }
+
+                            if (nationBean != null) {
+                                nation = nationBean.getWords();
+                            }
 
                             L.i("扫描的姓名是；" + name);
 

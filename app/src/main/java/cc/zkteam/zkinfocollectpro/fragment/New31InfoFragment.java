@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.blankj.utilcode.util.ToastUtils;
 
@@ -16,6 +17,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
@@ -45,6 +47,9 @@ public class New31InfoFragment extends BaseFragment {
     ZKModuleListLayout new31ZkModuleListLayout;
     @BindView(R.id.new_31_commit)
     Button new31Commit;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+    Unbinder unbinder;
 
     private String titleName;
     private String pageType;
@@ -68,6 +73,7 @@ public class New31InfoFragment extends BaseFragment {
     @Override
     public void initView(View rootView) {
         new31Commit.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
 
     }
 
@@ -160,10 +166,13 @@ public class New31InfoFragment extends BaseFragment {
                 } else {
                     ToastUtils.showShort("new31ZkModuleListLayout is null!");
                 }
+
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ZK31Bean> call, Throwable throwable) {
+                progressBar.setVisibility(View.GONE);
                 L.e("onFailure: ", throwable);
                 ToastUtils.showShort("onFailure: " + throwable.getMessage());
             }

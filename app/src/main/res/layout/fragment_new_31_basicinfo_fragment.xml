@@ -1,33 +1,49 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/dp_30">
-
-        <cc.zkteam.zkinfocollectpro.view.kind.ZKModuleListLayout
-            android:id="@+id/new_31_zk_module_list_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/dp_30">
+
+            <cc.zkteam.zkinfocollectpro.view.kind.ZKModuleListLayout
+                android:id="@+id/new_31_zk_module_list_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
 
 
-        <Button
-            android:id="@+id/new_31_commit"
+            <Button
+                android:id="@+id/new_31_commit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dip"
+                android:background="@drawable/basicinfo_btn_commit"
+                android:paddingLeft="@dimen/dp_60"
+                android:paddingRight="@dimen/dp_60"
+                android:text="@string/new_31_commit_text"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25dip"
-            android:paddingRight="@dimen/dp_60"
-            android:paddingLeft="@dimen/dp_60"
-            android:background="@drawable/basicinfo_btn_commit"
-            android:text="@string/new_31_commit_text"
-            android:textColor="@color/white"/>
-    </LinearLayout>
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:indeterminateDrawable="@drawable/progressbar"
+            android:indeterminateTint="@color/colorPrimary"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
 
 </ScrollView>
