@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-import com.blankj.utilcode.util.EncodeUtils;
+import com.blankj.utilcode.util.EncryptUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.networkbench.agent.impl.NBSAppAgent;
 
@@ -89,8 +89,8 @@ public class LoginActivity extends BaseActivity {
      */
     private void hideOrShowPwd() {
         final Drawable drawableEyeOpen = getResources().getDrawable(R.mipmap.login_eyes);
-        drawableEyeOpen.setBounds(0,0,60,60);//这一步不能省略
-        et_pwd.setCompoundDrawables(null,null,drawableEyeOpen,null);
+        drawableEyeOpen.setBounds(0, 0, 60, 60);//这一步不能省略
+        et_pwd.setCompoundDrawables(null, null, drawableEyeOpen, null);
         final Drawable[] drawables = et_pwd.getCompoundDrawables();
         final int eyeWidth = drawables[2].getBounds().width();// 眼睛图标的宽度
         et_pwd.setOnTouchListener(new View.OnTouchListener() {
@@ -149,7 +149,7 @@ public class LoginActivity extends BaseActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         String userNum = etUserNum.getText().toString();
-        String userPwd = EncodeUtils.urlEncode(et_pwd.getText().toString());
+        String userPwd = EncryptUtils.encryptMD5ToString(et_pwd.getText().toString());
 //        String userPwd = et_pwd.getText().toString();
 
         zhApi.login(userNum, userPwd).enqueue(new ZHCallback<ZHLoginBean>() {
