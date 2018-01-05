@@ -3,9 +3,11 @@ package cc.zkteam.zkinfocollectpro.fragment;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.ToastUtils;
 
@@ -16,6 +18,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
@@ -47,9 +50,10 @@ public class New31InfoFragment extends BaseFragment {
     ZKModuleListLayout new31ZkModuleListLayout;
     @BindView(R.id.new_31_commit)
     Button new31Commit;
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
     Unbinder unbinder;
+    @BindView(R.id.new_31_ll)
+    LinearLayout new31Ll;
+    Unbinder unbinder1;
 
     private String titleName;
     private String pageType;
@@ -72,8 +76,8 @@ public class New31InfoFragment extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
+        new31Ll.setVisibility(View.GONE);
         new31Commit.setVisibility(View.GONE);
-        progressBar.setVisibility(View.VISIBLE);
 
     }
 
@@ -167,15 +171,29 @@ public class New31InfoFragment extends BaseFragment {
                     ToastUtils.showShort("new31ZkModuleListLayout is null!");
                 }
 
-                progressBar.setVisibility(View.GONE);
+                new31Ll.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onFailure(Call<ZK31Bean> call, Throwable throwable) {
-                progressBar.setVisibility(View.GONE);
+                new31Ll.setVisibility(View.VISIBLE);
                 L.e("onFailure: ", throwable);
                 ToastUtils.showShort("onFailure: " + throwable.getMessage());
             }
         });
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder1 = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder1.unbind();
     }
 }

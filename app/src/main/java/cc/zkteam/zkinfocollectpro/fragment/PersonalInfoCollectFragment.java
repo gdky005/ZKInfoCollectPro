@@ -112,11 +112,15 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                 }
 
                 PersonalSimpleInfoBean.DataBean infoBean = response.body().getData();
-                if (TextUtils.isEmpty(infoBean.getImg())) {
-                    imgPersonalAvatar.setImageResource(R.mipmap.ic_launcher);
-                } else {
-                    imgPersonalAvatar.setImageURI(infoBean.getImg());
+
+                if (imgPersonalAvatar != null) {
+                    if (TextUtils.isEmpty(infoBean.getImg())) {
+                        imgPersonalAvatar.setImageResource(R.mipmap.ic_launcher);
+                    } else {
+                        imgPersonalAvatar.setImageURI(infoBean.getImg());
+                    }
                 }
+
                 setText(tvPersonalInfoCollectName, "姓名：" + infoBean.getName());
                 setText(tvPersonalInfoCollectId, "身份证号：" + infoBean.getId_card());
                 setText(tvPersonalInfoCollectProject, "性别：" + infoBean.getSex() + "    民族：" + infoBean.getNation());
