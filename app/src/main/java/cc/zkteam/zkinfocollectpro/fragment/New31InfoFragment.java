@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,7 +24,6 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
@@ -168,16 +165,17 @@ public class New31InfoFragment extends BaseFragment {
     public void onDestroy() {
         EventBus.getDefault().unregister(this);
         super.onDestroy();
-
-        if (!zhBaseBeanCall.isCanceled()) {
-            zhBaseBeanCall.cancel();
-        }
     }
 
     @Override
     public void initView(View rootView) {
-        new31Ll.setVisibility(View.GONE);
-        new31Commit.setVisibility(View.GONE);
+        if(new31Ll != null) {
+            new31Ll.setVisibility(View.GONE);
+        }
+
+        if(new31Commit != null) {
+            new31Commit.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -329,29 +327,18 @@ public class New31InfoFragment extends BaseFragment {
                     ToastUtils.showShort("new31ZkModuleListLayout is null!");
                 }
 
-                new31Ll.setVisibility(View.VISIBLE);
+                if (new31Ll != null)
+                     new31Ll.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onFailure(Call<ZK31Bean> call, Throwable throwable) {
-                new31Ll.setVisibility(View.VISIBLE);
+                if (new31Ll != null)
+                    new31Ll.setVisibility(View.VISIBLE);
                 L.e("onFailure: ", throwable);
                 ToastUtils.showShort("onFailure: " + throwable.getMessage());
             }
         });
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder1 = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder1.unbind();
-    }
 }
