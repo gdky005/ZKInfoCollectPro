@@ -74,11 +74,11 @@ public abstract class BaseFragment extends Fragment {
             TextView tv = new TextView(getActivity());
             tv.setText(ZKManager.getInstance().getWatermarkText());
             tv.setTextSize(25);
-            tv.setTextColor(Color.BLACK);
+            tv.setTextColor(Color.RED);
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-            params.gravity = Gravity.END;
-            ((ViewGroup) rootView).addView(tv, params);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(0, 100, 0, 0);
+            ((ViewGroup) getActivity().getWindow().getDecorView().findViewById(android.R.id.content)).addView(tv, params);
         }
 
         if (!TextUtils.isEmpty(ZKManager.getInstance().getWarningText())) {
