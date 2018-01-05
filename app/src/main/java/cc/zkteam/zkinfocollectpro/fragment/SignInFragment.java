@@ -243,6 +243,7 @@ public class SignInFragment extends BaseFragment {
             @Override
             public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
 //                layoutSignSuccess.setVisibility(View.VISIBLE);
+                if (null == getActivity()) return;
                 ZHBaseBean zhBaseBean = response.body();
                 if (zhBaseBean != null && !TextUtils.isEmpty(zhBaseBean.getMsg())) {
                     setText(tvSignSuccessMsg, zhBaseBean.getMsg());
@@ -264,6 +265,7 @@ public class SignInFragment extends BaseFragment {
 
             @Override
             public void onFailure(Call<ZHBaseBean> call, Throwable t) {
+                if (null == getActivity()) return;
                 Toast.makeText(getActivity(), "签到失败：" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

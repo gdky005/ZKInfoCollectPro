@@ -2,6 +2,7 @@ package cc.zkteam.zkinfocollectpro.base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
@@ -66,8 +67,8 @@ public abstract class BaseActivity extends AppCompatActivity {
             TextView tv = new TextView(this);
             tv.setText(ZKManager.getInstance().getWatermarkText());
             tv.setTextSize(25);
-            tv.setTextColor(getResources().getColor(R.color.red));
-
+            tv.setTextColor(Color.BLACK);
+            tv.setPadding(0, getResources().getDisplayMetrics().heightPixels / 2, 0, 0);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             addContentView(tv, params);
         }
