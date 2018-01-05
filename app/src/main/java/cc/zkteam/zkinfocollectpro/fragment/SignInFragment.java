@@ -230,7 +230,7 @@ public class SignInFragment extends BaseFragment {
             public void onReceiveLocation(BDLocation bdLocation) {
                 double lon = bdLocation.getLongitude();
                 double lat = bdLocation.getLatitude();
-                String location = bdLocation.getLocationDescribe();
+                String location = bdLocation.getAddrStr();
                 doSign(lon, lat, location);
             }
         });
