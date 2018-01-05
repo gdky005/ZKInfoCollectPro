@@ -105,9 +105,9 @@ public class NewResidentsInfoActivity extends BaseActivity {
     protected void initViews() {
         pbLoading.setVisibility(View.GONE);
         Intent intent = getIntent();
-        address = intent.getStringExtra("address");
-        b_id = intent.getStringExtra("b_id");
-        h_id = intent.getStringExtra("h_id");
+        address = intent.getStringExtra("address") != null ? intent.getStringExtra("address") : "";
+        b_id = intent.getStringExtra("b_id") != null ? intent.getStringExtra("b_id") : "";
+        h_id = intent.getStringExtra("h_id") != null ? intent.getStringExtra("h_id") : "";
         L.i("h_id；" + h_id + "b_id；" + b_id);
         if (TextUtils.isEmpty(address)) {
             ToastUtils.showLong("没有识别到地址，请返回重试");
