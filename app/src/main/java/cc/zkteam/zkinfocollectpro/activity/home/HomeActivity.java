@@ -15,23 +15,18 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 
 import com.blankj.utilcode.util.PermissionUtils;
-import com.blankj.utilcode.util.SDCardUtils;
 import com.blankj.utilcode.util.ToastUtils;
-
-import java.io.File;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.ZKICApplication;
 import cc.zkteam.zkinfocollectpro.activity.MyBean;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.fragment.SignInFragment;
 import cc.zkteam.zkinfocollectpro.fragment.datacollectfirst.DataCollectFragment;
 import cc.zkteam.zkinfocollectpro.fragment.problem.ProblemReportFragment;
-import cc.zkteam.zkinfocollectpro.localserver.JMHttpServer;
-import cc.zkteam.zkinfocollectpro.managers.ZHConfigDataManager;
-import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.view.ZKViewPager;
 import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
@@ -163,6 +158,7 @@ public class HomeActivity extends BaseActivity implements HasSupportFragmentInje
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
+        ZKICApplication.homeActivity = this;
     }
 
     @Override
@@ -185,19 +181,21 @@ public class HomeActivity extends BaseActivity implements HasSupportFragmentInje
     @Override
     protected void initData() {
 //        testDI();
-        verifyStoragePermissions(this);
-
-        JMHttpServer.getInstance().startServer(this, 8888, new File(SDCardUtils.getSDCardPaths(false).get(0)));
-
-        String address = JMHttpServer.getInstance().getLocalHostUrl(this);
-
-        L.d("当前的本地服务器路径是：" + address);
+//        verifyStoragePermissions(this);
+//
+//        JMHttpServer.getInstance().startServer(this, 8888, new File(SDCardUtils.getSDCardPaths(false).get(0)));
+//
+//        String address = JMHttpServer.getInstance().getLocalHostUrl(this);
+//
+//        L.d("当前的本地服务器路径是：" + address);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        JMHttpServer.getInstance().stopServer();
+        SignInFragment signInFragment = (SignInFragment) TABLE_FRAGMENT[0];
+        if (signInFragment != null) signInFragment.setSetIsShow(false);
+        ZKICApplication.homeActivity = null;
     }
 
     /**

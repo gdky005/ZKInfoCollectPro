@@ -163,7 +163,9 @@ public class LoginActivity extends BaseActivity {
                     if (1 == baseBean.getStatus()) {
                         ZKICApplication.zhLoginBean = result;
                         ZHMemoryCacheManager.getInstance().setUserInfo(result);
-
+                        if (ZKICApplication.homeActivity != null) {
+                            ZKICApplication.homeActivity.finish();
+                        }
                         PageCtrl.startActivity(LoginActivity.this, HomeActivity.class);
                         finish();
                         return;
