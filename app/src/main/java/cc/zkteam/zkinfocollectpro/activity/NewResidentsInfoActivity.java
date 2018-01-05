@@ -6,10 +6,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -71,8 +70,6 @@ public class NewResidentsInfoActivity extends BaseActivity {
     @BindView(R.id.savecommit)
     Button savecommit;
 
-    @BindView(R.id.drawerLayout)
-    DrawerLayout drawerLayout;
 
     @BindView(R.id.card_button)
     Button cardButton;
@@ -91,6 +88,8 @@ public class NewResidentsInfoActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
         return R.layout.activity_new_residents_info;
     }
 
@@ -107,9 +106,6 @@ public class NewResidentsInfoActivity extends BaseActivity {
         }
         addressName.setText(address);
 
-        drawerLayout.setScrimColor(Color.TRANSPARENT);
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED,
-                Gravity.END);
 
 
         zkTitleView.setLeftIVSrc(R.drawable.icon_back);
