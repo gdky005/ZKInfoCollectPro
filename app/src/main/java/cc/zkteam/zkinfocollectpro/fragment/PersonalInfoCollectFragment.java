@@ -105,7 +105,8 @@ public class PersonalInfoCollectFragment extends BaseFragment {
             @Override
             public void onResponse(Call<PersonalSimpleInfoBean> call, Response<PersonalSimpleInfoBean> response) {
                 hideLoading();
-                if (null == PersonalInfoCollectFragment.this || null == response.body() || 1 != (response.body().getStatus()) || null == response.body().getData()) {
+                if (null == imgPersonalAvatar) return;
+                if (null == response.body() || 1 != (response.body().getStatus()) || null == response.body().getData()) {
                     Toast.makeText(mContext, "信息请求失败，请稍后重试", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -133,7 +134,8 @@ public class PersonalInfoCollectFragment extends BaseFragment {
         zhApiInstance.getPersonalInfoList().enqueue(new Callback<CollectItemBean>() {
             @Override
             public void onResponse(Call<CollectItemBean> call, Response<CollectItemBean> response) {
-                if (null == PersonalInfoCollectFragment.this || null == response.body()) return;
+                if (null == PersonalInfoCollectFragment.this || null == response.body() || null == listPersonalInfo)
+                    return;
 
                 if (null == response.body() || response.body().getStatus() != 1) {
                     Toast.makeText(mContext, "信息请求失败，请稍后重试", Toast.LENGTH_SHORT).show();
@@ -169,7 +171,8 @@ public class PersonalInfoCollectFragment extends BaseFragment {
         zhApiInstance.changeCollectionStatus(mPersonid, "getstatus", "memo").enqueue(new Callback<ZHBaseBean>() {
             @Override
             public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
-                if (null == PersonalInfoCollectFragment.this || null == response.body()) return;
+                if (null == PersonalInfoCollectFragment.this || null == response.body() || null == layoutChangeCollectionState)
+                    return;
                 if (1 == (response.body().getStatus())) {
                     setText(tvPersonalInfoCollectCompletion, "采集状态：" + response.body().getMsg());
                     layoutChangeCollectionState.setVisibility(View.VISIBLE);
@@ -215,7 +218,7 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                         zhApiInstance.changeCollectionStatus(mPersonid, act, "memo").enqueue(new Callback<ZHBaseBean>() {
                             @Override
                             public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
-                                if (null == PersonalInfoCollectFragment.this || null == response.body()) {
+                                if (null == PersonalInfoCollectFragment.this || null == response.body() || null == mContext) {
                                     Toast.makeText(mContext, "请求失败，请稍后重试", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
