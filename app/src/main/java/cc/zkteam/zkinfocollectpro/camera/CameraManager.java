@@ -152,7 +152,7 @@ public class CameraManager {
         if (fixPictureSize != null) {
             int width = fixPictureSize.width;
             int height = fixPictureSize.height;
-            L.i("最合适 生成图片尺寸是：" + width + "x" + height);
+//            L.i("最合适 生成图片尺寸是：" + width + "x" + height);
             parameters.setPictureSize(fixPictureSize.width, fixPictureSize.height);
         }
     }
@@ -183,10 +183,14 @@ public class CameraManager {
     public synchronized void startPreview() {
         Log.e(TAG, "startPreview");
         Camera theCamera = camera;
-        if (theCamera != null && !previewing) {
-            theCamera.startPreview();
-            previewing = true;
-            autoFocusManager = new AutoFocusManager(camera);
+        try {
+            if (theCamera != null && !previewing) {
+                theCamera.startPreview();
+                previewing = true;
+                autoFocusManager = new AutoFocusManager(camera);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -210,10 +214,14 @@ public class CameraManager {
      */
     public synchronized void openLight() {
         Log.e(TAG, "openLight");
-        if (camera != null) {
-            parameters = camera.getParameters();
-            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-            camera.setParameters(parameters);
+        try {
+            if (camera != null) {
+                parameters = camera.getParameters();
+                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                camera.setParameters(parameters);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -222,10 +230,14 @@ public class CameraManager {
      */
     public synchronized void offLight() {
         Log.e(TAG, "offLight");
-        if (camera != null) {
-            parameters = camera.getParameters();
-            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-            camera.setParameters(parameters);
+        try {
+            if (camera != null) {
+                parameters = camera.getParameters();
+                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                camera.setParameters(parameters);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -238,9 +250,10 @@ public class CameraManager {
      */
     public synchronized void takePicture(final Camera.ShutterCallback shutter, final Camera.PictureCallback raw,
                                          final Camera.PictureCallback jpeg) {
-
-        camera.takePicture(shutter, raw, jpeg);
-
-
+        try {
+            camera.takePicture(shutter, raw, jpeg);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
