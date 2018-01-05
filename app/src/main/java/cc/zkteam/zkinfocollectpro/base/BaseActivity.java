@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,10 +20,12 @@ import com.bugtags.library.Bugtags;
 import com.networkbench.agent.impl.NBSAppAgent;
 
 import butterknife.ButterKnife;
-import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.ZKICApplication;
 import cc.zkteam.zkinfocollectpro.activity.LoginActivity;
 import cc.zkteam.zkinfocollectpro.managers.ZKManager;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 
 /**
@@ -120,6 +123,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
+    }
+
+    protected void setVisibility(View view, boolean isShow) {
+        if (view != null) {
+            view.setVisibility(isShow ? VISIBLE : GONE);
+        }
     }
 
     @Override
