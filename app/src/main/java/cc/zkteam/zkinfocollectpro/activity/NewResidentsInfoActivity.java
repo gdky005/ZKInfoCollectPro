@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,7 @@ import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragment;
 import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragmentHelper;
 import cc.zkteam.zkinfocollectpro.dialog.ZKDialogResultListener;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
+import cc.zkteam.zkinfocollectpro.utils.IdentityUtils;
 import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.utils.List2StringArrayUtils;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
@@ -88,7 +91,6 @@ public class NewResidentsInfoActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         return R.layout.activity_new_residents_info;
     }
@@ -105,7 +107,6 @@ public class NewResidentsInfoActivity extends BaseActivity {
             ToastUtils.showLong("没有识别到地址，请返回重试");
         }
         addressName.setText(address);
-
 
 
         zkTitleView.setLeftIVSrc(R.drawable.icon_back);
@@ -187,7 +188,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
                     @Override
                     public void onDatePicked(String year, String month, String day) {
 
-                        bornedittext.setText(year + month + day);
+                        bornedittext.setText(year + "-" + month + "-" + day);
                     }
                 });
                 picker2.setOnWheelListener(new DatePicker.OnWheelListener() {
@@ -312,6 +313,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 break;
 
             case R.id.savecommit:
+
                 pbLoading.setVisibility(View.VISIBLE);
                 //判断是扫码返回的页面还是手动填写的页面
                 String name = nameedittext.getText().toString().trim();
@@ -322,6 +324,14 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 String cardid = edittext21.getText().toString().trim();
                 String address = edittext22.getText().toString().trim();
                 String relation = edittext23.getText().toString().trim();
+                if ("身份证".equals(cardtype)) {
+                    boolean IDcardValid = IdentityUtils.checkIDCard(cardid);
+                    if (!IDcardValid) {
+                        ToastUtils.showLong("身份证格式有误，请核对后重试");
+                        pbLoading.setVisibility(View.GONE);
+                        break;
+                    }
+                }
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(sex) && !TextUtils.isEmpty(data) && !TextUtils.isEmpty(nation) && !TextUtils.isEmpty(cardtype) && !TextUtils.isEmpty(cardid) && !TextUtils.isEmpty(address) && !TextUtils.isEmpty(relation)) {
                     try {
                         zkApi = ZHConnectionManager.getInstance().getZHApi();
@@ -374,6 +384,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
                                                                     String msg = response.body().msg;
                                                                     if (status == 1) {
                                                                         ToastUtils.showLong(msg);
+                                                                        NewResidentsInfoActivity.this.finish();
                                                                     } else {
                                                                         ToastUtils.showLong("数据提交失败，请重试");
                                                                     }
@@ -409,6 +420,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
 
                                                     switch (result) {
                                                         case DialogInterface.BUTTON_POSITIVE: //确定
+                                                            NewResidentsInfoActivity.this.finish();
                                                             break;
                                                         case DialogInterface.BUTTON_NEGATIVE: // 取消
                                                             break;
@@ -484,6 +496,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
                             BDIdCardBean.AddressBean addressBean = wordsResultBean.getAddress();
                             BDIdCardBean.NationBean nationBean = wordsResultBean.getNation();
 
+
                             String name = null;
                             String sex = null;
                             String birthday = null;
@@ -501,6 +514,15 @@ public class NewResidentsInfoActivity extends BaseActivity {
 
                             if (birthdayBean != null) {
                                 birthday = birthdayBean.getWords();
+                                SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
+                                SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd");
+                                try {
+                                    birthday = sdf2.format(sdf.parse(birthday));
+
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                L.i("扫描的姓名是；" + birthday);
                             }
 
                             if (idCardNumberBean != null) {

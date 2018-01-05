@@ -154,7 +154,7 @@
                     android:layout_toRightOf="@id/born"
                     android:drawableRight="@mipmap/data_icon"
                     android:paddingHorizontal="8dp"
-                    android:text="1900年1月1日" />
+                    android:text="1900-01-01" />
 
 
             </RelativeLayout>
