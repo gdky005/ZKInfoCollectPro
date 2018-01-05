@@ -393,7 +393,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
                                                                     pbLoading.setVisibility(View.GONE);
                                                                     Log.d(TAG, "onResponse: " + response.body().toString());
                                                                     int status = response.body().status;
-                                                                    int msg = response.body().status;
+                                                                    String msg = response.body().msg;
                                                                     if (status == 1) {
                                                                         ToastUtils.showLong(msg);
                                                                     } else {
