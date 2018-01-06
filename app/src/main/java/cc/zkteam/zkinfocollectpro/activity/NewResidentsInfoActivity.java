@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -87,7 +86,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
     private String b_id = "";
     private String h_id = "";
     private ZHApi zkApi;
-    private String r_type = "";
+    private String r_type = "1";
 
     @Override
     protected int getLayoutId() {
