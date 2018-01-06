@@ -196,6 +196,12 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         if (adapter != null) {
             adapter.setData(zhCommunity.getData());
         }
+
+        if ("0".equals(type)) {
+            mPresenter.loadStreetCommunity(zhCommunity.getData().get(0).getId(), "1");
+            tempIds.put(0, zhCommunity.getData().get(0).getId());
+            showLoading();
+        }
     }
 
     @Override
