@@ -26,6 +26,7 @@ import java.util.List;
 import butterknife.BindView;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.MapActivity;
+import cc.zkteam.zkinfocollectpro.activity.home.HomeActivity;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.bean.ProblemPreview;
 import cc.zkteam.zkinfocollectpro.fragment.problem.mvp.PRPresenterImpl;
@@ -116,6 +117,7 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         isPageCanEdit();
         mProblemSource.setFocusable(false);
         mProblemSource.setText("采集端");
+        mProblemSource.setBackground(null);
     }
 
     private void isPageCanEdit() {
@@ -171,7 +173,6 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     }
 
     private void setBackground() {
-        mProblemSource.setBackground(null);
         mProblemType.setBackground(null);
         mSpinnerLayout.setBackground(null);
         mProblemDesc.setBackground(null);
@@ -322,6 +323,9 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         mProblemDesc.setText("");
         mProblemAttachment.setText("");
         mProblemSuggestion.setText("");
+        if (getActivity() != null && ((HomeActivity)getActivity()).getViewPager() != null) {
+            ((HomeActivity)getActivity()).getViewPager().setCurrentItem(HomeActivity.NAV_TYPE_MAIN);
+        }
     }
 
     @Override

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -113,6 +114,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         initCache();
         tempIds = new HashMap<>();
         mPresenter = new DcPresenterImpl(this);
+        showLoading();
         mPresenter.loadData();
     }
 
@@ -134,7 +136,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
     }
 
     private void initSpinner() {
-        roadAdapter = new LDSpinnerAdapter(mContext);
+        roadAdapter = new LDSpinnerAdapter(mContext, 0);
         mRoadSpinner.setAdapter(roadAdapter);
         mRoadSpinner.setOnItemSelectedListener(this);
 
@@ -205,32 +207,32 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
             intent.putExtra("params", params);
             intent.putExtra("build_Id", tempIds.get(3));
             intent.putExtra("address", mAddress.toString());
+            Log.e("TAG", mAddress.toString());
             PageCtrl.startActivity(getContext(), RentPersonInfoActivity.class, intent);
             mAddress.delete(0, mAddress.length());
+            Log.e("TAG", mAddress.toString());
         } else if (data.getStatus() == 1) {
             View view = getLayoutInflater().inflate(R.layout.create_house_dialog, null, false);
             Dialog dialog = new Dialog(mContext);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(view);
-            view.findViewById(R.id.confirm).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MapBean mapBean = new MapBean();
+            view.findViewById(R.id.confirm).setOnClickListener(v -> {
+                MapBean mapBean = new MapBean();
 
-                    Map<String, String>  map = new HashMap<>();
-                    map.put("type", TYPE_FANG_WU_XIN_XI_TYPE);
+                Map<String, String>  map = new HashMap<>();
+                map.put("type", TYPE_FANG_WU_XIN_XI_TYPE);
 
-                    map.put("community", getAddressName(mRoadSpinner));
-                    map.put("cunjuid", getAddressName(mCommunitySpinner));
-                    map.put("gridding", getAddressName(mNeighborSpinner));
-                    map.put("buildid", getAddressName(mHouseSpinner));
-                    map.put("house_serial", mUnitSpinner.getSelectedItem().toString());
-                    map.put("louceng", floorNum);
-                    map.put("house_number", roomNum);
+                map.put("community", getAddressName(mRoadSpinner));
+                map.put("cunjuid", getAddressName(mCommunitySpinner));
+                map.put("gridding", getAddressName(mNeighborSpinner));
+                map.put("buildid", getAddressName(mHouseSpinner));
+                map.put("house_serial", mUnitSpinner.getSelectedItem().toString());
+                map.put("louceng", floorNum);
+                map.put("house_number", roomNum);
 
-                    mapBean.setMap(map);
+                mapBean.setMap(map);
 
-                    PageCtrl.startNew31InfoActivity(getActivity(), "房屋信息", TYPE_FANG_WU_XIN_XI_TYPE, mapBean);
-                }
+                PageCtrl.startNew31InfoActivity(getActivity(), "房屋信息", TYPE_FANG_WU_XIN_XI_TYPE, mapBean);
             });
             view.findViewById(R.id.cancel).setOnClickListener(view12 -> dialog.dismiss());
 
@@ -240,6 +242,9 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
 
     @Override
     public void showLoading() {
+        if (mLoading == null) {
+            return;
+        }
         mLoading.setVisibility(View.VISIBLE);
     }
 

@@ -18,6 +18,7 @@ import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
  */
 
 public class LDSpinnerAdapter extends BaseAdapter {
+    private int index = -1;
 
 
     protected List<ZHCommunityBean.DataBean> mData;
@@ -30,6 +31,12 @@ public class LDSpinnerAdapter extends BaseAdapter {
         this.context = mContext;
         mData = new ArrayList<>();
         mData.add(new ZHCommunityBean.DataBean("-1", "请选择"));
+    }
+
+    public LDSpinnerAdapter(Context mContext, int index) {
+        this.context = mContext;
+        mData = new ArrayList<>();
+        this.index = index;
     }
 
     public int getmCeng() {
@@ -54,7 +61,9 @@ public class LDSpinnerAdapter extends BaseAdapter {
 
     public void reSetData() {
         mData.clear();
-        mData.add(new ZHCommunityBean.DataBean("-1", "请选择"));
+        if (index != 0) {
+            mData.add(new ZHCommunityBean.DataBean("-1", "请选择"));
+        }
         notifyDataSetChanged();
     }
 

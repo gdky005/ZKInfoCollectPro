@@ -118,6 +118,10 @@ public class HomeActivity extends BaseActivity implements HasSupportFragmentInje
         }
     };
 
+    public ZKViewPager getViewPager() {
+        return mViewPager;
+    }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {

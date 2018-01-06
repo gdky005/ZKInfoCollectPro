@@ -111,7 +111,7 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
         Log.e("TaG", rentperson.getStatus() + "");
         mBuildId = intent.getStringExtra("build_Id");
         address = intent.getStringExtra("address");
-
+        Log.e("TAG", address);
         if (rentperson != null) {
             List<RentPersoner.PersonlistBean> personlist = rentperson.getPersonlist();
             personlist.add(0, new RentPersoner.PersonlistBean(INVALID, INVALID, INVALID, INVALID));
