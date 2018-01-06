@@ -455,7 +455,9 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
             picker2.setRangeEnd(2111, 1, 11);
             picker2.setRangeStart(2016, 8, 29);
             picker2.setContentPadding(15, 0);
-            picker2.setLabel(yearStr, monthStr, dayStr);
+            picker2.setLabel(getContext().getString(R.string.zk_filed_year_label),
+                    getContext().getString(R.string.zk_filed_month_label),
+                    getContext().getString(R.string.zk_filed_day_label));
             picker2.setSelectedItem(year, month - 1, day);
 
             picker2.setResetWhileWheel(false);
@@ -488,7 +490,7 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
         String month = picker2.getSelectedMonth();
         String day = picker2.getSelectedDay();
 
-        picker2.setTitleText(String.format(context.getString(R.string.date_title_top_text), year, month, day));
+        picker2.setTitleText(String.format(context.getString(R.string.date_year_month_day), year, month, day));
     }
 
 

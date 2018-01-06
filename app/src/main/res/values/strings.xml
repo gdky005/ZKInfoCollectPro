@@ -61,5 +61,9 @@
     <string name="childbearing_age_info">育龄妇女信息</string>
     <string name="children_info">子女信息</string>
     <string name="new_31_commit_text">保存并提交</string>
+    <string name="zk_filed_year_label">年</string>
+    <string name="zk_filed_month_label">月</string>
+    <string name="zk_filed_day_label">日</string>
+    <string name="zk_filed_time_center_text">至</string>
 
 </resources>

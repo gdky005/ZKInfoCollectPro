@@ -30,9 +30,6 @@
         app:tipTextSize="@dimen/sp_16"/>
 
 
-
-
-
     <TextView
         android:id="@+id/waring_text"
         android:layout_width="wrap_content"
@@ -40,9 +37,9 @@
         android:layout_above="@+id/operate_rl"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/dp_20"
-        android:textColor="@color/white"
         android:gravity="center"
-        android:text="@string/ic_card_warning_text"/>
+        android:text="@string/ic_card_warning_text"
+        android:textColor="@color/white"/>
 
     <RelativeLayout
         android:id="@+id/operate_rl"
@@ -51,26 +48,43 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="100dp">
 
-        <ImageView
+
+        <Button
             android:id="@+id/photo_album_iv"
             style="@style/ScanBottomImageStyle"
             android:layout_toLeftOf="@+id/take_photo_iv"
-            android:src="@drawable/ic_photo_album"/>
+            android:background="@drawable/zk_blue_btn_selector"
+            android:text="相册选择"
+            android:textColor="@color/white"/>
+        <!--android:drawableTop="@drawable/ic_photo_album"-->
+        <!--android:drawablePadding="@dimen/dp_10"-->
 
 
-        <ImageView
+        <Button
             android:id="@+id/take_photo_iv"
             style="@style/ScanBottomImageStyle"
             android:layout_centerHorizontal="true"
+
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_marginRight="@dimen/dp_20"
-            android:src="@drawable/ic_take_photo"/>
+            android:background="@drawable/zk_blue_btn_selector"
+            android:text="拍照"
+            android:textColor="@color/white"
+            />
+        <!--android:drawablePadding="@dimen/dp_10"-->
+        <!--android:drawableTop="@drawable/ic_take_photo"-->
 
-        <ImageView
+        <Button
             android:id="@+id/light_iv"
             style="@style/ScanBottomImageStyle"
             android:layout_toRightOf="@+id/take_photo_iv"
-            android:src="@drawable/ic_light"/>
+            android:background="@drawable/zk_blue_btn_selector"
+            android:drawablePadding="@dimen/dp_10"
+            android:text="闪光灯"
+            android:textColor="@color/white"
+            />
+        <!--android:drawableTop="@drawable/ic_light"-->
+        <!--android:drawablePadding="@dimen/dp_10"-->
 
     </RelativeLayout>
 
@@ -82,6 +96,7 @@
         android:layout_below="@+id/zk_title_view"
         android:background="@color/scan_loading_color"
         android:visibility="gone">
+
         <ProgressBar
             android:id="@+id/progress"
             android:layout_width="wrap_content"

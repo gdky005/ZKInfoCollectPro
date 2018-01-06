@@ -211,7 +211,7 @@ public class New31InfoFragment extends BaseFragment {
 
     @OnClick(R.id.new_31_commit)
     public void onViewClicked() {
-        setVisibility(zk31NewLoadingRl, true);
+        showLoading(true);
         JSONObject resultObj = new31ZkModuleListLayout.getResult();
 
         setImageData(resultObj);
@@ -229,25 +229,29 @@ public class New31InfoFragment extends BaseFragment {
                     Log.d(TAG, "onResponse: " + response);
                     if (response.body() != null && response.body().getStatus() == 1) {
                         ToastUtils.showShort("数据提交成功");
-                        setVisibility(zk31NewLoadingRl, false);
+                        showLoading(false);
                         return;
                     }
 
                     ToastUtils.showShort("数据提交失败");
-                    setVisibility(zk31NewLoadingRl, false);
+                    showLoading(false);
                 }
 
                 @Override
                 public void onFailure(Call<ZHBaseBean> call, Throwable t) {
                     Log.e(TAG, "onFailure: ", t);
                     ToastUtils.showShort("数据提交失败：" + t.getMessage());
-                    setVisibility(zk31NewLoadingRl, false);
+                    showLoading(false);
                 }
             });
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+    }
+
+    private void showLoading(boolean isShow) {
+        setVisibility(zk31NewLoadingRl, isShow);
     }
 
     private void setImageData(JSONObject resultObj) {
@@ -323,13 +327,20 @@ public class New31InfoFragment extends BaseFragment {
                 if (zk31Bean != null) {
                     List<ZK31Bean.DataBeanX> dataBeanList = zk31Bean.getData();
                     if (zkModuleListLayout != null) {
-                        setVisibility(new31Commit, true);
-                        zkModuleListLayout.setDataBeanList(dataBeanList);
+
+                        if (dataBeanList != null && dataBeanList.size() > 0) {
+                            setVisibility(new31Commit, true);
+                            zkModuleListLayout.setDataBeanList(dataBeanList);
+                        } else {
+                            ToastUtils.showShort("当前数据为空");
+                        }
                         requestFinish();
                         return;
+
                     }
                 }
 
+                showLoading(false);
                 ToastUtils.showShort("请求数据异常");
             }
 
@@ -344,6 +355,6 @@ public class New31InfoFragment extends BaseFragment {
 
     private void requestFinish() {
         setVisibility(new31Ll, true);
-        setVisibility(zk31NewLoadingRl, false);
+        showLoading(false);
     }
 }

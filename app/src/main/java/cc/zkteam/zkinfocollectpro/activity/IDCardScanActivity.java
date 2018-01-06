@@ -10,7 +10,7 @@ import android.text.TextUtils;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -71,11 +71,11 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
     @BindView(R.id.waring_text)
     TextView textView2;
     @BindView(R.id.photo_album_iv)
-    ImageView photoAlbumIv;
+    Button photoAlbumIv;
     @BindView(R.id.take_photo_iv)
-    ImageView takePhotoIv;
+    Button takePhotoIv;
     @BindView(R.id.light_iv)
-    ImageView lightIv;
+    Button lightIv;
     @BindView(R.id.operate_rl)
     RelativeLayout operateRl;
     @BindView(R.id.progress_layout)
