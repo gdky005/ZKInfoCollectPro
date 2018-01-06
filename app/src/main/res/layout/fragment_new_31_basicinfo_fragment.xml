@@ -1,13 +1,10 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="ScrollViewSize">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/new_31_ll"
@@ -26,27 +23,33 @@
             <Button
                 android:id="@+id/new_31_commit"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="25dip"
-                android:background="@drawable/basicinfo_btn_commit"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@drawable/zk_blue_btn_selector"
                 android:paddingLeft="@dimen/dp_60"
                 android:paddingRight="@dimen/dp_60"
                 android:text="@string/new_31_commit_text"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_18"/>
         </LinearLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/zk_31_new_loading_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_centerInParent="true"
+            android:layout_gravity="center"
             android:indeterminateDrawable="@drawable/progressbar"
-            android:indeterminateTint="@color/colorPrimary"
-            android:visibility="gone" />
-
+            android:visibility="visible"/>
     </RelativeLayout>
 
 
-</ScrollView>
+</RelativeLayout>

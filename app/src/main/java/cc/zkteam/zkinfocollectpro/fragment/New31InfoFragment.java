@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -25,7 +26,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
@@ -63,14 +63,13 @@ public class New31InfoFragment extends BaseFragment {
     ZKModuleListLayout new31ZkModuleListLayout;
     @BindView(R.id.new_31_commit)
     Button new31Commit;
-    Unbinder unbinder;
     @BindView(R.id.new_31_ll)
     LinearLayout new31Ll;
-    Unbinder unbinder1;
+    @BindView(R.id.zk_31_new_loading_rl)
+    RelativeLayout zk31NewLoadingRl;
 
     private String titleName;
     private String pageType;
-    private Call<ZHBaseBean> zhBaseBeanCall;
 
     private String userID;
     private New31ImageEvent imageEvent;
@@ -169,13 +168,8 @@ public class New31InfoFragment extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
-        if(new31Ll != null) {
-            new31Ll.setVisibility(View.GONE);
-        }
-
-        if(new31Commit != null) {
-            new31Commit.setVisibility(View.GONE);
-        }
+        setVisibility(new31Ll, false);
+        setVisibility(new31Commit, false);
     }
 
     @Override
@@ -217,6 +211,7 @@ public class New31InfoFragment extends BaseFragment {
 
     @OnClick(R.id.new_31_commit)
     public void onViewClicked() {
+        setVisibility(zk31NewLoadingRl, true);
         JSONObject resultObj = new31ZkModuleListLayout.getResult();
 
         setImageData(resultObj);
@@ -227,19 +222,26 @@ public class New31InfoFragment extends BaseFragment {
             jsonObject.put("data", resultObj);
 
             RequestBody body = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
-            zhBaseBeanCall = ZHConnectionManager.getInstance().getZHApi().update31Data(body);
+            Call<ZHBaseBean> zhBaseBeanCall = ZHConnectionManager.getInstance().getZHApi().update31Data(body);
             zhBaseBeanCall.enqueue(new Callback<ZHBaseBean>() {
                 @Override
                 public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
                     Log.d(TAG, "onResponse: " + response);
                     if (response.body() != null && response.body().getStatus() == 1) {
                         ToastUtils.showShort("数据提交成功");
+                        setVisibility(zk31NewLoadingRl, false);
+                        return;
                     }
+
+                    ToastUtils.showShort("数据提交失败");
+                    setVisibility(zk31NewLoadingRl, false);
                 }
 
                 @Override
                 public void onFailure(Call<ZHBaseBean> call, Throwable t) {
                     Log.e(TAG, "onFailure: ", t);
+                    ToastUtils.showShort("数据提交失败：" + t.getMessage());
+                    setVisibility(zk31NewLoadingRl, false);
                 }
             });
         } catch (JSONException e) {
@@ -249,6 +251,11 @@ public class New31InfoFragment extends BaseFragment {
     }
 
     private void setImageData(JSONObject resultObj) {
+
+        if (resultObj == null) {
+            return;
+        }
+
         JSONArray jsonArray = resultObj.names();
 
         for (int i = 0; i < jsonArray.length(); i++) {
@@ -313,32 +320,30 @@ public class New31InfoFragment extends BaseFragment {
             public void onResponse(Call<ZK31Bean> call, Response<ZK31Bean> result) {
                 ZK31Bean zk31Bean = result.body();
 
-                if (zk31Bean == null) {
-                    L.e("zk31Bean is null!");
-                    return;
+                if (zk31Bean != null) {
+                    List<ZK31Bean.DataBeanX> dataBeanList = zk31Bean.getData();
+                    if (zkModuleListLayout != null) {
+                        setVisibility(new31Commit, true);
+                        zkModuleListLayout.setDataBeanList(dataBeanList);
+                        requestFinish();
+                        return;
+                    }
                 }
 
-                List<ZK31Bean.DataBeanX> dataBeanList = zk31Bean.getData();
-
-                if (zkModuleListLayout != null) {
-                    new31Commit.setVisibility(View.VISIBLE);
-                    zkModuleListLayout.setDataBeanList(dataBeanList);
-                } else {
-                    ToastUtils.showShort("new31ZkModuleListLayout is null!");
-                }
-
-                if (new31Ll != null)
-                     new31Ll.setVisibility(View.VISIBLE);
+                ToastUtils.showShort("请求数据异常");
             }
 
             @Override
             public void onFailure(Call<ZK31Bean> call, Throwable throwable) {
-                if (new31Ll != null)
-                    new31Ll.setVisibility(View.VISIBLE);
-                L.e("onFailure: ", throwable);
-                ToastUtils.showShort("onFailure: " + throwable.getMessage());
+                L.e("onFailure: ", throwable.getMessage());
+                requestFinish();
+                ToastUtils.showShort(throwable.getMessage());
             }
         });
     }
 
+    private void requestFinish() {
+        setVisibility(new31Ll, true);
+        setVisibility(zk31NewLoadingRl, false);
+    }
 }

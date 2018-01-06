@@ -112,6 +112,7 @@
                             android:textColor="@color/text_main" />
 
                         <LinearLayout
+                            android:id="@+id/ll_spinner"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bg_problem_report">
@@ -131,6 +132,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_desc"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
                         android:layout_marginTop="6dp"

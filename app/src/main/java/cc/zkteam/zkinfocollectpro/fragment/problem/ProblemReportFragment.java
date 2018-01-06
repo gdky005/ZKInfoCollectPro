@@ -8,12 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,13 +21,9 @@ import android.widget.TextView;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.blankj.utilcode.util.ToastUtils;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.MapActivity;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
@@ -41,6 +37,7 @@ import me.nereo.multi_image_selector.MultiImageSelector;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 import static android.app.Activity.RESULT_OK;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static cc.zkteam.zkinfocollectpro.activity.IDCardScanActivity.REQUEST_IMAGE;
 
 /**
@@ -74,6 +71,10 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     Button mSelectPicBtn;
     @BindView(R.id.pb_loading)
     ProgressBar mLoading;
+    @BindView(R.id.ll_spinner)
+    LinearLayout mSpinnerLayout;
+    @BindView(R.id.ll_desc)
+    LinearLayout mDescLayout;
     private PRPresenterImpl mPresenter;
     private boolean mIsEditPage = false;
     private String mCurrPicPath = "";
@@ -113,27 +114,38 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     public void initView(View rootView) {
         initSpinner();
         isPageCanEdit();
+        mProblemSource.setFocusable(false);
+        mProblemSource.setText("采集端");
     }
 
     private void isPageCanEdit() {
-        mProblemSource.setFocusable(false);
-        mProblemSource.setText("采集端");
         if (mIsEditPage) {
             mToolbarTitle.setText("问题信息填写");
         } else {
+            mToolbarTitle.setText("问题信息详情");
             showProblemDetail();
         }
     }
 
     private void showProblemDetail() {
-        mToolbarTitle.setText("问题信息详情");
         initToolbar(mToolbar);
         forbidClick();
         judgeAndShowProblemDetail();
+        setBackground();
+        reSizeDescLayout();
+        hideSomeView();
+    }
+
+    private void hideSomeView() {
         mSelectLocationBtn.setVisibility(View.GONE);
         mCommitBtn.setVisibility(View.GONE);
         mSelectPicBtn.setVisibility(View.GONE);
-        mProblemType.setBackground(null);
+    }
+
+    private void reSizeDescLayout() {
+        ViewGroup.LayoutParams lp = mDescLayout.getLayoutParams();
+        lp.height = WRAP_CONTENT;
+        mDescLayout.setLayoutParams(lp);
     }
 
     protected void initToolbar(Toolbar toolbar) {
@@ -155,6 +167,17 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         mProblemAttachment.setText(TextUtils.isEmpty(mProblem.getPath()) ? "无数据" : mProblem.getPath());
         mProblemLocation.setText(TextUtils.isEmpty(mProblem.getProblemposition()) ? "无数据" : mProblem.getProblemposition());
         mProblemSuggestion.setText(TextUtils.isEmpty(mProblem.getRemarks()) ? "无数据" : mProblem.getRemarks());
+
+    }
+
+    private void setBackground() {
+        mProblemSource.setBackground(null);
+        mProblemType.setBackground(null);
+        mSpinnerLayout.setBackground(null);
+        mProblemDesc.setBackground(null);
+        mProblemLocation.setBackground(null);
+        mProblemAttachment.setBackground(null);
+        mProblemSuggestion.setBackground(null);
     }
 
     private void forbidClick() {

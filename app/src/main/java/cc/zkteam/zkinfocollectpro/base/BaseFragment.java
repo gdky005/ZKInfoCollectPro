@@ -9,7 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +18,12 @@ import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.managers.ZKManager;
-import cc.zkteam.zkinfocollectpro.view.ZKImageView;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 /**
  * BaseFragment
@@ -132,6 +132,12 @@ public abstract class BaseFragment extends Fragment {
     public void setText(TextView textView, String str) {
         if (textView != null && null != str) {
             textView.setText(str);
+        }
+    }
+
+    protected void setVisibility(View view, boolean isShow) {
+        if (view != null) {
+            view.setVisibility(isShow ? VISIBLE : GONE);
         }
     }
 
