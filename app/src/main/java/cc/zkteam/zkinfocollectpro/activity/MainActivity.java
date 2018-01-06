@@ -33,7 +33,7 @@ import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.ZKBase;
 import cc.zkteam.zkinfocollectpro.activity.familyPlanningInfo.ConceptionControlActivity;
 import cc.zkteam.zkinfocollectpro.activity.home.HomeActivity;
-import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
+import cc.zkteam.zkinfocollectpro.bean.ZK31Bean;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.bd.ZKBDIDCardManager;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;

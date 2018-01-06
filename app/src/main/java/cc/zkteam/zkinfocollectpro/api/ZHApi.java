@@ -3,9 +3,10 @@ package cc.zkteam.zkinfocollectpro.api;
 import java.util.List;
 
 import cc.zkteam.zkinfocollectpro.Constant;
-import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
+import cc.zkteam.zkinfocollectpro.bean.ZK31Bean;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
 import cc.zkteam.zkinfocollectpro.bean.BDTokenBean;
+import cc.zkteam.zkinfocollectpro.bean.CheckIdCardBean;
 import cc.zkteam.zkinfocollectpro.bean.CollectItemBean;
 import cc.zkteam.zkinfocollectpro.bean.MarriageBean;
 import cc.zkteam.zkinfocollectpro.bean.PersonalSimpleInfoBean;
@@ -298,5 +299,11 @@ public interface ZHApi {
             @Part MultipartBody.Part Company5
     )
     ;
+
+    /**
+     * 查询身份证功能
+     */
+    @GET("datamanage.php/Admin/AppInterface/check_cardid")
+    Call<CheckIdCardBean> checkIdCard(@Query("card_id") String card_id);
 
 }

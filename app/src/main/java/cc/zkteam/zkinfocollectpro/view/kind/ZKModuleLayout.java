@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
+import cc.zkteam.zkinfocollectpro.bean.ZK31Bean;
 
 /**
  * ZKModuleLayout

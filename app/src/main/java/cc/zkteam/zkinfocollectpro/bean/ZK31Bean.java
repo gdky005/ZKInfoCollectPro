@@ -1,4 +1,4 @@
-package cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test;
+package cc.zkteam.zkinfocollectpro.bean;
 
 import com.google.gson.annotations.SerializedName;
 

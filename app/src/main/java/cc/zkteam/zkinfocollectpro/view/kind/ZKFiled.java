@@ -27,12 +27,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cc.zkteam.zkinfocollectpro.R;
-import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
+import cc.zkteam.zkinfocollectpro.bean.ZK31Bean;
+import cc.zkteam.zkinfocollectpro.bean.CheckIdCardBean;
 import cc.zkteam.zkinfocollectpro.fragment.New31ImageEvent;
+import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cn.qqtheme.framework.picker.DatePicker;
 import cn.qqtheme.framework.picker.OptionPicker;
 import cn.qqtheme.framework.util.ConvertUtils;
 import cn.qqtheme.framework.widget.WheelView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * ZKFiledView
@@ -382,7 +387,48 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
                 RelativeLayout rightLayoutIdCardNumber = rightLayoutIdCardNumberLayout.findViewById(R.id.right_layout_id_card_number);
                 rightLayoutLeftIdCardNumberEt = rightLayoutIdCardNumber.findViewById(R.id.right_layout_left_et);
                 TextView searchBtn = rightLayoutIdCardNumber.findViewById(R.id.right_layout_id_card_serial_number_right_search_btn);
-                searchBtn.setOnClickListener(view -> ToastUtils.showShort("你点击了搜索按钮"));
+                searchBtn.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String idCardStr = rightLayoutLeftIdCardNumberEt.getText().toString();
+
+                        if (!TextUtils.isEmpty(idCardStr)) {
+
+                            ZHConnectionManager.getInstance().getZHApi().checkIdCard(idCardStr).enqueue(new Callback<CheckIdCardBean>() {
+                                @Override
+                                public void onResponse(Call<CheckIdCardBean> call, Response<CheckIdCardBean> response) {
+
+                                    CheckIdCardBean checkIdCardBean = response.body();
+                                    if (checkIdCardBean != null) {
+                                        String msg = checkIdCardBean.getMsg();
+
+                                        if (checkIdCardBean.isResult()) {
+                                            if (rightLayoutLeftIdCardNumberEt != null) {
+                                                rightLayoutLeftIdCardNumberEt.setFocusable(true);
+                                                rightLayoutLeftIdCardNumberEt.setFocusableInTouchMode(true);
+                                                rightLayoutLeftIdCardNumberEt.requestFocus();
+                                            }
+
+                                        }
+
+                                        ToastUtils.showShort(msg);
+                                        return;
+                                    }
+
+                                    ToastUtils.showShort("请重试");
+                                }
+
+                                @Override
+                                public void onFailure(Call<CheckIdCardBean> call, Throwable t) {
+                                    ToastUtils.showShort("错误：" + t.getMessage());
+                                }
+                            });
+                        } else {
+                            ToastUtils.showShort("不能输入为空");
+                        }
+
+                    }
+                });
 
                 break;
         }

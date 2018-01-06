@@ -9,7 +9,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import java.util.List;
 
 import cc.zkteam.zkinfocollectpro.R;
-import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
+import cc.zkteam.zkinfocollectpro.bean.ZK31Bean;
 
 /**
  * Created by WangQing on 2018/1/1.

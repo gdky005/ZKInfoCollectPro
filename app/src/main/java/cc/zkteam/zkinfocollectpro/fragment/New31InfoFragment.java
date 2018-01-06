@@ -28,7 +28,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
-import cc.zkteam.zkinfocollectpro.activity.rentpersoninfo.mvp.test.ZK31Bean;
+import cc.zkteam.zkinfocollectpro.bean.ZK31Bean;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.fragment.datacollectfirst.DataCollectFragment;
@@ -211,6 +211,8 @@ public class New31InfoFragment extends BaseFragment {
         if (TextUtils.isEmpty(userID)) {
             userID = "2";
         }
+
+        userID = "1";
 
         showZKModuleAPI(new31ZkModuleListLayout, pageType);
     }
