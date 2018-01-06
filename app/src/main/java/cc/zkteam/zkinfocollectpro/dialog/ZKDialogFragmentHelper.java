@@ -47,7 +47,7 @@ public class ZKDialogFragmentHelper {
     public static ZKDialogFragment showSingleBtnDialog(FragmentManager fragmentManager, final String title, final String content,
                                                        final ZKDialogResultListener<Integer> listener, OnZKDialogCancelListener cancelListener) {
         Context context = ZKBase.getContext();
-        String sureText = context.getString(R.string.dialog_default_sure_btn_text);
+        String sureText = context.getString(R.string.dialog_single_sure_btn_text);
 
         return showDialog(fragmentManager, title, content, sureText, null, true, listener, cancelListener);
     }
