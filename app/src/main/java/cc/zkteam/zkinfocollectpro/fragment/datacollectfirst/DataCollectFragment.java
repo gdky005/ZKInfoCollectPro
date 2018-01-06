@@ -19,6 +19,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -35,6 +36,7 @@ import cc.zkteam.zkinfocollectpro.bean.RentPersoner;
 import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
 import cc.zkteam.zkinfocollectpro.fragment.datacollectfirst.mvp.DcPresenterImpl;
 import cc.zkteam.zkinfocollectpro.fragment.datacollectfirst.mvp.DcView;
+import cc.zkteam.zkinfocollectpro.utils.MapBean;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 import okhttp3.MultipartBody;
 
@@ -45,6 +47,11 @@ import okhttp3.MultipartBody;
  */
 
 public class DataCollectFragment extends BaseFragment implements DcView, ArgsInterface, AdapterView.OnItemSelectedListener {
+
+    public static final String TYPE_FANG_WU_XIN_XI_TYPE = "fangwuxinxi_type";
+
+    private String floorNum;
+    private String roomNum;
 
     @Inject
     DcPresenterImpl mPresenter;
@@ -204,8 +211,27 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
             View view = getLayoutInflater().inflate(R.layout.create_house_dialog, null, false);
             Dialog dialog = new Dialog(mContext);
             dialog.setContentView(view);
-            view.findViewById(R.id.confirm).setOnClickListener(view1 ->
-                    PageCtrl.startNew31InfoActivity(getActivity(), "屋权信息", "wuquanxinxi_type"));
+            view.findViewById(R.id.confirm).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MapBean mapBean = new MapBean();
+
+                    Map<String, String>  map = new HashMap<>();
+                    map.put("type", TYPE_FANG_WU_XIN_XI_TYPE);
+
+                    map.put("community", getAddressName(mRoadSpinner));
+                    map.put("cunjuid", getAddressName(mCommunitySpinner));
+                    map.put("gridding", getAddressName(mNeighborSpinner));
+                    map.put("buildid", getAddressName(mHouseSpinner));
+                    map.put("house_serial", mUnitSpinner.getSelectedItem().toString());
+                    map.put("louceng", floorNum);
+                    map.put("house_number", roomNum);
+
+                    mapBean.setMap(map);
+
+                    PageCtrl.startNew31InfoActivity(getActivity(), "房屋信息", TYPE_FANG_WU_XIN_XI_TYPE, mapBean);
+                }
+            });
             view.findViewById(R.id.cancel).setOnClickListener(view12 -> dialog.dismiss());
 
             dialog.show();
@@ -345,8 +371,13 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         public void onClick(View view) {
             showLoading();
             getAddress(mFloorNum, mRoomNum);
-            tempIds.put(5, mFloorNum + "");
-            tempIds.put(6, "0" + mRoomNum + "");
+
+            floorNum = mFloorNum  + "";
+            roomNum = "0" + mRoomNum;
+
+            tempIds.put(5, floorNum);
+            tempIds.put(6, roomNum);
+
             getRentPersoner(tempIds);
         }
     }

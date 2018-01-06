@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.FragmentUtils;
@@ -22,12 +23,16 @@ import cc.zkteam.zkinfocollectpro.bean.BasicInfoItemBean;
 import cc.zkteam.zkinfocollectpro.fragment.New31InfoFragment;
 import cc.zkteam.zkinfocollectpro.fragment.TitleEvent;
 import cc.zkteam.zkinfocollectpro.managers.ZKManager;
+import cc.zkteam.zkinfocollectpro.utils.MapBean;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
+
+import static cc.zkteam.zkinfocollectpro.fragment.datacollectfirst.DataCollectFragment.TYPE_FANG_WU_XIN_XI_TYPE;
 
 public class BasicInfoActivity extends BaseActivity {
 
     private String titleName;
     private String pageType;
+    private MapBean mapBean;
 
     @BindView(R.id.title)
     ZKTitleView title;
@@ -103,8 +108,19 @@ public class BasicInfoActivity extends BaseActivity {
     @Override
     protected void initData() {
         Intent intent = getIntent();
-        titleName = intent.getStringExtra(New31InfoFragment.NEW_31_INFO_NAME_KEY);
-        pageType = intent.getStringExtra(New31InfoFragment.NEW_31_INFO_PAGE_TYPE_KEY);
+
+        Bundle bundle = intent.getExtras();
+
+        if (bundle != null) {
+            titleName = bundle.getString(New31InfoFragment.NEW_31_INFO_NAME_KEY);
+            pageType = bundle.getString(New31InfoFragment.NEW_31_INFO_PAGE_TYPE_KEY);
+            mapBean = (MapBean) bundle.getSerializable(New31InfoFragment.NEW_31_INFO_MAP_BEAN_KEY);
+        }
+
+        if (TYPE_FANG_WU_XIN_XI_TYPE.equals(pageType)) {
+            title.rightIV.setVisibility(View.INVISIBLE);
+        }
+
 
         // TODO: 2018/1/4 test
         if (TextUtils.isEmpty(titleName))
@@ -119,7 +135,7 @@ public class BasicInfoActivity extends BaseActivity {
     }
 
     private void showFragment(String itemType, String itemName) {
-        FragmentUtils.add(getSupportFragmentManager(), New31InfoFragment.newInstance(itemName, itemType), R.id.content_view);
+        FragmentUtils.add(getSupportFragmentManager(), New31InfoFragment.newInstance(itemName, itemType, mapBean), R.id.content_view);
     }
 
 }
