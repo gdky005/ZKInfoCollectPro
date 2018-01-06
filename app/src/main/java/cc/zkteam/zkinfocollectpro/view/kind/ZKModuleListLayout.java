@@ -50,6 +50,8 @@ public class ZKModuleListLayout extends ZKBaseView implements IZKResult<JSONObje
     public void setDataBeanList(List<ZK31Bean.DataBeanX> dataBeanList) {
         setOrientation(VERTICAL);
 
+        if (dataBeanList == null)
+            return;
 
         for (ZK31Bean.DataBeanX dataBeanX : dataBeanList) {
             JSONArray moduleArray = new JSONArray();
