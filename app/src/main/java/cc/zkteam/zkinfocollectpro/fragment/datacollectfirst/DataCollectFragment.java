@@ -25,7 +25,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import cc.zkteam.zkinfocollectpro.ArgsInterface;
 import cc.zkteam.zkinfocollectpro.R;
-import cc.zkteam.zkinfocollectpro.activity.CreateHouseActivity;
 import cc.zkteam.zkinfocollectpro.activity.RentPersonInfoActivity;
 import cc.zkteam.zkinfocollectpro.adapter.HouseUnitAdapter;
 import cc.zkteam.zkinfocollectpro.adapter.LDSpinnerAdapter;
@@ -205,7 +204,8 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
             View view = getLayoutInflater().inflate(R.layout.create_house_dialog, null, false);
             Dialog dialog = new Dialog(mContext);
             dialog.setContentView(view);
-            view.findViewById(R.id.confirm).setOnClickListener(view1 -> PageCtrl.startActivity(getActivity(), CreateHouseActivity.class));
+            view.findViewById(R.id.confirm).setOnClickListener(view1 ->
+                    PageCtrl.startNew31InfoActivity(getActivity(), "屋权信息", "wuquanxinxi_type"));
             view.findViewById(R.id.cancel).setOnClickListener(view12 -> dialog.dismiss());
 
             dialog.show();
