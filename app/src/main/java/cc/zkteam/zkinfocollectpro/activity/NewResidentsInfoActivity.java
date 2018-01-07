@@ -123,8 +123,6 @@ public class NewResidentsInfoActivity extends BaseActivity {
         zkTitleView.rightIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showLong("按钮点击");
-
                 Intent intent = new Intent(NewResidentsInfoActivity.this, IDCardScanActivity.class);
                 startActivityForResult(intent, SCAN_REQUEST_CODE);
             }
