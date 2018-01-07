@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -218,31 +219,34 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
             mAddress.delete(0, mAddress.length());
             Log.e("TAG", mAddress.toString());
         } else if (data.getStatus() == 1) {
-            View view = getLayoutInflater().inflate(R.layout.create_house_dialog, null, false);
-            Dialog dialog = new Dialog(mContext);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(view);
-            view.findViewById(R.id.confirm).setOnClickListener(v -> {
-                MapBean mapBean = new MapBean();
+            FragmentActivity activity = getActivity();
+            if (activity != null) {
+                View view = getActivity().getLayoutInflater().inflate(R.layout.create_house_dialog, null, false);
+                Dialog dialog = new Dialog(mContext);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(view);
+                view.findViewById(R.id.confirm).setOnClickListener(v -> {
+                    MapBean mapBean = new MapBean();
 
-                Map<String, String>  map = new HashMap<>();
-                map.put("type", TYPE_FANG_WU_XIN_XI_TYPE);
+                    Map<String, String>  map = new HashMap<>();
+                    map.put("type", TYPE_FANG_WU_XIN_XI_TYPE);
 
-                map.put("community", getAddressName(mRoadSpinner));
-                map.put("cunjuid", getAddressName(mCommunitySpinner));
-                map.put("gridding", getAddressName(mNeighborSpinner));
-                map.put("buildid", getAddressName(mHouseSpinner));
-                map.put("house_serial", mUnitSpinner.getSelectedItem().toString());
-                map.put("louceng", floorNum);
-                map.put("house_number", roomNum);
+                    map.put("community", getAddressName(mRoadSpinner));
+                    map.put("cunjuid", getAddressName(mCommunitySpinner));
+                    map.put("gridding", getAddressName(mNeighborSpinner));
+                    map.put("buildid", getAddressName(mHouseSpinner));
+                    map.put("house_serial", mUnitSpinner.getSelectedItem().toString());
+                    map.put("louceng", floorNum);
+                    map.put("house_number", roomNum);
 
-                mapBean.setMap(map);
+                    mapBean.setMap(map);
 
-                PageCtrl.startNew31InfoActivity(getActivity(), "房屋信息", TYPE_FANG_WU_XIN_XI_TYPE, mapBean);
-            });
-            view.findViewById(R.id.cancel).setOnClickListener(view12 -> dialog.dismiss());
+                    PageCtrl.startNew31InfoActivity(getActivity(), "房屋信息", TYPE_FANG_WU_XIN_XI_TYPE, mapBean);
+                });
+                view.findViewById(R.id.cancel).setOnClickListener(view12 -> dialog.dismiss());
 
-            dialog.show();
+                dialog.show();
+            }
         }
     }
 
