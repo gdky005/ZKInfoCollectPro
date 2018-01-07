@@ -212,8 +212,6 @@ public class New31InfoFragment extends BaseFragment {
             userID = "2";
         }
 
-        userID = "1";
-
         showZKModuleAPI(new31ZkModuleListLayout, pageType);
     }
 
