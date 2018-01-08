@@ -31,6 +31,7 @@ versions.wave_swipe_refresh_layout = "1.6"
 versions.zk_fresco = "1.0.0"
 versions.systembartint = "1.0.3"
 versions.multi_image_selector = "1.2"
+versions.multi_image_selector_hx = "1.2.2"
 versions.bugtags = "latest.integration"
 ext.versions = versions
 
@@ -119,6 +120,8 @@ deps.systembartint = "com.readystatesoftware.systembartint:systembartint:$versio
 
 // 图片选择库 https://github.com/lovetuzitong/MultiImageSelector/blob/master/README_zh.md
 deps.multi_image_selector = "com.github.lovetuzitong:MultiImageSelector:$versions.multi_image_selector"
+// 上面的 multi_image_selector 不维护了，所以用这个：https://github.com/qq549631030/MultiImageSelector
+deps.multi_image_selector_hx = "com.hx.multi-image-selector:multi-image-selector:$versions.multi_image_selector_hx"
 deps.bugtags = "com.bugtags.library:bugtags-gradle:$versions.bugtags"
 deps.bugtags_lib = "com.bugtags.library:bugtags-lib:$versions.bugtags"
 

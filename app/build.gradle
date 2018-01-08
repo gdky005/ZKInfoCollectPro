@@ -105,7 +105,7 @@ dependencies {
     }
 
     implementation 'com.squareup.picasso:picasso:2.5.2'
-    compile(deps.multi_image_selector) {
+    compile(deps.multi_image_selector_hx) {
         exclude group: 'com.squareup.picasso'
     }
 

@@ -1,8 +1,6 @@
 package cc.zkteam.zkinfocollectpro;
 
 import android.content.Context;
-import android.os.Build;
-import android.os.StrictMode;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.bugtags.library.Bugtags;
@@ -57,17 +55,17 @@ public class ZKICApplication extends DaggerApplication {
         //添加 Stetho 的拦截器
         ZHConnectionManager.getInstance().getBuilder().addNetworkInterceptor(new StethoInterceptor());
 
-        try {
-//            http://blog.csdn.net/qq_23179075/article/details/70314473?locationNum=5&fps=1
-            // android 7.0系统解决拍照的问题
-            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-            StrictMode.setVmPolicy(builder.build());
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-                builder.detectFileUriExposure();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+////            http://blog.csdn.net/qq_23179075/article/details/70314473?locationNum=5&fps=1
+//            // android 7.0系统解决拍照的问题
+//            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+//            StrictMode.setVmPolicy(builder.build());
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+//                builder.detectFileUriExposure();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override
