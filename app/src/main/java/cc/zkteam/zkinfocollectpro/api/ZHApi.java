@@ -264,7 +264,7 @@ public interface ZHApi {
      */
     @FormUrlEncoded
     @POST("datamanage.php/Admin/AppInterface/gatherstatus")
-    Call<ZHBaseBean> changeCollectionStatus(@Field("personid") String personid, @Field("act") String act, @Field("memo") String memo);
+    Call<ZHBaseBean> changeCollectionStatus(@Field("user") String user, @Field("personid") String personid, @Field("act") String act, @Field("memo") String memo);
 
     /**
      * 新增住户接口
