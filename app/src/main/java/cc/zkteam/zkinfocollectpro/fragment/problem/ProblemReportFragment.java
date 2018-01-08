@@ -367,5 +367,6 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     @Override
     public void hideLoading() {
         mLoading.setVisibility(View.GONE);
+        mCurrPicPath.clear();
     }
 }
