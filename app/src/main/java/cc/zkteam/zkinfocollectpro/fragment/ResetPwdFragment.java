@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.EncryptUtils;
@@ -14,6 +15,7 @@ import com.blankj.utilcode.util.EncryptUtils;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.ZKICApplication;
 import cc.zkteam.zkinfocollectpro.activity.LoginActivity;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
@@ -30,7 +32,7 @@ public class ResetPwdFragment extends BaseFragment {
     @BindView(R.id.title_reset_pwd)
     ZKTitleView titleResetPwd;
     @BindView(R.id.et_count)
-    EditText etCount;
+    TextView etCount;
     @BindView(R.id.et_pwd_old)
     EditText etPwdOld;
     @BindView(R.id.et_pwd_new)
@@ -51,15 +53,17 @@ public class ResetPwdFragment extends BaseFragment {
     public void initView(View rootView) {
         titleResetPwd.setCenterTVText("修改密码");
         titleResetPwd.rightIV.setVisibility(View.GONE);
-        titleResetPwd.rightTextTV.setVisibility(View.VISIBLE);
-        titleResetPwd.rightTextTV.setText("登录");
-        titleResetPwd.rightTextTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), LoginActivity.class));
-                getActivity().finish();
-            }
-        });
+        titleResetPwd.rightTextTV.setVisibility(View.INVISIBLE);
+//        titleResetPwd.rightTextTV.setText("登录");
+//        titleResetPwd.rightTextTV.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(getActivity(), LoginActivity.class));
+//                getActivity().finish();
+//            }
+//        });
+
+        etCount.setText(ZKICApplication.zhLoginBean.getName());
         titleResetPwd.leftIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +119,6 @@ public class ResetPwdFragment extends BaseFragment {
                     Toast.makeText(mContext, response.body().getMsg() + "", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    etCount.setText("");
                     etPwdOld.setText("");
                     etPwdNew.setText("");
                     etPwdNewAgin.setText("");
