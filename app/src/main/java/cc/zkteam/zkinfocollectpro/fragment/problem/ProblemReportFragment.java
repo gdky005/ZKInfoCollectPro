@@ -25,6 +25,8 @@ import com.baidu.mapapi.search.core.PoiInfo;
 import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -33,12 +35,10 @@ import cc.zkteam.zkinfocollectpro.activity.MapActivity;
 import cc.zkteam.zkinfocollectpro.activity.home.HomeActivity;
 import cc.zkteam.zkinfocollectpro.adapter.ProblemPicAdapter;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
-import cc.zkteam.zkinfocollectpro.base.RvListener;
 import cc.zkteam.zkinfocollectpro.bean.ProblemPreview;
 import cc.zkteam.zkinfocollectpro.fragment.problem.mvp.PRPresenterImpl;
 import cc.zkteam.zkinfocollectpro.fragment.problem.mvp.PRView;
 import cc.zkteam.zkinfocollectpro.managers.ZHConfigDataManager;
-import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.viewholder.ProblemPreviewHolder;
 import me.nereo.multi_image_selector.MultiImageSelector;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
@@ -142,10 +142,10 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     private void showProblemDetail() {
         initToolbar(mToolbar);
         forbidClick();
+        hideSomeView();
         judgeAndShowProblemDetail();
         setBackground();
         reSizeDescLayout();
-        hideSomeView();
     }
 
     private void hideSomeView() {
@@ -180,15 +180,19 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         mProblemAttachment.setText(TextUtils.isEmpty(mProblem.getPath()) ? "无数据" : mProblem.getPath());
         mProblemLocation.setText(TextUtils.isEmpty(mProblem.getProblemposition()) ? "无数据" : mProblem.getProblemposition());
         mProblemSuggestion.setText(TextUtils.isEmpty(mProblem.getRemarks()) ? "无数据" : mProblem.getRemarks());
-        mShowPicsLayout.setVisibility(View.VISIBLE);
-        mShowPics.setLayoutManager(new GridLayoutManager(getContext(), 5));
+
         List<String> pics = new ArrayList<>();
-        pics.add("http://7xi8d6.com1.z0.glb.clouddn.com/20171228085004_5yEHju_Screenshot.jpeg");
-        pics.add("http://7xi8d6.com1.z0.glb.clouddn.com/20180102083655_3t4ytm_Screenshot.jpeg");
-        pics.add("http://7xi8d6.com1.z0.glb.clouddn.com/20171227115959_lmlLZ3_Screenshot.jpeg");
-        pics.add("http://7xi8d6.com1.z0.glb.clouddn.com/20171219224721_wFH5PL_Screenshot.jpeg");
-        pics.add("http://7xi8d6.com1.z0.glb.clouddn.com/20171219115747_tH0TN5_Screenshot.jpeg");
-        mShowPics.setAdapter(new ProblemPicAdapter(getContext(), pics, (id, position) -> {}));
+        pics.addAll(Arrays.asList(mProblem.getPath().split("[|]")));
+        Log.e("TAG", pics.toString());
+        if (pics.isEmpty() || "".equals(pics.get(0))) {
+            mShowPicsLayout.setVisibility(View.GONE);
+            mProblemAttachment.setText("无附件");
+            mProblemAttachment.setVisibility(View.VISIBLE);
+        } else {
+            mShowPicsLayout.setVisibility(View.VISIBLE);
+            mShowPics.setLayoutManager(new GridLayoutManager(getContext(), pics.size()));
+            mShowPics.setAdapter(new ProblemPicAdapter(getContext(), pics, (id, position) -> {}));
+        }
     }
 
     private void setBackground() {
@@ -220,7 +224,7 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        mPresenter = new PRPresenterImpl(this);
+        mPresenter = new PRPresenterImpl(this, getContext());
         if (mIsEditPage) {
             mPresenter.loadData();
         }

@@ -1,5 +1,6 @@
 package cc.zkteam.zkinfocollectpro.fragment.problem.mvp;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.baidu.location.BDAbstractLocationListener;
@@ -9,6 +10,7 @@ import com.baidu.location.LocationClientOption;
 import com.blankj.utilcode.util.ToastUtils;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -24,6 +26,8 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 /**
  * Created by Administrator on 2017/12/15.
@@ -33,8 +37,10 @@ public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implemen
     public LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
     private ZHApi zhApi;
+    private Context mContext;
 
-    public PRPresenterImpl(PRView view) {
+    public PRPresenterImpl(PRView view, Context context) {
+        mContext = context;
         this.mView = view;
         init();
     }
@@ -61,49 +67,71 @@ public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implemen
             MultipartBody.Part[] part = new MultipartBody.Part[picPath.size()];
             MultipartBody.Part[] fileType = new MultipartBody.Part[picPath.size()];
 
-            for (int i = 0; i < picPath.size(); i++) {
-                File file = new File(picPath.get(i));
-                RequestBody requestBody =
-                        RequestBody.create(MediaType.parse("image/png"), file);
+            List<File> afterFile = new ArrayList<>();
+            Luban.with(mContext)
+                    .load(picPath)                     //传人要压缩的图片
+                    .setCompressListener(new OnCompressListener() { //设置回调
 
-                //参数1 数组名，参数2 文件名。
-                MultipartBody.Part photoPart =
-                        MultipartBody.Part.createFormData("path" + (i + 1), picPath.get(i), requestBody);
-                part[i] = photoPart;
-                String[] picPathDetail = picPath.get(i).split("[.]");
-                String suffix = picPathDetail[picPathDetail.length - 1];
-                Log.e("TAG", suffix);
-                MultipartBody.Part fileSuffix = MultipartBody.Part.createFormData("filetype" + (i + 1), suffix);
-                fileType[i] = fileSuffix;
-            }
-
-            zhApi.report(number,
-                    reporter,
-                    problemposition,
-                    problemcontent,
-                    remarks,
-                    type,
-                    part,
-                    fileType).enqueue(new Callback<ZHBaseBean>() {
-                @Override
-                public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
-                    ZHBaseBean zhBaseBean = response.body();
-                    if (zhBaseBean != null) {
-                        Log.d("TAG", "onResponse: " + zhBaseBean.toString());
-                        if (zhBaseBean.getStatus() == 1) {
-                            ToastUtils.showShort("上报成功");
-                            mView.cleanInput();
+                        @Override
+                        public void onStart() {
+                            //TODO 压缩开始前调用，可以在方法内启动 loading UI
                         }
-                    }
-                    mView.hideLoading();
-                }
+                        @Override
+                        public void onSuccess(File file) {
+                            //TODO 压缩成功后调用，返回压缩后的图片文件
+                            Log.e("TAG", file.toString());
+                            afterFile.add(file);
+                            if (afterFile.size() == picPath.size()) {
 
-                @Override
-                public void onFailure(Call<ZHBaseBean> call, Throwable t) {
-                    t.printStackTrace();
-                    mView.hideLoading();
-                }
-            });
+                                for (int i = 0; i < afterFile.size(); i++) {
+                                    RequestBody requestBody =
+                                            RequestBody.create(MediaType.parse("image/png"), afterFile.get(i));
+
+                                    //参数1 数组名，参数2 文件名。
+                                    MultipartBody.Part photoPart =
+                                            MultipartBody.Part.createFormData("path" + (i + 1), picPath.get(i), requestBody);
+                                    part[i] = photoPart;
+                                    String[] picPathDetail = picPath.get(i).split("[.]");
+                                    String suffix = picPathDetail[picPathDetail.length - 1];
+                                    Log.e("TAG", suffix);
+                                    MultipartBody.Part fileSuffix = MultipartBody.Part.createFormData("filetype" + (i + 1), suffix);
+                                    fileType[i] = fileSuffix;
+                                }
+
+                                zhApi.report(number,
+                                        reporter,
+                                        problemposition,
+                                        problemcontent,
+                                        remarks,
+                                        type,
+                                        part,
+                                        fileType).enqueue(new Callback<ZHBaseBean>() {
+                                    @Override
+                                    public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
+                                        ZHBaseBean zhBaseBean = response.body();
+                                        if (zhBaseBean != null) {
+                                            Log.d("TAG", "onResponse: " + zhBaseBean.toString());
+                                            if (zhBaseBean.getStatus() == 1) {
+                                                ToastUtils.showShort("上报成功");
+                                                mView.cleanInput();
+                                            }
+                                        }
+                                        mView.hideLoading();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ZHBaseBean> call, Throwable t) {
+                                        t.printStackTrace();
+                                        mView.hideLoading();
+                                    }
+                                });
+                            }
+                        }
+                        @Override
+                        public void onError(Throwable e) {
+                            //TODO 当压缩过去出现问题时调用
+                        }
+                    }).launch();    //启动压缩
         });
     }
 

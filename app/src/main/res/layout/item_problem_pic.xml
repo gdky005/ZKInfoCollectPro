@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<cc.zkteam.zkinfocollectpro.view.ZKImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/iv_problem_pics"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="150dp"
     android:layout_height="150dp"
-    android:layout_marginRight="12dp"
-    android:contentDescription="@string/app_name"
-    android:scaleType="center"
-    android:layout_marginEnd="12dp" />
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+
+    <cc.zkteam.zkinfocollectpro.view.ZKImageView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/iv_problem_pics"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="center"
+        fresco:progressBarImage="@drawable/progressbar"
+        fresco:progressBarImageScaleType="centerInside"
+        fresco:progressBarAutoRotateInterval="1000"/>
+
+</RelativeLayout>
