@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -88,6 +90,18 @@ public class NewResidentsInfoActivity extends BaseActivity {
     private ZHApi zkApi;
     private String r_type = "1";
 
+    InputFilter filter = new InputFilter() {
+        public CharSequence filter(CharSequence source, int start, int end,
+                                   Spanned dest, int dstart, int dend) {
+            for (int i = start; i < end; i++) {
+                if (!IdentityUtils.isChinese(source.charAt(i))) {
+                    return "";
+                }
+            }
+            return null;
+        }
+    };
+
     @Override
     protected int getLayoutId() {
 
@@ -128,6 +142,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
             }
         });
 
+        nationaledittext.setFilters(new InputFilter[]{filter});
     }
 
     @Override
@@ -331,6 +346,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 }
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(sex) && !TextUtils.isEmpty(data) && !TextUtils.isEmpty(nation) && !TextUtils.isEmpty(cardtype) && !TextUtils.isEmpty(cardid) && !TextUtils.isEmpty(address) && !TextUtils.isEmpty(relation)) {
                     try {
+                        L.i("request---"+"b_id--"+b_id+"h_id--"+h_id+"r_type--"+r_type+"relation--"+relation+"name--"+name+"cardid--"+cardid+"sex"+sex+"birthday"+data+"nation--"+nation+"id_card_type--"+cardtype+"place_of_domicile--"+address);
                         zkApi = ZHConnectionManager.getInstance().getZHApi();
                         zkApi.addhouseperson(
                                 MultipartBody.Part.createFormData("b_id", b_id),

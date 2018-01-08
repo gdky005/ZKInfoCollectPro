@@ -66,4 +66,7 @@
     <string name="zk_filed_day_label">日</string>
     <string name="zk_filed_time_center_text">至</string>
 
+    <string name="rule_string">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+
+
 </resources>

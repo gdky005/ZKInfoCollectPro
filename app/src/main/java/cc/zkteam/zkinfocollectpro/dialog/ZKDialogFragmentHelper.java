@@ -83,9 +83,9 @@ public class ZKDialogFragmentHelper {
                 }
 
                 if (!TextUtils.isEmpty(sureText)) {
-                    sureBtn.setText(R.string.dialog_default_sure_btn_text);
-                } else {
                     sureBtn.setText(sureText);
+                } else {
+                    sureBtn.setText(R.string.dialog_default_sure_btn_text);
                 }
 
 
