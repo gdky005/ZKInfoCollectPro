@@ -331,6 +331,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 }
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(sex) && !TextUtils.isEmpty(data) && !TextUtils.isEmpty(nation) && !TextUtils.isEmpty(cardtype) && !TextUtils.isEmpty(cardid) && !TextUtils.isEmpty(address) && !TextUtils.isEmpty(relation)) {
                     try {
+                        L.i("request---"+"b_id--"+b_id+"h_id--"+h_id+"r_type--"+r_type+"relation--"+relation+"name--"+name+"cardid--"+cardid+"sex"+sex+"birthday"+data+"nation--"+nation+"id_card_type--"+cardtype+"place_of_domicile--"+address);
                         zkApi = ZHConnectionManager.getInstance().getZHApi();
                         zkApi.addhouseperson(
                                 MultipartBody.Part.createFormData("b_id", b_id),
