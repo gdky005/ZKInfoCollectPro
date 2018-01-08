@@ -9,6 +9,7 @@ import com.baidu.location.LocationClientOption;
 import com.blankj.utilcode.util.ToastUtils;
 
 import java.io.File;
+import java.util.List;
 import java.util.concurrent.Executors;
 
 import cc.zkteam.zkinfocollectpro.ZKBase;
@@ -28,7 +29,7 @@ import retrofit2.Response;
  * Created by Administrator on 2017/12/15.
  */
 
-    public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implements PRPresenter {
+public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implements PRPresenter {
     public LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
     private ZHApi zhApi;
@@ -47,25 +48,34 @@ import retrofit2.Response;
         getLocationInfo();
     }
 
-    public void report(String source, String typeStr, String desc, String location, String attachmentName, String suggestion, String picPath) {
+    public void report(String source, String typeStr, String desc, String location, String attachmentName, String suggestion, List<String> picPath) {
         Executors.newSingleThreadExecutor().execute(() -> {
             MultipartBody.Part number = MultipartBody.Part.createFormData("number", "wenti" + System.currentTimeMillis());
             MultipartBody.Part reporter = MultipartBody.Part.createFormData("reporter", ZKICApplication.zhLoginBean.getName());
             MultipartBody.Part problemposition = MultipartBody.Part.createFormData("problemposition", location);
             MultipartBody.Part problemcontent = MultipartBody.Part.createFormData("problemcontent", desc);
             MultipartBody.Part type = MultipartBody.Part.createFormData("type", typeStr);
-            String suffix = attachmentName.split("[.]")[1];
-            Log.e("TAG", suffix);
-            MultipartBody.Part filetype = MultipartBody.Part.createFormData("filetype", suffix);
+
             MultipartBody.Part remarks = MultipartBody.Part.createFormData("remarks", suggestion);
 
-            File file = new File(picPath);
-            RequestBody requestBody =
-                    RequestBody.create(MediaType.parse("image/png"), file);
+            MultipartBody.Part[] part = new MultipartBody.Part[picPath.size()];
+            MultipartBody.Part[] fileType = new MultipartBody.Part[picPath.size()];
 
-            //参数1 数组名，参数2 文件名。
-            MultipartBody.Part photo1part =
-                    MultipartBody.Part.createFormData("path", attachmentName, requestBody);
+            for (int i = 0; i < picPath.size(); i++) {
+                File file = new File(picPath.get(i));
+                RequestBody requestBody =
+                        RequestBody.create(MediaType.parse("image/png"), file);
+
+                //参数1 数组名，参数2 文件名。
+                MultipartBody.Part photoPart =
+                        MultipartBody.Part.createFormData("path" + (i + 1), picPath.get(i), requestBody);
+                part[i] = photoPart;
+                String[] picPathDetail = picPath.get(i).split("[.]");
+                String suffix = picPathDetail[picPathDetail.length - 1];
+                Log.e("TAG", suffix);
+                MultipartBody.Part fileSuffix = MultipartBody.Part.createFormData("filetype" + (i + 1), suffix);
+                fileType[i] = fileSuffix;
+            }
 
             zhApi.report(number,
                     reporter,
@@ -73,8 +83,8 @@ import retrofit2.Response;
                     problemcontent,
                     remarks,
                     type,
-                    photo1part,
-                    filetype).enqueue(new Callback<ZHBaseBean>() {
+                    part,
+                    fileType).enqueue(new Callback<ZHBaseBean>() {
                 @Override
                 public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
                     ZHBaseBean zhBaseBean = response.body();

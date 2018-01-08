@@ -85,7 +85,6 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/bg_problem_report"
                             android:ellipsize="end"
-                            android:hint="@string/input_problem_source"
                             android:padding="5dp"
                             android:singleLine="true"
                             android:textColor="@color/text_main"
@@ -224,6 +223,20 @@
                             android:text="@string/problem_attachment"
                             android:textColor="@color/text_main" />
 
+                        <HorizontalScrollView
+                            android:id="@+id/hsv_pic"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:scrollbars="none">
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/rl_show_pics"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                        </HorizontalScrollView>
+
                         <EditText
                             android:id="@+id/et_problem_attachment"
                             android:layout_width="0dp"
@@ -328,12 +341,12 @@
 
         <ProgressBar
             android:id="@+id/pb_loading"
-            android:indeterminateDrawable="@drawable/progressbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="gone"
-            android:indeterminateTint="@color/colorPrimary" />
+            android:indeterminateDrawable="@drawable/progressbar"
+            android:indeterminateTint="@color/colorPrimary"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

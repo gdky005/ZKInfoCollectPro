@@ -174,8 +174,8 @@ public interface ZHApi {
                             @Part MultipartBody.Part problemcontent,
                             @Part MultipartBody.Part remarks,
                             @Part MultipartBody.Part type,
-                            @Part MultipartBody.Part path,
-                            @Part MultipartBody.Part filetype);
+                            @Part MultipartBody.Part[] path,
+                            @Part MultipartBody.Part[] filetype);
 
     /**
      * 用户迁出

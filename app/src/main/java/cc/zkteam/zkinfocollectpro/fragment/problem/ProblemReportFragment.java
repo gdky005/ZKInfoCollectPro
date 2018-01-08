@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -21,13 +24,16 @@ import android.widget.TextView;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.blankj.utilcode.util.ToastUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.activity.MapActivity;
 import cc.zkteam.zkinfocollectpro.activity.home.HomeActivity;
+import cc.zkteam.zkinfocollectpro.adapter.ProblemPicAdapter;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
+import cc.zkteam.zkinfocollectpro.base.RvListener;
 import cc.zkteam.zkinfocollectpro.bean.ProblemPreview;
 import cc.zkteam.zkinfocollectpro.fragment.problem.mvp.PRPresenterImpl;
 import cc.zkteam.zkinfocollectpro.fragment.problem.mvp.PRView;
@@ -76,9 +82,13 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     LinearLayout mSpinnerLayout;
     @BindView(R.id.ll_desc)
     LinearLayout mDescLayout;
+    @BindView(R.id.rl_show_pics)
+    RecyclerView mShowPics;
+    @BindView(R.id.hsv_pic)
+    HorizontalScrollView mShowPicsLayout;
     private PRPresenterImpl mPresenter;
     private boolean mIsEditPage = false;
-    private String mCurrPicPath = "";
+    private ArrayList<String> mCurrPicPath = new ArrayList<>();
     private ProblemPreview.DataBean mProblem;
 
     public static ProblemReportFragment newInstance(boolean isEdit) {
@@ -142,6 +152,7 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         mSelectLocationBtn.setVisibility(View.GONE);
         mCommitBtn.setVisibility(View.GONE);
         mSelectPicBtn.setVisibility(View.GONE);
+        mProblemAttachment.setVisibility(View.GONE);
     }
 
     private void reSizeDescLayout() {
@@ -169,7 +180,15 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         mProblemAttachment.setText(TextUtils.isEmpty(mProblem.getPath()) ? "无数据" : mProblem.getPath());
         mProblemLocation.setText(TextUtils.isEmpty(mProblem.getProblemposition()) ? "无数据" : mProblem.getProblemposition());
         mProblemSuggestion.setText(TextUtils.isEmpty(mProblem.getRemarks()) ? "无数据" : mProblem.getRemarks());
-
+        mShowPicsLayout.setVisibility(View.VISIBLE);
+        mShowPics.setLayoutManager(new GridLayoutManager(getContext(), 5));
+        List<String> pics = new ArrayList<>();
+        pics.add("http://7xi8d6.com1.z0.glb.clouddn.com/20171228085004_5yEHju_Screenshot.jpeg");
+        pics.add("http://7xi8d6.com1.z0.glb.clouddn.com/20180102083655_3t4ytm_Screenshot.jpeg");
+        pics.add("http://7xi8d6.com1.z0.glb.clouddn.com/20171227115959_lmlLZ3_Screenshot.jpeg");
+        pics.add("http://7xi8d6.com1.z0.glb.clouddn.com/20171219224721_wFH5PL_Screenshot.jpeg");
+        pics.add("http://7xi8d6.com1.z0.glb.clouddn.com/20171219115747_tH0TN5_Screenshot.jpeg");
+        mShowPics.setAdapter(new ProblemPicAdapter(getContext(), pics, (id, position) -> {}));
     }
 
     private void setBackground() {
@@ -216,8 +235,9 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         });
         mCommitBtn.setOnClickListener(v -> judgeInput());
         mSelectPicBtn.setOnClickListener(v -> MultiImageSelector.create()
-                .showCamera(false)
-                .single() // single mode
+                .showCamera(true)
+                .count(5)
+                .origin(mCurrPicPath)
                 .start(ProblemReportFragment.this, REQUEST_IMAGE));
     }
 
@@ -234,15 +254,24 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         }
         if (requestCode == REQUEST_IMAGE) {
             if (resultCode == RESULT_OK) {
-                // 获取返回的图片列表
+                //  获取返回的图片列表
                 List<String> pics = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
 
                 if (pics != null && pics.size() > 0) {
-                    String galleyPicPath = pics.get(0);
-                    L.d("当前图片地址是：" + galleyPicPath);
-                    mCurrPicPath = galleyPicPath;
-                    String path[] = galleyPicPath.split("/");
-                    mProblemAttachment.setText(path[path.length - 1]);
+                    mCurrPicPath.clear();
+                    mCurrPicPath.addAll(pics);
+                    mProblemAttachment.setText("");
+                    for (int i = 0; i < pics.size(); i++) {
+                        if (i > 4) {
+                            return;
+                        }
+                        String galleyPicPath = pics.get(i);
+                        String path[] = galleyPicPath.split("/");
+                        mProblemAttachment.append(path[path.length - 1]);
+                        if (i < pics.size() - 1) {
+                            mProblemAttachment.append("\n");
+                        }
+                    }
                 }
             }
         }
@@ -252,8 +281,7 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
      * 判断输入的值是否有效
      */
     private void judgeInput() {
-        if (inputIsEmpty(mProblemSource, R.string.input_problem_source)
-                || inputIsEmpty(mProblemType, R.string.input_problem_type)
+        if (inputIsEmpty(mProblemType, R.string.input_problem_type)
                 || inputIsEmpty(mProblemDesc, R.string.input_problem_desc)
                 || inputIsEmpty(mProblemLocation, R.string.input_problem_location)
                 || inputIsEmpty(mProblemAttachment, R.string.select_problem_pic)
@@ -319,12 +347,11 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
 
     @Override
     public void cleanInput() {
-        mProblemSource.setText("");
         mProblemDesc.setText("");
         mProblemAttachment.setText("");
         mProblemSuggestion.setText("");
-        if (getActivity() != null && ((HomeActivity)getActivity()).getViewPager() != null) {
-            ((HomeActivity)getActivity()).getViewPager().setCurrentItem(HomeActivity.NAV_TYPE_MAIN);
+        if (getActivity() != null && ((HomeActivity) getActivity()).getViewPager() != null) {
+            ((HomeActivity) getActivity()).getViewPager().setCurrentItem(HomeActivity.NAV_TYPE_MAIN);
         }
     }
 
