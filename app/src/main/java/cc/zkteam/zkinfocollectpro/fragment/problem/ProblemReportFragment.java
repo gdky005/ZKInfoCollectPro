@@ -319,7 +319,7 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
 
     @Override
     public void cleanInput() {
-        mProblemSource.setText("");
+//        mProblemSource.setText("");
         mProblemDesc.setText("");
         mProblemAttachment.setText("");
         mProblemSuggestion.setText("");
