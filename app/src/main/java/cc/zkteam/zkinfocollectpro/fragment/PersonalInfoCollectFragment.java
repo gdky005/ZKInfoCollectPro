@@ -15,6 +15,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
+import cc.zkteam.zkinfocollectpro.ZKICApplication;
 import cc.zkteam.zkinfocollectpro.adapter.PersonalInfoListAdapter;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.base.RvListener;
@@ -173,7 +174,7 @@ public class PersonalInfoCollectFragment extends BaseFragment {
     }
 
     private void requestCollectionStatus() {
-        zhApiInstance.changeCollectionStatus(mPersonid, "getstatus", "memo").enqueue(new Callback<ZHBaseBean>() {
+        zhApiInstance.changeCollectionStatus(ZKICApplication.zhLoginBean.getId(), mPersonid, "getstatus", "memo").enqueue(new Callback<ZHBaseBean>() {
             @Override
             public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
                 if (null == PersonalInfoCollectFragment.this || null == response.body() || null == layoutChangeCollectionState)
@@ -234,7 +235,7 @@ public class PersonalInfoCollectFragment extends BaseFragment {
             public void onOptionPicked(int index1, String item) {
                 String act = mStatus == 1 ? "finish" : "edit";
 
-                zhApiInstance.changeCollectionStatus(mPersonid, act, "memo").enqueue(new Callback<ZHBaseBean>() {
+                zhApiInstance.changeCollectionStatus(ZKICApplication.zhLoginBean.getId(), mPersonid, act, "memo").enqueue(new Callback<ZHBaseBean>() {
                     @Override
                     public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
                         if (null == PersonalInfoCollectFragment.this || null == response.body() || null == mContext) {
