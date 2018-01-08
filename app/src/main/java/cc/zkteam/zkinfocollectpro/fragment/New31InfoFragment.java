@@ -270,7 +270,17 @@ public class New31InfoFragment extends BaseFragment {
         if (createHouseMap != null && DataCollectFragment.TYPE_FANG_WU_XIN_XI_TYPE.equals(pageType)) {
             for (Map.Entry<String, String> entry : createHouseMap.entrySet()) {
                 try {
-                    resultObj.put(entry.getKey(), entry.getValue());
+                    String value = entry.getValue();
+
+                    try {
+                        int valueInt = Integer.valueOf(value);
+                        resultObj.put(entry.getKey(), valueInt);
+                        continue;
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
+
+                    resultObj.put(entry.getKey(), value);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

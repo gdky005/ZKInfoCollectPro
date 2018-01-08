@@ -231,13 +231,23 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
                     Map<String, String>  map = new HashMap<>();
                     map.put("type", TYPE_FANG_WU_XIN_XI_TYPE);
 
-                    map.put("community", getAddressName(mRoadSpinner));
-                    map.put("cunjuid", getAddressName(mCommunitySpinner));
-                    map.put("gridding", getAddressName(mNeighborSpinner));
-                    map.put("buildid", getAddressName(mHouseSpinner));
-                    map.put("house_serial", mUnitSpinner.getSelectedItem().toString());
-                    map.put("louceng", floorNum);
-                    map.put("house_number", roomNum);
+//                    以下是 int
+                    map.put("community", tempIds.get(0));
+                    map.put("cunjuid", tempIds.get(1));
+                    map.put("gridding", tempIds.get(2));
+                    map.put("buildid", tempIds.get(3));
+                    map.put("house_serial", tempIds.get(4));
+                    map.put("louceng", tempIds.get(5));
+                    map.put("house_number", tempIds.get(6));
+
+////                    以下是字符串
+//                    map.put("community", getAddressName(mRoadSpinner));
+//                    map.put("cunjuid", getAddressName(mCommunitySpinner));
+//                    map.put("gridding", getAddressName(mNeighborSpinner));
+//                    map.put("buildid", getAddressName(mHouseSpinner));
+//                    map.put("house_serial", mUnitSpinner.getSelectedItem().toString());
+//                    map.put("louceng", floorNum);
+//                    map.put("house_number", roomNum);
 
                     mapBean.setMap(map);
 
