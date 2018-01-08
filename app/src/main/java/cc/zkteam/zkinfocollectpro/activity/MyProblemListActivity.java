@@ -3,7 +3,6 @@ package cc.zkteam.zkinfocollectpro.activity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -19,6 +18,7 @@ import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.base.RvListener;
 import cc.zkteam.zkinfocollectpro.bean.ProblemPreview;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
+import cc.zkteam.zkinfocollectpro.utils.L;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -67,13 +67,17 @@ public class MyProblemListActivity extends BaseActivity implements RvListener {
         ZHConnectionManager.getInstance().getZHApi().getProblemList(ZKICApplication.zhLoginBean.getId()).enqueue(new Callback<ProblemPreview>() {
             @Override
             public void onResponse(Call<ProblemPreview> call, Response<ProblemPreview> response) {
-                Log.e("TAG", response.body().toString());
-                mLoading.setVisibility(View.GONE);
-                if (response.isSuccessful()) {
-                    mAdapter = new ProblemPreviewAdapter(MyProblemListActivity.this,
-                            response.body().getData(), MyProblemListActivity.this);
-                    mMyProblem.setAdapter(mAdapter);
+                ProblemPreview problemPreview = response.body();
+                if (problemPreview != null) {
+                    L.i(problemPreview.toString());
+                    if (response.isSuccessful()) {
+                        mAdapter = new ProblemPreviewAdapter(MyProblemListActivity.this,
+                                problemPreview.getData(), MyProblemListActivity.this);
+                        mMyProblem.setAdapter(mAdapter);
+                    }
                 }
+
+                mLoading.setVisibility(View.GONE);
             }
 
             @Override
