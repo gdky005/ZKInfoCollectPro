@@ -237,9 +237,10 @@ public class New31InfoFragment extends BaseFragment {
         setCreateHouseData(resultObj);
 
         try {
+            resultObj.put("p_id", personId);
+
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("user", userID);
-            jsonObject.put("p_id", personId);
             jsonObject.put("data", resultObj);
 
             RequestBody body = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());

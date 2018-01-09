@@ -60,10 +60,21 @@ public final class ZKBase {
       } else {
           path = SDCardUtils.getSDCardPaths(true).get(0);
       }
-
       sdCardPath = path + File.separator + BASE_DIR;
-      FileUtils.createOrExistsDir(sdCardPath);
 
+      String tempFile = sdCardPath + "/temp";
+      boolean b = FileUtils.createOrExistsFile(tempFile);
+      if (!b) {
+          //获取 app 私有目录
+          File file = ZKBase.getContext().getFilesDir();
+          if (file != null) {
+              sdCardPath = file.getPath() + File.separator + BASE_DIR;
+          }
+      } else {
+          FileUtils.deleteFile(tempFile);
+      }
+
+      FileUtils.createOrExistsDir(sdCardPath);
       L.d("当前获取的存储路径是：" + sdCardPath);
   }
 
