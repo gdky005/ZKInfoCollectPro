@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
@@ -155,9 +157,20 @@ public class PersonalInfoCollectFragment extends BaseFragment {
                             Toast.makeText(mContext, "当前状态不允许修改信息", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        if (null == response.body().getData() || response.body().getData().size() < position)
+                        CollectItemBean collectItemBean = response.body();
+
+                        if (collectItemBean == null) {
                             return;
-                        PageCtrl.startNew31InfoActivity(getActivity(), response.body().getData().get(position).getName(), response.body().getData().get(position).getType());
+                        }
+
+                        List<CollectItemBean.DataBean> list =  collectItemBean.getData();
+                        if (null == list || list.size() < position)
+                            return;
+
+                        PageCtrl.startNew31InfoActivity(getActivity(),
+                                list.get(position).getName(),
+                                list.get(position).getType(),
+                                mPersonid);
                     }
                 });
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import cc.zkteam.zkinfocollectpro.activity.BasicInfoActivity;
 import cc.zkteam.zkinfocollectpro.fragment.New31InfoFragment;
@@ -42,7 +43,15 @@ public class PageCtrl {
      * @param pageType  当前页面的类型： 例如 renyuanxinxi_type
      */
     public static void startNew31InfoActivity(Context context, String pageName, String pageType) {
-        startNew31InfoActivity(context, pageName, pageType, null);
+        startNew31InfoActivity(context, pageName, pageType, null, null);
+    }
+
+    public static void startNew31InfoActivity(Context context, String pageName, String pageType, String personId) {
+        startNew31InfoActivity(context, pageName, pageType, null, personId);
+    }
+
+    public static void startNew31InfoActivity(Context context, String pageName, String pageType, MapBean mapBean) {
+        startNew31InfoActivity(context, pageName, pageType, mapBean, null);
     }
 
     /**
@@ -50,7 +59,7 @@ public class PageCtrl {
      * @param pageName  当前页面的名称：例如 人员信息
      * @param pageType  当前页面的类型： 例如 renyuanxinxi_type
      */
-    public static void startNew31InfoActivity(Context context, String pageName, String pageType, MapBean mapBean) {
+    public static void startNew31InfoActivity(Context context, String pageName, String pageType, MapBean mapBean, String personId) {
         if (context == null) return;
         Intent intent = new Intent(context, BasicInfoActivity.class);
 
@@ -60,6 +69,10 @@ public class PageCtrl {
 
         if (mapBean != null) {
             bundle.putSerializable(New31InfoFragment.NEW_31_INFO_MAP_BEAN_KEY, mapBean);
+        }
+
+        if (!TextUtils.isEmpty(personId)) {
+            bundle.putString(New31InfoFragment.NEW_31_INFO_PERSON_ID_KEY, personId);
         }
 
         intent.putExtras(bundle);

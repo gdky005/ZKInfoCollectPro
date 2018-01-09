@@ -32,6 +32,7 @@ public class BasicInfoActivity extends BaseActivity {
 
     private String titleName;
     private String pageType;
+    private String personId;
     private MapBean mapBean;
 
     @BindView(R.id.title)
@@ -114,6 +115,7 @@ public class BasicInfoActivity extends BaseActivity {
         if (bundle != null) {
             titleName = bundle.getString(New31InfoFragment.NEW_31_INFO_NAME_KEY);
             pageType = bundle.getString(New31InfoFragment.NEW_31_INFO_PAGE_TYPE_KEY);
+            personId = bundle.getString(New31InfoFragment.NEW_31_INFO_PERSON_ID_KEY);
             mapBean = (MapBean) bundle.getSerializable(New31InfoFragment.NEW_31_INFO_MAP_BEAN_KEY);
         }
 
@@ -135,7 +137,7 @@ public class BasicInfoActivity extends BaseActivity {
     }
 
     private void showFragment(String itemType, String itemName) {
-        FragmentUtils.add(getSupportFragmentManager(), New31InfoFragment.newInstance(itemName, itemType, mapBean), R.id.content_view);
+        FragmentUtils.add(getSupportFragmentManager(), New31InfoFragment.newInstance(itemName, itemType, mapBean, personId), R.id.content_view);
     }
 
 }

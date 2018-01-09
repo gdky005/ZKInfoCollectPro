@@ -61,6 +61,7 @@ public class New31InfoFragment extends BaseFragment {
     public static final String NEW_31_INFO_NAME_KEY = "name";
     public static final String NEW_31_INFO_PAGE_TYPE_KEY = "pageType";
     public static final String NEW_31_INFO_MAP_BEAN_KEY = "mapBean";
+    public static final String NEW_31_INFO_PERSON_ID_KEY = "person_id";
     public static final int REQUEST_CODE = 300;
 
     @BindView(R.id.new_31_zk_module_list_layout)
@@ -74,16 +75,18 @@ public class New31InfoFragment extends BaseFragment {
 
     private String titleName;
     private String pageType;
+    private String personId;
     private Map<String, String> createHouseMap;
 
     private String userID;
     private New31ImageEvent imageEvent;
 
-    public static New31InfoFragment newInstance(String name, String pageType, MapBean mapBean) {
+    public static New31InfoFragment newInstance(String name, String pageType, MapBean mapBean, String personId) {
         Bundle args = new Bundle();
         New31InfoFragment fragment = new New31InfoFragment();
         args.putString(NEW_31_INFO_NAME_KEY, name);
         args.putString(NEW_31_INFO_PAGE_TYPE_KEY, pageType);
+        args.putString(NEW_31_INFO_PERSON_ID_KEY, personId);
         args.putSerializable(NEW_31_INFO_MAP_BEAN_KEY, mapBean);
         fragment.setArguments(args);
         return fragment;
@@ -184,6 +187,7 @@ public class New31InfoFragment extends BaseFragment {
         if (bundle != null) {
             titleName = bundle.getString(NEW_31_INFO_NAME_KEY);
             pageType = bundle.getString(NEW_31_INFO_PAGE_TYPE_KEY);
+            personId = bundle.getString(NEW_31_INFO_PERSON_ID_KEY);
             MapBean mapBean = (MapBean) bundle.getSerializable(NEW_31_INFO_MAP_BEAN_KEY);
             if (mapBean != null) {
                 createHouseMap = mapBean.getMap();
@@ -235,6 +239,7 @@ public class New31InfoFragment extends BaseFragment {
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("user", userID);
+            jsonObject.put("p_id", personId);
             jsonObject.put("data", resultObj);
 
             RequestBody body = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
