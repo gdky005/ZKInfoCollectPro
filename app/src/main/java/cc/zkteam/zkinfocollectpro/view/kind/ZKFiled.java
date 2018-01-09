@@ -498,8 +498,8 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
             picker2.setCanceledOnTouchOutside(true);
             picker2.setUseWeight(true);
             picker2.setTopPadding(ConvertUtils.toPx(context, 10));
-            picker2.setRangeEnd(2111, 1, 11);
-            picker2.setRangeStart(2016, 8, 29);
+            picker2.setRangeEnd(2050, 12, 31);
+            picker2.setRangeStart(1900, 1, 1);
             picker2.setContentPadding(15, 0);
             picker2.setLabel(getContext().getString(R.string.zk_filed_year_label),
                     getContext().getString(R.string.zk_filed_month_label),
