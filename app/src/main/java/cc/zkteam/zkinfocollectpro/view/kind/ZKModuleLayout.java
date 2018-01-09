@@ -156,18 +156,40 @@ public class ZKModuleLayout extends ZKBaseView {
 
 
         try {
-            for (ZKFiled zkFiled :
-                    zkFiledList) {
+
+            for (int i = 0; i < zkFiledList.size(); i++) {
+                ZKFiled zkFiled = zkFiledList.get(i);
                 Map map = zkFiled.getResult();
                 if (map != null) {
                     String tableName = (String) map.get(ZKFiled.ZK_FILED_TABLE_NAME);
                     String newValue = (String) map.get(ZKFiled.ZK_FILED_NEW_VALUE);
-                    jsonObject.put(tableName, newValue);
+
+                    if (!TextUtils.isEmpty(tableName) && tableName.contains("[]")) {
+                        String newKey = String.valueOf(i);
+
+                        String newTableName = tableName.replaceAll("\\[]", "");
+
+                        if (jsonObject.has(newTableName)) {
+                            JSONObject obj = jsonObject.optJSONObject(newTableName);
+                            obj.put(newKey, newValue);
+
+                            jsonObject.put(newTableName, obj);
+                        } else {
+                            JSONObject obj = new JSONObject();
+                            obj.put(newKey, newValue);
+
+                            jsonObject.put(newTableName, obj);
+                        }
+                    } else {
+                        jsonObject.put(tableName, newValue);
+                    }
                 }
             }
 
             return jsonObject;
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
