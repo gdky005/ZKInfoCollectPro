@@ -34,6 +34,7 @@ import cc.zkteam.zkinfocollectpro.dialog.OnZKDialogCancelListener;
 import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragment;
 import cc.zkteam.zkinfocollectpro.dialog.ZKDialogFragmentHelper;
 import cc.zkteam.zkinfocollectpro.dialog.ZKDialogResultListener;
+import cc.zkteam.zkinfocollectpro.managers.ZHConfigDataManager;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.utils.IdentityUtils;
 import cc.zkteam.zkinfocollectpro.utils.L;
@@ -61,7 +62,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
     @BindView(R.id.bornedittext)
     Button bornedittext;
     @BindView(R.id.nationaledittext)
-    EditText nationaledittext;
+    Button nationaledittext;
 
     @BindView(R.id.edittext21)
     EditText edittext21;
@@ -142,7 +143,48 @@ public class NewResidentsInfoActivity extends BaseActivity {
             }
         });
 
-        nationaledittext.setFilters(new InputFilter[]{filter});
+        setNationData();
+    }
+
+    /**
+     * 设置民族的数据
+     */
+    private void setNationData() {
+        List<String> nationList = ZHConfigDataManager.getInstance().getNation();
+        if (nationList != null && nationList.size() > 0) {
+            nationaledittext.setText(nationList.get(0));
+        }
+
+        nationaledittext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] strings = List2StringArrayUtils.list2StringArray(nationList);
+                if (strings.length > 0) {
+//                                修复bug
+                    for (int i = 0; i < strings.length; i++) {
+                        String tempStr = strings[i];
+
+                        if (TextUtils.isEmpty(tempStr)) {
+                            strings[i] = "";
+                        }
+                    }
+                    OptionPicker picker3 = new OptionPicker(NewResidentsInfoActivity.this, strings);
+                    picker3.setCanceledOnTouchOutside(false);
+                    picker3.setDividerRatio(WheelView.DividerConfig.FILL);
+                    picker3.setShadowColor(Color.BLUE, 40);
+                    picker3.setSelectedIndex(0);
+                    picker3.setCycleDisable(true);
+                    picker3.setTextSize(20);
+                    picker3.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                        @Override
+                        public void onOptionPicked(int index1, String item) {
+                            nationaledittext.setText(item);
+                        }
+                    });
+                    picker3.show();
+                }
+            }
+        });
     }
 
     @Override
