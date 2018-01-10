@@ -18,6 +18,6 @@
           android:paddingRight="@dimen/dp_5"
           android:paddingTop="5dp"
           android:textColor="@color/gray_3"
-          android:textSize="@dimen/sp_15"
+          android:textSize="@dimen/sp_12"
           android:visibility="visible"
           tools:text="2018年1月1日"/>
