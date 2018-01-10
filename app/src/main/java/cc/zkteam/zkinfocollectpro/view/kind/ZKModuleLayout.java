@@ -139,6 +139,9 @@ public class ZKModuleLayout extends ZKBaseView {
                         }
                     }
 
+                    if (null == defaultValue) {
+                        defaultValue = dataBean.getDefaultX();
+                    }
 
                     zkFiled.setData(key, (String) value, defaultValue, i, type);
 

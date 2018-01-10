@@ -88,7 +88,18 @@ public class ZKModuleListLayout extends ZKBaseView implements IZKResult<JSONObje
                         String str = dataBean.getDefault_list_data();
                         if (!TextUtils.isEmpty(str)) {
                             String[] strList = str.split(",");
-                            list.add(strList);
+
+                            String[] strings = new String[strList.length + 1];
+                            for (int j = 0; j < strings.length; j++) {
+                                if (j == 0) {
+                                    strings[j] = dataBean.getDefaultX();
+                                    continue;
+                                }
+
+                                strings[j] = strList[j - 1];
+                            }
+
+                            list.add(strings);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

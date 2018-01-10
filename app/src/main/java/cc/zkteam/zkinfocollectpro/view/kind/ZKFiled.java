@@ -224,6 +224,17 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
             case TYPE_FILED_FORM_SELECT_DATA:
                 if (defaultValue instanceof String[]) {
                     String[] value = (String[]) defaultValue;
+                    String defualtX = value[0];
+
+                    String[] newValueData = new String[value.length - 1];
+
+                    for (int i = 0; i < value.length; i++) {
+                        if (i == 0)
+                            continue;
+                        newValueData[i - 1] = value[i];
+                    }
+
+                    value = newValueData;
 
                     if (value.length > 0) {
                         String[] newValue = new String[value.length];
@@ -278,7 +289,12 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
                             }
 
                         });
-                        rightLayoutSelectDataFiledValue.setText(newValue[0]);
+
+                        if (TextUtils.isEmpty(defualtX)) {
+                            defualtX = newValue[0];
+                        }
+
+                        rightLayoutSelectDataFiledValue.setText(defualtX);
                     }
                 }
                 break;
