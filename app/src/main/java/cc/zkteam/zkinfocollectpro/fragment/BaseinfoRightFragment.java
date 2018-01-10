@@ -55,12 +55,12 @@ public class BaseinfoRightFragment extends BaseFragment implements RvListener {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        Resources res = getResources();//统一命名规则 批量设置图片\
+        Resources res = mContext.getResources();//统一命名规则 批量设置图片\
         list.clear();
         for (int i = 0; i <= 30; i++) {
             int id = res.getIdentifier("basininfoitem" + (i), "drawable", getActivity().getPackageName());
-            String[] mItems_name = getResources().getStringArray(R.array.base_info_item_name);
-            String[] mItems_type = getResources().getStringArray(R.array.base_info_item_type);
+            String[] mItems_name = mContext.getResources().getStringArray(R.array.base_info_item_name);
+            String[] mItems_type = mContext.getResources().getStringArray(R.array.base_info_item_type);
 
             BasicInfoItemBean bean = new BasicInfoItemBean();
             bean.image = id;
