@@ -39,6 +39,8 @@ import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 
 public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Callback {
@@ -254,7 +256,36 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
     private void uploadAndRecognize(final String filePath) throws ZKIdCardException {
         progressLayout.setVisibility(View.VISIBLE);
         if (!TextUtils.isEmpty(filePath)) {
-            getIdCardInfo(filePath);
+            Luban.with(mContext)
+                    .load(filePath)                     //传入要压缩的图片
+                    .setCompressListener(new OnCompressListener() { //设置回调
+
+                        @Override
+                        public void onStart() {
+                        }
+                        @Override
+                        public void onSuccess(File file) {
+                            String galleyPicPath = file.getAbsolutePath();
+                            L.d("压缩图片后地址是：" + galleyPicPath);
+
+                            try {
+                                getIdCardInfo(galleyPicPath);
+                            } catch (ZKIdCardException e) {
+                                e.printStackTrace();
+                                ToastUtils.showShort(e.getMessage());
+                            }
+                        }
+                        @Override
+                        public void onError(Throwable e) {
+                            //当压缩 出现问题时调用
+                            try {
+                                getIdCardInfo(filePath);
+                            } catch (ZKIdCardException e1) {
+                                e1.printStackTrace();
+                                ToastUtils.showShort(e.getMessage());
+                            }
+                        }
+                    }).launch();    //启动压缩
         }
     }
 
