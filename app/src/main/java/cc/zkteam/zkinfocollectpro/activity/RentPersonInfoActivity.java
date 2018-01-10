@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -169,6 +170,7 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
     private void showOutSetting(int position) {
         View view = getLayoutInflater().inflate(R.layout.data_collect_out_setting, null, false);
         mEmigrationDialog = new Dialog(this);
+        mEmigrationDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         mEmigrationDialog.setContentView(view);
         view.findViewById(R.id.confirm).setOnClickListener(new View.OnClickListener() {
             @Override

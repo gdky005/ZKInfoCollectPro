@@ -58,6 +58,7 @@ public class DataCollectRvHolder extends RvHolder<RentPersoner.PersonlistBean> {
         if (mType == 0) {
             TextView address = findTv(R.id.tv_address);
             if (address != null) {
+                address.setText("");
                 address.setText(mAddress);
             }
             TextView btn = findTv(R.id.create_new);

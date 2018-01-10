@@ -52,8 +52,8 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
 
     public static final String TYPE_FANG_WU_XIN_XI_TYPE = "fangwuxinxi_type";
 
-    private String floorNum;
-    private String roomNum;
+    private int floorNum;
+    private int roomNum;
 
     @Inject
     DcPresenterImpl mPresenter;
@@ -90,7 +90,8 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
     private HashMap<Integer, Spinner> spinnerMap;
     private HashMap<Integer, String> tempIds;
     private StringBuffer mAddress = new StringBuffer();
-
+    private boolean mFirstOne = true;
+    private boolean mFirstTwo = true;
 
     public static DataCollectFragment newInstance() {
         Bundle args = new Bundle();
@@ -141,7 +142,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         mRoadSpinner.setAdapter(roadAdapter);
         mRoadSpinner.setOnItemSelectedListener(this);
 
-        communityAdapter = new LDSpinnerAdapter(mContext);
+        communityAdapter = new LDSpinnerAdapter(mContext, 0);
         mCommunitySpinner.setAdapter(communityAdapter);
         mCommunitySpinner.setOnItemSelectedListener(this);
 
@@ -203,6 +204,23 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
             tempIds.put(0, zhCommunity.getData().get(0).getId());
             showLoading();
         }
+
+        if ("1".equals(type) && mFirstOne) {
+            mFirstOne = false;
+            mPresenter.loadStreetCommunity(zhCommunity.getData().get(4).getId(), "2");
+            tempIds.put(1, zhCommunity.getData().get(4).getId());
+            if (mCommunitySpinner.getAdapter().getCount() >= 5) {
+                mCommunitySpinner.setSelection(4);
+            }
+            showLoading();
+        }
+
+        if ("2".equals(type) && mFirstTwo) {
+            mFirstTwo = false;
+            if (mNeighborSpinner.getAdapter().getCount() >= 2) {
+                mNeighborSpinner.setSelection(1);
+            }
+        }
     }
 
     @Override
@@ -210,6 +228,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         List<RentPersoner.PersonlistBean> personlist = data.getPersonlist();
         if (data.getStatus() == 2) {
             Intent intent = new Intent();
+            getAddress(floorNum, roomNum);
             AddHouseParams params = new AddHouseParams(tempIds);
             intent.putExtra("params", params);
             intent.putExtra("build_Id", tempIds.get(3));
@@ -228,7 +247,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
                 view.findViewById(R.id.confirm).setOnClickListener(v -> {
                     MapBean mapBean = new MapBean();
 
-                    Map<String, String>  map = new HashMap<>();
+                    Map<String, String> map = new HashMap<>();
                     map.put("type", TYPE_FANG_WU_XIN_XI_TYPE);
 
 //                    以下是 int
@@ -382,8 +401,8 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         Log.i("chris", "onNothingSelected: ");
     }
 
-    class RoomClickListener implements View.OnClickListener {
 
+    class RoomClickListener implements View.OnClickListener {
         int mFloorNum;
         int mRoomNum;
 
@@ -395,13 +414,12 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         @Override
         public void onClick(View view) {
             showLoading();
-            getAddress(mFloorNum, mRoomNum);
 
-            floorNum = mFloorNum  + "";
-            roomNum = "0" + mRoomNum;
+            floorNum = mFloorNum;
+            roomNum = mRoomNum;
 
-            tempIds.put(5, floorNum);
-            tempIds.put(6, roomNum);
+            tempIds.put(5, floorNum + "");
+            tempIds.put(6, "0" + roomNum);
 
             getRentPersoner(tempIds);
         }
