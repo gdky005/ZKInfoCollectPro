@@ -394,7 +394,7 @@ public class New31InfoFragment extends BaseFragment {
     }
 
     private void showZKModuleAPI(ZKModuleListLayout zkModuleListLayout, String pageType) {
-        ZHConnectionManager.getInstance().getZHApi().get31Data(pageType, userID).enqueue(new Callback<ZK31Bean>() {
+        ZHConnectionManager.getInstance().getZHApi().get31Data(pageType, personId).enqueue(new Callback<ZK31Bean>() {
 
             @Override
             public void onResponse(Call<ZK31Bean> call, Response<ZK31Bean> result) {
