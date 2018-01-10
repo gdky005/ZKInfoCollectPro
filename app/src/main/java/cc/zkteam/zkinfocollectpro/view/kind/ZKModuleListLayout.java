@@ -23,6 +23,7 @@ import cc.zkteam.zkinfocollectpro.bean.ZK31Bean;
 
 public class ZKModuleListLayout extends ZKBaseView implements IZKResult<JSONObject> {
 
+    private boolean isMoreData;
     private ArrayList<ZKModuleLayout> zkModuleLayouts = new ArrayList<>();
 
     public ZKModuleListLayout(Context context) {
@@ -45,6 +46,10 @@ public class ZKModuleListLayout extends ZKBaseView implements IZKResult<JSONObje
     @Override
     protected void initViews(View rootView) {
 
+    }
+
+    public void setMoreData(boolean moreData) {
+        isMoreData = moreData;
     }
 
     public void setDataBeanList(List<ZK31Bean.DataBeanX> dataBeanList) {
@@ -117,6 +122,7 @@ public class ZKModuleListLayout extends ZKBaseView implements IZKResult<JSONObje
             titleList.add(dataBeanX.getType());
 //                    titleList.add(dataBean.getList()); // 这里如果有值的话，就是列表 String[]
             //                zkModuleLayout.setJsonArray(moduleArray, null, titleList);
+            zkModuleLayout.setMoreData(isMoreData);
             zkModuleLayout.setJsonArray(moduleArray, objectHashMap, titleList);
             zkModuleLayouts.add(zkModuleLayout);
             addView(zkModuleLayout);
@@ -135,14 +141,28 @@ public class ZKModuleListLayout extends ZKBaseView implements IZKResult<JSONObje
                 if (jsonObject == null) {
                     jsonObject = zkModuleLayoutResult;
                 } else {
-
                     if (zkModuleLayoutResult != null) {
-                        JSONArray jsonArray = zkModuleLayoutResult.names();
-                        if (jsonArray != null) {
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                String key = jsonArray.optString(i);
-                                String value = zkModuleLayoutResult.optString(key);
-                                jsonObject.put(key, value);
+                        if (isMoreData) {
+                            JSONArray jsonArray = null;
+                            if (jsonObject.has("list")) {
+                                jsonArray = jsonObject.optJSONArray("list");
+                            }
+
+                            if (jsonArray == null) {
+                                jsonArray = new JSONArray();
+                            }
+
+                            jsonArray.put(zkModuleLayoutResult);
+                            jsonObject.put("list", jsonArray);
+
+                        } else {
+                            JSONArray jsonArray = zkModuleLayoutResult.names();
+                            if (jsonArray != null) {
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    String key = jsonArray.optString(i);
+                                    String value = zkModuleLayoutResult.optString(key);
+                                    jsonObject.put(key, value);
+                                }
                             }
                         }
                     }

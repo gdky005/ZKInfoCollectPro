@@ -24,6 +24,7 @@ import cc.zkteam.zkinfocollectpro.bean.ZK31Bean;
 
 public class ZKModuleLayout extends ZKBaseView {
 
+    private boolean isMoreData;
     private List<ZKFiled> zkFiledList = new ArrayList<>();
 
     public ZKModuleLayout(Context context) {
@@ -46,6 +47,10 @@ public class ZKModuleLayout extends ZKBaseView {
     @Override
     protected void initViews(View rootView) {
 
+    }
+
+    public void setMoreData(boolean moreData) {
+        isMoreData = moreData;
     }
 
     /**
@@ -168,7 +173,13 @@ public class ZKModuleLayout extends ZKBaseView {
                     String newValue = (String) map.get(ZKFiled.ZK_FILED_NEW_VALUE);
 
                     if (!TextUtils.isEmpty(tableName) && tableName.contains("[]")) {
-                        String newKey = String.valueOf(i);
+
+                        String newKey;
+                        if (isMoreData) {
+                            newKey = tableName;
+                        } else {
+                            newKey = String.valueOf(i);
+                        }
 
                         String newTableName = tableName.replaceAll("\\[]", "");
 

@@ -406,6 +406,7 @@ public class New31InfoFragment extends BaseFragment {
 
                         if (dataBeanList != null && dataBeanList.size() > 0) {
                             setVisibility(new31Commit, true);
+                            zkModuleListLayout.setMoreData("1".equals(zk31Bean.getOne_to_many()));
                             zkModuleListLayout.setDataBeanList(dataBeanList);
                         } else {
                             ToastUtils.showShort("当前数据为空");

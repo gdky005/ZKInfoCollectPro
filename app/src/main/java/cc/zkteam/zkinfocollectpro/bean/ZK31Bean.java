@@ -11,13 +11,14 @@ import java.util.List;
 
 public class ZK31Bean {
 
-
     /**
      * status : 1
-     * data : [{"id":"1","name":"人员基础数据","type":"1","list":"","data":[{"number":"1","type":"2","name":"是否是新生儿","default":"否","default_time":"","first_time":"","end_time":"","default_list_data":"是|是,否|否","table_name":"newbaby"},{"number":"2","type":"1","name":"身份证号","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"","table_name":"id_card"},{"number":"3","type":"2","name":"性别","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"男|1,女|2","table_name":"sex"},{"number":"4","type":"3","name":"出生日期","default":"","default_time":"","first_time":"","end_time":"","default_list_data":null,"table_name":"birthday"},{"number":"5","type":"1","name":"联系电话","default":"","default_time":"","first_time":"","end_time":"","default_list_data":null,"table_name":"phone"},{"number":"6","type":"2","name":"民族","default":"","default_time":"","first_time":"","end_time":"","default_list_data":null,"table_name":"nation"},{"number":"7","type":"2","name":"政治面貌","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"群众|1,共产党党员|2,共产党预备党员|3,团员|4,民革|5,民盟|6,民建|7,民进|8,农工党|9,致公党|10,九三学社|11,台盟|12,无党派民主人士|13,未知|14","table_name":"politics"},{"number":"8","type":"2","name":"血型","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"未知|0,A型|1,B型|2,AB型|3,O型|4,Rh型|5,MN型|6,MNSs型|7","table_name":"bloodtype"}]}]
+     * one_to_many : 1
+     * data : [{"id":"1","name":"避孕节育信息","type":"1","list":"","data":[{"number":"1","type":"1","name":"子女数","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"","table_name":"contraception_haschilds"},{"number":"2","type":"3","name":"最小子女出生日期","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"","table_name":"contraception_lastchild"},{"number":"3","type":"2","name":"避孕方法","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"输卵管结扎|输卵管结扎,宫内节育器|宫内节育器,内用避孕药|内用避孕药,外用避孕药|外用避孕药,皮下埋植避孕|皮下埋植避孕,安全期避孕|安全期避孕,避孕套|避孕套,紧急避孕|紧急避孕","table_name":"contraception_type"},{"number":"4","type":"3","name":"开始时间","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"","table_name":"contraception_startdate"},{"number":"5","type":"3","name":"结束时间","default":null,"default_time":null,"first_time":null,"end_time":null,"default_list_data":null,"table_name":"contraception_stopdate"},{"number":"6","type":"1","name":"提供服务单位","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"","table_name":"contraception_unit"},{"number":"7","type":"1","name":"停用原因","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"","table_name":"contraception_stopcause"}]},{"id":"2","name":"妇检情况信息","type":"1","list":null,"data":[{"number":"1","type":"3","name":"检查时间","default":null,"default_time":null,"first_time":null,"end_time":null,"default_list_data":null,"table_name":"checkdate[]"},{"number":"2","type":"1","name":"检查人","default":null,"default_time":null,"first_time":null,"end_time":null,"default_list_data":null,"table_name":"checkman[]"},{"number":"3","type":"1","name":"医院名称","default":null,"default_time":null,"first_time":null,"end_time":null,"default_list_data":null,"table_name":"hospital_name[]"},{"number":"4","type":"1","name":"检查结果","default":null,"default_time":null,"first_time":null,"end_time":null,"default_list_data":null,"table_name":"result[]"}]},{"id":"3","name":"妇检情况信息","type":"1","list":"","data":[{"number":"1","type":"3","name":"检查时间","default":"","default_time":"","first_time":"","end_time":"","default_list_data":null,"table_name":"checkdate[]"},{"number":"2","type":"1","name":"检查人","default":"","default_time":"","first_time":"","end_time":"","default_list_data":null,"table_name":"checkman[]"},{"number":"3","type":"1","name":"医院名称","default":"","default_time":"","first_time":"","end_time":"","default_list_data":null,"table_name":"hospital_name[]"},{"number":"4","type":"1","name":"检查结果","default":"","default_time":"","first_time":"","end_time":"","default_list_data":null,"table_name":"result[]"}]},{"id":"4","name":"妇检情况信息","type":"1","list":"","data":[{"number":"1","type":"3","name":"检查时间","default":"","default_time":"","first_time":"","end_time":"","default_list_data":null,"table_name":"checkdate[]"},{"number":"2","type":"1","name":"检查人","default":"","default_time":"","first_time":"","end_time":"","default_list_data":null,"table_name":"checkman[]"},{"number":"3","type":"1","name":"医院名称","default":"","default_time":"","first_time":"","end_time":"","default_list_data":null,"table_name":"hospital_name[]"},{"number":"4","type":"1","name":"检查结果","default":"","default_time":"","first_time":"","end_time":"","default_list_data":null,"table_name":"result[]"}]}]
      */
 
     private int status;
+    private String one_to_many;
     private List<DataBeanX> data;
 
     public int getStatus() {
@@ -26,6 +27,14 @@ public class ZK31Bean {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getOne_to_many() {
+        return one_to_many;
+    }
+
+    public void setOne_to_many(String one_to_many) {
+        this.one_to_many = one_to_many;
     }
 
     public List<DataBeanX> getData() {
@@ -39,10 +48,10 @@ public class ZK31Bean {
     public static class DataBeanX {
         /**
          * id : 1
-         * name : 人员基础数据
+         * name : 避孕节育信息
          * type : 1
          * list :
-         * data : [{"number":"1","type":"2","name":"是否是新生儿","default":"否","default_time":"","first_time":"","end_time":"","default_list_data":"是|是,否|否","table_name":"newbaby"},{"number":"2","type":"1","name":"身份证号","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"","table_name":"id_card"},{"number":"3","type":"2","name":"性别","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"男|1,女|2","table_name":"sex"},{"number":"4","type":"3","name":"出生日期","default":"","default_time":"","first_time":"","end_time":"","default_list_data":null,"table_name":"birthday"},{"number":"5","type":"1","name":"联系电话","default":"","default_time":"","first_time":"","end_time":"","default_list_data":null,"table_name":"phone"},{"number":"6","type":"2","name":"民族","default":"","default_time":"","first_time":"","end_time":"","default_list_data":null,"table_name":"nation"},{"number":"7","type":"2","name":"政治面貌","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"群众|1,共产党党员|2,共产党预备党员|3,团员|4,民革|5,民盟|6,民建|7,民进|8,农工党|9,致公党|10,九三学社|11,台盟|12,无党派民主人士|13,未知|14","table_name":"politics"},{"number":"8","type":"2","name":"血型","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"未知|0,A型|1,B型|2,AB型|3,O型|4,Rh型|5,MN型|6,MNSs型|7","table_name":"bloodtype"}]
+         * data : [{"number":"1","type":"1","name":"子女数","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"","table_name":"contraception_haschilds"},{"number":"2","type":"3","name":"最小子女出生日期","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"","table_name":"contraception_lastchild"},{"number":"3","type":"2","name":"避孕方法","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"输卵管结扎|输卵管结扎,宫内节育器|宫内节育器,内用避孕药|内用避孕药,外用避孕药|外用避孕药,皮下埋植避孕|皮下埋植避孕,安全期避孕|安全期避孕,避孕套|避孕套,紧急避孕|紧急避孕","table_name":"contraception_type"},{"number":"4","type":"3","name":"开始时间","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"","table_name":"contraception_startdate"},{"number":"5","type":"3","name":"结束时间","default":null,"default_time":null,"first_time":null,"end_time":null,"default_list_data":null,"table_name":"contraception_stopdate"},{"number":"6","type":"1","name":"提供服务单位","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"","table_name":"contraception_unit"},{"number":"7","type":"1","name":"停用原因","default":"","default_time":"","first_time":"","end_time":"","default_list_data":"","table_name":"contraception_stopcause"}]
          */
 
         private String id;
@@ -94,14 +103,14 @@ public class ZK31Bean {
         public static class DataBean {
             /**
              * number : 1
-             * type : 2
-             * name : 是否是新生儿
-             * default : 否
+             * type : 1
+             * name : 子女数
+             * default :
              * default_time :
              * first_time :
              * end_time :
-             * default_list_data : 是|是,否|否
-             * table_name : newbaby
+             * default_list_data :
+             * table_name : contraception_haschilds
              */
 
             private String number;
