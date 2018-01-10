@@ -503,6 +503,29 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
 
     // ———————————内部使用方法———————————
     private void setCurrentTime(TextView rightLayoutTwoTimeLeftTv) {
+        try {
+            if (defaultValue instanceof String) {
+                if (!TextUtils.isEmpty((CharSequence) defaultValue)) {
+                    String[] date = ((String) defaultValue).split("-");
+
+                    yearStr = date[0];
+                    monthStr = date[1];
+                    dayStr = date[2];
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (monthStr.length() == 1) {
+            monthStr = "0" + monthStr;
+        }
+
+        if (dayStr.length() == 1) {
+            dayStr = "0" + dayStr;
+        }
+
+
         rightLayoutTwoTimeLeftTv.setText(String.format(context.getString(R.string.date_year_month_day), yearStr, monthStr, dayStr));
     }
 
