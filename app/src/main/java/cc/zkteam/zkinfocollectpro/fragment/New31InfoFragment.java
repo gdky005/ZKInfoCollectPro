@@ -249,13 +249,16 @@ public class New31InfoFragment extends BaseFragment {
                 @Override
                 public void onResponse(Call<ZHBaseBean> call, Response<ZHBaseBean> response) {
                     Log.d(TAG, "onResponse: " + response);
-                    if (response.body() != null && response.body().getStatus() == 1) {
+
+                    ZHBaseBean zhBaseBean = response.body();
+
+                    if (zhBaseBean != null && zhBaseBean.getStatus() == 1) {
                         ToastUtils.showShort("数据提交成功");
                         showLoading(false);
                         return;
                     }
 
-                    ToastUtils.showShort("数据提交失败");
+                    ToastUtils.showShort("数据提交失败:" + (zhBaseBean != null ? zhBaseBean.getMsg() : "错误"));
                     showLoading(false);
                 }
 

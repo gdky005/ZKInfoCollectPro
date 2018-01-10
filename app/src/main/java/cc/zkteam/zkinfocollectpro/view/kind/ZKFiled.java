@@ -393,7 +393,7 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
                         String idCardStr = rightLayoutLeftIdCardNumberEt.getText().toString();
 
                         if (!TextUtils.isEmpty(idCardStr)) {
-
+                            ToastUtils.showShort("正在查询，请稍后");
                             ZHConnectionManager.getInstance().getZHApi().checkIdCard(idCardStr).enqueue(new Callback<CheckIdCardBean>() {
                                 @Override
                                 public void onResponse(Call<CheckIdCardBean> call, Response<CheckIdCardBean> response) {
