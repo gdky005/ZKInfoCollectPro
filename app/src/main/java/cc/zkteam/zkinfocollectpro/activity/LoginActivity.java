@@ -76,6 +76,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void initViews() {
         progressBar.setVisibility(View.GONE);
+        btnSubmit.setEnabled(true);
 //        SystemBarTintManager systemBarTintManager = new SystemBarTintManager(this);
 //        systemBarTintManager.setStatusBarTintEnabled(false);
 //        systemBarTintManager.setNavigationBarTintEnabled(false);
@@ -147,7 +148,7 @@ public class LoginActivity extends BaseActivity {
     @OnClick(R.id.btn_submit)
     public void onViewClicked() {
         progressBar.setVisibility(View.VISIBLE);
-
+        btnSubmit.setEnabled(false);
         String userNum = etUserNum.getText().toString();
         String userPwd = EncryptUtils.encryptMD5ToString(et_pwd.getText().toString());
 //        String userPwd = et_pwd.getText().toString();
@@ -156,6 +157,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onResponse(ZHBaseBean<ZHLoginBean> baseBean, ZHLoginBean result) {
                 progressBar.setVisibility(View.GONE);
+                btnSubmit.setEnabled(true);
                 if (result != null) {
                     L.d("onResponse: " + result.toString());
 
@@ -178,6 +180,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onFailure(Throwable throwable) {
                 progressBar.setVisibility(View.GONE);
+                btnSubmit.setEnabled(true);
                 ToastUtils.showShort(throwable.getMessage());
             }
         });
