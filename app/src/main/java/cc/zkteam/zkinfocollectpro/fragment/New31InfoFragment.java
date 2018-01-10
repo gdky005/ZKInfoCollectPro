@@ -21,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
@@ -28,9 +29,9 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.zkteam.zkinfocollectpro.R;
-import cc.zkteam.zkinfocollectpro.bean.ZK31Bean;
 import cc.zkteam.zkinfocollectpro.base.BaseFragment;
 import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
+import cc.zkteam.zkinfocollectpro.bean.ZK31Bean;
 import cc.zkteam.zkinfocollectpro.fragment.datacollectfirst.DataCollectFragment;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
 import cc.zkteam.zkinfocollectpro.managers.ZHMemoryCacheManager;
@@ -47,6 +48,8 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -122,44 +125,66 @@ public class New31InfoFragment extends BaseFragment {
                 String galleyPicPath = pics.get(0);
                 L.d("当前图片地址是：" + galleyPicPath);
 
-                if (imageEvent != null) {
-                    ZKFiled zkFiled = imageEvent.zkFiled;
+                Luban.with(mContext)
+                        .load(galleyPicPath)                     //传入要压缩的图片
+                        .setCompressListener(new OnCompressListener() { //设置回调
 
-                    if (zkFiled != null) {
-                        int type = imageEvent.type;
-
-                        if (ZKFiled.TYPE_FILED_FORM_IMAGE == type) {
-                            zkFiled.defaultValue = galleyPicPath;
-
-                            ImageView rightLayoutImageView = zkFiled.findViewById(R.id.right_layout_image_view);
-                            rightLayoutImageView.setImageURI(Uri.parse(galleyPicPath));
-                        } else if (ZKFiled.TYPE_FILED_FORM_ID_CARD == type) {
-                            ImageView rightLayoutIdCardLeft = zkFiled.findViewById(R.id.right_layout_id_card_left);
-                            ImageView rightLayoutIdCardRight = zkFiled.findViewById(R.id.right_layout_id_card_right);
-
-                            String[] strings = (String[]) zkFiled.defaultValue;
-                            if (strings == null) {
-                                strings = new String[2];
+                            @Override
+                            public void onStart() {
                             }
+                            @Override
+                            public void onSuccess(File file) {
+                                String galleyPicPath = file.getAbsolutePath();
+                                L.d("压缩图片后地址是：" + file.getAbsolutePath());
 
-                            if (imageEvent.isIdcardLeft) {
-                                strings[0] = galleyPicPath;
-                                rightLayoutIdCardLeft.setImageURI(Uri.parse(galleyPicPath));
-                            } else {
-                                strings[1] = galleyPicPath;
-                                rightLayoutIdCardRight.setImageURI(Uri.parse(galleyPicPath));
+                                handlePic(galleyPicPath);
                             }
-
-                            zkFiled.defaultValue = strings;
-                        }
-                    }
-                }
+                            @Override
+                            public void onError(Throwable e) {
+                                //当压缩 出现问题时调用
+                                handlePic(galleyPicPath);
+                            }
+                        }).launch();    //启动压缩
             }
         } else {
             ToastUtils.showShort("取消操作");
         }
+    }
 
-        this.imageEvent = null;
+    private void handlePic(String galleyPicPath) {
+        if (imageEvent != null) {
+            ZKFiled zkFiled = imageEvent.zkFiled;
+
+            if (zkFiled != null) {
+                int type = imageEvent.type;
+
+                if (ZKFiled.TYPE_FILED_FORM_IMAGE == type) {
+                    zkFiled.defaultValue = galleyPicPath;
+
+                    ImageView rightLayoutImageView = zkFiled.findViewById(R.id.right_layout_image_view);
+                    rightLayoutImageView.setImageURI(Uri.parse(galleyPicPath));
+                } else if (ZKFiled.TYPE_FILED_FORM_ID_CARD == type) {
+                    ImageView rightLayoutIdCardLeft = zkFiled.findViewById(R.id.right_layout_id_card_left);
+                    ImageView rightLayoutIdCardRight = zkFiled.findViewById(R.id.right_layout_id_card_right);
+
+                    String[] strings = (String[]) zkFiled.defaultValue;
+                    if (strings == null) {
+                        strings = new String[2];
+                    }
+
+                    if (imageEvent.isIdcardLeft) {
+                        strings[0] = galleyPicPath;
+                        rightLayoutIdCardLeft.setImageURI(Uri.parse(galleyPicPath));
+                    } else {
+                        strings[1] = galleyPicPath;
+                        rightLayoutIdCardRight.setImageURI(Uri.parse(galleyPicPath));
+                    }
+
+                    zkFiled.defaultValue = strings;
+                }
+            }
+            this.imageEvent = null;
+        }
     }
 
 
