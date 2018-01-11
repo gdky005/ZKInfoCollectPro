@@ -184,14 +184,7 @@ public class HomeActivity extends BaseActivity implements HasSupportFragmentInje
 
     @Override
     protected void initData() {
-//        testDI();
         verifyStoragePermissions(this);
-//
-//        JMHttpServer.getInstance().startServer(this, 8888, new File(SDCardUtils.getSDCardPaths(false).get(0)));
-//
-//        String address = JMHttpServer.getInstance().getLocalHostUrl(this);
-//
-//        L.d("当前的本地服务器路径是：" + address);
     }
 
     @Override
