@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.FragmentUtils;
 
@@ -21,7 +20,6 @@ import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.bean.BasicInfoItemBean;
 import cc.zkteam.zkinfocollectpro.fragment.New31InfoFragment;
 import cc.zkteam.zkinfocollectpro.fragment.TitleEvent;
-import cc.zkteam.zkinfocollectpro.managers.ZKManager;
 import cc.zkteam.zkinfocollectpro.utils.MapBean;
 import cc.zkteam.zkinfocollectpro.view.ZKTitleView;
 
@@ -73,15 +71,6 @@ public class BasicInfoActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-        if (ZKManager.getInstance().isNew31State()) {
-            Toast.makeText(mContext, "" + ZKManager.getInstance().getWarningText(), Toast.LENGTH_SHORT).show();
-            drawerLayout.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    System.exit(0);
-                }
-            }, 2000);
-        }
         drawerLayout.setScrimColor(Color.TRANSPARENT);
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED,
                 Gravity.END);
