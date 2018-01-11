@@ -51,10 +51,6 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
      * 图片质量 默认 70%
      */
     public static final int PIC_QUALITY = 70;
-    /**
-     * 如果图片过大，图片宽度 600， 高度 自适应
-     */
-    public static final int PIC_WIDTH = 600;
 
     /**
      * 默认图片生成的名称
@@ -204,10 +200,8 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
     Camera.PictureCallback myjpegCallback = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(final byte[] data, Camera camera) {
-            // 2017/12/16  这里需要注意，获取到图片后，需要先停止 相机的拍摄功能，否则会有报错日志。可根据实际情况调整
             cameraManager.stopPreview();
 
-            // 根据拍照所得的数据创建位图
             final Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0,
                     data.length);
             Bitmap bitmap2 = adjustPhotoRotation(bitmap, 90);
@@ -215,12 +209,6 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
             int width = bitmap2.getWidth();
             int scanWidth = width * 15 / 16;
             int scanHeight = (int) (scanWidth * 0.63f);
-
-//            if (scanWidth > PIC_WIDTH) {
-//                // 对图片尺寸进行处理下 宽度 600， 高度自适应，图片质量 70%
-//                scanHeight = scanHeight / scanWidth * 600;
-//                scanWidth = PIC_WIDTH;
-//            }
 
             final Bitmap bitmap1 = Bitmap.createBitmap(bitmap2,
                     (width - scanWidth) / 2,
@@ -234,7 +222,6 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
 
             FileOutputStream outStream = null;
             try {
-                // 打开指定文件对应的输出流
                 outStream = new FileOutputStream(file);
                 // 把位图输出到指定文件中
                 bitmap1.compress(Bitmap.CompressFormat.JPEG,
@@ -257,8 +244,8 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
         progressLayout.setVisibility(View.VISIBLE);
         if (!TextUtils.isEmpty(filePath)) {
             Luban.with(mContext)
-                    .load(filePath)                     //传入要压缩的图片
-                    .setCompressListener(new OnCompressListener() { //设置回调
+                    .load(filePath)
+                    .setCompressListener(new OnCompressListener() {
 
                         @Override
                         public void onStart() {
@@ -277,7 +264,6 @@ public class IDCardScanActivity extends BaseActivity implements SurfaceHolder.Ca
                         }
                         @Override
                         public void onError(Throwable e) {
-                            //当压缩 出现问题时调用
                             try {
                                 getIdCardInfo(filePath);
                             } catch (ZKIdCardException e1) {
