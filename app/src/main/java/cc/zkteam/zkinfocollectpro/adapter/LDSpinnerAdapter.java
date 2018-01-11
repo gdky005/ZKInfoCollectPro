@@ -20,12 +20,9 @@ import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
 public class LDSpinnerAdapter extends BaseAdapter {
     private int index = -1;
 
-
-    protected List<ZHCommunityBean.DataBean> mData;
-
+    List<ZHCommunityBean.DataBean> mData;
 
     protected Context context;
-
 
     public LDSpinnerAdapter(Context mContext) {
         this.context = mContext;
@@ -47,8 +44,8 @@ public class LDSpinnerAdapter extends BaseAdapter {
         return isHaveData() ? Integer.parseInt(mData.get(1).getBuildhome()) : 0;
     }
 
-    public boolean isHaveData() {
-        return mData.size() == 1 ? false : true;
+    boolean isHaveData() {
+        return mData.size() != 1;
     }
 
     public void setData(List<ZHCommunityBean.DataBean> tempData) {

@@ -53,13 +53,6 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
 
     RentPersonPresenterImpl mPresent;
     FragmentManager fragmentManager;
-
-   /* @BindView(R.id.create_new)
-    Button createNewRenter;
-
-    @BindView(R.id.house_person_infos)
-    LinearLayout personInfoContainer;*/
-
     @BindView(R.id.recycle_data)
     RecyclerView mRecycle;
     @BindView(R.id.tv_toolbar_title)
@@ -90,7 +83,6 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
 
     @Override
     protected void initViews() {
-
         fragmentManager = getSupportFragmentManager();
         mRecycle.setLayoutManager(new LinearLayoutManager(this));
         mRecycle.addItemDecoration(new DividerItemDecoration(getResources().getColor(R.color.item_decor), CommonUtils.dip2px(this, 1)));
@@ -164,26 +156,19 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
                 PageCtrl.startActivity(this, NewResidentsInfoActivity.class, intent);
                 return;
         }
-//        Toast.makeText(mContext, "hello" + position, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * 迁出弹框
+     * @param position
+     */
     private void showOutSetting(int position) {
         View view = getLayoutInflater().inflate(R.layout.data_collect_out_setting, null, false);
         mEmigrationDialog = new Dialog(this);
         mEmigrationDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         mEmigrationDialog.setContentView(view);
-        view.findViewById(R.id.confirm).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                emigration(position);
-            }
-        });
-        view.findViewById(R.id.cancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mEmigrationDialog.dismiss();
-            }
-        });
+        view.findViewById(R.id.confirm).setOnClickListener(view12 -> emigration(position));
+        view.findViewById(R.id.cancel).setOnClickListener(view1 -> mEmigrationDialog.dismiss());
 
         mEmigrationDialog.show();
     }
@@ -245,6 +230,9 @@ public class RentPersonInfoActivity extends BaseActivity implements RvListener, 
         requestPersonList();
     }
 
+    /**
+     * 请求人员
+     */
     private void requestPersonList() {
         MultipartBody.Part community = MultipartBody.Part.createFormData("community", mAddHouseParams.getParams().get(0));
         MultipartBody.Part cunjuid = MultipartBody.Part.createFormData("cunjuid", mAddHouseParams.getParams().get(1));

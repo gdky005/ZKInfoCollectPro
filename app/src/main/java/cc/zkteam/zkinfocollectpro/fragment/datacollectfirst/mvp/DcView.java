@@ -13,10 +13,23 @@ import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
 
 public interface DcView extends BaseMVPView {
 
+    /**
+     * 更新视图
+     * @param mData
+     */
     void updateRecycle(List<HouseInfo> mData);
 
+    /**
+     * 下拉框加载
+     * @param zhCommunity
+     * @param type
+     */
     void loadSpinner(ZHCommunityBean zhCommunity, String type);
 
+    /**
+     * 更新数据
+     * @param data
+     */
     void updata(RentPersoner data);
 
     void showLoading();

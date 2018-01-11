@@ -49,9 +49,7 @@ import okhttp3.MultipartBody;
  */
 
 public class DataCollectFragment extends BaseFragment implements DcView, ArgsInterface, AdapterView.OnItemSelectedListener {
-
     public static final String TYPE_FANG_WU_XIN_XI_TYPE = "fangwuxinxi_type";
-
     private int floorNum;
     private int roomNum;
 
@@ -93,6 +91,10 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
     private boolean mFirstOne = true;
     private boolean mFirstTwo = true;
 
+    /**
+     * 创建
+     * @return
+     */
     public static DataCollectFragment newInstance() {
         Bundle args = new Bundle();
         DataCollectFragment fragment = new DataCollectFragment();
@@ -120,6 +122,9 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         mPresenter.loadData();
     }
 
+    /**
+     * 缓存
+     */
     private void initCache() {
         adapterMap = new HashMap<>();
         adapterMap.put(0, roadAdapter);
@@ -137,6 +142,9 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
 
     }
 
+    /**
+     * 下拉
+     */
     private void initSpinner() {
         roadAdapter = new LDSpinnerAdapter(mContext, 0);
         mRoadSpinner.setAdapter(roadAdapter);
@@ -188,7 +196,6 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
 
     @Override
     public void loadSpinner(ZHCommunityBean zhCommunity, String type) {
-
         if (zhCommunity.getData() == null) {
             return;
         }
@@ -227,6 +234,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
     public void updata(RentPersoner data) {
         List<RentPersoner.PersonlistBean> personlist = data.getPersonlist();
         if (data.getStatus() == 2) {
+            //  跳转
             Intent intent = new Intent();
             getAddress(floorNum, roomNum);
             AddHouseParams params = new AddHouseParams(tempIds);
@@ -238,6 +246,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
             mAddress.delete(0, mAddress.length());
             Log.e("TAG", mAddress.toString());
         } else if (data.getStatus() == 1) {
+            //  弹框
             FragmentActivity activity = getActivity();
             if (activity != null) {
                 View view = getActivity().getLayoutInflater().inflate(R.layout.create_house_dialog, null, false);
@@ -249,8 +258,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
 
                     Map<String, String> map = new HashMap<>();
                     map.put("type", TYPE_FANG_WU_XIN_XI_TYPE);
-
-//                    以下是 int
+                    //  以下是 int
                     map.put("community", tempIds.get(0));
                     map.put("cunjuid", tempIds.get(1));
                     map.put("gridding", tempIds.get(2));
@@ -258,16 +266,6 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
                     map.put("house_serial", tempIds.get(4));
                     map.put("louceng", tempIds.get(5));
                     map.put("house_number", tempIds.get(6));
-
-////                    以下是字符串
-//                    map.put("community", getAddressName(mRoadSpinner));
-//                    map.put("cunjuid", getAddressName(mCommunitySpinner));
-//                    map.put("gridding", getAddressName(mNeighborSpinner));
-//                    map.put("buildid", getAddressName(mHouseSpinner));
-//                    map.put("house_serial", mUnitSpinner.getSelectedItem().toString());
-//                    map.put("louceng", floorNum);
-//                    map.put("house_number", roomNum);
-
                     mapBean.setMap(map);
 
                     PageCtrl.startNew31InfoActivity(getActivity(), "房屋信息", TYPE_FANG_WU_XIN_XI_TYPE, mapBean);
@@ -337,9 +335,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
         int index = -1;
-
         switch (adapterView.getId()) {
             case R.id.road_spinner:
                 index = 0;
@@ -374,9 +370,7 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
             index++;
             showLoading();
             mPresenter.loadStreetCommunity(id, index + "");
-
         } else {
-            // TODO: 2017/12/25 调用更新住房信息接口
             LDSpinnerAdapter adapter1 = adapterMap.get(index);
             tempIds.put(index, i + "");
             List<HouseInfo> houseInfos = new ArrayList<>();
@@ -388,7 +382,10 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         }
     }
 
-
+    /**
+     * 清除数据
+     * @param startIndex
+     */
     private void clearSpinnerData(int startIndex) {
         for (int i = startIndex + 1; i <= 4; i++) {
             adapterMap.get(i).reSetData();
@@ -401,12 +398,11 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         Log.i("chris", "onNothingSelected: ");
     }
 
-
     class RoomClickListener implements View.OnClickListener {
         int mFloorNum;
         int mRoomNum;
 
-        public RoomClickListener(int floorNum, int roomNum) {
+        RoomClickListener(int floorNum, int roomNum) {
             this.mFloorNum = floorNum;
             this.mRoomNum = roomNum;
         }
@@ -425,6 +421,11 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         }
     }
 
+    /**
+     * 地址拼接
+     * @param floorNum
+     * @param roomNum
+     */
     private void getAddress(int floorNum, int roomNum) {
         mAddress.append(getAddressName(mRoadSpinner));
         mAddress.append(" ");
@@ -442,11 +443,20 @@ public class DataCollectFragment extends BaseFragment implements DcView, ArgsInt
         mAddress.append("室");
     }
 
+    /**
+     * 获得下拉内容
+     * @param spinner
+     * @return
+     */
     private String getAddressName(Spinner spinner) {
         ZHCommunityBean.DataBean dataBean = (ZHCommunityBean.DataBean) spinner.getSelectedItem();
         return dataBean.getName();
     }
 
+    /**
+     * 请求房屋信息
+     * @param params
+     */
     private void getRentPersoner(HashMap<Integer, String> params) {
         MultipartBody.Part community = MultipartBody.Part.createFormData("community", params.get(0));
         MultipartBody.Part cunjuid = MultipartBody.Part.createFormData("cunjuid", params.get(1));
