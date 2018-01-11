@@ -9,15 +9,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bugtags.library.Bugtags;
-import com.networkbench.agent.impl.NBSAppAgent;
 
 import butterknife.ButterKnife;
 import cc.zkteam.zkinfocollectpro.ZKICApplication;
@@ -59,7 +55,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         initStatus();
 
         ButterKnife.bind(this);
-        NBSAppAgent.leaveBreadcrumb(getClass().getSimpleName() + " onCreate");
         initViews();
         initListener();
         initData();
@@ -129,29 +124,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (view != null) {
             view.setVisibility(isShow ? VISIBLE : GONE);
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //注：回调 1
-        Bugtags.onResume(this);
-        NBSAppAgent.leaveBreadcrumb(getClass().getSimpleName() + " onResume");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //注：回调 2
-        Bugtags.onPause(this);
-        NBSAppAgent.leaveBreadcrumb(getClass().getSimpleName() + " onPause");
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        //注：回调 3
-        Bugtags.onDispatchTouchEvent(this, event);
-        return super.dispatchTouchEvent(event);
     }
 
     @Override

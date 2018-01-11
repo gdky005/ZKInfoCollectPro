@@ -17,7 +17,6 @@ import android.widget.RelativeLayout;
 
 import com.blankj.utilcode.util.EncryptUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.networkbench.agent.impl.NBSAppAgent;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -121,10 +120,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        NBSAppAgent.setLicenseKey("b8f35200fae249148ccac88c105c5bcd").withLocationServiceEnabled(true).start(this.getApplicationContext());
         zhApi = ZHConnectionManager.getInstance().getZHApi();
-
-
     }
 
     @OnClick(R.id.btn_submit)
