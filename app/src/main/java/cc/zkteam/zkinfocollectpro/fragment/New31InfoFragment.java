@@ -115,8 +115,6 @@ public class New31InfoFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // TODO: 2018/1/5  处理事件
-
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             // 获取返回的图片
             List<String> pics = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
@@ -126,8 +124,8 @@ public class New31InfoFragment extends BaseFragment {
                 L.d("当前图片地址是：" + galleyPicPath);
 
                 Luban.with(mContext)
-                        .load(galleyPicPath)                     //传入要压缩的图片
-                        .setCompressListener(new OnCompressListener() { //设置回调
+                        .load(galleyPicPath)
+                        .setCompressListener(new OnCompressListener() {
 
                             @Override
                             public void onStart() {
@@ -141,10 +139,9 @@ public class New31InfoFragment extends BaseFragment {
                             }
                             @Override
                             public void onError(Throwable e) {
-                                //当压缩 出现问题时调用
                                 handlePic(galleyPicPath);
                             }
-                        }).launch();    //启动压缩
+                        }).launch();
             }
         } else {
             ToastUtils.showShort("取消操作");
@@ -219,27 +216,11 @@ public class New31InfoFragment extends BaseFragment {
             }
         }
 
-
-        // TODO: 2018/1/4 test
-        if (TextUtils.isEmpty(pageType)) {
-            pageType = "renyuanxinxi_type";
-        }
-
-        // TODO: 2018/1/4 test
-        if (TextUtils.isEmpty(titleName)) {
-            titleName = "人员信息";
-        }
-
         TitleEvent titleEvent = new TitleEvent();
         titleEvent.title = titleName;
         EventBus.getDefault().post(titleEvent);
 
         userID = ZHMemoryCacheManager.getInstance().getUserId();
-
-        // TODO: 2018/1/2 test 数据
-        if (TextUtils.isEmpty(userID)) {
-            userID = "2";
-        }
 
         showZKModuleAPI(new31ZkModuleListLayout, pageType);
     }
