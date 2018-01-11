@@ -20,3 +20,8 @@ http://ai.baidu.com/docs#/OCR-API/top
 ## 31项信息
 
 都是由服务器配置。
+
+## 修改域名
+Constant 类中：
+
+    public static final String ZHI_HUI_DOMAIN_URL = "http://58.42.248.105:8100/";
