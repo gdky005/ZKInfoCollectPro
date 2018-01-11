@@ -88,7 +88,6 @@ public class ZKModuleListLayout extends ZKBaseView implements IZKResult<JSONObje
 
                     list.add(type);
                     list.add(dataBean.getName());
-                    // TODO: 2018/1/2 test
                     try {
                         String str = dataBean.getDefault_list_data();
                         if (!TextUtils.isEmpty(str)) {
