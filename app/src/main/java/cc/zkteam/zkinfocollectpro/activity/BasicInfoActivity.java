@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
@@ -45,8 +44,6 @@ public class BasicInfoActivity extends BaseActivity {
         drawerLayout.closeDrawer(Gravity.END);
         String itemType = basicItemClick.itemtype;
         String itemName = basicItemClick.itemname;
-
-        // TODO: 2018/1/3  启动 Fragment
         showFragment(itemType, itemName);
     }
 
@@ -119,16 +116,6 @@ public class BasicInfoActivity extends BaseActivity {
 
         if (TYPE_FANG_WU_XIN_XI_TYPE.equals(pageType)) {
             title.rightIV.setVisibility(View.INVISIBLE);
-        }
-
-
-        // TODO: 2018/1/4 test
-        if (TextUtils.isEmpty(titleName))
-            titleName = "人员信息";
-
-        // TODO: 2018/1/4 test
-        if (TextUtils.isEmpty(pageType)) {
-            pageType = "renyuanxinxi_type";
         }
 
         showFragment(pageType, titleName);
