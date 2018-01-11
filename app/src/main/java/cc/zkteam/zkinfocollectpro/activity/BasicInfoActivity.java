@@ -45,8 +45,6 @@ public class BasicInfoActivity extends BaseActivity {
         drawerLayout.closeDrawer(Gravity.END);
         String itemType = basicItemClick.itemtype;
         String itemName = basicItemClick.itemname;
-//        viewpager.setCurrentItem(basicItemClick.getI());
-//        ToastUtils.showShort("-"+basicItemClick.getI());
 
         // TODO: 2018/1/3  启动 Fragment
         showFragment(itemType, itemName);

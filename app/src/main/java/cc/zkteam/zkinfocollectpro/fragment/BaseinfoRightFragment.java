@@ -3,7 +3,6 @@ package cc.zkteam.zkinfocollectpro.fragment;
 
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -25,7 +24,7 @@ import cc.zkteam.zkinfocollectpro.base.RvListener;
 import cc.zkteam.zkinfocollectpro.bean.BasicInfoItemBean;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 信息录入右侧抽屉
  */
 public class BaseinfoRightFragment extends BaseFragment implements RvListener {
 
@@ -55,7 +54,7 @@ public class BaseinfoRightFragment extends BaseFragment implements RvListener {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        Resources res = mContext.getResources();//统一命名规则 批量设置图片\
+        Resources res = mContext.getResources();
         list.clear();
         for (int i = 0; i <= 30; i++) {
             int id = res.getIdentifier("basininfoitem" + (i), "drawable", getActivity().getPackageName());
