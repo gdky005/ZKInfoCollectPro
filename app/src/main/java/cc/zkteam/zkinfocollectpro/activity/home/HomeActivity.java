@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 
@@ -22,7 +21,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import cc.zkteam.zkinfocollectpro.R;
 import cc.zkteam.zkinfocollectpro.ZKICApplication;
-import cc.zkteam.zkinfocollectpro.activity.MyBean;
 import cc.zkteam.zkinfocollectpro.base.BaseActivity;
 import cc.zkteam.zkinfocollectpro.fragment.SignInFragment;
 import cc.zkteam.zkinfocollectpro.fragment.datacollectfirst.DataCollectFragment;
@@ -32,7 +30,6 @@ import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
-import okhttp3.OkHttpClient;
 
 /**
  * HomeActivity
@@ -40,8 +37,6 @@ import okhttp3.OkHttpClient;
  */
 
 public class HomeActivity extends BaseActivity implements HasSupportFragmentInjector {
-
-    private static final String TAG = "HomeActivity";
 
     // 首页
     public static final int NAV_TYPE_MAIN = 0;
@@ -194,27 +189,6 @@ public class HomeActivity extends BaseActivity implements HasSupportFragmentInje
         if (signInFragment != null) signInFragment.setSetIsShow(false);
         ZKICApplication.homeActivity = null;
     }
-
-    /**
-     * ********************************测试 Dagger2 的代码 start**********************************************************
-     */
-    @Inject
-    OkHttpClient okHttpClient;
-    @Inject
-    MyBean myBean;
-
-    private void testDI() {
-        Log.d(TAG, "initData: " + okHttpClient.toString());
-        Log.d(TAG, "initData: " + myBean.getName());
-        Log.d(TAG, "initData: " + myBean.getAge());
-        myBean.setName("QQ");
-        myBean.setAge("555");
-        Log.d(TAG, "initData: " + myBean.getName());
-        Log.d(TAG, "initData: " + myBean.getAge());
-    }
-    /**
-     ************************************** end *********************************************************************************
-     */
 
     /**
      * MainActivity 中的四大底标签页面
