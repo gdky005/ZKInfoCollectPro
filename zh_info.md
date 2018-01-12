@@ -25,3 +25,7 @@ http://ai.baidu.com/docs#/OCR-API/top
 Constant 类中：
 
     public static final String ZHI_HUI_DOMAIN_URL = "http://58.42.248.105:8100/";
+    
+    
+## 接口文档地址
+https://shimo.im/doc/k6rx2cAw0JwypPcr?r=3OO28N
