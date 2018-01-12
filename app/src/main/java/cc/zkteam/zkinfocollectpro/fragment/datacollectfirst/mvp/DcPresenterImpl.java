@@ -19,7 +19,6 @@ import retrofit2.Response;
  */
 
 public class DcPresenterImpl extends BaseMVPPresenter<DcView, DcModel> implements DCPresenter {
-
     ZHApi zkApi;
     public static final String TAG = "DcPresenterImpl";
 
@@ -35,16 +34,14 @@ public class DcPresenterImpl extends BaseMVPPresenter<DcView, DcModel> implement
     @Override
     public void loadData() {
         Log.i(TAG, "loadData: ");
-      /*  List<HouseInfo> houseInfos = new ArrayList<>();
-        for (int i = 1; i <= 10; i++) {
-            HouseInfo houseInfo = new HouseInfo(i, 5);
-            houseInfos.add(houseInfo);
-        }
-        mView.updateRecycle(houseInfos);*/
-
         loadStreetCommunity("1", "0");
     }
 
+    /**
+     * 加载街道
+     * @param id
+     * @param type
+     */
     public void loadStreetCommunity(String id, String type) {
         Log.e("TAG", "loadStreetCommunity " + id + "-" + type);
         zkApi.shequliandong(id, type).enqueue(new Callback<ZHCommunityBean>() {

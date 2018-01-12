@@ -17,13 +17,12 @@ import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
 
 public class HouseUnitAdapter extends LDSpinnerAdapter {
 
-    public static final String Invaild = "0";
+    private static final String Invaild = "0";
 
     public HouseUnitAdapter(Context mContext) {
         super(mContext);
         reSetData();
     }
-
 
     @Override
     public void reSetData() {
@@ -32,18 +31,12 @@ public class HouseUnitAdapter extends LDSpinnerAdapter {
         notifyDataSetChanged();
     }
 
-    /* public void reSetData(){
-            mData.clear();
-            mData.add(new ZHCommunityBean.DataBean(Invaild,Invaild,Invaild,Invaild));
-            notifyDataSetChanged();
-        }*/
     @Override
     public int getCount() {
 
 
         return isHaveData() ? Integer.parseInt(mData.get(1).getBuildunit()) + 1 : 1;
     }
-
 
     public void setUnitData(List<ZHCommunityBean.DataBean> tempData) {
         if (tempData != null && tempData.size() > 0) {

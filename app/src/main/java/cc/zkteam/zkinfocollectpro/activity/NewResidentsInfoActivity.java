@@ -6,8 +6,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.InputFilter;
-import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -63,45 +61,29 @@ public class NewResidentsInfoActivity extends BaseActivity {
     Button bornedittext;
     @BindView(R.id.nationaledittext)
     Button nationaledittext;
-
     @BindView(R.id.edittext21)
     EditText edittext21;
     @BindView(R.id.edittext22)
     EditText edittext22;
     @BindView(R.id.edittext23)
     Button edittext23;
-
-
     @BindView(R.id.savecommit)
     Button savecommit;
-
-
     @BindView(R.id.card_button)
     Button cardButton;
     @BindView(R.id.zk_title_view)
     ZKTitleView zkTitleView;
-
     @BindView(R.id.address_name)
     TextView addressName;
     @BindView(R.id.pb_loading)
     ProgressBar pbLoading;
+
     private String address = "";
     private String b_id = "";
     private String h_id = "";
     private ZHApi zkApi;
     private String r_type = "1";
 
-    InputFilter filter = new InputFilter() {
-        public CharSequence filter(CharSequence source, int start, int end,
-                                   Spanned dest, int dstart, int dend) {
-            for (int i = start; i < end; i++) {
-                if (!IdentityUtils.isChinese(source.charAt(i))) {
-                    return "";
-                }
-            }
-            return null;
-        }
-    };
 
     @Override
     protected int getLayoutId() {
@@ -121,11 +103,8 @@ public class NewResidentsInfoActivity extends BaseActivity {
             ToastUtils.showLong("没有识别到地址，请返回重试");
         }
         addressName.setText(address);
-
-
         zkTitleView.setLeftIVSrc(R.drawable.icon_back);
         zkTitleView.setRightIVSrc(R.drawable.icon_saoyisao);
-
         zkTitleView.leftIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,7 +139,6 @@ public class NewResidentsInfoActivity extends BaseActivity {
             public void onClick(View v) {
                 String[] strings = List2StringArrayUtils.list2StringArray(nationList);
                 if (strings.length > 0) {
-//                                修复bug
                     for (int i = 0; i < strings.length; i++) {
                         String tempStr = strings[i];
 
@@ -200,7 +178,6 @@ public class NewResidentsInfoActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
 
@@ -208,7 +185,6 @@ public class NewResidentsInfoActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.sexedittext:
-
                 OptionPicker picker = new OptionPicker(this, new String[]{
                         "男", "女"
                 });
@@ -227,7 +203,6 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 picker.show();
                 break;
             case R.id.bornedittext:
-
                 final DatePicker picker2 = new DatePicker(this);
                 picker2.setCanceledOnTouchOutside(true);
                 picker2.setUseWeight(true);
@@ -236,7 +211,6 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 picker2.setRangeStart(1900, 1, 1);
                 picker2.setSelectedItem(1900, 1, 1);
                 picker2.setContentPadding(15, 0);
-
                 picker2.setResetWhileWheel(false);
                 picker2.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
                     @Override
@@ -343,8 +317,6 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 picker3.setCycleDisable(true);
                 picker3.setUseWeight(true);
                 picker3.setLabel("关系", "关系");
-//                picker3.setSelectedIndex(0, 8);
-                //picker.setSelectedItem("12", "9");
                 picker3.setContentPadding(10, 0);
                 picker3.setOnStringPickListener(new LinkagePicker.OnStringPickListener() {
                     @Override
@@ -367,9 +339,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 break;
 
             case R.id.savecommit:
-
                 pbLoading.setVisibility(View.VISIBLE);
-                //判断是扫码返回的页面还是手动填写的页面
                 String name = nameedittext.getText().toString().trim();
                 String sex = sexedittext.getText().toString().trim();
                 String data = bornedittext.getText().toString().trim();
@@ -388,7 +358,7 @@ public class NewResidentsInfoActivity extends BaseActivity {
                 }
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(sex) && !TextUtils.isEmpty(data) && !TextUtils.isEmpty(nation) && !TextUtils.isEmpty(cardtype) && !TextUtils.isEmpty(cardid) && !TextUtils.isEmpty(address) && !TextUtils.isEmpty(relation)) {
                     try {
-                        L.i("request---"+"b_id--"+b_id+"h_id--"+h_id+"r_type--"+r_type+"relation--"+relation+"name--"+name+"cardid--"+cardid+"sex"+sex+"birthday"+data+"nation--"+nation+"id_card_type--"+cardtype+"place_of_domicile--"+address);
+                        L.i("request---" + "b_id--" + b_id + "h_id--" + h_id + "r_type--" + r_type + "relation--" + relation + "name--" + name + "cardid--" + cardid + "sex" + sex + "birthday" + data + "nation--" + nation + "id_card_type--" + cardtype + "place_of_domicile--" + address);
                         zkApi = ZHConnectionManager.getInstance().getZHApi();
                         zkApi.addhouseperson(
                                 MultipartBody.Part.createFormData("b_id", b_id),
@@ -533,6 +503,12 @@ public class NewResidentsInfoActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 扫身份证返回数据
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -569,8 +545,8 @@ public class NewResidentsInfoActivity extends BaseActivity {
 
                             if (birthdayBean != null) {
                                 birthday = birthdayBean.getWords();
-                                SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
-                                SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd");
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
                                 try {
                                     birthday = sdf2.format(sdf.parse(birthday));
 

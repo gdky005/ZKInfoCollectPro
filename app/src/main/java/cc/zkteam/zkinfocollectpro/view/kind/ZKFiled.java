@@ -239,7 +239,7 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
                     if (value.length > 0) {
                         String[] newValue = new String[value.length];
 
-                        // TODO: 2018/1/2  不是我想要写这么多，服务器说很麻烦，非要这么弄，那行吧，就是费事一点的啦
+                        // 不是我想要写这么多，服务器说很麻烦，非要这么弄，那行吧，就是费事一点的啦
                         for (int i = 0; i < value.length; i++) {
 
                             String str = value[i];
@@ -392,8 +392,6 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
                     if (value.length > 0) {
                         rightLayoutIdCardLeft.setImageURI(Uri.parse(value[0]));
                         rightLayoutIdCardRight.setImageURI(Uri.parse(value[1]));
-                    } else {
-                        // TODO: 2018/1/2  默认值图片设置
                     }
                 }
 
@@ -475,7 +473,6 @@ public class ZKFiled extends ZKBaseView implements IZKResult {
             case TYPE_FILED_FORM_DOUBLE_BUTTON:
                 return null;
             case TYPE_FILED_FORM_TWO_TIME_BUTTON:
-                // TODO: 2018/1/2  这里请使用 逗号 区分
                 return getMapResult(rightLayoutTwoTimeLeftTv.getText().toString() + "," + rightLayoutTwoTimeRightTv.getText().toString());
             case TYPE_FILED_FORM_ID_CARD:
                 if (defaultValue instanceof String[]) {

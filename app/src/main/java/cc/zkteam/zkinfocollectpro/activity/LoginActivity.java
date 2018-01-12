@@ -17,7 +17,6 @@ import android.widget.RelativeLayout;
 
 import com.blankj.utilcode.util.EncryptUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.networkbench.agent.impl.NBSAppAgent;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -36,7 +35,7 @@ import cc.zkteam.zkinfocollectpro.utils.L;
 import cc.zkteam.zkinfocollectpro.utils.PageCtrl;
 
 /**
- * Created by Administrator on 2017/12/15.
+ * 登录页面
  */
 
 public class LoginActivity extends BaseActivity {
@@ -59,7 +58,7 @@ public class LoginActivity extends BaseActivity {
     ProgressBar progressBar;
 
     private ZHApi zhApi;
-    private boolean isHidePwd = true;// 输入框密码是否是隐藏的，默认为true
+    private boolean isHidePwd = true;// 输入框密码是否隐藏
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,10 +76,6 @@ public class LoginActivity extends BaseActivity {
     protected void initViews() {
         progressBar.setVisibility(View.GONE);
         btnSubmit.setEnabled(true);
-//        SystemBarTintManager systemBarTintManager = new SystemBarTintManager(this);
-//        systemBarTintManager.setStatusBarTintEnabled(false);
-//        systemBarTintManager.setNavigationBarTintEnabled(false);
-
 
         hideOrShowPwd();
     }
@@ -90,15 +85,14 @@ public class LoginActivity extends BaseActivity {
      */
     private void hideOrShowPwd() {
         final Drawable drawableEyeOpen = getResources().getDrawable(R.mipmap.login_eyes);
-        drawableEyeOpen.setBounds(0, 0, 60, 60);//这一步不能省略
+        drawableEyeOpen.setBounds(0, 0, 60, 60);
         et_pwd.setCompoundDrawables(null, null, drawableEyeOpen, null);
         final Drawable[] drawables = et_pwd.getCompoundDrawables();
-        final int eyeWidth = drawables[2].getBounds().width();// 眼睛图标的宽度
+        final int eyeWidth = drawables[2].getBounds().width();
         et_pwd.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    // getWidth,getHeight必须在这里处理
                     float et_pwdMinX = v.getWidth() - eyeWidth - et_pwd.getPaddingRight();
                     float et_pwdMaxX = v.getWidth();
                     float et_pwdMinY = 0;
@@ -106,10 +100,8 @@ public class LoginActivity extends BaseActivity {
                     float x = event.getX();
                     float y = event.getY();
                     if (x < et_pwdMaxX && x > et_pwdMinX && y > et_pwdMinY && y < et_pwdMaxY) {
-                        // 点击了眼睛图标的位置
                         isHidePwd = !isHidePwd;
                         if (isHidePwd) {
-
                             et_pwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
                         } else {
                             et_pwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
@@ -128,21 +120,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        NBSAppAgent.setLicenseKey("b8f35200fae249148ccac88c105c5bcd").withLocationServiceEnabled(true).start(this.getApplicationContext());
-
-//        // TODO: 2017/12/23  这是测试代码哦
-//        btnSubmit.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                PageCtrl.startActivity( LoginActivity.this, HomeActivity.class);
-//                finish();
-//            }
-//        }, 3000);
-//        ToastUtils.showLong("默认三秒后自动进入主页 [调试状态]");
-
         zhApi = ZHConnectionManager.getInstance().getZHApi();
-
-
     }
 
     @OnClick(R.id.btn_submit)
@@ -151,7 +129,6 @@ public class LoginActivity extends BaseActivity {
         btnSubmit.setEnabled(false);
         String userNum = etUserNum.getText().toString();
         String userPwd = EncryptUtils.encryptMD5ToString(et_pwd.getText().toString());
-//        String userPwd = et_pwd.getText().toString();
 
         zhApi.login(userNum, userPwd).enqueue(new ZHCallback<ZHLoginBean>() {
             @Override

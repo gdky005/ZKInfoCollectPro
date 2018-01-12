@@ -61,7 +61,6 @@ public class DateCollectRvAdapter extends RvAdapter<RentPersoner.PersonlistBean>
 
     @Override
     protected RvHolder getHolder(View view, int viewType) {
-
         DataCollectRvHolder holder = new DataCollectRvHolder(view, viewType, listener);
         holder.setAdapter(this);
         if (viewType == 0) holder.setAddress(mAddress);

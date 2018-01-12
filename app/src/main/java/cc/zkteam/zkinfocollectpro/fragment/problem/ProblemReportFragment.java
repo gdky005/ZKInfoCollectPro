@@ -130,6 +130,9 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         mProblemSource.setBackground(null);
     }
 
+    /**
+     * 编辑处理
+     */
     private void isPageCanEdit() {
         if (mIsEditPage) {
             mToolbarTitle.setText("问题信息填写");
@@ -139,6 +142,9 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         }
     }
 
+    /**
+     * 显示详情
+     */
     private void showProblemDetail() {
         initToolbar(mToolbar);
         forbidClick();
@@ -148,6 +154,9 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         reSizeDescLayout();
     }
 
+    /**
+     * 隐藏控件
+     */
     private void hideSomeView() {
         mSelectLocationBtn.setVisibility(View.GONE);
         mCommitBtn.setVisibility(View.GONE);
@@ -155,26 +164,34 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         mProblemAttachment.setVisibility(View.GONE);
     }
 
+    /**
+     * 设置描述布局大小
+     */
     private void reSizeDescLayout() {
         ViewGroup.LayoutParams lp = mDescLayout.getLayoutParams();
         lp.height = WRAP_CONTENT;
         mDescLayout.setLayoutParams(lp);
     }
 
+    /**
+     * Toolbar 初始化
+     * @param toolbar
+     */
     protected void initToolbar(Toolbar toolbar) {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        //  设置了左上角的返回按钮
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
     }
 
+    /**
+     * 数据判断与显示
+     */
     private void judgeAndShowProblemDetail() {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.item_problem_type, new String[]{TextUtils.isEmpty(mProblem.getType()) ? "无数据" :
                 ZHConfigDataManager.getInstance().getWtsbValue(mProblem.getType())});
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //  绑定 Adapter到控件
         mProblemType.setAdapter(adapter);
         mProblemDesc.setText(TextUtils.isEmpty(mProblem.getProblemcontent()) ? "无数据" : mProblem.getProblemcontent());
         mProblemAttachment.setText(TextUtils.isEmpty(mProblem.getPath()) ? "无数据" : mProblem.getPath());
@@ -195,6 +212,9 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         }
     }
 
+    /**
+     * 清除背景
+     */
     private void setBackground() {
         mProblemType.setBackground(null);
         mSpinnerLayout.setBackground(null);
@@ -204,6 +224,9 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         mProblemSuggestion.setBackground(null);
     }
 
+    /**
+     * 关闭焦点
+     */
     private void forbidClick() {
         mProblemDesc.setFocusable(false);
         mProblemLocation.setFocusable(false);
@@ -211,14 +234,14 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
         mProblemType.setEnabled(false);
     }
 
+    /**
+     * 下拉
+     */
     private void initSpinner() {
-        //  建立数据源
         String[] items = new String[ZHConfigDataManager.getInstance().getWtsbData().size()];
         ZHConfigDataManager.getInstance().getWtsbData().toArray(items);
-        //  建立Adapter并且绑定数据源
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.item_problem_type, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //  绑定 Adapter到控件
         mProblemType.setAdapter(adapter);
     }
 
@@ -233,7 +256,6 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
     @Override
     public void initListener() {
         mSelectLocationBtn.setOnClickListener(v -> {
-//                PageCtrl.startActivity(MapActivity.class);
             startActivityForResult(new Intent(getActivity(),
                     MapActivity.class), GO_MAP);
         });
@@ -302,6 +324,12 @@ public class ProblemReportFragment extends BaseFragment implements PRView {
                 mCurrPicPath);
     }
 
+    /**
+     * 是否为空
+     * @param view
+     * @param msgId
+     * @return
+     */
     private boolean inputIsEmpty(View view, int msgId) {
         if (view instanceof EditText) {
             if (TextUtils.isEmpty(((EditText) view).getText().toString())) {

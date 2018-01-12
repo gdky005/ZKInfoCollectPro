@@ -173,7 +173,6 @@ public class IdentityUtils {
 
     //产生随机的出生日期
     private static String getRandomDate(Random ran, boolean idNewID) {
-        // TODO Auto-generated method stub
         if (ran == null) {
             return "";
         }
@@ -201,7 +200,6 @@ public class IdentityUtils {
 
     //产生随机的序列号
     private static String getIDOrder(Random ran) {
-        // TODO Auto-generated method stub
         NumberFormat nf = NumberFormat.getIntegerInstance();
         nf.setMaximumIntegerDigits(3);
         nf.setMinimumIntegerDigits(3);

@@ -115,6 +115,9 @@ public class MapActivity extends BaseActivity implements TextWatcher, SensorEven
         });
     }
 
+    /**
+     * 返回结果
+     */
     private void finishAndReturnResult() {
         Intent intent = new Intent();
         intent.putExtra(NEW_LOCATION, mCurrPoiInfo);
@@ -122,6 +125,10 @@ public class MapActivity extends BaseActivity implements TextWatcher, SensorEven
         finish();
     }
 
+    /**
+     * 选择地址信息
+     * @param position
+     */
     private void selectLocationFromList(int position) {
         mHintFlag = false;
         mSearch.reverseGeoCode(new ReverseGeoCodeOption()
@@ -148,6 +155,10 @@ public class MapActivity extends BaseActivity implements TextWatcher, SensorEven
         }
     }
 
+
+    /**
+     * 初始化定位
+     */
     private void initLocation() {
         mLocClient = new LocationClient(getApplicationContext());
         mLocClient.registerLocationListener(myListener);

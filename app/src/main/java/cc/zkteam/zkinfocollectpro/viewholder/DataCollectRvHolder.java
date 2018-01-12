@@ -38,7 +38,6 @@ public class DataCollectRvHolder extends RvHolder<RentPersoner.PersonlistBean> {
 
     }
 
-
     private TextView findTv(int id) {
         return ((TextView) itemView.findViewById(id));
     }
@@ -91,21 +90,15 @@ public class DataCollectRvHolder extends RvHolder<RentPersoner.PersonlistBean> {
 
                 initTextColor(Color.parseColor("#ffffff"), num, name, updateTitle, relation, operate_title);
                 initViewColor(Color.parseColor("#3ba3d0"), num, name, relation, imageContainer, updateTitle, operate, operate_title);
-                // return;
             } else if (rePosiont % 2 == 0) {      //偶数行
                 initTextColor(Color.parseColor("#333333"), num, name, relation, caiji, out);
                 showContent(operate, operate_title);
-//                showContent(imageContainer, updateTitle);
                 initViewColor(Color.parseColor("#ebf6fa"), num, name, relation, imageContainer, operate);
             } else {     //奇数行
                 initTextColor(Color.parseColor("#333333"), num, name, relation, caiji, out);
                 showContent(operate, operate_title);
-//                showContent(imageContainer, updateTitle);
                 initViewColor(Color.parseColor("#dff0f7"), num, name, relation, imageContainer, operate);
             }
-
-//            updateTitle.setText(rentInfo.update);
-//            operate_title.setText(rentInfo.operate);
             if ("-1".equals(rentInfo.getName())) {
                 num.setText("序号");
                 operate_title.setText("操作");
@@ -116,9 +109,6 @@ public class DataCollectRvHolder extends RvHolder<RentPersoner.PersonlistBean> {
                 num.setText(rePosiont + "");
                 name.setText(rentInfo.getName());
                 relation.setText(rentInfo.getRelation());
-//                Drawable updated = mContext.getResources().getDrawable(R.drawable.updated);
-//                updated.setBounds(0, 0, 32, 32);
-//                update.setImageDrawable(updated);
             }
 
         } else if (mType == 2) {

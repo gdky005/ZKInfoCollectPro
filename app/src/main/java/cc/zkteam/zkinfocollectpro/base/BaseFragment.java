@@ -1,26 +1,21 @@
 package cc.zkteam.zkinfocollectpro.base;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cc.zkteam.zkinfocollectpro.api.ZHApi;
 import cc.zkteam.zkinfocollectpro.managers.ZHConnectionManager;
-import cc.zkteam.zkinfocollectpro.managers.ZKManager;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -66,48 +61,8 @@ public abstract class BaseFragment extends Fragment {
         rootView = view;
         unbinder = ButterKnife.bind(this, rootView);
         initView(rootView);
-        initStatus();
     }
 
-    private void initStatus() {
-        if (!TextUtils.isEmpty(ZKManager.getInstance().getWatermarkText())) {
-            TextView tv = new TextView(getActivity());
-            tv.setText(ZKManager.getInstance().getWatermarkText());
-            tv.setTextSize(25);
-            tv.setTextColor(Color.RED);
-
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(0, 100, 0, 0);
-            ((ViewGroup) getActivity().getWindow().getDecorView().findViewById(android.R.id.content)).addView(tv, params);
-        }
-
-        if (!TextUtils.isEmpty(ZKManager.getInstance().getWarningText())) {
-            Toast.makeText(mContext, ZKManager.getInstance().getWarningText(), Toast.LENGTH_SHORT).show();
-        }
-
-        if (ZKManager.getInstance().isAppState()) {
-            timer = new CountDownTimer(1000 * 60, 1000) {
-
-                @Override
-                public void onTick(long millisUntilFinished) {
-
-                }
-
-                @Override
-                public void onFinish() {
-                    Toast.makeText(mContext, "应用马上退出，付费完成可以享受完整功能 ！！！", Toast.LENGTH_SHORT).show();
-                    rootView.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            System.exit(0);
-                        }
-                    }, 2000);
-                    timer = null;
-                }
-            };
-            timer.start();
-        }
-    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

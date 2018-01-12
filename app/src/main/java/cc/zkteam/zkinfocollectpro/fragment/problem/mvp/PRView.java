@@ -8,6 +8,10 @@ import cc.zkteam.zkinfocollectpro.base.mvp.BaseMVPView;
 
 public interface PRView extends BaseMVPView {
 
+    /**
+     * 位置设置
+     * @param location
+     */
     void setLocationInfo(String location);
 
     void cleanInput();

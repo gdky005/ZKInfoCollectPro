@@ -54,6 +54,16 @@ public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implemen
         getLocationInfo();
     }
 
+    /**
+     * 上报问题
+     * @param source
+     * @param typeStr
+     * @param desc
+     * @param location
+     * @param attachmentName
+     * @param suggestion
+     * @param picPath
+     */
     public void report(String source, String typeStr, String desc, String location, String attachmentName, String suggestion, List<String> picPath) {
         Executors.newSingleThreadExecutor().execute(() -> {
             MultipartBody.Part number = MultipartBody.Part.createFormData("number", "wenti" + System.currentTimeMillis());
@@ -74,11 +84,10 @@ public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implemen
 
                         @Override
                         public void onStart() {
-                            //TODO 压缩开始前调用，可以在方法内启动 loading UI
+
                         }
                         @Override
                         public void onSuccess(File file) {
-                            //TODO 压缩成功后调用，返回压缩后的图片文件
                             Log.e("TAG", file.toString());
                             afterFile.add(file);
                             if (afterFile.size() == picPath.size()) {
@@ -129,12 +138,15 @@ public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implemen
                         }
                         @Override
                         public void onError(Throwable e) {
-                            //TODO 当压缩过去出现问题时调用
+
                         }
                     }).launch();    //启动压缩
         });
     }
 
+    /**
+     * 获取位置
+     */
     private void getLocationInfo() {
         mLocationClient = new LocationClient(ZKBase.getContext());
         //声明LocationClient类
@@ -149,17 +161,8 @@ public class PRPresenterImpl extends BaseMVPPresenter<PRView, PRModule> implemen
 
         @Override
         public void onReceiveLocation(BDLocation location) {
-            //此处的BDLocation为定位结果信息类，通过它的各种get方法可获取定位相关的全部结果
-            //以下只列举部分获取地址相关的结果信息
-            //更多结果信息获取说明，请参照类参考中BDLocation类中的说明
-
-            String addr = location.getAddrStr();    //获取详细地址信息
-//            String country = location.getCountry();    //获取国家
-//            String province = location.getProvince();    //获取省份
-//            String city = location.getCity();    //获取城市
-//            String district = location.getDistrict();    //获取区县
-//            String street = location.getStreet();    //获取街道信息
-            mView.setLocationInfo(addr);
+            String address = location.getAddrStr();    //获取详细地址信息
+            mView.setLocationInfo(address);
         }
     }
 }

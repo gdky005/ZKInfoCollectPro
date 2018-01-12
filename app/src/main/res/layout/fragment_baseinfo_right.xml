@@ -5,9 +5,6 @@
     android:background="@drawable/basicinfo_rightviewback"
     tools:context="cc.zkteam.zkinfocollectpro.fragment.BaseinfoRightFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
-
             <RelativeLayout
                 android:id="@+id/titleview"
                 android:layout_width="match_parent"

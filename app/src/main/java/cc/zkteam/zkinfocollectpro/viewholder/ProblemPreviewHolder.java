@@ -67,6 +67,11 @@ public class ProblemPreviewHolder extends RvHolder<ProblemPreview.DataBean> {
         textColor("时间：", time, mProblemReportTime);
     }
 
+    /**
+     * 时间格式化
+     * @param timeL
+     * @return
+     */
     private String formatTime(String timeL) {
         try {
             long time = Long.valueOf(timeL);
@@ -76,6 +81,12 @@ public class ProblemPreviewHolder extends RvHolder<ProblemPreview.DataBean> {
         }
     }
 
+    /**
+     * 颜色修改
+     * @param prefix
+     * @param content
+     * @param textView
+     */
     private void textColor(String prefix, String content, TextView textView) {
         SpannableString spannable = new SpannableString(prefix + content);
         spannable.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")), 0, prefix.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

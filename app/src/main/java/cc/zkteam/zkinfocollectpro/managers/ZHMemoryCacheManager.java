@@ -3,6 +3,7 @@ package cc.zkteam.zkinfocollectpro.managers;
 import cc.zkteam.zkinfocollectpro.bean.ZHLoginBean;
 
 /**
+ * ZHMemoryCacheManager
  * Created by WangQing on 2018/1/2.
  */
 
