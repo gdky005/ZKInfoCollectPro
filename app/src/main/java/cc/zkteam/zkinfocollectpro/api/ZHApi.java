@@ -1,9 +1,6 @@
 package cc.zkteam.zkinfocollectpro.api;
 
-import java.util.List;
-
 import cc.zkteam.zkinfocollectpro.Constant;
-import cc.zkteam.zkinfocollectpro.bean.ZK31Bean;
 import cc.zkteam.zkinfocollectpro.bean.BDIdCardBean;
 import cc.zkteam.zkinfocollectpro.bean.BDTokenBean;
 import cc.zkteam.zkinfocollectpro.bean.CheckIdCardBean;
@@ -17,9 +14,8 @@ import cc.zkteam.zkinfocollectpro.bean.ZHBaseBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHCommunityBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHLoginBean;
 import cc.zkteam.zkinfocollectpro.bean.ZHTongJiBean;
+import cc.zkteam.zkinfocollectpro.bean.ZK31Bean;
 import cc.zkteam.zkinfocollectpro.bean.ZKSettingBean;
-import cc.zkteam.zkinfocollectpro.bean.ZKTestBaseBean;
-import cc.zkteam.zkinfocollectpro.bean.ZKTestCategoryBean;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -54,15 +50,6 @@ public interface ZHApi {
     @Headers({"Content-Type: application/x-www-form-urlencoded"})
     @POST(Constant.BD_ID_CARD_URL)
     Call<BDIdCardBean> bdIDCard(@Body RequestBody requestBody, @Query("access_token") String access_token);
-
-    /**
-     * 请求分类接口
-     * test
-     *
-     * @return 分类的数据
-     */
-    @GET(Constant.ZK_CE_SHI_URL)
-    Call<ZKTestBaseBean<List<ZKTestCategoryBean>>> categoryData(@Query("PAGE_COUNT") int count);
 
 
     /**
