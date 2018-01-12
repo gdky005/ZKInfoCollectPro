@@ -58,7 +58,7 @@ import retrofit2.Response;
 
 public class MainActivity extends BaseActivity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "MainActivity_ZK";
 
 
     private static String[] PERMISSIONS_STORAGE = {
@@ -128,7 +128,6 @@ public class MainActivity extends BaseActivity {
         // TODO: 2017/12/29 请先把 aessts 目录下面的文件都放到 SD 卡的根目录下测试。
         String sdPath = Environment.getExternalStorageDirectory().getPath() + "/pics";
         copyFilesFassets(this, "pics", sdPath);
-
 
         String[] list = new String[]{"哈哈哈", "第一单位", "第二单位", "第三单位"};
 
